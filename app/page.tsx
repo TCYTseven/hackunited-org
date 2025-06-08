@@ -4,83 +4,115 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
-import { CheckIcon, ArrowRightIcon, ChevronRightIcon } from "lucide-react"
+import { CheckIcon, ArrowRightIcon } from "lucide-react"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
-import CyberGlobe from "@/components/cyber-globe"
+import InteractiveLogo from "@/components/interactive-logo"
+import { ScrollButton, ScrollButtonWithIcon } from "@/components/scroll-button"
 
 export default function Home() {
   return (
     <main className="bg-black text-white">
       {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-screen flex items-center">
-        {/* Dot grid background pattern */}
-        <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+      <section className="relative overflow-hidden min-h-screen flex items-center -mt-20 pt-20">
+        {/* Modern gradient background */}
+        <div className="absolute inset-0 -top-20 bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
+        
+        {/* Subtle dot pattern overlay */}
+        <div className="absolute inset-0 -top-20 bg-[radial-gradient(#ffffff_0.5px,transparent_1px)] [background-size:20px_20px] opacity-20"></div>
 
-        {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
+        {/* Modern gradient overlays */}
+        <div className="absolute inset-0 -top-20 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
+        
+        {/* Purple accent glow - only visible on larger screens */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-600/8 rounded-full blur-3xl hidden lg:block"></div>
+        
+        {/* Mobile gradient accent */}
+        <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-purple-900/10 to-transparent lg:hidden"></div>
 
-        {/* Large purple circle on right side */}
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full border border-purple-500/30 bg-purple-900/5"></div>
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full bg-purple-500/5 blur-3xl"></div>
+
 
         <div className="container relative px-4 mx-auto">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
+          {/* Mobile Design - Copy of reference style */}
+          <div className="lg:hidden flex flex-col items-center text-center min-h-screen justify-center space-y-8 -mt-16">
+            {/* Hero Image */}
+            <div className="w-80 h-80 rounded-3xl overflow-hidden mb-4">
+              <Image 
+                src="/images/globe-icon.png" 
+                alt="Hack United" 
+                width={320} 
+                height={320} 
+                className="w-full h-full object-contain bg-gradient-to-br from-purple-600/20 to-purple-800/20 p-16"
+              />
+            </div>
+
+            {/* Main headline */}
+            <h1 className="text-4xl font-bold text-white leading-tight max-w-sm">
+              Hack United
+            </h1>
+
+            {/* Description */}
+            <p className="text-gray-400 text-lg leading-relaxed max-w-sm">
+              A 501(c)(3) developing soft skills in the next generation of tech innovators through free hackathons and hands-on learning.
+            </p>
+
+            {/* Buttons */}
+            <div className="flex flex-col w-full max-w-sm space-y-4 pt-4">
+              <ScrollButton className="w-full bg-purple-600 hover:bg-purple-700 text-white py-4 rounded-full font-medium text-base">
+                Learn More
+              </ScrollButton>
+            </div>
+          </div>
+
+          {/* Desktop Design - Original layout */}
+          <div className="hidden lg:grid gap-12 lg:grid-cols-2 items-center">
             <div className="flex flex-col justify-center">
               {/* Globe icon and badge */}
               <div className="flex items-center gap-3 mb-12">
-                <div className="w-16 h-16 bg-purple-600 rounded-lg flex items-center justify-center shadow-lg">
-                  <Image src="/images/globe-icon.png" alt="Hack United" width={32} height={32} className="h-8 w-8" />
+                <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center shadow-lg">
+                  <Image src="/images/globe-icon.png" alt="Hack United" width={24} height={24} className="h-6 w-6" />
                 </div>
-                <Badge className="bg-purple-600/20 text-purple-300 hover:bg-purple-600/30 border-purple-500/30 py-1.5 px-4 text-sm">
+                <Badge className="bg-purple-600/10 text-purple-300/80 border-purple-500/20 py-1 px-3 text-xs">
                   Empowering Young Innovators
                 </Badge>
               </div>
 
               {/* Main heading */}
-              <h1 className="text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl mb-6">
-                Hack <span className="text-purple-400">United</span>
+              <h1 className="text-7xl font-bold tracking-tight mb-8">
+                Hack <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">United</span>
               </h1>
 
               {/* Who Are We? and description */}
               <div className="mb-12">
-                <h2 className="text-xl font-medium text-gray-300 mb-3">Who Are We?</h2>
-                <p className="text-xl text-gray-300 leading-relaxed">
+                <h2 className="text-xl font-semibold text-gray-200 mb-4">Who Are We?</h2>
+                <p className="text-xl text-gray-300 leading-relaxed max-w-xl">
                   A 501(c)(3) non-profit organization founded by teenagers with a passion for programming and
                   technology.
                 </p>
               </div>
 
               {/* Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-6 rounded-md">
-                  Join Our Community
-                  <ChevronRightIcon className="ml-2 h-4 w-4" />
-                </Button>
-                <Link href="/about">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-gray-700 text-white hover:bg-gray-800 px-8 py-6 rounded-md"
-                  >
-                    Learn More
-                  </Button>
-                </Link>
+              <div className="flex gap-4">
+                <ScrollButtonWithIcon 
+                  size="lg" 
+                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-8 py-4 rounded-xl text-base font-semibold shadow-lg shadow-purple-500/25 transition-all duration-200"
+                >
+                  Learn More
+                </ScrollButtonWithIcon>
               </div>
             </div>
 
-            {/* Right side with 3D Cyber Globe */}
-            <div className="relative flex items-center justify-center py-8">
+            {/* Right side with Interactive Logo */}
+            <div className="relative flex items-center justify-center min-h-[600px]">
               <div className="relative z-10">
-                <CyberGlobe />
+                <InteractiveLogo />
               </div>
-              <div className="absolute inset-0 bg-purple-500/5 rounded-full blur-3xl"></div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Who Are We Section */}
-      <section id="who-are-we" className="relative overflow-hidden py-20">
+      <section id="who-are-we" className="relative overflow-hidden py-12 sm:py-16 lg:py-20">
         {/* Dot grid background pattern */}
         <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
@@ -88,9 +120,17 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
 
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
+        
+        {/* Large "About Us" background text */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <h2 className="text-[20rem] sm:text-[28vw] md:text-[25vw] lg:text-[20vw] xl:text-[25vw] xl:h-[25vw] font-bold text-white/10 select-none leading-[0.8] whitespace-nowrap">
+            ABOUT US
+          </h2>
+        </div>
+        
         <div className="container relative px-4 mx-auto">
-          <div className="max-w-3xl mx-auto bg-black/60 backdrop-blur-sm rounded-xl p-8 border border-purple-500/20">
-            <p className="text-lg text-gray-200 leading-relaxed">
+          <div className="max-w-3xl mx-auto bg-black/60 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-purple-500/20">
+            <p className="text-base sm:text-lg text-gray-200 leading-relaxed">
               Hack United is a 501(c)(3) non-profit organization founded by teenagers with a passion for programming and
               technology. Our mission is to inspire and educate the next generation of innovators through hackathons and
               workshops. We address a problem not as commonly talked about, aiming to equip high school and college
@@ -103,7 +143,7 @@ export default function Home() {
       </section>
 
       {/* Featured Event */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
         {/* Dot grid background pattern */}
         <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
@@ -111,79 +151,64 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
 
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-        <div className="absolute -top-40 right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl hidden lg:block"></div>
 
         <div className="container relative px-4 mx-auto">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 lg:mb-12">
             <div>
-              <h2 className="text-3xl font-bold tracking-tight">Upcoming Event</h2>
-              <p className="text-gray-300 mt-2">Register now for our next hackathon</p>
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Upcoming Event</h2>
+              <p className="text-gray-300 mt-2 text-sm sm:text-base">Register now for our next hackathon</p>
             </div>
           </div>
 
           <Card className="overflow-hidden border border-purple-500/30 bg-black/60 backdrop-blur-sm">
-            <div className="grid md:grid-cols-2">
-              <div className="p-8 md:p-10 bg-gradient-to-br from-purple-900/50 to-purple-950/50">
-                <Badge className="bg-white/10 text-white hover:bg-white/20 mb-6 border-purple-500/50">
+            <div className="grid lg:grid-cols-2">
+              <div className="p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-purple-900/50 to-purple-950/50">
+                <Badge className="bg-white/10 text-white hover:bg-white/20 mb-4 sm:mb-6 border-purple-500/50 text-xs sm:text-sm">
                   Registration Open
                 </Badge>
-                <h3 className="text-3xl font-bold mb-4">United Hacks V5</h3>
-                <p className="text-white/90 mb-6">
+                <h3 className="text-2xl sm:text-3xl font-bold mb-4">United Hacks V5</h3>
+                <p className="text-white/90 mb-6 text-sm sm:text-base">
                   Join us for our biggest hackathon yet! Connect with other innovators, learn from industry experts, and
                   build amazing projects.
                 </p>
-                <div className="grid grid-cols-2 gap-6 mb-8">
+                <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                   <div>
-                    <h4 className="text-white/70 text-sm font-medium mb-1">Date</h4>
-                    <p className="font-medium">July 11-13, 2025</p>
+                    <h4 className="text-white/70 text-xs sm:text-sm font-medium mb-1">Date</h4>
+                    <p className="font-medium text-sm sm:text-base">July 11-13, 2025</p>
                   </div>
                   <div>
-                    <h4 className="text-white/70 text-sm font-medium mb-1">Location</h4>
-                    <p className="font-medium">Online (Virtual)</p>
+                    <h4 className="text-white/70 text-xs sm:text-sm font-medium mb-1">Location</h4>
+                    <p className="font-medium text-sm sm:text-base">Online (Virtual)</p>
                   </div>
                   <div>
-                    <h4 className="text-white/70 text-sm font-medium mb-1">Team Size</h4>
-                    <p className="font-medium">1-4 Members</p>
+                    <h4 className="text-white/70 text-xs sm:text-sm font-medium mb-1">Team Size</h4>
+                    <p className="font-medium text-sm sm:text-base">1-4 Members</p>
                   </div>
                   <div>
-                    <h4 className="text-white/70 text-sm font-medium mb-1">Entry Fee</h4>
-                    <p className="font-medium">Free</p>
+                    <h4 className="text-white/70 text-xs sm:text-sm font-medium mb-1">Entry Fee</h4>
+                    <p className="font-medium text-sm sm:text-base">Free</p>
                   </div>
                 </div>
-                <Button className="bg-white text-purple-900 hover:bg-white/90">Register Now</Button>
+                <a 
+                  href="https://unitedhacksv5.devpost.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <Button className="bg-white text-purple-900 hover:bg-white/90 w-full sm:w-auto text-sm sm:text-base">Register Now</Button>
+                </a>
               </div>
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 to-black"></div>
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                  <div className="bg-black/60 backdrop-blur-md rounded-xl p-6 max-w-md border border-purple-500/20">
-                    <h4 className="text-white font-bold text-xl mb-2">What to Expect</h4>
-                    <ul className="space-y-3 text-left">
-                      <li className="flex items-start gap-2">
-                        <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-purple-500/30 flex items-center justify-center">
-                          <CheckIcon className="w-3 h-3 text-purple-400" />
-                        </div>
-                        <span className="text-white/90">Workshops from industry professionals</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-purple-500/30 flex items-center justify-center">
-                          <CheckIcon className="w-3 h-3 text-purple-400" />
-                        </div>
-                        <span className="text-white/90">Networking opportunities with tech leaders</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-purple-500/30 flex items-center justify-center">
-                          <CheckIcon className="w-3 h-3 text-purple-400" />
-                        </div>
-                        <span className="text-white/90">$10,000+ in prizes and swag</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-purple-500/30 flex items-center justify-center">
-                          <CheckIcon className="w-3 h-3 text-purple-400" />
-                        </div>
-                        <span className="text-white/90">Mentorship throughout the event</span>
-                      </li>
-                    </ul>
-                  </div>
+              <div className="relative min-h-[200px] sm:min-h-[300px] lg:min-h-auto">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 to-black rounded-r-xl"></div>
+                <div className="absolute inset-0 p-4 sm:p-6">
+                  <iframe
+                    className="w-full h-full rounded-xl border border-purple-500/20"
+                    src="https://www.youtube.com/embed/tETq2E0kPE0"
+                    title="United Hacks V5 Preview"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
                 </div>
               </div>
             </div>
@@ -192,7 +217,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
         {/* Dot grid background pattern */}
         <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
@@ -203,34 +228,34 @@ export default function Home() {
 
         {/* Background elements for stats */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-purple-600/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-purple-600/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-purple-600/10 rounded-full blur-3xl hidden lg:block"></div>
+          <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-purple-600/10 rounded-full blur-3xl hidden lg:block"></div>
         </div>
 
         <div className="container relative px-4 mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-4xl font-bold text-purple-400">2,500+</CardTitle>
+              <CardHeader className="pb-2 text-center sm:text-left">
+                <CardTitle className="text-3xl sm:text-4xl font-bold text-purple-400">25,000+</CardTitle>
               </CardHeader>
-              <CardContent>
-                <CardDescription className="text-gray-300 text-base">Social Media Followers</CardDescription>
+              <CardContent className="text-center sm:text-left">
+                <CardDescription className="text-gray-300 text-sm sm:text-base">Individuals Impacted</CardDescription>
               </CardContent>
             </Card>
             <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-4xl font-bold text-purple-400">1,500+</CardTitle>
+              <CardHeader className="pb-2 text-center sm:text-left">
+                <CardTitle className="text-3xl sm:text-4xl font-bold text-purple-400">3,000+</CardTitle>
               </CardHeader>
-              <CardContent>
-                <CardDescription className="text-gray-300 text-base">Community Members</CardDescription>
+              <CardContent className="text-center sm:text-left">
+                <CardDescription className="text-gray-300 text-sm sm:text-base">Community Members</CardDescription>
               </CardContent>
             </Card>
-            <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-4xl font-bold text-purple-400">5,000+</CardTitle>
+            <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1">
+              <CardHeader className="pb-2 text-center sm:text-left">
+                <CardTitle className="text-3xl sm:text-4xl font-bold text-purple-400">50+</CardTitle>
               </CardHeader>
-              <CardContent>
-                <CardDescription className="text-gray-300 text-base">Individuals Impacted</CardDescription>
+              <CardContent className="text-center sm:text-left">
+                <CardDescription className="text-gray-300 text-sm sm:text-base">Countries Impacted</CardDescription>
               </CardContent>
             </Card>
           </div>
@@ -238,7 +263,7 @@ export default function Home() {
       </section>
 
       {/* Our Goals Section */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
         {/* Dot grid background pattern */}
         <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
@@ -246,17 +271,17 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
 
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-        <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl hidden lg:block"></div>
 
         <div className="container relative px-4 mx-auto">
           <div className="flex items-center justify-center mb-6">
-            <Badge variant="outline" className="px-4 py-1 border-purple-500/50 text-purple-300">
+            <Badge variant="outline" className="px-3 py-1 sm:px-4 border-purple-500/50 text-purple-300 text-xs sm:text-sm">
               Our Vision
             </Badge>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-white">Our Goals</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-12 lg:mb-16 text-white">Our Goals</h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm hover:border-purple-500/60 transition-all duration-300">
               <CardHeader>
                 <div className="w-12 h-12 flex items-center justify-center rounded-full bg-purple-900/50 text-purple-400 mb-4">
@@ -351,7 +376,7 @@ export default function Home() {
       </section>
 
       {/* Our Initiatives Section */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
         {/* Dot grid background pattern */}
         <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
@@ -359,25 +384,25 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
 
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-        <div className="absolute -top-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl hidden lg:block"></div>
 
         <div className="container relative px-4 mx-auto">
           <div className="flex items-center justify-center mb-6">
-            <Badge variant="outline" className="px-4 py-1 border-purple-500/50 text-purple-300">
+            <Badge variant="outline" className="px-3 py-1 sm:px-4 border-purple-500/50 text-purple-300 text-xs sm:text-sm">
               What We Do
             </Badge>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-white">Our Initiatives</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-12 lg:mb-16 text-white">Our Initiatives</h2>
 
           <div className="max-w-4xl mx-auto">
             <Tabs defaultValue="education" className="w-full">
-              <TabsList className="w-full grid grid-cols-3 mb-12 h-14 bg-gray-900/80 border border-purple-500/30">
+              <TabsList className="w-full grid grid-cols-3 mb-8 lg:mb-12 h-12 sm:h-14 bg-gray-900/80 border border-purple-500/30">
                 <TabsTrigger
                   value="education"
-                  className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white"
+                  className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
                 >
                   <svg
-                    className="w-5 h-5 mr-2"
+                    className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -394,10 +419,10 @@ export default function Home() {
                 </TabsTrigger>
                 <TabsTrigger
                   value="hackathons"
-                  className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white"
+                  className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
                 >
                   <svg
-                    className="w-5 h-5 mr-2"
+                    className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -414,10 +439,10 @@ export default function Home() {
                 </TabsTrigger>
                 <TabsTrigger
                   value="connecting"
-                  className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white"
+                  className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
                 >
                   <svg
-                    className="w-5 h-5 mr-2"
+                    className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

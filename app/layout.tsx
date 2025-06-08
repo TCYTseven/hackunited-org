@@ -66,9 +66,15 @@ export default function RootLayout({
 
                     {/* Right Side Actions */}
                     <div className="flex items-center gap-3">
-                      <Button className="hidden md:flex bg-purple-600 hover:bg-purple-700 text-white rounded-full px-6 py-2 text-sm font-medium transition-all duration-200">
-                        Register Now
-                      </Button>
+                      <a 
+                        href="https://unitedhacks.hackunited.org" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                      >
+                        <Button className="hidden md:flex bg-purple-600 hover:bg-purple-700 text-white rounded-full px-6 py-2 text-sm font-medium transition-all duration-200">
+                          Hackathon
+                        </Button>
+                      </a>
                       
                       {/* Mobile Menu */}
                       <Sheet>
@@ -104,9 +110,16 @@ export default function RootLayout({
                               Blog
                             </a>
                             <div className="pt-4 border-t border-gray-700">
-                              <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white rounded-full py-3">
-                                Register Now
-                              </Button>
+                              <a 
+                                href="https://unitedhacks.hackunited.org" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="block"
+                              >
+                                <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white rounded-full py-3">
+                                  Hackathons
+                                </Button>
+                              </a>
                             </div>
                           </div>
                         </SheetContent>
@@ -118,8 +131,8 @@ export default function RootLayout({
             </header>
             {children}
             <footer className="bg-black border-t border-purple-500/20">
-              <div className="container px-4 py-12 mx-auto">
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+              <div className="container px-4 py-8 sm:py-12 mx-auto">
+                <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-4">
                   <div className="space-y-4">
                     <Link href="/" className="flex items-center gap-2 font-bold text-xl">
                       <Image
