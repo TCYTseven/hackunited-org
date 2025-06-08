@@ -42,8 +42,7 @@ const executiveTeamRow2: TeamMember[] = [
   {
     name: "Fiona F.",
     position: "Head of Product",
-    image:
-      "https://media.discordapp.net/attachments/967241062705930241/1378877681378005002/image0.jpg?ex=683e3369&is=683ce1e9&hm=70fe2ea833080cb7e3de40cc2c979aa6dd3a2b448b8a80765c72bfd3d175956b&=&format=webp&width=683&height=911",
+    image: "/images/fionaa.jpg",
   },
   {
     name: "James Z.",
@@ -66,8 +65,7 @@ const officersRow1: TeamMember[] = [
   {
     name: "Fiona F.",
     position: "Head of Product",
-    image:
-      "https://media.discordapp.net/attachments/967241062705930241/1378877681378005002/image0.jpg?ex=683e3369&is=683ce1e9&hm=70fe2ea833080cb7e3de40cc2c979aa6dd3a2b448b8a80765c72bfd3d175956b&=&format=webp&width=683&height=911",
+    image: "/images/fionaa.jpg",
   },
   {
     name: "James Z.",
@@ -94,7 +92,7 @@ const officersRow2: TeamMember[] = [
   },
   {
     name: "Pranav A.",
-    position: "Noob",
+    position: "Chat Mod",
     image: "https://hackunited.org/assets/images/image68.jpg?v=fab6f006",
   },
   {
