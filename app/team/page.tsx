@@ -88,6 +88,11 @@ const officersRow2: TeamMember[] = [
     image: "https://hackunited.org/assets/images/image87.jpg?v=fab6f006",
   },
   {
+    name: "Akmal. M",
+    position: "Outreach Director",
+    image: "/images/akmal.png",
+  },
+  {
     name: "Pranav A.",
     position: "Noob",
     image: "https://hackunited.org/assets/images/image68.jpg?v=fab6f006",
@@ -488,7 +493,7 @@ export default function TeamPage() {
           </div>
 
           {/* Team Row 2 */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-8 justify-items-center">
             {officersRow2.map((member, index) => (
               <TeamMemberCard key={index} member={member} size="large" />
             ))}

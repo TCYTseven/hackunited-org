@@ -18,7 +18,7 @@ function DiscordWidget() {
         src="https://e.widgetbot.io/channels/1108199473206792203/1113813542039207977"
         width="100%"
         height="600"
-        allowTransparency={true}
+        allowtransparency="true"
         frameBorder="0"
         sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
         className="rounded-lg border border-purple-500/30 bg-gray-900"
