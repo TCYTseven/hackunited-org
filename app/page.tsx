@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -8,6 +10,23 @@ import { CheckIcon, ArrowRightIcon } from "lucide-react"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import InteractiveLogo from "@/components/interactive-logo"
 import { ScrollButton, ScrollButtonWithIcon } from "@/components/scroll-button"
+
+function DiscordWidget() {
+  return (
+    <div className="w-full max-w-4xl mx-auto">
+      <iframe
+        src="https://e.widgetbot.io/channels/1108199473206792203/1113813542039207977"
+        width="100%"
+        height="600"
+        allowTransparency={true}
+        frameBorder="0"
+        sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+        className="rounded-lg border border-purple-500/30 bg-gray-900"
+        title="Hack United Discord Community"
+      />
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -787,9 +806,7 @@ export default function Home() {
               for our next hackathon or become a part of our Discord community.
             </p>
             <div className="flex justify-center">
-              <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white">
-                Register for United Hacks V5
-              </Button>
+              <DiscordWidget />
             </div>
           </div>
         </div>
