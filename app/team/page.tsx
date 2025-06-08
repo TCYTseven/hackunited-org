@@ -388,22 +388,45 @@ const previousVolunteers: TeamMember[][] = [
   ],
 ]
 
-function TeamMemberCard({ member, size = "small" }: { member: TeamMember; size?: "small" | "large" }) {
-  const imageSize = size === "large" ? "w-32 h-32" : "w-20 h-20"
-  const textSize = size === "large" ? "text-lg" : "text-sm"
-  const positionSize = size === "large" ? "text-sm" : "text-xs"
+function TeamMemberCard({ member, size = "small" }: { member: TeamMember; size?: "small" | "large" | "compact" | "card" }) {
+  const imageSize = size === "large" ? "w-32 h-32" : size === "compact" ? "w-12 h-12" : size === "card" ? "w-10 h-10" : "w-20 h-20"
+  const textSize = size === "large" ? "text-lg" : size === "compact" ? "text-xs" : size === "card" ? "text-sm" : "text-sm"
+  const positionSize = size === "large" ? "text-sm" : size === "compact" ? "text-[10px]" : size === "card" ? "text-xs" : "text-xs"
+  const marginBottom = size === "compact" ? "mb-1" : size === "card" ? "mb-2" : "mb-3"
+  const borderWidth = size === "compact" ? "border-2" : size === "card" ? "border-2" : "border-4"
+
+  if (size === "card") {
+    return (
+      <div className={`bg-gray-900/50 rounded-lg p-3 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 hover:bg-gray-800/50 ${montserrat.className}`}>
+        <div className="flex items-center gap-3">
+          <div className={`relative ${imageSize} flex-shrink-0`}>
+            <Image
+              src={member.image || "/placeholder.svg"}
+              alt={member.name}
+              fill
+              className={`rounded-full object-cover ${borderWidth} border-purple-600`}
+            />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h3 className={`font-bold text-white ${textSize} mb-0.5 truncate`}>{member.name}</h3>
+            <p className={`text-purple-400 ${positionSize} font-medium truncate`}>{member.position}</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className={`flex flex-col items-center text-center ${montserrat.className}`}>
-      <div className={`relative ${imageSize} mb-3`}>
+      <div className={`relative ${imageSize} ${marginBottom}`}>
         <Image
           src={member.image || "/placeholder.svg"}
           alt={member.name}
           fill
-          className="rounded-full object-cover border-4 border-purple-600 transition-transform duration-300 hover:scale-110"
+          className={`rounded-full object-cover ${borderWidth} border-purple-600 transition-transform duration-300 hover:scale-110`}
         />
       </div>
-      <h3 className={`font-bold text-white ${textSize} mb-1`}>{member.name}</h3>
+      <h3 className={`font-bold text-white ${textSize} mb-0.5`}>{member.name}</h3>
       <p className={`text-purple-400 ${positionSize} font-bold`}>{member.position}</p>
     </div>
   )
@@ -468,22 +491,16 @@ export default function TeamPage() {
         </div>
 
         {/* Previous Volunteers */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-white text-center mb-8">Previous Volunteers</h2>
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-white mb-2">Previous Volunteers</h2>
+            <p className="text-gray-400 text-sm">Thank you to all who have contributed to our journey</p>
+          </div>
 
-          {/* All 11 rows of Previous Volunteers */}
-          <div className="space-y-6">
-            {previousVolunteers.map((row, rowIndex) => (
-              <div
-                key={rowIndex}
-                className={`grid gap-4 justify-items-center ${
-                  rowIndex === 10 ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1 md:grid-cols-5"
-                }`}
-              >
-                {row.map((member, memberIndex) => (
-                  <TeamMemberCard key={memberIndex} member={member} size="small" />
-                ))}
-              </div>
+          {/* All Previous Volunteers in Card Format */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            {previousVolunteers.flat().map((member, index) => (
+              <TeamMemberCard key={index} member={member} size="card" />
             ))}
           </div>
         </div>

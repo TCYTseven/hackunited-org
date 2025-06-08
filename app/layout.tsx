@@ -27,75 +27,92 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <div className="flex min-h-screen flex-col bg-black text-white">
-            <header className="sticky top-0 z-50 w-full border-b border-purple-500/20 bg-black/80 backdrop-blur supports-[backdrop-filter]:bg-black/60">
-              <div className="container flex h-16 items-center">
-                <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-                  <Image src="/images/globe-icon.png" alt="Hack United" width={24} height={24} className="h-6 w-6" />
-                  <span>Hack United</span>
-                </Link>
-                <nav className="hidden md:flex items-center gap-6 ml-10">
-                  <Link href="/" className="text-sm font-medium transition-colors hover:text-purple-400">
-                    Home
-                  </Link>
-                  <Link href="/donate" className="text-sm font-medium transition-colors hover:text-purple-400">
-                    Donate
-                  </Link>
-                  <Link href="/team" className="text-sm font-medium transition-colors hover:text-purple-400">
-                    Team
-                  </Link>
-                  <Link href="/apply" className="text-sm font-medium transition-colors hover:text-purple-400">
-                    Apply
-                  </Link>
-                  <Link href="/social" className="text-sm font-medium transition-colors hover:text-purple-400">
-                    Social
-                  </Link>
-                  <a
-                    href="https://blog.hackunited.org/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium transition-colors hover:text-purple-400"
-                  >
-                    Blog
-                  </a>
-                </nav>
-                <div className="flex items-center ml-auto gap-4">
-                  <Button className="hidden md:flex bg-purple-600 hover:bg-purple-700 text-white">Register Now</Button>
-                  <Sheet>
-                    <SheetTrigger asChild>
-                      <Button variant="ghost" size="icon" className="md:hidden">
-                        <Menu className="h-5 w-5" />
-                        <span className="sr-only">Toggle menu</span>
+            <header className="sticky top-0 z-50 w-full px-4 py-4">
+              <div className="max-w-7xl mx-auto">
+                <div className="bg-gray-900/60 backdrop-blur-xl rounded-full border border-gray-600/40 shadow-lg drop-shadow-md px-6 py-3">
+                  <div className="flex items-center justify-between">
+                    {/* Logo and Brand */}
+                    <Link href="/" className="flex items-center gap-3 font-bold text-lg">
+                      <Image src="/images/globe-icon.png" alt="Hack United" width={32} height={32} className="h-8 w-8" />
+                      <span className="text-white">Hack United</span>
+                    </Link>
+
+                    {/* Desktop Navigation */}
+                    <nav className="hidden md:flex items-center gap-2">
+                      <Link href="/" className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200">
+                        Home
+                      </Link>
+                      <Link href="/donate" className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200">
+                        Donate
+                      </Link>
+                      <Link href="/team" className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200">
+                        Team
+                      </Link>
+                      <Link href="/apply" className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200">
+                        Apply
+                      </Link>
+                      <Link href="/social" className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200">
+                        Social
+                      </Link>
+                      <a
+                        href="https://blog.hackunited.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200"
+                      >
+                        Blog
+                      </a>
+                    </nav>
+
+                    {/* Right Side Actions */}
+                    <div className="flex items-center gap-3">
+                      <Button className="hidden md:flex bg-purple-600 hover:bg-purple-700 text-white rounded-full px-6 py-2 text-sm font-medium transition-all duration-200">
+                        Register Now
                       </Button>
-                    </SheetTrigger>
-                    <SheetContent side="right" className="bg-black border-purple-500/20">
-                      <div className="flex flex-col gap-6 mt-6">
-                        <Link href="/" className="text-sm font-medium transition-colors hover:text-purple-400">
-                          Home
-                        </Link>
-                        <Link href="/donate" className="text-sm font-medium transition-colors hover:text-purple-400">
-                          Donate
-                        </Link>
-                        <Link href="/team" className="text-sm font-medium transition-colors hover:text-purple-400">
-                          Team
-                        </Link>
-                        <Link href="/apply" className="text-sm font-medium transition-colors hover:text-purple-400">
-                          Apply
-                        </Link>
-                        <Link href="/social" className="text-sm font-medium transition-colors hover:text-purple-400">
-                          Social
-                        </Link>
-                        <a
-                          href="https://blog.hackunited.org/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm font-medium transition-colors hover:text-purple-400"
-                        >
-                          Blog
-                        </a>
-                        <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">Register Now</Button>
-                      </div>
-                    </SheetContent>
-                  </Sheet>
+                      
+                      {/* Mobile Menu */}
+                      <Sheet>
+                        <SheetTrigger asChild>
+                          <Button variant="ghost" size="icon" className="md:hidden rounded-full hover:bg-gray-700/50">
+                            <Menu className="h-5 w-5 text-white" />
+                            <span className="sr-only">Toggle menu</span>
+                          </Button>
+                        </SheetTrigger>
+                        <SheetContent side="right" className="bg-gray-900 border-gray-700">
+                          <div className="flex flex-col gap-6 mt-8">
+                            <Link href="/" className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2">
+                              Home
+                            </Link>
+                            <Link href="/donate" className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2">
+                              Donate
+                            </Link>
+                            <Link href="/team" className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2">
+                              Team
+                            </Link>
+                            <Link href="/apply" className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2">
+                              Apply
+                            </Link>
+                            <Link href="/social" className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2">
+                              Social
+                            </Link>
+                            <a
+                              href="https://blog.hackunited.org/"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2"
+                            >
+                              Blog
+                            </a>
+                            <div className="pt-4 border-t border-gray-700">
+                              <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white rounded-full py-3">
+                                Register Now
+                              </Button>
+                            </div>
+                          </div>
+                        </SheetContent>
+                      </Sheet>
+                    </div>
+                  </div>
                 </div>
               </div>
             </header>
