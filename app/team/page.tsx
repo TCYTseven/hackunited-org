@@ -13,87 +13,93 @@ interface TeamMember {
 const executiveTeam: TeamMember[] = [
   {
     name: "Tejas C.",
-    position: "Founder + CEO",
+    position: "Founder",
     image: "https://hackunited.org/assets/images/image71.jpg?v=fab6f006",
   },
   {
-    name: "Pranav A.",
-    position: "Chief Operating Officer",
-    image: "https://hackunited.org/assets/images/image68.jpg?v=fab6f006",
-  },
-  {
     name: "Kavin A.",
-    position: "Chief Administrative Officer",
+    position: "Head of Operations",
     image: "https://hackunited.org/assets/images/image36.jpg?v=fab6f006",
   },
-]
-
-const executiveTeamRow2: TeamMember[] = [
   {
     name: "Kishan P.",
     position: "Head of Community",
     image: "https://hackunited.org/assets/images/image84.jpg?v=fab6f006",
   },
-  {
-    name: "Sahana P.",
-    position: "Head Outreach Manager",
-    image: "https://hackunited.org/assets/images/image85.jpg?v=fab6f006",
-  },
+]
+
+const executiveTeamRow2: TeamMember[] = [
   {
     name: "Rehan R.",
     position: "Head of Marketing",
     image: "https://hackunited.org/assets/images/image86.jpg?v=fab6f006",
   },
   {
-    name: "Armaan P.",
-    position: "Head Blog Manager",
+    name: "Sahana P.",
+    position: "Head of Outreach",
+    image: "https://hackunited.org/assets/images/image85.jpg?v=fab6f006",
+  },
+  {
+    name: "Fiona F.",
+    position: "Head of Product",
+    image:
+      "https://media.discordapp.net/attachments/967241062705930241/1378877681378005002/image0.jpg?ex=683e3369&is=683ce1e9&hm=70fe2ea833080cb7e3de40cc2c979aa6dd3a2b448b8a80765c72bfd3d175956b&=&format=webp&width=683&height=911",
+  },
+  {
+    name: "James Z.",
+    position: "Head of Blog",
     image: "https://hackunited.org/assets/images/image87.jpg?v=fab6f006",
   },
 ]
 
 const officersRow1: TeamMember[] = [
   {
-    name: "Ankit B.",
-    position: "Web Developer",
-    image: "https://hackunited.org/assets/images/image88.jpg?v=fab6f006",
+    name: "Rehan R.",
+    position: "Head of Marketing",
+    image: "https://hackunited.org/assets/images/image86.jpg?v=fab6f006",
   },
   {
-    name: "Arnnav K.",
-    position: "Technical Team",
-    image: "https://hackunited.org/assets/images/image89.jpg?v=fab6f006",
+    name: "Sahana P.",
+    position: "Head of Outreach",
+    image: "https://hackunited.org/assets/images/image85.jpg?v=fab6f006",
   },
   {
     name: "Fiona F.",
-    position: "Social Media Manager",
+    position: "Head of Product",
     image:
       "https://media.discordapp.net/attachments/967241062705930241/1378877681378005002/image0.jpg?ex=683e3369&is=683ce1e9&hm=70fe2ea833080cb7e3de40cc2c979aa6dd3a2b448b8a80765c72bfd3d175956b&=&format=webp&width=683&height=911",
   },
   {
-    name: "Henry N.",
-    position: "Social Media Manager",
-    image: "https://hackunited.org/assets/images/image91.jpg?v=fab6f006",
+    name: "James Z.",
+    position: "Head of Blog",
+    image: "https://hackunited.org/assets/images/image87.jpg?v=fab6f006",
   },
 ]
 
 const officersRow2: TeamMember[] = [
   {
+    name: "Henry N.",
+    position: "Graphics Design",
+    image: "https://hackunited.org/assets/images/image91.jpg?v=fab6f006",
+  },
+  {
+    name: "Armaan P.",
+    position: "Blog Writer",
+    image: "https://hackunited.org/assets/images/image87.jpg?v=fab6f006",
+  },
+  {
+    name: "Pranav A.",
+    position: "Noob",
+    image: "https://hackunited.org/assets/images/image68.jpg?v=fab6f006",
+  },
+  {
     name: "Ritvik P.",
-    position: "Outreach Associate",
+    position: "Outreach",
     image: "https://hackunited.org/assets/images/image95.jpg?v=fab6f006",
   },
   {
-    name: "Som S.",
-    position: "Web Developer",
-    image: "https://hackunited.org/assets/images/image90.jpg?v=fab6f006",
-  },
-  {
-    name: "Tadas V.",
-    position: "Community Planner",
-    image: "https://hackunited.org/assets/images/image92.jpg?v=fab6f006",
-  },
-  {
     name: "Yukta P.",
-    position: "Outreach Manager",
+    position: "Outreach",
     image: "https://hackunited.org/assets/images/image93.jpg?v=fab6f006",
   },
 ]
@@ -386,6 +392,29 @@ const previousVolunteers: TeamMember[][] = [
       image: "https://hackunited.org/assets/images/image35.jpg?v=fab6f006",
     },
   ],
+  // Row 12 - Recently moved from active team
+  [
+    {
+      name: "Ankit B.",
+      position: "Web Developer",
+      image: "https://hackunited.org/assets/images/image88.jpg?v=fab6f006",
+    },
+    {
+      name: "Arnnav K.",
+      position: "Technical Team",
+      image: "https://hackunited.org/assets/images/image89.jpg?v=fab6f006",
+    },
+    {
+      name: "Som S.",
+      position: "Web Developer",
+      image: "https://hackunited.org/assets/images/image90.jpg?v=fab6f006",
+    },
+    {
+      name: "Tadas V.",
+      position: "Community Planner",
+      image: "https://hackunited.org/assets/images/image92.jpg?v=fab6f006",
+    },
+  ],
 ]
 
 function TeamMemberCard({ member, size = "small" }: { member: TeamMember; size?: "small" | "large" | "compact" | "card" }) {
@@ -442,10 +471,8 @@ export default function TeamPage() {
 
         {/* Executive Team */}
         <div className="mb-16">
-          <h2 className="text-2xl font-bold text-white text-center mb-8">Executive Team</h2>
-
-          {/* Executive Team Row 1 - Dark Background with White Glow */}
-          <div className="bg-gray-900/50 rounded-lg p-8 mb-8 border-2 border-purple-500/30 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+          {/* Core Executives - Dark Background with White Glow */}
+          <div className="bg-gray-900/50 rounded-lg p-8 mb-12 border-2 border-purple-500/30 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
               {executiveTeam.map((member, index) => (
                 <TeamMemberCard key={index} member={member} size="large" />
@@ -453,32 +480,15 @@ export default function TeamPage() {
             </div>
           </div>
 
-          {/* Executive Team Row 2 */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-center">
-            {executiveTeamRow2.map((member, index) => (
-              <TeamMemberCard key={index} member={member} size="large" />
-            ))}
-          </div>
-        </div>
-
-        {/* Purple Divider - Thicker, Shorter, Darker */}
-        <div className="flex justify-center mb-16">
-          <div className="w-32 h-1 bg-purple-800"></div>
-        </div>
-
-        {/* Officers */}
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-white text-center mb-8">Officers</h2>
-
-          {/* Officers Row 1 */}
+          {/* Team Row 1 */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-center mb-12">
             {officersRow1.map((member, index) => (
               <TeamMemberCard key={index} member={member} size="large" />
             ))}
           </div>
 
-          {/* Officers Row 2 */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-center">
+          {/* Team Row 2 */}
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 justify-items-center">
             {officersRow2.map((member, index) => (
               <TeamMemberCard key={index} member={member} size="large" />
             ))}
