@@ -11,6 +11,24 @@ import { AspectRatio } from "@/components/ui/aspect-ratio"
 import InteractiveLogo from "@/components/interactive-logo"
 import { ScrollButton, ScrollButtonWithIcon } from "@/components/scroll-button"
 
+// Simple animations
+const styles = `
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+`
+
 function DiscordWidget() {
   return (
     <div className="w-full max-w-4xl mx-auto">
@@ -18,7 +36,7 @@ function DiscordWidget() {
         src="https://e.widgetbot.io/channels/1108199473206792203/1113813542039207977"
         width="100%"
         height="600"
-        allowtransparency="true"
+        allowTransparency={true}
         frameBorder="0"
         sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
         className="rounded-lg border border-purple-500/30 bg-gray-900"
@@ -30,7 +48,9 @@ function DiscordWidget() {
 
 export default function Home() {
   return (
-    <main className="bg-black text-white">
+    <>
+      <style jsx>{styles}</style>
+      <main className="bg-black text-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-screen flex items-center -mt-20 pt-20">
         {/* Modern gradient background */}
@@ -43,7 +63,7 @@ export default function Home() {
         <div className="absolute inset-0 -top-20 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
         
         {/* Purple accent glow - only visible on larger screens */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-600/8 rounded-full blur-3xl hidden lg:block"></div>
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-600/8 rounded-full blur-3xl hidden lg:block animate-pulse"></div>
         
         {/* Mobile gradient accent */}
         <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-purple-900/10 to-transparent lg:hidden"></div>
@@ -54,29 +74,29 @@ export default function Home() {
           {/* Mobile Design - Copy of reference style */}
           <div className="lg:hidden flex flex-col items-center text-center min-h-screen justify-center space-y-8 -mt-16">
             {/* Hero Image */}
-            <div className="w-80 h-80 rounded-3xl overflow-hidden mb-4">
+            <div className="w-80 h-80 rounded-3xl overflow-hidden mb-4 animate-fade-in">
               <Image 
                 src="/images/globe-icon.png" 
                 alt="Hack United" 
                 width={320} 
                 height={320} 
-                className="w-full h-full object-contain bg-gradient-to-br from-purple-600/20 to-purple-800/20 p-16"
+                className="w-full h-full object-contain bg-gradient-to-br from-purple-600/20 to-purple-800/20 p-16 hover:scale-105 transition-transform duration-300"
               />
             </div>
 
             {/* Main headline */}
-            <h1 className="text-4xl font-bold text-white leading-tight max-w-sm">
+            <h1 className="text-4xl font-bold text-white leading-tight max-w-sm animate-fade-in">
               Hack United
             </h1>
 
             {/* Description */}
-            <p className="text-gray-400 text-lg leading-relaxed max-w-sm">
+            <p className="text-gray-400 text-lg leading-relaxed max-w-sm animate-fade-in">
               A 501(c)(3) developing soft skills in the next generation of tech innovators through free hackathons and hands-on learning.
             </p>
 
             {/* Buttons */}
-            <div className="flex flex-col w-full max-w-sm space-y-4 pt-4">
-              <ScrollButton className="w-full bg-purple-600 hover:bg-purple-700 text-white py-4 rounded-full font-medium text-base">
+            <div className="flex flex-col w-full max-w-sm space-y-4 pt-4 animate-fade-in">
+              <ScrollButton className="w-full bg-purple-600 hover:bg-purple-700 hover:scale-105 text-white py-4 rounded-full font-medium text-base transition-all duration-300">
                 Learn More
               </ScrollButton>
             </div>
@@ -86,22 +106,22 @@ export default function Home() {
           <div className="hidden lg:grid gap-12 lg:grid-cols-2 items-center">
             <div className="flex flex-col justify-center">
               {/* Globe icon and badge */}
-              <div className="flex items-center gap-3 mb-12">
-                <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center shadow-lg">
+              <div className="flex items-center gap-3 mb-12 animate-fade-in">
+                <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
                   <Image src="/images/globe-icon.png" alt="Hack United" width={24} height={24} className="h-6 w-6" />
                 </div>
-                <Badge className="bg-purple-600/10 text-purple-300/80 border-purple-500/20 py-1 px-3 text-xs">
+                <Badge className="bg-purple-600/10 text-purple-300/80 border-purple-500/20 py-1 px-3 text-xs hover:bg-purple-600/20 transition-colors duration-300">
                   Empowering Young Innovators
                 </Badge>
               </div>
 
               {/* Main heading */}
-              <h1 className="text-7xl font-bold tracking-tight mb-8">
+              <h1 className="text-7xl font-bold tracking-tight mb-8 animate-fade-in">
                 Hack <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">United</span>
               </h1>
 
               {/* Description */}
-              <div className="mb-12">
+              <div className="mb-12 animate-fade-in">
                 <p className="text-xl text-gray-300 leading-relaxed max-w-xl">
                   A 501(c)(3) non-profit organization founded by teenagers with a passion for programming and
                   technology.
@@ -109,10 +129,10 @@ export default function Home() {
               </div>
 
               {/* Buttons */}
-              <div className="flex gap-4">
+              <div className="flex gap-4 animate-fade-in">
                 <ScrollButtonWithIcon 
                   size="lg" 
-                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-8 py-4 rounded-xl text-base font-semibold shadow-lg shadow-purple-500/25 transition-all duration-200"
+                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 hover:scale-105 text-white px-8 py-4 rounded-xl text-base font-semibold shadow-lg shadow-purple-500/25 transition-all duration-300"
                 >
                   Learn More
                 </ScrollButtonWithIcon>
@@ -120,7 +140,7 @@ export default function Home() {
             </div>
 
             {/* Right side with Interactive Logo */}
-            <div className="relative flex items-center justify-center min-h-[600px]">
+            <div className="relative flex items-center justify-center min-h-[600px] animate-fade-in">
               <div className="relative z-10">
                 <InteractiveLogo />
               </div>
@@ -147,7 +167,7 @@ export default function Home() {
         </div>
         
         <div className="container relative px-4 mx-auto">
-          <div className="max-w-3xl mx-auto bg-black/60 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-purple-500/20">
+          <div className="max-w-3xl mx-auto bg-black/60 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-purple-500/20 animate-fade-in hover:border-purple-500/40 transition-all duration-500">
             <p className="text-base sm:text-lg text-gray-200 leading-relaxed">
               Hack United is a 501(c)(3) non-profit organization founded by teenagers with a passion for programming and
               technology. Our mission is to inspire and educate the next generation of innovators through hackathons and
@@ -179,7 +199,7 @@ export default function Home() {
             </div>
           </div>
 
-          <Card className="overflow-hidden border border-purple-500/30 bg-black/60 backdrop-blur-sm">
+          <Card className="overflow-hidden border border-purple-500/30 bg-black/60 backdrop-blur-sm animate-fade-in hover:border-purple-500/50 transition-all duration-300">
             <div className="grid lg:grid-cols-2">
               <div className="p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-purple-900/50 to-purple-950/50">
                 <Badge className="bg-white/10 text-white hover:bg-white/20 mb-4 sm:mb-6 border-purple-500/50 text-xs sm:text-sm">
@@ -213,7 +233,7 @@ export default function Home() {
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
-                  <Button className="bg-white text-purple-900 hover:bg-white/90 w-full sm:w-auto text-sm sm:text-base">Register Now</Button>
+                  <Button className="bg-white text-purple-900 hover:bg-white/90 hover:scale-105 w-full sm:w-auto text-sm sm:text-base transition-all duration-300">Register Now</Button>
                 </a>
               </div>
               <div className="relative min-h-[200px] sm:min-h-[300px] lg:min-h-auto">
@@ -252,7 +272,7 @@ export default function Home() {
 
         <div className="container relative px-4 mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm">
+            <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm animate-fade-in hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
               <CardHeader className="pb-2 text-center sm:text-left">
                 <CardTitle className="text-3xl sm:text-4xl font-bold text-purple-400">25,000+</CardTitle>
               </CardHeader>
@@ -260,7 +280,7 @@ export default function Home() {
                 <CardDescription className="text-gray-300 text-sm sm:text-base">Individuals Impacted</CardDescription>
               </CardContent>
             </Card>
-            <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm">
+            <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm animate-fade-in hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
               <CardHeader className="pb-2 text-center sm:text-left">
                 <CardTitle className="text-3xl sm:text-4xl font-bold text-purple-400">3,000+</CardTitle>
               </CardHeader>
@@ -268,7 +288,7 @@ export default function Home() {
                 <CardDescription className="text-gray-300 text-sm sm:text-base">Community Members</CardDescription>
               </CardContent>
             </Card>
-            <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1">
+            <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 animate-fade-in hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
               <CardHeader className="pb-2 text-center sm:text-left">
                 <CardTitle className="text-3xl sm:text-4xl font-bold text-purple-400">50+</CardTitle>
               </CardHeader>
@@ -300,7 +320,7 @@ export default function Home() {
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-12 lg:mb-16 text-white">Our Goals</h2>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm hover:border-purple-500/60 transition-all duration-300">
+            <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
               <CardHeader>
                 <div className="w-12 h-12 flex items-center justify-center rounded-full bg-purple-900/50 text-purple-400 mb-4">
                   <svg
@@ -330,7 +350,7 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm hover:border-purple-500/60 transition-all duration-300">
+            <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
               <CardHeader>
                 <div className="w-12 h-12 flex items-center justify-center rounded-full bg-purple-900/50 text-purple-400 mb-4">
                   <svg
@@ -360,7 +380,7 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm hover:border-purple-500/60 transition-all duration-300">
+            <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
               <CardHeader>
                 <div className="w-12 h-12 flex items-center justify-center rounded-full bg-purple-900/50 text-purple-400 mb-4">
                   <svg
@@ -795,22 +815,23 @@ export default function Home() {
         {/* Subtle gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
 
-        <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
-        <div className="absolute -top-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -top-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
 
         <div className="container relative px-4 mx-auto">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Ready to Join Our Community?</h2>
-            <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white animate-fade-in">Ready to Join Our Community?</h2>
+            <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in">
               Whether you're a beginner or an experienced developer, there's a place for you in our community. Join us
               for our next hackathon or become a part of our Discord community.
             </p>
-            <div className="flex justify-center">
+            <div className="flex justify-center animate-fade-in">
               <DiscordWidget />
             </div>
           </div>
         </div>
       </section>
     </main>
+    </>
   )
 }

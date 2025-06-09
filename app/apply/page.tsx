@@ -278,32 +278,32 @@ export default function ApplyPage() {
 
   return (
     <main className="bg-black text-white">
-      {/* Compact Hero */}
-      <section className="relative py-16 -mt-20 pt-32">
+      {/* Mobile-Responsive Hero */}
+      <section className="relative py-16 sm:py-20 lg:py-24 -mt-20 pt-24 sm:pt-28 lg:pt-32">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
         <div className="absolute inset-0 bg-[radial-gradient(#ffffff_0.5px,transparent_1px)] [background-size:20px_20px] opacity-20"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/8 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-purple-600/8 rounded-full blur-3xl"></div>
         
         <div className="container relative px-4 mx-auto text-center">
-          <Badge className="bg-purple-600/10 text-purple-300/80 border-purple-500/20 mb-4">
+          <Badge className="bg-purple-600/10 text-purple-300/80 border-purple-500/20 mb-4 text-xs sm:text-sm">
             Join Our Mission
           </Badge>
           
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
             Join The{" "}
             <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
               Team
             </span>
           </h1>
           
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base lg:text-lg">
             We are always looking for new additions to help run Hack United! Read below for requirements, benefits, and application info.
           </p>
 
           <div className="flex justify-center">
             <a 
               href="mailto:jobs@hackunited.org"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base"
             >
               <Mail className="w-4 h-4" />
               Apply Now
@@ -312,20 +312,20 @@ export default function ApplyPage() {
         </div>
       </section>
 
-      {/* Compact Benefits & Positions */}
-      <section className="py-12">
+      {/* Mobile-Responsive Benefits & Positions */}
+      <section className="py-8 sm:py-12 lg:py-16">
         <div className="container px-4 mx-auto">
-          <div className="grid lg:grid-cols-4 gap-8">
+          <div className="grid lg:grid-cols-4 gap-6 lg:gap-8">
             
-            {/* Benefits Column */}
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Benefits</h2>
+            {/* Benefits Column - Mobile First */}
+            <div className="lg:col-span-1">
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Benefits</h2>
               <Card className="bg-gray-900/60 border-purple-500/20">
-                <CardContent className="p-4">
-                  <p className="text-sm text-gray-300 mb-4">While positions are unpaid, we provide valuable benefits:</p>
-                  <ul className="space-y-2">
+                <CardContent className="p-4 sm:p-6">
+                  <p className="text-xs sm:text-sm text-gray-300 mb-4">While positions are unpaid, we provide valuable benefits:</p>
+                  <ul className="space-y-2 sm:space-y-3">
                     {benefits.map((benefit, index) => (
-                      <li key={index} className="flex items-center gap-2 text-sm">
+                      <li key={index} className="flex items-center gap-2 text-xs sm:text-sm">
                         <div className="w-1.5 h-1.5 bg-purple-400 rounded-full flex-shrink-0"></div>
                         <span className="text-gray-200">{benefit}</span>
                       </li>
@@ -339,24 +339,24 @@ export default function ApplyPage() {
               </Card>
             </div>
 
-            {/* Open Positions - Individual Role Cards */}
+            {/* Open Positions - Mobile Responsive Grid */}
             <div className="lg:col-span-3">
-              <h2 className="text-2xl font-bold mb-4">Open Positions</h2>
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Open Positions</h2>
               
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 {departments.map((department) => 
                   department.positions.map((position, posIndex) => (
                     <button
                       key={`${department.title}-${posIndex}`}
                       onClick={() => openPositionModal(position)}
-                      className="text-left p-4 bg-gray-900/60 border border-purple-500/20 rounded-lg hover:border-purple-400/40 hover:bg-gray-800/60 transition-all duration-300 group"
+                      className="text-left p-3 sm:p-4 bg-gray-900/60 border border-purple-500/20 rounded-lg hover:border-purple-400/40 hover:bg-gray-800/60 transition-all duration-300 group"
                     >
-                      <div className="flex items-start gap-3">
-                        <div className={`p-2 bg-gradient-to-r ${department.color} rounded-lg text-white flex-shrink-0`}>
+                      <div className="flex items-start gap-2 sm:gap-3">
+                        <div className={`p-1.5 sm:p-2 bg-gradient-to-r ${department.color} rounded-lg text-white flex-shrink-0`}>
                           {department.icon}
                         </div>
                         <div className="min-w-0 flex-1">
-                          <h3 className="font-semibold text-white text-sm mb-1 group-hover:text-purple-300 transition-colors duration-200">
+                          <h3 className="font-semibold text-white text-xs sm:text-sm mb-1 group-hover:text-purple-300 transition-colors duration-200 leading-tight">
                             {position}
                           </h3>
                           <Badge className={`${department.title === 'Marketing' ? 'text-pink-400' : 
@@ -376,42 +376,42 @@ export default function ApplyPage() {
         </div>
       </section>
 
-      {/* How to Apply Section - Bottom of Page */}
-      <section className="py-16 bg-gray-900/30">
+      {/* Mobile-Responsive How to Apply Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-gray-900/30">
         <div className="container px-4 mx-auto">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">How to Apply</h2>
-              <p className="text-gray-300 text-lg">
+            <div className="text-center mb-8 sm:mb-12">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4">How to Apply</h2>
+              <p className="text-gray-300 text-sm sm:text-base lg:text-lg">
                 Ready to join our team? Follow these simple steps to submit your application.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
               {/* Application Process */}
               <Card className="bg-gray-900/60 border-purple-500/20" id="application-section">
-                <CardContent className="p-8">
-                  <h3 className="text-xl font-semibold mb-6 text-white">Application Process</h3>
-                  <div className="space-y-6">
-                    <div className="flex gap-4">
-                      <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">1</div>
+                <CardContent className="p-4 sm:p-6 lg:p-8">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-white">Application Process</h3>
+                  <div className="space-y-4 sm:space-y-6">
+                    <div className="flex gap-3 sm:gap-4">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">1</div>
                       <div>
-                        <p className="font-medium text-white text-lg mb-2">Email jobs@hackunited.org</p>
-                        <p className="text-gray-400">Include all required information listed on the right</p>
+                        <p className="font-medium text-white text-sm sm:text-base lg:text-lg mb-1 sm:mb-2">Email jobs@hackunited.org</p>
+                        <p className="text-gray-400 text-xs sm:text-sm">Include all required information listed on the right</p>
                       </div>
                     </div>
-                    <div className="flex gap-4">
-                      <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">2</div>
+                    <div className="flex gap-3 sm:gap-4">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">2</div>
                       <div>
-                        <p className="font-medium text-white text-lg mb-2">Review Process</p>
-                        <p className="text-gray-400">We review applications regularly and respond promptly</p>
+                        <p className="font-medium text-white text-sm sm:text-base lg:text-lg mb-1 sm:mb-2">Review Process</p>
+                        <p className="text-gray-400 text-xs sm:text-sm">We review applications regularly and respond promptly</p>
                       </div>
                     </div>
-                    <div className="flex gap-4">
-                      <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">3</div>
+                    <div className="flex gap-3 sm:gap-4">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">3</div>
                       <div>
-                        <p className="font-medium text-white text-lg mb-2">Welcome to the Team!</p>
-                        <p className="text-gray-400">Start contributing to Hack United's mission</p>
+                        <p className="font-medium text-white text-sm sm:text-base lg:text-lg mb-1 sm:mb-2">Welcome to the Team!</p>
+                        <p className="text-gray-400 text-xs sm:text-sm">Start contributing to Hack United's mission</p>
                       </div>
                     </div>
                   </div>
@@ -420,52 +420,52 @@ export default function ApplyPage() {
 
               {/* Email Requirements */}
               <Card className="bg-gray-900/60 border-purple-500/20">
-                <CardContent className="p-8">
-                  <h3 className="text-xl font-semibold mb-6 text-white">Include in Your Email</h3>
-                  <ul className="space-y-3 text-gray-300">
-                    <li className="flex items-center gap-3">
+                <CardContent className="p-4 sm:p-6 lg:p-8">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-white">Include in Your Email</h3>
+                  <ul className="space-y-2 sm:space-y-3 text-gray-300">
+                    <li className="flex items-center gap-2 sm:gap-3">
                       <div className="w-2 h-2 bg-purple-400 rounded-full flex-shrink-0"></div>
-                      <span>Full Name & Email Address</span>
+                      <span className="text-xs sm:text-sm">Full Name & Email Address</span>
                     </li>
-                    <li className="flex items-center gap-3">
+                    <li className="flex items-center gap-2 sm:gap-3">
                       <div className="w-2 h-2 bg-purple-400 rounded-full flex-shrink-0"></div>
-                      <span>Age & Location (Country & State)</span>
+                      <span className="text-xs sm:text-sm">Age & Location (Country & State)</span>
                     </li>
-                    <li className="flex items-center gap-3">
+                    <li className="flex items-center gap-2 sm:gap-3">
                       <div className="w-2 h-2 bg-purple-400 rounded-full flex-shrink-0"></div>
-                      <span>Position(s) you're applying for</span>
+                      <span className="text-xs sm:text-sm">Position(s) you're applying for</span>
                     </li>
-                    <li className="flex items-center gap-3">
+                    <li className="flex items-center gap-2 sm:gap-3">
                       <div className="w-2 h-2 bg-purple-400 rounded-full flex-shrink-0"></div>
-                      <span>Why you're interested in joining</span>
+                      <span className="text-xs sm:text-sm">Why you're interested in joining</span>
                     </li>
-                    <li className="flex items-center gap-3">
+                    <li className="flex items-center gap-2 sm:gap-3">
                       <div className="w-2 h-2 bg-purple-400 rounded-full flex-shrink-0"></div>
-                      <span>Relevant skills & experience</span>
+                      <span className="text-xs sm:text-sm">Relevant skills & experience</span>
                     </li>
-                    <li className="flex items-center gap-3">
+                    <li className="flex items-center gap-2 sm:gap-3">
                       <div className="w-2 h-2 bg-purple-400 rounded-full flex-shrink-0"></div>
-                      <span>Time commitment available</span>
+                      <span className="text-xs sm:text-sm">Time commitment available</span>
                     </li>
-                    <li className="flex items-center gap-3">
+                    <li className="flex items-center gap-2 sm:gap-3">
                       <div className="w-2 h-2 bg-purple-400 rounded-full flex-shrink-0"></div>
-                      <span>Resume & LinkedIn (optional)</span>
+                      <span className="text-xs sm:text-sm">Resume & LinkedIn (optional)</span>
                     </li>
                   </ul>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Bottom CTA */}
+            {/* Bottom CTA - Mobile Responsive */}
             <div className="text-center">
               <a 
                 href="mailto:jobs@hackunited.org?subject=Application for [Position Name]&body=Hi! I'm interested in applying for [position]. Here are my details:%0D%0A%0D%0AFull Name: %0D%0AEmail: %0D%0AAge: %0D%0ALocation: %0D%0A%0D%0APosition(s) applying for: %0D%0A%0D%0AWhy I'm interested: %0D%0A%0D%0ARelevant skills/experience: %0D%0A%0D%0ATime commitment: %0D%0A%0D%0AThanks!"
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-10 py-4 rounded-lg text-lg font-semibold transition-all duration-300 hover:scale-105"
+                className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-6 sm:px-8 lg:px-10 py-3 sm:py-4 rounded-lg text-sm sm:text-base lg:text-lg font-semibold transition-all duration-300 hover:scale-105"
               >
-                <Mail className="w-5 h-5" />
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                 Send Application Email
               </a>
-              <p className="text-gray-400 text-sm mt-4">
+              <p className="text-gray-400 text-xs sm:text-sm mt-3 sm:mt-4">
                 Have questions? Email us at{" "}
                 <a href="mailto:jobs@hackunited.org" className="text-purple-400 hover:text-purple-300">
                   jobs@hackunited.org
@@ -476,43 +476,43 @@ export default function ApplyPage() {
         </div>
       </section>
 
-      {/* Position Modal */}
+      {/* Mobile-Responsive Position Modal */}
       {selectedPosition && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
           <div className="bg-gray-900 border border-purple-500/20 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            {/* Modal Header */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-700">
-              <div className="flex items-center gap-3">
+            {/* Modal Header - Mobile Responsive */}
+            <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-700">
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
                 <Badge className={`${selectedPosition.color} bg-gray-800 text-xs`}>
                   {selectedPosition.department.toUpperCase()}
                 </Badge>
-                <h3 className="text-xl font-bold text-white">{selectedPosition.name}</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-white truncate">{selectedPosition.name}</h3>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-shrink-0 ml-2">
                 <button
                   onClick={scrollToApplication}
-                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300"
+                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300"
                 >
-                  Apply Now
+                  Apply
                 </button>
                 <button
                   onClick={closeModal}
-                  className="p-2 hover:bg-gray-800 rounded-lg transition-colors duration-200"
+                  className="p-2 hover:bg-gray-800 rounded-lg transition-colors duration-200 flex-shrink-0"
                 >
-                  <X className="w-5 h-5 text-gray-400" />
+                  <X className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                 </button>
               </div>
             </div>
 
-            {/* Modal Content */}
-            <div className="p-6 space-y-6">
+            {/* Modal Content - Mobile Responsive */}
+            <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
               {/* Responsibilities */}
               <div>
-                <h4 className="text-lg font-semibold text-white mb-3">Responsibilities</h4>
-                <ul className="space-y-2">
+                <h4 className="text-base sm:text-lg font-semibold text-white mb-2 sm:mb-3">Responsibilities</h4>
+                <ul className="space-y-1.5 sm:space-y-2">
                   {selectedPosition.responsibilities.map((responsibility: string, index: number) => (
-                    <li key={index} className="flex items-start gap-2 text-sm text-gray-300">
-                      <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <li key={index} className="flex items-start gap-2 text-xs sm:text-sm text-gray-300">
+                      <div className="w-1.5 h-1.5 bg-purple-400 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
                       <span>{responsibility}</span>
                     </li>
                   ))}
@@ -521,11 +521,11 @@ export default function ApplyPage() {
 
               {/* Requirements */}
               <div>
-                <h4 className="text-lg font-semibold text-white mb-3">Requirements</h4>
-                <ul className="space-y-2">
+                <h4 className="text-base sm:text-lg font-semibold text-white mb-2 sm:mb-3">Requirements</h4>
+                <ul className="space-y-1.5 sm:space-y-2">
                   {selectedPosition.requirements.map((requirement: string, index: number) => (
-                    <li key={index} className="flex items-start gap-2 text-sm text-gray-300">
-                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <li key={index} className="flex items-start gap-2 text-xs sm:text-sm text-gray-300">
+                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
                       <span>{requirement}</span>
                     </li>
                   ))}
@@ -534,51 +534,51 @@ export default function ApplyPage() {
 
               {/* Benefits */}
               <div>
-                <h4 className="text-lg font-semibold text-white mb-3">Benefits</h4>
-                <p className="text-sm text-gray-300 mb-3">As a volunteer at Hack United, you will get numerous benefits:</p>
-                <ul className="space-y-2">
-                  <li className="flex items-start gap-2 text-sm text-gray-300">
-                    <Trophy className="w-4 h-4 text-yellow-400 mt-0.5 flex-shrink-0" />
+                <h4 className="text-base sm:text-lg font-semibold text-white mb-2 sm:mb-3">Benefits</h4>
+                <p className="text-xs sm:text-sm text-gray-300 mb-2 sm:mb-3">As a volunteer at Hack United, you will get numerous benefits:</p>
+                <ul className="space-y-1.5 sm:space-y-2">
+                  <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-300">
+                    <Trophy className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 mt-0.5 flex-shrink-0" />
                     <span>Official Volunteering Hours</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm text-gray-300">
-                    <Star className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                  <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-300">
+                    <Star className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400 mt-0.5 flex-shrink-0" />
                     <span>Opportunity for President's Volunteering Service Award</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm text-gray-300">
-                    <Users className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
+                  <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-300">
+                    <Users className="w-3 h-3 sm:w-4 sm:h-4 text-green-400 mt-0.5 flex-shrink-0" />
                     <span>Gain new skills and leadership experience</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm text-gray-300">
-                    <Mail className="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0" />
+                  <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-300">
+                    <Mail className="w-3 h-3 sm:w-4 sm:h-4 text-purple-400 mt-0.5 flex-shrink-0" />
                     <span>Custom email (yourname@hackunited.org)</span>
                   </li>
-                  <li className="flex items-start gap-2 text-sm text-gray-300">
-                    <Heart className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
+                  <li className="flex items-start gap-2 text-xs sm:text-sm text-gray-300">
+                    <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-red-400 mt-0.5 flex-shrink-0" />
                     <span>Recognition and networking opportunities</span>
                   </li>
                 </ul>
               </div>
             </div>
 
-            {/* Modal Footer */}
-            <div className="border-t border-gray-700 p-6">
-              <p className="text-sm text-gray-400 mb-4">
+            {/* Modal Footer - Mobile Responsive */}
+            <div className="border-t border-gray-700 p-4 sm:p-6">
+              <p className="text-xs sm:text-sm text-gray-400 mb-3 sm:mb-4">
                 If you have any questions, please contact us at{" "}
                 <a href="mailto:jobs@hackunited.org" className="text-purple-400 hover:text-purple-300">
                   jobs@hackunited.org
                 </a>
               </p>
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <button
                   onClick={scrollToApplication}
-                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex-1"
+                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-300 flex-1 text-sm sm:text-base"
                 >
                   Apply for this Position
                 </button>
                 <button
                   onClick={closeModal}
-                  className="border border-gray-600 text-gray-300 hover:bg-gray-800 px-6 py-3 rounded-lg transition-all duration-300"
+                  className="border border-gray-600 text-gray-300 hover:bg-gray-800 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg transition-all duration-300 text-sm sm:text-base"
                 >
                   Close
                 </button>
