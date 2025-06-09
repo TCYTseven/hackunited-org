@@ -31,11 +31,25 @@ export const metadata = {
     locale: "en_US",
     type: "website",
   },
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
-  },
+  icons: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '32x32',
+      url: '/images/main-globe-icon.png',
+    },
+    {
+      rel: 'icon',
+      type: 'image/png', 
+      sizes: '16x16',
+      url: '/images/main-globe-icon.png',
+    },
+    {
+      rel: 'apple-touch-icon',
+      sizes: '180x180',
+      url: '/images/main-globe-icon.png',
+    },
+  ],
   robots: {
     index: true,
     follow: true,
@@ -49,6 +63,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/main-globe-icon.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/main-globe-icon.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/main-globe-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+      </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <div className="flex min-h-screen flex-col bg-black text-white">
