@@ -14,17 +14,17 @@ const executiveTeam: TeamMember[] = [
   {
     name: "Tejas C.",
     position: "Founder",
-    image: "https://hackunited.org/assets/images/image71.jpg?v=fab6f006",
+    image: "/images/team-images/TejasChakrapaniPFP.jpeg",
   },
   {
     name: "Kavin A.",
     position: "Head of Operations",
-    image: "https://hackunited.org/assets/images/image36.jpg?v=fab6f006",
+    image: "/images/team-images/kavina.jpg",
   },
   {
     name: "Kishan P.",
     position: "Head of Community",
-    image: "https://hackunited.org/assets/images/image84.jpg?v=fab6f006",
+    image: "/images/team-images/exe.jpg",
   },
 ]
 
@@ -32,12 +32,12 @@ const executiveTeamRow2: TeamMember[] = [
   {
     name: "Rehan R.",
     position: "Head of Marketing",
-    image: "https://hackunited.org/assets/images/image86.jpg?v=fab6f006",
+    image: "/images/team-images/rehan.jpg",
   },
   {
     name: "Sahana P.",
     position: "Head of Outreach",
-    image: "https://hackunited.org/assets/images/image85.jpg?v=fab6f006",
+    image: "/images/team-images/sahana.jpg",
   },
   {
     name: "Fiona F.",
@@ -45,9 +45,9 @@ const executiveTeamRow2: TeamMember[] = [
     image: "/images/fionaa.jpg",
   },
   {
-    name: "James Z.",
+    name: "Pranitha R.",
     position: "Head of Blog",
-    image: "https://hackunited.org/assets/images/image87.jpg?v=fab6f006",
+    image: "/images/team-images/pranitha.png",
   },
 ]
 
@@ -55,12 +55,12 @@ const officersRow1: TeamMember[] = [
   {
     name: "Rehan R.",
     position: "Head of Marketing",
-    image: "https://hackunited.org/assets/images/image86.jpg?v=fab6f006",
+    image: "/images/team-images/rehan.jpg",
   },
   {
     name: "Sahana P.",
     position: "Head of Outreach",
-    image: "https://hackunited.org/assets/images/image85.jpg?v=fab6f006",
+    image: "/images/team-images/sahana.jpg",
   },
   {
     name: "Fiona F.",
@@ -68,9 +68,9 @@ const officersRow1: TeamMember[] = [
     image: "/images/fionaa.jpg",
   },
   {
-    name: "James Z.",
+    name: "Pranitha R.",
     position: "Head of Blog",
-    image: "https://hackunited.org/assets/images/image87.jpg?v=fab6f006",
+    image: "/images/team-images/pranitha.png",
   },
 ]
 
@@ -78,12 +78,12 @@ const officersRow2: TeamMember[] = [
   {
     name: "Henry N.",
     position: "Graphics Design",
-    image: "https://hackunited.org/assets/images/image91.jpg?v=fab6f006",
+    image: "/images/team-images/henry.jpg",
   },
   {
     name: "Armaan P.",
     position: "Blog Writer",
-    image: "https://hackunited.org/assets/images/image87.jpg?v=fab6f006",
+    image: "https://ui-avatars.com/api/?name=A&background=E11D48&color=fff&size=128",
   },
   {
     name: "Akmal. M",
@@ -93,45 +93,45 @@ const officersRow2: TeamMember[] = [
   {
     name: "Pranav A.",
     position: "Chat Mod",
-    image: "https://hackunited.org/assets/images/image68.jpg?v=fab6f006",
+    image: "/images/team-images/PranavA.jpeg",
   },
   {
     name: "Ritvik P.",
     position: "Outreach",
-    image: "https://hackunited.org/assets/images/image95.jpg?v=fab6f006",
+    image: "/images/team-images/ritvik.jpg",
   },
   {
     name: "Yukta P.",
     position: "Outreach",
-    image: "https://hackunited.org/assets/images/image93.jpg?v=fab6f006",
+    image: "/images/team-images/yukta.jpg",
   },
 ]
 
 // Previous Volunteers - 11 rows total, last row has 2 people
-// Using the actual profile images provided in order from left to right, row by row
+// Using colored avatars with initials for previous volunteers
 const previousVolunteers: TeamMember[][] = [
   // Row 1
   [
-    { name: "Shruti G.", position: "Marketing", image: "https://hackunited.org/assets/images/image49.jpg?v=fab6f006" },
+    { name: "Shruti G.", position: "Marketing", image: "https://ui-avatars.com/api/?name=S&background=8B5CF6&color=fff&size=128" },
     {
       name: "Josh M.",
       position: "Article Writer",
-      image: "https://hackunited.org/assets/images/image50.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=J&background=10B981&color=fff&size=128",
     },
     {
       name: "Yash M.",
       position: "Outreach Associate",
-      image: "https://hackunited.org/assets/images/image51.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=Y&background=F59E0B&color=fff&size=128",
     },
     {
       name: "Dev C.",
       position: "Partnership Manager",
-      image: "https://hackunited.org/assets/images/image52.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=D&background=EF4444&color=fff&size=128",
     },
     {
       name: "Youssef E.",
       position: "Technical Support",
-      image: "https://hackunited.org/assets/images/image19.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=Y&background=3B82F6&color=fff&size=128",
     },
   ],
   // Row 2
@@ -139,27 +139,27 @@ const previousVolunteers: TeamMember[][] = [
     {
       name: "Jen H.",
       position: "Community Manager",
-      image: "https://hackunited.org/assets/images/image37.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=J&background=EC4899&color=fff&size=128",
     },
     {
       name: "Joel. R",
       position: "Community Manager",
-      image: "https://hackunited.org/assets/images/image42.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=J&background=06B6D4&color=fff&size=128",
     },
     {
       name: "Yosuf A.",
       position: "Community Team",
-      image: "https://hackunited.org/assets/images/image44.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=Y&background=84CC16&color=fff&size=128",
     },
     {
       name: "Hadi M.",
       position: "Full Stack Developer",
-      image: "https://hackunited.org/assets/images/image54.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=H&background=A855F7&color=fff&size=128",
     },
     {
       name: "Dheeraj T",
       position: "Education Team",
-      image: "https://hackunited.org/assets/images/image55.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=D&background=F97316&color=fff&size=128",
     },
   ],
   // Row 3
@@ -167,27 +167,27 @@ const previousVolunteers: TeamMember[][] = [
     {
       name: "Jeffery L.",
       position: "Chief Finance Officer",
-      image: "https://hackunited.org/assets/images/image59.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=J&background=DC2626&color=fff&size=128",
     },
     {
       name: "Shaan B.",
       position: "Discord Bot Developer",
-      image: "https://hackunited.org/assets/images/image60.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=S&background=059669&color=fff&size=128",
     },
     {
       name: "Narain S.",
       position: "Course Instructor",
-      image: "https://hackunited.org/assets/images/image39.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=N&background=7C3AED&color=fff&size=128",
     },
     {
       name: "Danish A.",
       position: "Graphic Designer",
-      image: "https://hackunited.org/assets/images/image62.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=D&background=DB2777&color=fff&size=128",
     },
     {
       name: "Sudar A.",
       position: "Graphic Designer",
-      image: "https://hackunited.org/assets/images/image63.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=S&background=0891B2&color=fff&size=128",
     },
   ],
   // Row 4
@@ -195,27 +195,27 @@ const previousVolunteers: TeamMember[][] = [
     {
       name: "Anora D.",
       position: "Course Instructor",
-      image: "https://hackunited.org/assets/images/image17.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=A&background=65A30D&color=fff&size=128",
     },
     {
       name: "Kevin A.",
       position: "Course Instructor",
-      image: "https://hackunited.org/assets/images/image22.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=K&background=D97706&color=fff&size=128",
     },
     {
       name: "Prince M.",
       position: "Head Marketing",
-      image: "https://hackunited.org/assets/images/image28.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=P&background=9333EA&color=fff&size=128",
     },
     {
       name: "Mylthosa",
       position: "Talent Acquisition",
-      image: "https://hackunited.org/assets/images/image38.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=M&background=BE185D&color=fff&size=128",
     },
     {
       name: "Harish A.",
       position: "Finance Manager",
-      image: "https://hackunited.org/assets/images/image40.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=H&background=0284C7&color=fff&size=128",
     },
   ],
   // Row 5
@@ -223,27 +223,27 @@ const previousVolunteers: TeamMember[][] = [
     {
       name: "Aidan D.",
       position: "Talent Acquisition",
-      image: "https://hackunited.org/assets/images/image29.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=A&background=7C2D12&color=fff&size=128",
     },
     {
       name: "Ru Xue J.",
       position: "Senior Content Writer",
-      image: "https://hackunited.org/assets/images/image30.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=R&background=B91C1C&color=fff&size=128",
     },
     {
       name: "Abhinav S.",
       position: "Finance Manager",
-      image: "https://hackunited.org/assets/images/image33.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=A&background=047857&color=fff&size=128",
     },
     {
       name: "Oluwatimi Iehin A.",
       position: "Partnership Manager",
-      image: "https://hackunited.org/assets/images/image43.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=O&background=6D28D9&color=fff&size=128",
     },
     {
       name: "Alaap J.",
       position: "Project Coordinator",
-      image: "https://hackunited.org/assets/images/image53.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=A&background=C2410C&color=fff&size=128",
     },
   ],
   // Row 6
@@ -251,27 +251,27 @@ const previousVolunteers: TeamMember[][] = [
     {
       name: "Ishan K.",
       position: "Community Manager",
-      image: "https://hackunited.org/assets/images/image58.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=I&background=1E40AF&color=fff&size=128",
     },
     {
       name: "Shrey V.",
       position: "Event Operations",
-      image: "https://hackunited.org/assets/images/image64.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=S&background=991B1B&color=fff&size=128",
     },
     {
       name: "Nicole I.",
       position: "Technical Associate",
-      image: "https://hackunited.org/assets/images/image65.png?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=N&background=059669&color=fff&size=128",
     },
     {
       name: "Ameer.",
       position: "Head of Engineering",
-      image: "https://hackunited.org/assets/images/image66.png?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=A&background=5B21B6&color=fff&size=128",
     },
     {
       name: "Mason Z.",
       position: "Technical Support",
-      image: "https://hackunited.org/assets/images/image69.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=M&background=A21CAF&color=fff&size=128",
     },
   ],
   // Row 7
@@ -279,27 +279,27 @@ const previousVolunteers: TeamMember[][] = [
     {
       name: "Mau T.",
       position: "Event Operations",
-      image: "https://hackunited.org/assets/images/image14.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=M&background=0F766E&color=fff&size=128",
     },
     {
       name: "Quunh T.",
       position: "Event Operations",
-      image: "https://hackunited.org/assets/images/image23.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=Q&background=7C3AED&color=fff&size=128",
     },
     {
       name: "Omkar P.",
       position: "Community Planner",
-      image: "https://hackunited.org/assets/images/image41.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=O&background=BE123C&color=fff&size=128",
     },
     {
       name: "Shrey S.",
       position: "Finance Manager",
-      image: "https://hackunited.org/assets/images/image46.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=S&background=0369A1&color=fff&size=128",
     },
     {
       name: "Easwar G.",
       position: "Partnership Manager",
-      image: "https://hackunited.org/assets/images/image48.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=E&background=4338CA&color=fff&size=128",
     },
   ],
   // Row 8
@@ -307,27 +307,27 @@ const previousVolunteers: TeamMember[][] = [
     {
       name: "Adi K.",
       position: "Outreach Manager",
-      image: "https://hackunited.org/assets/images/image24.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=A&background=B45309&color=fff&size=128",
     },
     {
       name: "Aadi G.",
       position: "Social Media Manager",
-      image: "https://hackunited.org/assets/images/image67.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=A&background=86198F&color=fff&size=128",
     },
     {
       name: "Noah A.",
       position: "Article Writer",
-      image: "https://hackunited.org/assets/images/image81.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=N&background=0D9488&color=fff&size=128",
     },
     {
       name: "Isaac W.",
       position: "Web Developer",
-      image: "https://hackunited.org/assets/images/image82.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=I&background=7E22CE&color=fff&size=128",
     },
     {
       name: "Wahib B.",
       position: "Web Developer",
-      image: "https://hackunited.org/assets/images/image83.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=W&background=BE185D&color=fff&size=128",
     },
   ],
   // Row 9
@@ -335,27 +335,27 @@ const previousVolunteers: TeamMember[][] = [
     {
       name: "Niko P.",
       position: "Community Team",
-      image: "https://hackunited.org/assets/images/image32.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=N&background=0891B2&color=fff&size=128",
     },
     {
       name: "Dino B.",
       position: "Web Developer",
-      image: "https://hackunited.org/assets/images/image34.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=D&background=9333EA&color=fff&size=128",
     },
     {
       name: "Rushil C.",
       position: "Social Media Manager",
-      image: "https://hackunited.org/assets/images/image47.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=R&background=DC2626&color=fff&size=128",
     },
     {
       name: "Muhammad D.",
       position: "Technical Team",
-      image: "https://hackunited.org/assets/images/image56.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=M&background=059669&color=fff&size=128",
     },
     {
       name: "Murari A.",
       position: "Social Media Manager",
-      image: "https://hackunited.org/assets/images/image75.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=M&background=7C3AED&color=fff&size=128",
     },
   ],
   // Row 10
@@ -363,23 +363,23 @@ const previousVolunteers: TeamMember[][] = [
     {
       name: "Akishai S.",
       position: "Outreach Associate",
-      image: "https://hackunited.org/assets/images/image73.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=A&background=DB2777&color=fff&size=128",
     },
     {
       name: "Indrajeet S.",
       position: "Outreach Associate",
-      image: "https://hackunited.org/assets/images/image21.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=I&background=0284C7&color=fff&size=128",
     },
-    { name: "Alex P.", position: "Advisor", image: "https://hackunited.org/assets/images/image25.png?v=fab6f006" },
+    { name: "Alex P.", position: "Advisor", image: "https://ui-avatars.com/api/?name=A&background=65A30D&color=fff&size=128" },
     {
       name: "Mikul R.",
       position: "Article Writer",
-      image: "https://hackunited.org/assets/images/image26.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=M&background=D97706&color=fff&size=128",
     },
     {
       name: "Sohil C.",
       position: "Outreach Associate",
-      image: "https://hackunited.org/assets/images/image57.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=S&background=BE185D&color=fff&size=128",
     },
   ],
   // Row 11 - Last row with 2 people
@@ -387,12 +387,12 @@ const previousVolunteers: TeamMember[][] = [
     {
       name: "Arnav S.",
       position: "Outreach Manager",
-      image: "https://hackunited.org/assets/images/image27.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=A&background=0891B2&color=fff&size=128",
     },
     {
       name: "Taha Y.",
       position: "Graphic Designer",
-      image: "https://hackunited.org/assets/images/image35.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=T&background=9333EA&color=fff&size=128",
     },
   ],
   // Row 12 - Recently moved from active team
@@ -400,22 +400,22 @@ const previousVolunteers: TeamMember[][] = [
     {
       name: "Ankit B.",
       position: "Web Developer",
-      image: "https://hackunited.org/assets/images/image88.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=A&background=DC2626&color=fff&size=128",
     },
     {
       name: "Arnnav K.",
       position: "Technical Team",
-      image: "https://hackunited.org/assets/images/image89.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=A&background=059669&color=fff&size=128",
     },
     {
       name: "Som S.",
       position: "Web Developer",
-      image: "https://hackunited.org/assets/images/image90.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=S&background=7C3AED&color=fff&size=128",
     },
     {
       name: "Tadas V.",
       position: "Community Planner",
-      image: "https://hackunited.org/assets/images/image92.jpg?v=fab6f006",
+      image: "https://ui-avatars.com/api/?name=T&background=DB2777&color=fff&size=128",
     },
   ],
 ]
