@@ -22,7 +22,7 @@ export const metadata = {
     siteName: "Hack United",
     images: [
       {
-        url: "/images/LogoBanner.png",
+        url: "/images/hackunitedsplash.png",
         width: 1200,
         height: 630,
         alt: "Hack United - Empowering Teen Developers",

@@ -91,7 +91,7 @@ export default function Home() {
 
             {/* Description */}
             <p className="text-gray-400 text-lg leading-relaxed max-w-sm animate-fade-in">
-              A 501(c)(3) developing soft skills in the next generation of tech innovators through free hackathons and hands-on learning.
+              A 501(c)(3) non-profit organization that develops the soft skills in tech interested youth through hands on application, such as our flagship hackathons.
             </p>
 
             {/* Buttons */}
@@ -123,8 +123,7 @@ export default function Home() {
               {/* Description */}
               <div className="mb-12 animate-fade-in">
                 <p className="text-xl text-gray-300 leading-relaxed max-w-xl">
-                  A 501(c)(3) non-profit organization founded by teenagers with a passion for programming and
-                  technology.
+                  A 501(c)(3) non-profit organization that develops the soft skills in tech interested youth through hands on application, such as our flagship hackathons.
                 </p>
               </div>
 

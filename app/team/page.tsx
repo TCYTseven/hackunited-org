@@ -30,6 +30,11 @@ const executiveTeam: TeamMember[] = [
 
 const executiveTeamRow2: TeamMember[] = [
   {
+    name: "Saighi D.",
+    position: "Head of Staff",
+    image: "/images/team-images/sag.jpg",
+  },
+  {
     name: "Rehan R.",
     position: "Head of Marketing",
     image: "/images/team-images/rehan.jpg",
@@ -483,9 +488,9 @@ export default function TeamPage() {
             </div>
           </div>
 
-          {/* Team Row 1 */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-center mb-12">
-            {officersRow1.map((member, index) => (
+          {/* Executive Team Row 2 */}
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 justify-items-center mb-12">
+            {executiveTeamRow2.map((member, index) => (
               <TeamMemberCard key={index} member={member} size="large" />
             ))}
           </div>
