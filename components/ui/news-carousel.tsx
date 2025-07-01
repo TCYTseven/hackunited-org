@@ -71,7 +71,16 @@ export default function NewsCarousel() {
 
   return (
     <div className="w-full flex justify-center">
-      <div className="w-full max-w-2xl bg-[#f7fafc] rounded-3xl shadow-xl py-4 px-4 flex flex-col items-center">
+      <style jsx>{`
+        @keyframes fadeInUp {
+          0% { opacity: 0; transform: translateY(40px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in-up {
+          animation: fadeInUp 1s cubic-bezier(0.23, 1, 0.32, 1) both;
+        }
+      `}</style>
+      <div className="w-full max-w-2xl rounded-3xl shadow-xl py-4 px-4 flex flex-col items-center fade-in-up" style={{ background: '#f0f4fc' }}>
         <h2 className="text-gray-600 text-base sm:text-lg font-semibold mb-4 tracking-wide uppercase self-center text-center">As Seen On...</h2>
         <div
           ref={sliderRef}
