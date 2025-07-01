@@ -10,6 +10,7 @@ import { CheckIcon, ArrowRightIcon } from "lucide-react"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import InteractiveLogo from "@/components/interactive-logo"
 import { ScrollButton, ScrollButtonWithIcon } from "@/components/scroll-button"
+import NewsCarousel from "@/components/ui/news-carousel"
 
 // Simple animations
 const styles = `
@@ -36,7 +37,6 @@ function DiscordWidget() {
         src="https://e.widgetbot.io/channels/1108199473206792203/1113813542039207977"
         width="100%"
         height="600"
-        allowTransparency={true}
         frameBorder="0"
         sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
         className="rounded-lg border border-purple-500/30 bg-gray-900"
@@ -100,6 +100,9 @@ export default function Home() {
                 Learn More
               </ScrollButton>
             </div>
+            <div className="w-full flex flex-col items-center mt-12">
+              <NewsCarousel />
+            </div>
           </div>
 
           {/* Desktop Design - Original layout */}
@@ -135,6 +138,9 @@ export default function Home() {
                 >
                   Learn More
                 </ScrollButtonWithIcon>
+              </div>
+              <div className="w-full flex flex-col items-start mt-12">
+                <NewsCarousel />
               </div>
             </div>
 
