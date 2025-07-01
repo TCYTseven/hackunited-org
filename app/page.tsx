@@ -12,7 +12,7 @@ import InteractiveLogo from "@/components/interactive-logo"
 import { ScrollButton, ScrollButtonWithIcon } from "@/components/scroll-button"
 import NewsCarousel from "@/components/ui/news-carousel"
 
-// Simple animations
+// Simple animations a
 const styles = `
   @keyframes fadeIn {
     from {
