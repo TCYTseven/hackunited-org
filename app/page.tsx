@@ -105,14 +105,14 @@ export default function Home() {
           {/* Desktop Design - Original layout */}
           <div className="hidden lg:grid gap-12 lg:grid-cols-2 items-center">
             <div className="flex flex-col justify-center">
-              {/* Globe icon and badge */}
-              <div className="flex items-center gap-3 mb-12 animate-fade-in">
+              {/* Globe icon and participant stat */}
+              <div className="flex items-center gap-3 mb-8 animate-fade-in">
                 <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
                   <Image src="/images/globe-icon.png" alt="Hack United" width={24} height={24} className="h-6 w-6" />
                 </div>
-                <Badge className="bg-purple-600/10 text-purple-300/80 border-purple-500/20 py-1 px-3 text-xs hover:bg-purple-600/20 transition-colors duration-300">
-                  Empowering Young Innovators
-                </Badge>
+                <div className="bg-purple-600/20 backdrop-blur-sm border border-purple-500/30 rounded-full px-4 py-2 hover:bg-purple-600/30 transition-all duration-300">
+                  <span className="text-purple-300 font-medium text-sm">Over 2,250 hackathon participants</span>
+                </div>
               </div>
 
               {/* Main heading */}
@@ -204,7 +204,7 @@ export default function Home() {
                 <Badge className="bg-white/10 text-white hover:bg-white/20 mb-4 sm:mb-6 border-purple-500/50 text-xs sm:text-sm">
                   Registration Open
                 </Badge>
-                <h3 className="text-2xl sm:text-3xl font-bold mb-4">United Hacks V5</h3>
+                <h3 className="text-2xl sm:text-3xl font-bold mb-4">United Hacks V6</h3>
                 <p className="text-white/90 mb-6 text-sm sm:text-base">
                   Join us for our biggest hackathon yet! Connect with other innovators, learn from industry experts, and
                   build amazing projects.
@@ -212,7 +212,7 @@ export default function Home() {
                 <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                   <div>
                     <h4 className="text-white/70 text-xs sm:text-sm font-medium mb-1">Date</h4>
-                    <p className="font-medium text-sm sm:text-base">July 11-13, 2025</p>
+                    <p className="font-medium text-sm sm:text-base">Jan 16-18, 2025</p>
                   </div>
                   <div>
                     <h4 className="text-white/70 text-xs sm:text-sm font-medium mb-1">Location</h4>
@@ -228,7 +228,7 @@ export default function Home() {
                   </div>
                 </div>
                 <a 
-                  href="https://unitedhacksv5.devpost.com/" 
+                  href="https://unitedhacksv6.devpost.com/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
@@ -432,8 +432,8 @@ export default function Home() {
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-12 lg:mb-16 text-white">Check Out Our Previous Hackathons!</h2>
 
           <div className="max-w-4xl mx-auto">
-            <Tabs defaultValue="v4" className="w-full">
-              <TabsList className="w-full grid grid-cols-4 mb-8 lg:mb-12 h-12 sm:h-14 bg-gray-900/80 border border-purple-500/30">
+            <Tabs defaultValue="v5" className="w-full">
+              <TabsList className="w-full grid grid-cols-5 mb-8 lg:mb-12 h-12 sm:h-14 bg-gray-900/80 border border-purple-500/30">
                 <TabsTrigger
                   value="v1"
                   className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
@@ -457,6 +457,12 @@ export default function Home() {
                   className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
                 >
                   V4
+                </TabsTrigger>
+                <TabsTrigger
+                  value="v5"
+                  className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
+                >
+                  V5
                 </TabsTrigger>
               </TabsList>
 
@@ -793,6 +799,91 @@ export default function Home() {
                         asChild
                       >
                         <a href="https://unitedhacksv4.devpost.com/" target="_blank" rel="noopener noreferrer">
+                          DEVPOST
+                          <ArrowRightIcon className="h-4 w-4" />
+                        </a>
+                      </Button>
+                    </div>
+                  </CardFooter>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="v5" className="focus-visible:outline-none focus-visible:ring-0">
+                <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm">
+                  <CardContent className="p-6 md:p-8">
+                    <div className="grid md:grid-cols-2 gap-8">
+                      <div>
+                        <h3 className="text-xl font-bold mb-4 text-white">United Hacks V5</h3>
+                        <p className="text-gray-300 mb-2">
+                          <span className="text-purple-400 font-semibold">July 2025</span> • Entertainment Theme
+                        </p>
+                        <p className="text-gray-300 mb-6">
+                          Our latest hackathon focused on entertainment solutions, featuring 1250+ participants and our largest prize pool yet with industry professional judges.
+                        </p>
+                        <div className="grid grid-cols-2 gap-4 mb-6">
+                          <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-xl font-bold text-purple-400">1250+</div>
+                            <div className="text-xs text-gray-400">Participants</div>
+                          </div>
+                          <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-xl font-bold text-purple-400">150+</div>
+                            <div className="text-xs text-gray-400">Projects</div>
+                          </div>
+                          <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-xl font-bold text-purple-400">$51,000+</div>
+                            <div className="text-xs text-gray-400">Prize Pool</div>
+                          </div>
+                          <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-xl font-bold text-purple-400">15+</div>
+                            <div className="text-xs text-gray-400">Sponsors</div>
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-xl font-bold text-purple-400">250+</div>
+                            <div className="text-xs text-gray-400">Workshop Attendees</div>
+                          </div>
+                          <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-xl font-bold text-purple-400">8</div>
+                            <div className="text-xs text-gray-400">Workshops</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="relative rounded-xl overflow-hidden">
+                        <AspectRatio ratio={4 / 3}>
+                          <Image
+                            src="/images/v5kool.png"
+                            alt="United Hacks V5 winning projects"
+                            fill
+                            className="object-cover"
+                          />
+                        </AspectRatio>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end">
+                          <div className="p-4">
+                            <Badge className="bg-purple-600 hover:bg-purple-700 mb-2">Entertainment</Badge>
+                            <h4 className="text-white font-medium">July 2025</h4>
+                            <p className="text-white/80 text-sm">Our biggest hackathon yet with record participation</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                  <CardFooter className="bg-black/60 px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <div className="flex gap-3">
+                      <Button
+                        variant="outline"
+                        className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 cursor-not-allowed opacity-60"
+                        disabled
+                      >
+                        Article Recap
+                        <ArrowRightIcon className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200"
+                        asChild
+                      >
+                        <a href="https://unitedhacksv5.devpost.com/" target="_blank" rel="noopener noreferrer">
                           DEVPOST
                           <ArrowRightIcon className="h-4 w-4" />
                         </a>
