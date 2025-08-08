@@ -1,4 +1,5 @@
 import type React from "react"
+import type { Metadata } from "next"
 import "@/app/globals.css"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -10,7 +11,8 @@ import Image from "next/image"
 
 const inter = Inter({ subsets: ["latin"] })
 
-export const metadata = {
+export const metadata: Metadata = {
+  metadataBase: new URL("https://hackunited.org"),
   title: "Hack United",
   description: "Hack United is a 501(c)(3) non-profit organization founded by teenagers with a passion for programming and technology. Join our community of young developers, participate in hackathons, and make an impact through code.",
   keywords: "hackathon, teen developers, programming, technology, non-profit, coding competitions, United Hacks",
