@@ -201,7 +201,7 @@ export default function Home() {
                     Registration Open
                   </Badge>
                   <h3 className="text-2xl sm:text-3xl font-bold mb-4">
-                    United Hacks V5
+                    United Hacks V6
                   </h3>
                   <p className="text-white/90 mb-6 text-sm sm:text-base">
                     Join us for our biggest hackathon yet! Connect with other
@@ -214,7 +214,7 @@ export default function Home() {
                         Date
                       </h4>
                       <p className="font-medium text-sm sm:text-base">
-                        July 11-13, 2025
+                        Jan 16-18, 2026
                       </p>
                     </div>
                     <div>
@@ -241,7 +241,7 @@ export default function Home() {
                     </div>
                   </div>
                   <a
-                    href="https://unitedhacksv5.devpost.com/"
+                    href="https://unitedhacksv6.devpost.com/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -250,17 +250,14 @@ export default function Home() {
                     </Button>
                   </a>
                 </div>
-                <div className="relative min-h-[200px] sm:min-h-[300px] lg:min-h-auto">
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 to-black rounded-r-xl"></div>
-                  <div className="absolute inset-0 p-4 sm:p-6">
-                    <iframe
-                      className="w-full h-full rounded-xl border border-purple-500/20"
-                      src="https://www.youtube.com/embed/tETq2E0kPE0"
-                      title="United Hacks V5 Preview"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                    ></iframe>
+                <div className="relative flex items-center justify-center min-h-[200px] sm:min-h-[300px] lg:min-h-auto bg-gradient-to-br from-purple-900/30 to-black rounded-r-xl p-4 sm:p-6">
+                  <div className="text-center">
+                    <h3 className="text-2xl font-bold text-white">
+                      Trailer Coming Soon
+                    </h3>
+                    <p className="text-white/70 mt-2">
+                      Stay tuned for the official trailer!
+                    </p>
                   </div>
                 </div>
               </div>
@@ -485,8 +482,8 @@ export default function Home() {
             </h2>
 
             <div className="max-w-4xl mx-auto">
-              <Tabs defaultValue="v4" className="w-full">
-                <TabsList className="w-full grid grid-cols-4 mb-8 lg:mb-12 h-12 sm:h-14 bg-gray-900/80 border border-purple-500/30">
+              <Tabs defaultValue="v5" className="w-full">
+                <TabsList className="w-full grid grid-cols-5 mb-8 lg:mb-12 h-12 sm:h-14 bg-gray-900/80 border border-purple-500/30">
                   <TabsTrigger
                     value="v1"
                     className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
@@ -510,6 +507,12 @@ export default function Home() {
                     className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
                   >
                     V4
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="v5"
+                    className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
+                  >
+                    V5
                   </TabsTrigger>
                 </TabsList>
 
@@ -1039,6 +1042,142 @@ export default function Home() {
                         >
                           <a
                             href="https://unitedhacksv4.devpost.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            DEVPOST
+                            <ArrowRightIcon className="h-4 w-4" />
+                          </a>
+                        </Button>
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </TabsContent>
+                <TabsContent
+                  value="v5"
+                  className="focus-visible:outline-none focus-visible:ring-0"
+                >
+                  <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm">
+                    <CardContent className="p-6 md:p-8">
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div>
+                          <h3 className="text-xl font-bold mb-4 text-white">
+                            United Hacks V5
+                          </h3>
+                          <p className="text-gray-300 mb-2">
+                            <span className="text-purple-400 font-semibold">
+                              July 2025
+                            </span>{" "}
+                            • Entertainment Theme
+                          </p>
+                          <p className="text-gray-300 mb-6">
+                            Our fifth hackathon focused on entertainment
+                            solutions, bringing together 1250+ participants to
+                            tackle real-world challenges with industry
+                            professional judges.
+                          </p>
+                          <div className="grid grid-cols-2 gap-4 mb-6">
+                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                              <div className="text-xl font-bold text-purple-400">
+                                1250+
+                              </div>
+                              <div className="text-xs text-gray-400">
+                                Participants
+                              </div>
+                            </div>
+                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                              <div className="text-xl font-bold text-purple-400">
+                                200+
+                              </div>
+                              <div className="text-xs text-gray-400">
+                                Projects
+                              </div>
+                            </div>
+                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                              <div className="text-xl font-bold text-purple-400">
+                                $50,000+
+                              </div>
+                              <div className="text-xs text-gray-400">
+                                Prize Pool
+                              </div>
+                            </div>
+                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                              <div className="text-xl font-bold text-purple-400">
+                                10+
+                              </div>
+                              <div className="text-xs text-gray-400">
+                                Sponsors
+                              </div>
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-2 gap-4">
+                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                              <div className="text-xl font-bold text-purple-400">
+                                250+
+                              </div>
+                              <div className="text-xs text-gray-400">
+                                Workshop Attendees
+                              </div>
+                            </div>
+                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                              <div className="text-xl font-bold text-purple-400">
+                                8
+                              </div>
+                              <div className="text-xs text-gray-400">
+                                Workshops
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="relative rounded-xl overflow-hidden">
+                          <AspectRatio ratio={4 / 3}>
+                            <Image
+                              src="/images/imagecoo.png"
+                              alt="United Hacks V5 winning projects"
+                              fill
+                              className="object-cover"
+                            />
+                          </AspectRatio>
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end">
+                            <div className="p-4">
+                              <Badge className="bg-purple-600 hover:bg-purple-700 mb-2">
+                                Entertainment
+                              </Badge>
+                              <h4 className="text-white font-medium">
+                                July 2025
+                              </h4>
+                              <p className="text-white/80 text-sm">
+                                Featuring winning projects from our entertainment
+                                themed hackathon.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                    <CardFooter className="bg-black/60 px-6 md:px-8 py-4 border-t border-purple-500/20">
+                      <div className="flex gap-3">
+                        <Button
+                          variant="outline"
+                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200"
+                          asChild
+                        >
+                          <a
+                            href="https://blog.hackunited.org/united-hacks-v5-recap"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Article Recap
+                            <ArrowRightIcon className="h-4 w-4" />
+                          </a>
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200"
+                          asChild
+                        >
+                          <a
+                            href="https://unitedhacksv5.devpost.com/"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
