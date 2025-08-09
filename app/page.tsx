@@ -71,8 +71,8 @@ export default function Home() {
       <main className="bg-black text-white">
         {/* Hero Section */}
         <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat h-[100%] w-[100%] pt-[30px]">
-          <div className="headContainer max-w-7xl mx-auto grid grid-cols-[48%_52%] mt-[120px] pb-[160px] px-4 md:px-8">
-            <div className="right">
+          <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-[120px] pb-[160px] px-4 md:px-8">
+            <div className="right text-center md:text-left">
               <div className="mb-4 inline-flex items-center rounded-full bg-green-500/10 px-4 py-1 text-sm font-medium text-green-400">
                 <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-500" />
                 discord.gg/hackunited
@@ -85,16 +85,22 @@ export default function Home() {
                 of Tech Innovators
               </h1>
               <div className="subHeading mt-[20px]">
-                <p>
+                <p className="hidden md:block">
                   A student-led non-profit hosting free hackathons and workshop
                   <br />
                   to build both tech skills and soft skills for high school and
-                  college
                   <br />
-                  students.
+                  college students.
+                </p>
+                <p className="md:hidden">
+                  A student-led non-profit hosting free hackathons
+                  <br />
+                  and workshop to build both tech skills and soft
+                  <br />
+                  skills for high school and college students.
                 </p>
               </div>
-              <div className="flex w-[288px] justify-between mt-[31px]">
+              <div className="flex w-[288px] justify-center md:justify-between mt-[31px] mx-auto md:mx-0">
                 <HeroButton onClick={() => scrollTo("who-are-we")}>
                   Learn More
                 </HeroButton>
@@ -106,21 +112,21 @@ export default function Home() {
                 </HeroButton>
               </div>
             </div>
-            <div className="left flex items-center justify-end">
+            <div className="left flex items-center justify-center md:justify-end mt-16 md:mt-0">
               <img
-                className="h-[350px] mr-[48px]"
+                className="h-[280px] md:h-[350px] md:mr-[48px]"
                 src="./images/Logo.png"
                 alt=""
               />
-              <div className="glassCard glassCard1 h-[79.24px] w-[240.8px] pl-[16px]">
+              <div className="glassCard glassCard1 hidden h-[79.24px] w-[240.8px] pl-[16px] md:block">
                 <h3 className="purpleGradient mt-[5px]">25,000+</h3>
                 <p>Individuals Impacted</p>
               </div>
-              <div className="glassCard glassCard2 h-[79.24px] w-[240.8px] pl-[16px]">
+              <div className="glassCard glassCard2 hidden h-[79.24px] w-[240.8px] pl-[16px] md:block">
                 <h3 className="purpleGradient mt-[5px]">3,000+</h3>
                 <p>Community Members</p>
               </div>
-              <div className="glassCard glassCard3 h-[79.24px] w-[240.8px] pl-[16px]">
+              <div className="glassCard glassCard3 hidden h-[79.24px] w-[240.8px] pl-[16px] md:block">
                 <h3 className="purpleGradient mt-[5px]">50+</h3>
                 <p>Countries Impacted</p>
               </div>
