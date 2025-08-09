@@ -31,54 +31,54 @@ export default function ApplyPage() {
   ]
 
   const positionDetails = {
-    "Social Media Management": {
-      department: "Marketing",
+    "Social Media Manager": {
+      department: "Growth",
       color: "text-pink-400",
       responsibilities: [
         "Frequently post on social media platforms including X/Twitter, Instagram, Threads",
         "Work with our Graphic Designers to post high quality and reputable content",
         "Grow social media followers by being active on your assigned platform(s)",
         "Develop and maintain a consistent brand voice across all platforms",
-        "Monitor engagement metrics and adapt strategies accordingly"
+        "Monitor engagement metrics and adapt strategies accordingly",
       ],
       requirements: [
         "Proven experience with content creation on social media platforms",
         "Understanding of social media trends and best practices",
         "Strong communication and writing skills",
-        "Ability to work independently and meet deadlines"
-      ]
+        "Ability to work independently and meet deadlines",
+      ],
     },
-    "Short Form Content Creator": {
-      department: "Marketing", 
+    "Short-Form Creator": {
+      department: "Growth",
       color: "text-pink-400",
       responsibilities: [
         "Develop interesting and compelling videos for Instagram Reels, TikTok, and Youtube Shorts",
         "Stay up to date with trends to bring Hack United maximum attention",
         "Create engaging video content that showcases our events and community",
-        "Collaborate with team to align content with marketing goals"
+        "Collaborate with team to align content with marketing goals",
       ],
       requirements: [
         "Experience with video editing software",
         "Understanding of short-form content trends",
         "Creative mindset and ability to think outside the box",
-        "Bonus: Experience with editing software for reels"
-      ]
+        "Bonus: Experience with editing software for reels",
+      ],
     },
-    "Discord Promoter": {
-      department: "Marketing",
-      color: "text-pink-400", 
+    "Growth Intern": {
+      department: "Growth",
+      color: "text-pink-400",
       responsibilities: [
         "Utilize provided advertising methods to promote our server effectively",
         "Engage with potential members by actively joining various servers",
         "Execute multiple daily posts in relevant server promotion channels",
-        "Establish promotional partnerships with other STEM servers"
+        "Establish promotional partnerships with other STEM servers",
       ],
       requirements: [
         "Active Discord user with understanding of server dynamics",
         "Strong communication and networking skills",
         "Ability to represent Hack United professionally",
-        "Experience with community building preferred"
-      ]
+        "Experience with community building preferred",
+      ],
     },
     "Talent Acquisition Manager": {
       department: "Human Resources",
@@ -86,18 +86,18 @@ export default function ApplyPage() {
       responsibilities: [
         "Create and implement recruitment strategies",
         "Develop job descriptions and postings",
-        "Screen resumes and conduct interviews", 
+        "Screen resumes and conduct interviews",
         "Manage the hiring process from start to finish",
-        "Analyze recruitment metrics to evaluate strategy effectiveness"
+        "Analyze recruitment metrics to evaluate strategy effectiveness",
       ],
       requirements: [
         "Experience with recruitment or HR processes",
         "Strong interpersonal and communication skills",
         "Ability to assess candidate qualifications",
-        "Organizational skills and attention to detail"
-      ]
+        "Organizational skills and attention to detail",
+      ],
     },
-    "Outreach Manager": {
+    "Administrative Coordinator": {
       department: "Human Resources",
       color: "text-blue-400",
       responsibilities: [
@@ -105,159 +105,114 @@ export default function ApplyPage() {
         "Contact software engineers/entrepreneurs for workshops and events",
         "Contact other organizations to establish partnerships",
         "Reach out to media publications to showcase Hack United progress",
-        "Contact companies for sponsorship opportunities"
+        "Contact companies for sponsorship opportunities",
       ],
       requirements: [
         "Excellent written and verbal communication skills",
         "Experience with professional networking",
         "Ability to represent Hack United professionally",
-        "Strong follow-up and relationship management skills"
-      ]
+        "Strong follow-up and relationship management skills",
+      ],
     },
-    "Community Team": {
-      department: "Community",
+    "Outreach Manager": {
+      department: "Strategy",
       color: "text-green-400",
       responsibilities: [
         "Develop strategies to increase engagement on Discord and other platforms",
         "Monitor and moderate community discussions for positive environment",
         "Keep channels like daily polls and coding challenges updated frequently",
         "Collaborate with other teams to organize community events",
-        "Respond to user concerns in timely and professional manner"
+        "Respond to user concerns in timely and professional manner",
       ],
       requirements: [
         "Experience with community management or moderation",
         "Strong interpersonal skills and patience",
         "Ability to handle conflicts and difficult situations",
-        "Understanding of Discord and community platforms"
-      ]
+        "Understanding of Discord and community platforms",
+      ],
     },
-    "Article Writer": {
-      department: "Community",
+    "Project Manager": {
+      department: "Strategy",
       color: "text-green-400",
       responsibilities: [
         "Conduct research on assigned topics and analyze major news articles",
         "Write clear, concise, and informative articles (1-2 pages)",
         "Target content towards teenage audience",
         "Publish articles on our blog.hackunited.org page",
-        "Collaborate with team on content strategy and topics"
+        "Collaborate with team on content strategy and topics",
       ],
       requirements: [
         "Strong writing and research skills",
         "Ability to write for teenage audience",
         "Understanding of tech and STEM topics",
-        "AI tools allowed but content should appear human-written"
-      ]
+        "AI tools allowed but content should appear human-written",
+      ],
     },
-    "Web Developer": {
-      department: "Technology",
+    "Article Writer": {
+      department: "Community & Content",
       color: "text-purple-400",
       responsibilities: [
         "Help maintain hackunited.org and hackathon websites",
         "Code embeds for pop-ups, navigation bars, and interactive elements",
         "Implement new features and fix bugs",
         "Collaborate with design team on website improvements",
-        "Ensure website performance and responsiveness"
+        "Ensure website performance and responsiveness",
       ],
       requirements: [
         "Required: HTML, CSS, JavaScript",
         "Bonus: Next.js, React.js, Tailwind CSS",
         "Bonus: MongoDB, Firebase, Node.js",
-        "Experience with version control (Git) preferred"
-      ]
+        "Experience with version control (Git) preferred",
+      ],
     },
-    "Discord Bot Developer": {
-      department: "Technology",
+    "Community Manager": {
+      department: "Community & Content",
       color: "text-purple-400",
       responsibilities: [
         "Design and develop innovative user-friendly bot commands",
         "Monitor server activities and address bot issues proactively",
         "Optimize bot performance for seamless user experience",
         "Implement new features based on community needs",
-        "Maintain bot uptime and troubleshoot problems"
+        "Maintain bot uptime and troubleshoot problems",
       ],
       requirements: [
         "Recommended: discord.js and/or discord.py",
         "Understanding of Discord API and bot development",
         "Problem-solving skills for debugging",
-        "Ability to write clean, maintainable code"
-      ]
-    },
-    "Graphics Designer": {
-      department: "Technology",
-      color: "text-purple-400",
-      responsibilities: [
-        "Create promotional graphics for marketing campaigns",
-        "Design merchandise and event materials",
-        "Develop social media graphics and visual content",
-        "Maintain consistent brand identity across all designs",
-        "Collaborate with marketing team on visual strategies"
+        "Ability to write clean, maintainable code",
       ],
-      requirements: [
-        "Experience with design software (any of your choice)",
-        "Strong sense of visual design and branding",
-        "Ability to create clean and unique designs",
-        "Bonus: Experience with Figma"
-      ]
     },
-    "Technical Team": {
-      department: "Technology", 
-      color: "text-purple-400",
-      responsibilities: [
-        "Offer tech support and debugging assistance in Discord",
-        "Use AI tools to explain coding concepts to community members",
-        "Develop and curate engaging coding challenges",
-        "Collaborate on technical improvements and solutions",
-        "Help community members with programming problems"
-      ],
-      requirements: [
-        "Recommended: Python and/or C++ and/or Java",
-        "Strong problem-solving and debugging skills",
-        "Ability to explain technical concepts clearly",
-        "Patience when helping beginners"
-      ]
-    }
   }
 
   const departments = [
     {
-      title: "Marketing",
+      title: "Growth",
       icon: <Megaphone className="w-5 h-5" />,
       color: "from-pink-500 to-rose-600",
       positions: [
-        "Social Media Management",
-        "Short Form Content Creator", 
-        "Discord Promoter"
-      ]
+        "Social Media Manager",
+        "Short-Form Creator",
+        "Growth Intern",
+      ],
     },
     {
-      title: "Human Resources", 
+      title: "Human Resources",
       icon: <Briefcase className="w-5 h-5" />,
       color: "from-blue-500 to-indigo-600",
-      positions: [
-        "Talent Acquisition Manager",
-        "Outreach Manager"
-      ]
+      positions: ["Talent Acquisition Manager", "Administrative Coordinator"],
     },
     {
-      title: "Community",
+      title: "Strategy",
       icon: <MessageSquare className="w-5 h-5" />,
-      color: "from-green-500 to-emerald-600", 
-      positions: [
-        "Community Team",
-        "Article Writer"
-      ]
+      color: "from-green-500 to-emerald-600",
+      positions: ["Outreach Manager", "Project Manager"],
     },
     {
-      title: "Technology",
+      title: "Community & Content",
       icon: <Code className="w-5 h-5" />,
       color: "from-purple-500 to-violet-600",
-      positions: [
-        "Web Developer",
-        "Discord Bot Developer",
-        "Graphics Designer", 
-        "Technical Team"
-      ]
-    }
+      positions: ["Article Writer", "Community Manager"],
+    },
   ]
 
   const openPositionModal = (positionName: string) => {
@@ -359,9 +314,17 @@ export default function ApplyPage() {
                           <h3 className="font-semibold text-white text-xs sm:text-sm mb-1 group-hover:text-purple-300 transition-colors duration-200 leading-tight">
                             {position}
                           </h3>
-                          <Badge className={`${department.title === 'Marketing' ? 'text-pink-400' : 
-                                            department.title === 'Human Resources' ? 'text-blue-400' :
-                                            department.title === 'Community' ? 'text-green-400' : 'text-purple-400'} bg-gray-800 text-xs`}>
+                          <Badge
+                            className={`${
+                              department.title === "Growth"
+                                ? "text-yellow-400"
+                                : department.title === "Human Resources"
+                                ? "text-blue-400"
+                                : department.title === "Strategy"
+                                ? "text-green-400"
+                                : "text-purple-400"
+                            } bg-gray-800 text-xs`}
+                          >
                             {department.title.toUpperCase()}
                           </Badge>
                         </div>

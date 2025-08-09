@@ -70,8 +70,8 @@ export default function Home() {
       <style jsx>{styles}</style>
       <main className="bg-black text-white">
         {/* Hero Section */}
-        <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat h-[100%] w-[100%] pt-[30px]">
-          <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-[120px] pb-[160px] px-4 md:px-8">
+        <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat w-full pt-[30px] md:min-h-screen">
+          <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-[140px] pb-[160px] px-4 md:px-8">
             <div className="right text-center md:text-left">
               <div className="mb-4 inline-flex items-center rounded-full bg-green-500/10 px-4 py-1 text-sm font-medium text-green-400">
                 <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-500" />
