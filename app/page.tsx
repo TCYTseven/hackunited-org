@@ -70,9 +70,13 @@ export default function Home() {
       <style jsx>{styles}</style>
       <main className="bg-black text-white">
         {/* Hero Section */}
-        <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat h-[100%] w-[100%] pt-[30px] px-24">
-          <div className="headContainer grid grid-cols-[44%_56%] mt-[190px] pb-[240px]">
+        <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat h-[100%] w-[100%] pt-[30px]">
+          <div className="headContainer max-w-7xl mx-auto grid grid-cols-[48%_52%] mt-[120px] pb-[160px] px-4 md:px-8">
             <div className="right">
+              <div className="mb-4 inline-flex items-center rounded-full bg-green-500/10 px-4 py-1 text-sm font-medium text-green-400">
+                <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-500" />
+                discord.gg/hackunited
+              </div>
               <h1 className="headingText">
                 <span className="purpleGradient">Empowering</span>
                 <br />
@@ -104,7 +108,7 @@ export default function Home() {
             </div>
             <div className="left flex items-center justify-end">
               <img
-                className="h-[350px] mr-[112px]"
+                className="h-[350px] mr-[48px]"
                 src="./images/Logo.png"
                 alt=""
               />
@@ -143,8 +147,8 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="container relative px-4 mx-auto">
-            <div className="max-w-3xl mx-auto bg-black/60 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-purple-500/20 animate-fade-in hover:border-purple-500/40 transition-all duration-500">
+          <div className="container relative max-w-3xl mx-auto px-2 sm:px-4">
+            <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-purple-500/20 animate-fade-in hover:border-purple-500/40 transition-all duration-500">
               <p className="text-base sm:text-lg text-gray-200 leading-relaxed">
                 Hack United is a 501(c)(3) non-profit organization founded by
                 teenagers with a passion for programming and technology. Our
@@ -172,7 +176,7 @@ export default function Home() {
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
           <div className="absolute -top-40 right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl hidden lg:block"></div>
 
-          <div className="container relative px-4 mx-auto">
+          <div className="container relative max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto px-2 sm:px-4">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 lg:mb-12">
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
