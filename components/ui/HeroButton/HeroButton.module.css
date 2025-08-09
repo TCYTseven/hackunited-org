@@ -1,0 +1,23 @@
+.fill {
+  background: linear-gradient(
+    111deg,
+    rgba(255, 255, 255, 1) 20%,
+    rgba(179, 179, 179, 1) 100%
+  );
+  color: black;
+  height: 40px;
+  width: 135px;
+  border-radius: 9999px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.outline {
+  backdrop-filter: blur(10px);
+  border: 0.5px solid white;
+  height: 40px;
+  width: 135px;
+  border-radius: 9999px;
+  font-size: 15px;
+  font-weight: 600;
+}

@@ -1,25 +1,28 @@
-import type React from "react"
-import type { Metadata } from "next"
-import "@/app/globals.css"
-import { Inter } from "next/font/google"
-import { ThemeProvider } from "@/components/theme-provider"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Menu } from "lucide-react"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import Image from "next/image"
+import type React from "react";
+import type { Metadata } from "next";
+import "@/app/globals.css";
+import { Inter } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Menu } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Image from "next/image";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hackunited.org"),
   title: "Hack United",
-  description: "Hack United is a 501(c)(3) non-profit organization founded by teenagers with a passion for programming and technology. Join our community of young developers, participate in hackathons, and make an impact through code.",
-  keywords: "hackathon, teen developers, programming, technology, non-profit, coding competitions, United Hacks",
+  description:
+    "Hack United is a 501(c)(3) non-profit organization founded by teenagers with a passion for programming and technology. Join our community of young developers, participate in hackathons, and make an impact through code.",
+  keywords:
+    "hackathon, teen developers, programming, technology, non-profit, coding competitions, United Hacks",
   authors: [{ name: "Hack United Team" }],
   openGraph: {
     title: "Hack United",
-    description: "Join our community of young developers, participate in hackathons, and make an impact through code.",
+    description:
+      "Join our community of young developers, participate in hackathons, and make an impact through code.",
     url: "https://hackunited.org",
     siteName: "Hack United",
     images: [
@@ -35,70 +38,113 @@ export const metadata: Metadata = {
   },
   icons: [
     {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '32x32',
-      url: '/images/main-globe-icon.png',
+      rel: "icon",
+      type: "image/png",
+      sizes: "32x32",
+      url: "/images/main-globe-icon.png",
     },
     {
-      rel: 'icon',
-      type: 'image/png', 
-      sizes: '16x16',
-      url: '/images/main-globe-icon.png',
+      rel: "icon",
+      type: "image/png",
+      sizes: "16x16",
+      url: "/images/main-globe-icon.png",
     },
     {
-      rel: 'apple-touch-icon',
-      sizes: '180x180',
-      url: '/images/main-globe-icon.png',
+      rel: "apple-touch-icon",
+      sizes: "180x180",
+      url: "/images/main-globe-icon.png",
     },
   ],
   robots: {
     index: true,
     follow: true,
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" type="image/png" sizes="32x32" href="/images/main-globe-icon.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/images/main-globe-icon.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/images/main-globe-icon.png" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/images/main-globe-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/images/main-globe-icon.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/images/main-globe-icon.png"
+        />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
           <div className="flex min-h-screen flex-col bg-black text-white">
-            <header className="sticky top-0 z-50 w-full px-4 py-4">
-              <div className="max-w-7xl mx-auto">
+            <header className="sticky top-0 z-50 w-full px-4 relative flex justify-center">
+              <div className="max-w-7xl mx-auto absolute top-[10px]">
                 <div className="bg-gray-900/60 backdrop-blur-xl rounded-full border border-gray-600/40 shadow-lg drop-shadow-md px-6 py-3">
                   <div className="flex items-center justify-between">
                     {/* Logo and Brand */}
-                    <Link href="/" className="flex items-center gap-3 font-bold text-lg">
-                      <Image src="/images/globe-icon.png" alt="Hack United" width={32} height={32} className="h-8 w-8" />
+                    <Link
+                      href="/"
+                      className="flex items-center gap-3 font-bold text-lg"
+                    >
+                      <Image
+                        src="/images/globe-icon.png"
+                        alt="Hack United"
+                        width={32}
+                        height={32}
+                        className="h-8 w-8"
+                      />
                       <span className="text-white">Hack United</span>
                     </Link>
 
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex items-center gap-2">
-                      <Link href="/" className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200">
+                      <Link
+                        href="/"
+                        className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200"
+                      >
                         Home
                       </Link>
-                      <Link href="/donate" className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200">
+                      <Link
+                        href="/donate"
+                        className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200"
+                      >
                         Donate
                       </Link>
-                      <Link href="/team" className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200">
+                      <Link
+                        href="/team"
+                        className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200"
+                      >
                         Team
                       </Link>
-                      <Link href="/apply" className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200">
+                      <Link
+                        href="/apply"
+                        className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200"
+                      >
                         Apply
                       </Link>
-                      <Link href="/social" className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200">
+                      <Link
+                        href="/social"
+                        className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200"
+                      >
                         Social
                       </Link>
                       <a
@@ -113,39 +159,61 @@ export default function RootLayout({
 
                     {/* Right Side Actions */}
                     <div className="flex items-center gap-3">
-                      <a 
-                        href="https://unitedhacks.hackunited.org" 
-                        target="_blank" 
+                      <a
+                        href="https://unitedhacks.hackunited.org"
+                        target="_blank"
                         rel="noopener noreferrer"
                       >
                         <Button className="hidden md:flex bg-purple-600 hover:bg-purple-700 text-white rounded-full px-6 py-2 text-sm font-medium transition-all duration-200">
                           Hackathon
                         </Button>
                       </a>
-                      
+
                       {/* Mobile Menu */}
                       <Sheet>
                         <SheetTrigger asChild>
-                          <Button variant="ghost" size="icon" className="md:hidden rounded-full hover:bg-gray-700/50">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="md:hidden rounded-full hover:bg-gray-700/50"
+                          >
                             <Menu className="h-5 w-5 text-white" />
                             <span className="sr-only">Toggle menu</span>
                           </Button>
                         </SheetTrigger>
-                        <SheetContent side="right" className="bg-gray-900 border-gray-700">
+                        <SheetContent
+                          side="right"
+                          className="bg-gray-900 border-gray-700"
+                        >
                           <div className="flex flex-col gap-6 mt-8">
-                            <Link href="/" className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2">
+                            <Link
+                              href="/"
+                              className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2"
+                            >
                               Home
                             </Link>
-                            <Link href="/donate" className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2">
+                            <Link
+                              href="/donate"
+                              className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2"
+                            >
                               Donate
                             </Link>
-                            <Link href="/team" className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2">
+                            <Link
+                              href="/team"
+                              className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2"
+                            >
                               Team
                             </Link>
-                            <Link href="/apply" className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2">
+                            <Link
+                              href="/apply"
+                              className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2"
+                            >
                               Apply
                             </Link>
-                            <Link href="/social" className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2">
+                            <Link
+                              href="/social"
+                              className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2"
+                            >
                               Social
                             </Link>
                             <a
@@ -157,9 +225,9 @@ export default function RootLayout({
                               Blog
                             </a>
                             <div className="pt-4 border-t border-gray-700">
-                              <a 
-                                href="https://unitedhacks.hackunited.org" 
-                                target="_blank" 
+                              <a
+                                href="https://unitedhacks.hackunited.org"
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="block"
                               >
@@ -181,7 +249,10 @@ export default function RootLayout({
               <div className="container px-4 py-8 sm:py-12 mx-auto">
                 <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
                   <div className="space-y-4">
-                    <Link href="/" className="flex items-center gap-2 font-bold text-xl">
+                    <Link
+                      href="/"
+                      className="flex items-center gap-2 font-bold text-xl"
+                    >
                       <Image
                         src="/images/globe-icon.png"
                         alt="Hack United"
@@ -192,12 +263,10 @@ export default function RootLayout({
                       <span>Hack United</span>
                     </Link>
                     <p className="text-sm text-gray-400">
-                      A 501(c)(3) non-profit organization founded by teenagers with a passion for programming and
-                      technology.
+                      A 501(c)(3) non-profit organization founded by teenagers
+                      with a passion for programming and technology.
                     </p>
-                    <p className="text-sm text-gray-400">
-                      EIN: 81-2908499
-                    </p>
+                    <p className="text-sm text-gray-400">EIN: 81-2908499</p>
                     <div className="flex gap-2">
                       <a
                         href="https://instagram.com/hack_united"
@@ -221,7 +290,14 @@ export default function RootLayout({
                             strokeLinejoin="round"
                             className="h-4 w-4"
                           >
-                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <rect
+                              width="20"
+                              height="20"
+                              x="2"
+                              y="2"
+                              rx="5"
+                              ry="5"
+                            ></rect>
                             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                             <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
                           </svg>
@@ -287,36 +363,54 @@ export default function RootLayout({
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold uppercase tracking-wider text-white mb-4">COMPANY</h3>
+                    <h3 className="text-sm font-semibold uppercase tracking-wider text-white mb-4">
+                      COMPANY
+                    </h3>
                     <ul className="space-y-2">
                       <li>
-                        <a href="mailto:humans@hackunited.org" className="text-sm text-gray-400 hover:text-purple-400">
+                        <a
+                          href="mailto:humans@hackunited.org"
+                          className="text-sm text-gray-400 hover:text-purple-400"
+                        >
                           Sponsor Us
                         </a>
                       </li>
                       <li>
-                        <a href="mailto:humans@hackunited.org" className="text-sm text-gray-400 hover:text-purple-400">
+                        <a
+                          href="mailto:humans@hackunited.org"
+                          className="text-sm text-gray-400 hover:text-purple-400"
+                        >
                           Press/Media
                         </a>
                       </li>
                       <li>
-                        <Link href="/apply" className="text-sm text-gray-400 hover:text-purple-400">
+                        <Link
+                          href="/apply"
+                          className="text-sm text-gray-400 hover:text-purple-400"
+                        >
                           Volunteer
                         </Link>
                       </li>
                     </ul>
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold uppercase tracking-wider text-white mb-4">Contact</h3>
+                    <h3 className="text-sm font-semibold uppercase tracking-wider text-white mb-4">
+                      Contact
+                    </h3>
                     <ul className="space-y-2">
-                      <li className="text-sm text-gray-400">Email: humans@hackunited.org</li>
-                      <li className="text-sm text-gray-400">Discord: discord.gg/hackunited</li>
+                      <li className="text-sm text-gray-400">
+                        Email: humans@hackunited.org
+                      </li>
+                      <li className="text-sm text-gray-400">
+                        Discord: discord.gg/hackunited
+                      </li>
                     </ul>
                   </div>
                 </div>
                 <div className="mt-8 pt-8 border-t border-purple-500/20">
                   <p className="text-xs text-gray-500 text-center">
-                    © {new Date().getFullYear()} Hack United. All rights reserved.
+                    © {new Date().getFullYear()} Hack United. All rights
+                    reserved.
                   </p>
                 </div>
               </div>
@@ -325,5 +419,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

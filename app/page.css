@@ -1,0 +1,76 @@
+li,
+a {
+  text-decoration: none;
+}
+
+.headingText {
+  font-size: 55px;
+  font-weight: 600;
+  background: linear-gradient(
+    111deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(153, 153, 153, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 97%;
+}
+
+.subHeading p {
+  color: #d3d3d3;
+  font-size: 14px;
+  font-weight: 400;
+}
+.subHeading {
+  height: 58px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.purpleGradient {
+  background: linear-gradient(
+    111deg,
+    rgb(200, 152, 255) 0%,
+    rgb(170, 0, 237) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glassCard {
+  backdrop-filter: blur(12px);
+  background-color: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 15px;
+  position: absolute;
+}
+
+.glassCard1 {
+  top: -3%;
+  left: 66%;
+}
+
+.glassCard2 {
+  top: 41%;
+  left: 21%;
+}
+
+.glassCard3 {
+  top: 72%;
+  left: 69%;
+}
+
+.left {
+  position: relative;
+}
+
+.glassCard p {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.glassCard h3 {
+  font-size: 24px;
+  font-weight: 700;
+}
