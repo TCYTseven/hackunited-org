@@ -96,158 +96,130 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="flex min-h-screen flex-col bg-black text-white">
-            <header className="sticky top-0 z-50 w-full px-4 relative flex justify-center">
-              <div className="max-w-7xl mx-auto absolute top-[10px]">
-                <div className="bg-gray-900/60 backdrop-blur-xl rounded-full border border-gray-600/40 shadow-lg drop-shadow-md px-6 py-3">
-                  <div className="flex items-center justify-between">
-                    {/* Logo and Brand */}
-                    <Link
-                      href="/"
-                      className="flex items-center gap-3 font-bold text-lg"
+            <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/80 backdrop-blur-sm">
+              <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
+                <Link href="/" className="flex items-center gap-2">
+                  <Image
+                    src="/images/main-globe-icon.png"
+                    alt="Hack United"
+                    width={28}
+                    height={28}
+                    className="h-7 w-7"
+                  />
+                  <span className="text-xl font-bold">
+                    Hack{" "}
+                    <span className="bg-gradient-to-r from-purple-400 to-violet-600 bg-clip-text text-transparent">
+                      United
+                    </span>
+                  </span>
+                </Link>
+
+                <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
+                  <Link
+                    href="/"
+                    className="text-gray-300 transition-colors hover:text-white"
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    href="/donate"
+                    className="text-gray-300 transition-colors hover:text-white"
+                  >
+                    Donate
+                  </Link>
+                  <Link
+                    href="/team"
+                    className="text-gray-300 transition-colors hover:text-white"
+                  >
+                    Team
+                  </Link>
+                  <Link
+                    href="/apply"
+                    className="text-gray-300 transition-colors hover:text-white"
+                  >
+                    Apply
+                  </Link>
+                  <Link
+                    href="/social"
+                    className="text-gray-300 transition-colors hover:text-white"
+                  >
+                    Socials
+                  </Link>
+                  <a
+                    href="https://blog.hackunited.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-300 transition-colors hover:text-white"
+                  >
+                    Blogs
+                  </a>
+                </nav>
+
+                <div className="flex items-center md:hidden">
+                  <Sheet>
+                    <SheetTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="rounded-full hover:bg-gray-700/50 md:hidden"
+                      >
+                        <Menu className="h-5 w-5 text-white" />
+                        <span className="sr-only">Toggle menu</span>
+                      </Button>
+                    </SheetTrigger>
+                    <SheetContent
+                      side="right"
+                      className="border-gray-700 bg-gray-900"
                     >
-                      <Image
-                        src="/images/globe-icon.png"
-                        alt="Hack United"
-                        width={32}
-                        height={32}
-                        className="h-8 w-8"
-                      />
-                      <span className="text-white">Hack United</span>
-                    </Link>
-
-                    {/* Desktop Navigation */}
-                    <nav className="hidden md:flex items-center gap-2">
-                      <Link
-                        href="/"
-                        className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200"
-                      >
-                        Home
-                      </Link>
-                      <Link
-                        href="/donate"
-                        className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200"
-                      >
-                        Donate
-                      </Link>
-                      <Link
-                        href="/team"
-                        className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200"
-                      >
-                        Team
-                      </Link>
-                      <Link
-                        href="/apply"
-                        className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200"
-                      >
-                        Apply
-                      </Link>
-                      <Link
-                        href="/social"
-                        className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200"
-                      >
-                        Social
-                      </Link>
-                      <a
-                        href="https://blog.hackunited.org/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 rounded-full transition-all duration-200"
-                      >
-                        Blog
-                      </a>
-                    </nav>
-
-                    {/* Right Side Actions */}
-                    <div className="flex items-center gap-3">
-                      <a
-                        href="https://unitedhacks.hackunited.org"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Button className="hidden md:flex bg-purple-600 hover:bg-purple-700 text-white rounded-full px-6 py-2 text-sm font-medium transition-all duration-200">
-                          Hackathon
-                        </Button>
-                      </a>
-
-                      {/* Mobile Menu */}
-                      <Sheet>
-                        <SheetTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="md:hidden rounded-full hover:bg-gray-700/50"
-                          >
-                            <Menu className="h-5 w-5 text-white" />
-                            <span className="sr-only">Toggle menu</span>
-                          </Button>
-                        </SheetTrigger>
-                        <SheetContent
-                          side="right"
-                          className="bg-gray-900 border-gray-700"
+                      <div className="mt-8 flex flex-col gap-6">
+                        <Link
+                          href="/"
+                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
                         >
-                          <div className="flex flex-col gap-6 mt-8">
-                            <Link
-                              href="/"
-                              className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2"
-                            >
-                              Home
-                            </Link>
-                            <Link
-                              href="/donate"
-                              className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2"
-                            >
-                              Donate
-                            </Link>
-                            <Link
-                              href="/team"
-                              className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2"
-                            >
-                              Team
-                            </Link>
-                            <Link
-                              href="/apply"
-                              className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2"
-                            >
-                              Apply
-                            </Link>
-                            <Link
-                              href="/social"
-                              className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2"
-                            >
-                              Social
-                            </Link>
-                            <a
-                              href="https://blog.hackunited.org/"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-base font-medium text-gray-300 hover:text-white transition-colors py-2"
-                            >
-                              Blog
-                            </a>
-                            <div className="pt-4 border-t border-gray-700">
-                              <a
-                                href="https://unitedhacks.hackunited.org"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="block"
-                              >
-                                <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white rounded-full py-3">
-                                  Hackathons
-                                </Button>
-                              </a>
-                            </div>
-                          </div>
-                        </SheetContent>
-                      </Sheet>
-                    </div>
-                  </div>
+                          Home
+                        </Link>
+                        <Link
+                          href="/donate"
+                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
+                        >
+                          Donate
+                        </Link>
+                        <Link
+                          href="/team"
+                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
+                        >
+                          Team
+                        </Link>
+                        <Link
+                          href="/apply"
+                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
+                        >
+                          Apply
+                        </Link>
+                        <Link
+                          href="/social"
+                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
+                        >
+                          Socials
+                        </Link>
+                        <a
+                          href="https://blog.hackunited.org/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
+                        >
+                          Blogs
+                        </a>
+                      </div>
+                    </SheetContent>
+                  </Sheet>
                 </div>
               </div>
             </header>
             {children}
-            <footer className="bg-black border-t border-purple-500/20">
-              <div className="container px-4 py-8 sm:py-12 mx-auto">
-                <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <footer className="border-t border-purple-500/20 bg-black">
+              <div className="container mx-auto px-4 py-8 sm:py-12">
+                <div className="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
                   <div className="space-y-4">
                     <Link
                       href="/"

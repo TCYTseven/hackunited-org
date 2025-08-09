@@ -56,36 +56,22 @@ function DiscordWidget() {
 }
 
 export default function Home() {
+  const scrollTo = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
   return (
     <>
       <style jsx>{styles}</style>
       <main className="bg-black text-white">
         {/* Hero Section */}
-        <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat h-[100%] w-[100%] pt-[30px]">
-          {/* <nav className="flex items-center justify-between w-[100%] pr-[48px] pl-[48px]">
-            <TextLogo />
-            <ul className="flex gap-[31px]">
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">Donate</a>
-              </li>
-              <li>
-                <a href="#">Team</a>
-              </li>
-              <li>
-                <a href="#">Apply</a>
-              </li>
-              <li>
-                <a href="#">Socials</a>
-              </li>
-              <li>
-                <a href="#">Blogs</a>
-              </li>
-            </ul>
-          </nav> */}
-          <div className="headContainer grid grid-cols-[44%_56%] mt-[190px] pl-[94px] pr-[94px] pb-[240px]">
+        <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat h-[100%] w-[100%] pt-[30px] px-24">
+          <div className="headContainer grid grid-cols-[44%_56%] mt-[190px] pb-[240px]">
             <div className="right">
               <h1 className="headingText">
                 <span className="purpleGradient">Empowering</span>
@@ -105,8 +91,13 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex w-[288px] justify-between mt-[31px]">
-                <HeroButton link="#">Learn More</HeroButton>
-                <HeroButton link="#" filled={false}>
+                <HeroButton onClick={() => scrollTo("who-are-we")}>
+                  Learn More
+                </HeroButton>
+                <HeroButton
+                  link="https://unitedhacks.hackunited.org"
+                  filled={false}
+                >
                   Hackathons
                 </HeroButton>
               </div>
