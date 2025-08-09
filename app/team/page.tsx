@@ -23,13 +23,13 @@ const executiveTeam: TeamMember[] = [
   },
   {
     name: "Pranav A.",
-    position: "COO",
+    position: "Chief Operations Officer",
     image: "/images/team-images/PranavA.png",
     blurb: "As Chief Operating Officer, Pranav ensures Hack United’s events run seamlessly from start to finish. With a sharp eye for logistics, scheduling, and process optimization, he’s the backbone of the organization’s operational success. Pranav thrives on turning ambitious plans into smooth, impactful experiences for participants worldwide.",
   },
   {
     name: "Kavin A.",
-    position: "CSO",
+    position: "Chief Product Officer",
     image: "/images/team-images/kavina.png",
     blurb: "As Chief Strategy Officer, Kavin shapes Hack United’s vision, partnerships, and long-term growth. Blending strategic thinking with hands-on execution, he focuses on building relationships, securing sponsorships, and guiding the organization toward greater impact. His work ensures Hack United not only grows but thrives in its mission to inspire young creators.",
   },
@@ -65,16 +65,6 @@ const headsTeam: TeamMember[] = [
 
 const membersTeam: TeamMember[] = [
   {
-    name: "Emily F.",
-    position: "Article Writer",
-    image: "/images/team-images/emily.png",
-  },
-  {
-    name: "Alexander N.",
-    position: "Article Writer",
-    image: "/images/team-images/alexander.png",
-  },
-  {
     name: "Kyungjin O.",
     position: "Outreach Associate",
     image: "/images/team-images/kyungjin.png",
@@ -93,11 +83,6 @@ const membersTeam: TeamMember[] = [
     name: "Ritvik P.",
     position: "Outreach Associate",
     image: "/images/team-images/ritvik.png",
-  },
-  {
-    name: "Yukta P.",
-    position: "Outreach Associate",
-    image: "/images/team-images/yukta.png",
   },
   {
     name: "Austin H.",
@@ -119,12 +104,22 @@ const membersTeam: TeamMember[] = [
     position: "Web Developer",
     image: "/images/team-images/sujal.png",
   },
+  {
+    name: "Emily F.",
+    position: "Article Writer",
+    image: "/images/team-images/emily.png",
+  },
+  {
+    name: "Alexander N.",
+    position: "Article Writer",
+    image: "/images/team-images/alexander.png",
+  },
 ];
 
 const otherMembers = [...headsTeam, ...membersTeam];
-const otherMembersRow1 = otherMembers.slice(0, 6);
-const otherMembersRow2 = otherMembers.slice(6, 11);
-const otherMembersRow3 = otherMembers.slice(11, 16);
+const otherMembersRow1 = otherMembers.slice(0, 5);
+const otherMembersRow2 = otherMembers.slice(5, 10);
+const otherMembersRow3 = otherMembers.slice(10, 15);
 
 
 // Previous Volunteers - 11 rows total, last row has 2 people
@@ -437,8 +432,13 @@ const previousVolunteers: TeamMember[][] = [
       position: "Community Planner",
       image: "https://ui-avatars.com/api/?name=T&background=DB2777&color=fff&size=128",
     },
+    {
+      name: "Yukta P.",
+      position: "Outreach Associate",
+      image: "/images/team-images/yukta.png",
+    },
   ],
-]
+];
 
 function TeamMemberCard({ member, size = "small", index, onClick }: { member: TeamMember; size?: "small" | "large" | "compact" | "card", index?: number, onClick?: () => void }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -563,78 +563,6 @@ function BlurbModal({ member, onClose }: { member: TeamMember | null; onClose: (
   );
 }
 
-function InfoBanner({ isVisible, onClose }: { isVisible: boolean; onClose: () => void }) {
-  const [isExiting, setIsExiting] = useState(false);
-
-  const handleClose = () => {
-    setIsExiting(true);
-    setTimeout(onClose, 300);
-  };
-
-  if (!isVisible) return null;
-
-  return (
-    <div className={`relative mb-4 transition-opacity duration-300 ${isExiting ? "opacity-0" : "opacity-100"}`}>
-      <div className="bg-gray-800/50 backdrop-blur-sm border border-purple-500/20 rounded-lg p-4 flex items-center gap-4 animate-fadeInUp">
-        <svg className="w-6 h-6 text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <p className="text-white">Curious about our leadership? Click any executive to learn more!</p>
-        <button onClick={handleClose} className="text-gray-400 hover:text-white transition-colors duration-300">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function AnimatedCounter({ value, title, icon, isInView }: { value: number, title: string, icon: string, isInView: boolean }) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (isInView) {
-      const interval = setInterval(() => {
-        setCount((prev) => {
-          if (prev < value) {
-            return prev + 1;
-          }
-          clearInterval(interval);
-          return value;
-        });
-      }, 50);
-
-      return () => clearInterval(interval);
-    }
-  }, [isInView, value]);
-
-  return (
-    <div className="text-center">
-      <div className="text-5xl font-bold text-purple-400">{count}{icon}</div>
-      <div className="text-lg text-white">{title}</div>
-    </div>
-  );
-}
-
-function TeamStats() {
-  const totalMembers = executiveTeam.length + otherMembers.length;
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.5 });
-  
-  return (
-    <div ref={ref} className="bg-gray-900/50 rounded-lg p-8 my-16 border-2 border-purple-500/30 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <AnimatedCounter value={totalMembers} title="Total Members" icon="+" isInView={isInView} />
-        <AnimatedCounter value={10} title="Countries Represented" icon="+" isInView={isInView} />
-        <AnimatedCounter value={15} title="Programming Languages" icon="+" isInView={isInView} />
-        <AnimatedCounter value={50} title="Coffee Cups Daily" icon="☕" isInView={isInView} />
-      </div>
-    </div>
-  );
-}
-
-
 export default function TeamPage() {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [showBanner, setShowBanner] = useState(false);
@@ -668,28 +596,39 @@ export default function TeamPage() {
   const handleCloseModal = () => {
     setSelectedMember(null);
   };
-  
+
   return (
-    <main className={`flex flex-col items-center bg-black text-white min-h-screen ${montserrat.className}`}>
+    <main
+      className={`flex flex-col items-center bg-black text-white min-h-screen ${montserrat.className}`}
+    >
       <section className="w-full max-w-7xl mx-auto px-4 py-16 md:py-24">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h1 className={`text-5xl md:text-7xl font-bold text-white mb-4 ${montserrat.className}`}>Meet The Team</h1>
+          <h1
+            className={`text-5xl md:text-7xl font-bold text-white mb-4 ${montserrat.className}`}
+          >
+            Meet The Team
+          </h1>
         </div>
 
         {/* Executive Team */}
         <div className="mb-16" ref={executiveSectionRef}>
-          <InfoBanner isVisible={showBanner} onClose={() => setShowBanner(false)} />
           {/* Core Executives - Dark Background with White Glow */}
           <div className="bg-gray-900/50 rounded-lg p-8 mb-12 border-2 border-purple-500/30 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
               {executiveTeam.map((member, index) => (
-                <TeamMemberCard key={index} member={member} size="large" index={index} onClick={() => handleMemberClick(member)} />
+                <TeamMemberCard
+                  key={index}
+                  member={member}
+                  size="large"
+                  index={index}
+                  onClick={() => handleMemberClick(member)}
+                />
               ))}
             </div>
           </div>
 
           {/* Other Members Row 1 */}
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-8 justify-items-center mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 justify-items-center mb-12">
             {otherMembersRow1.map((member, index) => (
               <TeamMemberCard key={index} member={member} size="large" index={index} />
             ))}
@@ -709,8 +648,6 @@ export default function TeamPage() {
             ))}
           </div>
         </div>
-
-        <TeamStats />
 
         {/* Purple Divider - Thicker, Shorter, Darker */}
         <div className="flex justify-center mb-16">
