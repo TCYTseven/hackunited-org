@@ -59,7 +59,7 @@ const headsTeam: TeamMember[] = [
   {
     name: "Namish J.",
     position: "Head of Blog",
-    image: "https://ui-avatars.com/api/?name=N+J&background=E11D48&color=fff&size=128",
+    image: "/images/team-images/namish.png",
   },
 ];
 
