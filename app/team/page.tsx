@@ -114,12 +114,17 @@ const membersTeam: TeamMember[] = [
     position: "Article Writer",
     image: "/images/team-images/alexander.png",
   },
+  {
+    name: "Aarjit A.",
+    position: "Article Writer",
+    image: "/images/team-images/Aarjit.png",
+  },
 ];
 
 const otherMembers = [...headsTeam, ...membersTeam];
 const otherMembersRow1 = otherMembers.slice(0, 5);
 const otherMembersRow2 = otherMembers.slice(5, 10);
-const otherMembersRow3 = otherMembers.slice(10, 15);
+const otherMembersRow3 = otherMembers.slice(10);
 
 
 // Previous Volunteers - 11 rows total, last row has 2 people
