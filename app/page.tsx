@@ -20,6 +20,47 @@ import { ScrollButton, ScrollButtonWithIcon } from "@/components/scroll-button";
 import NewsCarousel from "@/components/ui/news-carousel";
 import HeroButton from "../components/ui/HeroButton/HeroButton";
 import "./page.css";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { Playfair_Display } from "next/font/google";
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+const logos = [
+  {
+    src: "/images/companies logo/benzinga_00000.png",
+    alt: "Benzinga",
+    href: "https://www.benzinga.com/content/46087906/hack-united-unveils-united-hacks-v5-a-global-hackathon-equipping-youth-innovation-with-essential-sof",
+  },
+  {
+    src: "/images/companies logo/asocciatePress_00000.png",
+    alt: "Associated Press",
+    href: "https://apnews.com/press-release/ein-presswire-newsmatics/hack-united-unveils-united-hacks-v5-a-global-hackathon-equipping-youth-innovation-with-essential-soft-skills-d95d1a2b7f2b0367502ec18bd0148d08",
+  },
+  {
+    src: "/images/companies logo/digitalJournal_00000.png",
+    alt: "Digital Journal",
+    href: "https://www.digitaljournal.com/pr/news/vehement-media/teen-led-hack-united-launches-united-1122733292.html",
+  },
+  {
+    src: "/images/companies logo/fox40_00000.png",
+    alt: "Fox 40",
+    href: "https://fox40.com/business/press-releases/ein-presswire/825280862/hack-united-unveils-united-hacks-v5-a-global-hackathon-equipping-youth-innovation-with-essential-soft-skills/",
+  },
+  {
+    src: "/images/companies logo/news 10_00000.png",
+    alt: "News 10",
+    href: "https://www.news10.com/business/press-releases/ein-presswire/825280862/hack-united-unveils-united-hacks-v5-a-global-hackathon-equipping-youth-innovation-with-essential-soft-skills/",
+  },
+  {
+    src: "/images/companies logo/theGlobe_00000.png",
+    alt: "The Globe and Mail",
+    href: "https://www.barchart.com/story/news/32321966/wall-street-giants-are-quietly-pouring-billions-into-this-overlooked-asset-class-and-now-you-can-too",
+  },
+];
 
 // Simple animations
 const styles = `
@@ -65,13 +106,24 @@ export default function Home() {
       });
     }
   };
+
+  useGSAP(() => {
+    gsap.to(".logoContainer", {
+      transform: "translateX(-876px)",
+      duration: 6,
+      ease: "none",
+      repeat: -1,
+    });
+  });
+
   return (
     <>
       <style jsx>{styles}</style>
-      <main className="bg-black text-white">
+      <main className="bg-black text-white overflow-hidden">
         {/* Hero Section */}
-        <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat w-full pt-[30px] md:min-h-screen">
-          <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-[140px] pb-[160px] px-4 md:px-8">
+        <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat w-full pt-[30px] md:min-h-screen relative">
+          <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black to-transparent" />
+          <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-[140px] pb-[160px] px-4 md:px-8 relative">
             <div className="right text-center md:text-left">
               <div className="mb-4 inline-flex items-center rounded-full bg-green-500/10 px-4 py-1 text-sm font-medium text-green-400">
                 <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-500" />
@@ -133,27 +185,47 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <div className="recognizedCompanies">
+          <h2
+            className={`headingText purpleGradient mt-4 mb-4 text-center ${playfairDisplay.className}`}
+          >
+            RECOGNIZED BY
+          </h2>
+          <div className="container mx-auto px-4 md:px-8 companiesLogo flex overflow-hidden relative">
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
+            <div className="logoContainer flex">
+              {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
+                <img
+                  key={index}
+                  src={logo.src}
+                  alt={logo.alt}
+                  onClick={() => window.open(logo.href, "_blank")}
+                  className="cursor-pointer"
+                />
+              ))}
+            </div>
+            <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-l from-black to-transparent" />
+            <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-black to-transparent" />
+          </div>
+        </div>
         {/* Who Are We Section */}
-        <section
-          id="who-are-we"
-          className="relative overflow-hidden py-12 sm:py-16 lg:py-20"
-        >
+        <section id="who-are-we" className="relative overflow-hidden py-16 md:py-24">
           {/* Dot grid background pattern */}
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+          {/* <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div> */}
 
           {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
+          {/* <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div> */}
 
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
 
           {/* Large "About Us" background text */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          {/* <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <h2 className="text-[20rem] sm:text-[28vw] md:text-[25vw] lg:text-[20vw] xl:text-[25vw] xl:h-[25vw] font-bold text-white/10 select-none leading-[0.8] whitespace-nowrap">
               ABOUT US
             </h2>
-          </div>
+          </div> */}
 
-          <div className="container relative max-w-3xl mx-auto px-2 sm:px-4">
+          {/* <div className="container relative max-w-3xl mx-auto px-2 sm:px-4">
             <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-purple-500/20 animate-fade-in hover:border-purple-500/40 transition-all duration-500">
               <p className="text-base sm:text-lg text-gray-200 leading-relaxed">
                 Hack United is a 501(c)(3) non-profit organization founded by
@@ -168,6 +240,32 @@ export default function Home() {
                 students prosper in the realm of technology.
               </p>
             </div>
+          </div> */}
+
+          <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center w-full md:h-[300px] font-light text-base md:text-[21px] text-[#E8E8E8] text-center md:text-left">
+            <div className="md:w-2/3">
+              <h2 className="headingText purpleGradient mt-[15px] mb-[15px] ">
+                ABOUT US
+              </h2>
+              <p>
+                {" "}
+                Hack United is a 501(c)(3) non-profit organization founded by
+                teenagers with a passion for programming and technology. Our
+                mission is to inspire and educate the next generation of
+                innovators through hackathons and workshops. We address a
+                problem not as commonly talked about, aiming to equip high
+                school and college students with the essential soft skills
+                needed to thrive in their chosen career paths. This is done
+                through hands on application such as our free to enter
+                hackathons. Through our initiatives, we ultimately aim to help
+                students prosper in the realm of technology.
+              </p>
+            </div>
+            <img
+              className="w-1/2 md:w-[400px] mt-8 md:mt-0 md:mr-[70px]"
+              src="./images/globe-icon.png"
+              alt=""
+            />
           </div>
         </section>
 
@@ -1147,8 +1245,8 @@ export default function Home() {
                                 July 2025
                               </h4>
                               <p className="text-white/80 text-sm">
-                                Featuring winning projects from our entertainment
-                                themed hackathon.
+                                Featuring winning projects from our
+                                entertainment themed hackathon.
                               </p>
                             </div>
                           </div>
