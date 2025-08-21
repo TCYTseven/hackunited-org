@@ -61,6 +61,11 @@ const headsTeam: TeamMember[] = [
     position: "Head of Blog",
     image: "/images/team-images/namish.png",
   },
+  {
+    name: "Akshay",
+    position: "Head of Finance",
+    image: "/images/team-images/akshay.png",
+  },
 ];
 
 const membersTeam: TeamMember[] = [
@@ -118,6 +123,11 @@ const membersTeam: TeamMember[] = [
     name: "Aarjit A.",
     position: "Article Writer",
     image: "/images/team-images/Aarjit.png",
+  },
+  {
+    name: "Joey",
+    position: "Project Manager",
+    image: "/images/team-images/joey.png",
   },
 ];
 
