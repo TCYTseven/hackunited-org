@@ -52,9 +52,9 @@ const headsTeam: TeamMember[] = [
     image: "/images/team-images/fionaa.png",
   },
   {
-    name: "Ishaan P.",
-    position: "Head of Strategy",
-    image: "/images/team-images/ishaan.png",
+    name: "Avyakt",
+    position: "Head of Human Resources",
+    image: "/images/team-images/Avyakt.png",
   },
   {
     name: "Namish J.",
@@ -65,6 +65,11 @@ const headsTeam: TeamMember[] = [
     name: "Akshay",
     position: "Head of Finance",
     image: "/images/team-images/akshay.png",
+  },
+  {
+    name: "Ishaan P.",
+    position: "Officer",
+    image: "/images/team-images/ishaan.png",
   },
 ];
 
