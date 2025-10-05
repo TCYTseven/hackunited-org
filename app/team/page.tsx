@@ -97,7 +97,7 @@ const membersTeam: TeamMember[] = [
   {
     name: "Austin H.",
     position: "Outreach Associate",
-    image: "/images/team-images/austin.png",
+    image: "/images/team-images/Austin.png",
   },
   {
     name: "Derrick W.",
