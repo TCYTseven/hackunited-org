@@ -134,6 +134,11 @@ const membersTeam: TeamMember[] = [
     position: "Project Manager",
     image: "/images/team-images/joey.png",
   },
+  {
+    name: "Vedant M.",
+    position: "Bot Developer",
+    image: "/images/team-images/Vedant.png",
+  },
 ];
 
 const otherMembers = [...headsTeam, ...membersTeam];
