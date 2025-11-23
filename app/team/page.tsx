@@ -71,6 +71,11 @@ const headsTeam: TeamMember[] = [
     position: "Officer",
     image: "/images/team-images/ishaan.png",
   },
+  {
+    name: "Eldiiar Bekbolotov",
+    position: "Officer",
+    image: "/images/team-images/Eldiiar Bekbolotov.png",
+  },
 ];
 
 const membersTeam: TeamMember[] = [
