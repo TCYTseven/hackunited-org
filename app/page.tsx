@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -31,9 +32,9 @@ const playfairDisplay = Playfair_Display({
 
 const logos = [
   {
-    src: "/images/companies logo/benzinga_00000.png",
-    alt: "Benzinga",
-    href: "https://www.benzinga.com/content/46087906/hack-united-unveils-united-hacks-v5-a-global-hackathon-equipping-youth-innovation-with-essential-sof",
+    src: "/images/companies logo/TechBullionLogo.webp",
+    alt: "TechBullion",
+    href: "https://techbullion.com/teenage-founder-creates-hackathon-program-to-help-peers/",
   },
   {
     src: "/images/companies logo/asocciatePress_00000.png",
@@ -58,9 +59,62 @@ const logos = [
   {
     src: "/images/companies logo/theGlobe_00000.png",
     alt: "The Globe and Mail",
-    href: "https://www.barchart.com/story/news/32321966/wall-street-giants-are-quietly-pouring-billions-into-this-overlooked-asset-class-and-now-you-can-too",
+    href: "https://www.barchart.com/story/news/33037092/hack-united-empowers-youth-with-soft-skills-at-united-hacks-v5",
   },
 ];
+
+const allSponsors = [
+  { src: "/images/sponsors/launchx.png", alt: "LaunchX" },
+  { src: "/images/sponsors/YRI.jpg", alt: "YRI" },
+  { src: "/images/sponsors/cp-logo-dark.svg", alt: "CodePath" },
+  { src: "/images/sponsors/Coder.com_logo.png", alt: "Coder.com" },
+  { src: "/images/sponsors/incogni_black.png", alt: "Incogni" },
+  { src: "/images/sponsors/saily-logo-black_(3).png", alt: "Saily" },
+  { src: "/images/sponsors/interviewbuddy.png", alt: "InterviewBuddy" },
+  { src: "/images/sponsors/opennote.png", alt: "OpenNote" },
+  { src: "/images/sponsors/images.png", alt: "Sponsor" },
+  { src: "/images/sponsors/devIT.png", alt: "DevIT" },
+  {
+    src: "/images/sponsors/algoverse_logo_max_quality_-_compresed_(1).png",
+    alt: "Algoverse",
+  },
+  { src: "/images/sponsors/aops_logo.png", alt: "AOPS" },
+  { src: "/images/sponsors/axure_logo.png", alt: "Axure" },
+  { src: "/images/sponsors/cake_logo_blue_gray.png", alt: "Cake" },
+  { src: "/images/sponsors/CoCalc-Image.png", alt: "CoCalc" },
+  { src: "/images/sponsors/codepath-1x1_icon-dark_1.jpg", alt: "CodePath" },
+  { src: "/images/sponsors/desmossss_logo.png", alt: "Desmos" },
+  { src: "/images/sponsors/devtranet_logo_with_text.png", alt: "Devtranet" },
+  { src: "/images/sponsors/echo_3d.png", alt: "Echo3D" },
+  { src: "/images/sponsors/FearedMediaLogo.png", alt: "Feared Media" },
+  { src: "/images/sponsors/givemycertificate.png", alt: "GiveMyCertificate" },
+  { src: "/images/sponsors/images_(2).png", alt: "Sponsor" },
+  { src: "/images/sponsors/Logomark_(With_color).png", alt: "Sponsor" },
+  { src: "/images/sponsors/NordVPN_horizontal.svg.png", alt: "NordVPN" },
+  { src: "/images/sponsors/Postman.png", alt: "Postman" },
+  { src: "/images/sponsors/StreamYardLogo.png", alt: "StreamYard" },
+  { src: "/images/sponsors/SwishSwoosh_Logo_Light_BG.png", alt: "SwishSwoosh" },
+  { src: "/images/sponsors/VerbwireLogoHackathonn.png", alt: "Verbwire" },
+  { src: "/images/sponsors/Vue_School_logo.png", alt: "Vue School" },
+  { src: "/images/sponsors/WoflramLogo.png", alt: "Wolfram" },
+  { src: "/images/sponsors/1200px-.xyz_logo.svg.png", alt: ".xyz" },
+  { src: "/images/sponsors/1_pass.jpg", alt: "1Pass" },
+];
+
+// Split sponsors into 2 groups (removed middle group, split it between first and third)
+const firstThird = Math.ceil(allSponsors.length / 3);
+const secondThird = Math.ceil((allSponsors.length * 2) / 3);
+const sponsors2FirstHalf = allSponsors.slice(
+  firstThird,
+  Math.ceil((firstThird + secondThird) / 2)
+);
+const sponsors2SecondHalf = allSponsors.slice(
+  Math.ceil((firstThird + secondThird) / 2),
+  secondThird
+);
+
+const sponsors1 = [...allSponsors.slice(0, firstThird), ...sponsors2FirstHalf];
+const sponsors3 = [...sponsors2SecondHalf, ...allSponsors.slice(secondThird)];
 
 // Simple animations
 const styles = `
@@ -77,6 +131,125 @@ const styles = `
 
   .animate-fade-in {
     animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .tabs-slider-container {
+    position: relative;
+  }
+
+  .tabs-slider-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: calc(100% / 5);
+    border: 3px solid rgba(168, 85, 247, 0.5);
+    border-radius: 9999px;
+    background: transparent;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .goal-icon-container {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    border-radius: 9999px;
+    background: rgba(139, 92, 246, 0.1);
+    box-shadow: 0 0 20px 5px rgba(168, 85, 247, 0.4);
+  }
+
+  .goal-icon-container svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  @media (max-width: 768px) {
+    .goal-icon-container {
+      width: 64px;
+      height: 64px;
+    }
+    .goal-icon-container svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  .tab-trigger-custom {
+    position: relative;
+    z-index: 1;
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    background: transparent;
+    transition: all 0.3s ease;
+  }
+
+  .tab-trigger-custom[data-state="active"] {
+    color: white;
+    opacity: 1;
+  }
+
+  .tab-trigger-custom[data-state="inactive"] {
+    color: rgba(255, 255, 255, 0.5);
+    opacity: 0.6;
+  }
+
+  .logoContainer {
+    will-change: transform;
+    align-items: center;
+  }
+
+  .logoContainer img {
+    margin: 0 40px;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .logoContainer img[alt="TechBullion"] {
+    height: 40px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    align-self: center;
+  }
+
+  @media (max-width: 768px) {
+    .logoContainer img {
+      margin: 0 25px;
+    }
+    .logoContainer img[alt="TechBullion"] {
+      height: 30px;
+      max-width: 90px;
+    }
+  }
+
+  .sponsorContainer {
+    will-change: transform;
+    align-items: center;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  .sponsorContainer img {
+    height: 60px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    margin: 0 40px;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .sponsorContainer img {
+      height: 45px;
+      margin: 0 25px;
+      max-width: 150px;
+    }
   }
 `;
 
@@ -97,6 +270,8 @@ function DiscordWidget() {
 }
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState("v5");
+
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -108,11 +283,82 @@ export default function Home() {
   };
 
   useGSAP(() => {
-    gsap.to(".logoContainer", {
-      transform: "translateX(-876px)",
-      duration: 6,
-      ease: "none",
-      repeat: -1,
+    const logoContainer = document.querySelector(".logoContainer");
+    if (logoContainer) {
+      // Wait for images to load before calculating
+      const images = logoContainer.querySelectorAll("img");
+      let loadedCount = 0;
+
+      const checkAndAnimate = () => {
+        loadedCount++;
+        if (loadedCount === images.length || images.length === 0) {
+          // Calculate the width of one set of logos
+          const firstSetWidth = logoContainer.scrollWidth / 4;
+
+          gsap.to(".logoContainer", {
+            x: -firstSetWidth,
+            duration: 10,
+            ease: "none",
+            repeat: -1,
+          });
+        }
+      };
+
+      if (images.length === 0) {
+        checkAndAnimate();
+      } else {
+        images.forEach((img) => {
+          if (img.complete) {
+            checkAndAnimate();
+          } else {
+            img.addEventListener("load", checkAndAnimate);
+            img.addEventListener("error", checkAndAnimate);
+          }
+        });
+      }
+    }
+
+    // Sponsor carousels animations
+    const sponsorContainers = document.querySelectorAll(".sponsorContainer");
+    sponsorContainers.forEach((container) => {
+      const carouselIndex = container.getAttribute("data-carousel");
+      const images = container.querySelectorAll("img");
+      let loadedCount = 0;
+
+      const checkAndAnimate = () => {
+        loadedCount++;
+        if (loadedCount === images.length || images.length === 0) {
+          // Calculate the width of one set of sponsors
+          const firstSetWidth = container.scrollWidth / 4;
+
+          // Both carousels: left to right
+          // Start from 0, animate to negative (container moves left, content appears to move right)
+          gsap.set(container, { x: 0 });
+          gsap.fromTo(
+            container,
+            { x: 0 },
+            {
+              x: -firstSetWidth,
+              duration: 20,
+              ease: "none",
+              repeat: -1,
+            }
+          );
+        }
+      };
+
+      if (images.length === 0) {
+        checkAndAnimate();
+      } else {
+        images.forEach((img) => {
+          if (img.complete) {
+            checkAndAnimate();
+          } else {
+            img.addEventListener("load", checkAndAnimate);
+            img.addEventListener("error", checkAndAnimate);
+          }
+        });
+      }
     });
   });
 
@@ -209,7 +455,10 @@ export default function Home() {
           </div>
         </div>
         {/* Who Are We Section */}
-        <section id="who-are-we" className="relative overflow-hidden py-16 md:py-24">
+        <section
+          id="who-are-we"
+          className="relative overflow-hidden py-16 md:py-24"
+        >
           {/* Dot grid background pattern */}
           {/* <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div> */}
 
@@ -292,9 +541,9 @@ export default function Home() {
               </div>
             </div>
 
-            <Card className="overflow-hidden border border-purple-500/30 bg-black/60 backdrop-blur-sm animate-fade-in hover:border-purple-500/50 transition-all duration-300">
+            <Card className="overflow-hidden border border-purple-500/30 bg-black/40 backdrop-blur-md animate-fade-in hover:border-purple-500/50 transition-all duration-300">
               <div className="grid lg:grid-cols-2">
-                <div className="p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-purple-900/50 to-purple-950/50">
+                <div className="p-6 sm:p-8 lg:p-10 bg-black/30 backdrop-blur-sm">
                   <Badge className="bg-white/10 text-white hover:bg-white/20 mb-4 sm:mb-6 border-purple-500/50 text-xs sm:text-sm">
                     Registration Open
                   </Badge>
@@ -343,12 +592,12 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Button className="bg-white text-purple-900 hover:bg-white/90 hover:scale-105 w-full sm:w-auto text-sm sm:text-base transition-all duration-300">
+                    <Button className="bg-white text-purple-900 hover:bg-white/90 hover:scale-105 w-full sm:w-auto text-sm sm:text-base transition-all duration-300 rounded-full">
                       Register Now
                     </Button>
                   </a>
                 </div>
-                <div className="relative flex items-center justify-center min-h-[200px] sm:min-h-[300px] lg:min-h-auto bg-gradient-to-br from-purple-900/30 to-black rounded-r-xl p-4 sm:p-6">
+                <div className="relative flex items-center justify-center min-h-[200px] sm:min-h-[300px] lg:min-h-auto bg-black/30 backdrop-blur-sm rounded-r-xl p-4 sm:p-6">
                   <div className="w-full h-full flex items-center justify-center">
                     <iframe
                       className="w-full h-full min-h-[200px] sm:min-h-[300px] rounded-lg"
@@ -383,26 +632,26 @@ export default function Home() {
 
           <div className="container relative px-4 mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm animate-fade-in hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
+              <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 animate-fade-in hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
                 <CardHeader className="pb-2 text-center sm:text-left">
                   <CardTitle className="text-3xl sm:text-4xl font-bold text-purple-400">
                     25,000+
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-center sm:text-left">
-                  <CardDescription className="text-gray-300 text-sm sm:text-base">
+                  <CardDescription className="text-white text-sm sm:text-base">
                     Individuals Impacted
                   </CardDescription>
                 </CardContent>
               </Card>
-              <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm animate-fade-in hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
+              <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 animate-fade-in hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
                 <CardHeader className="pb-2 text-center sm:text-left">
                   <CardTitle className="text-3xl sm:text-4xl font-bold text-purple-400">
                     3,000+
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-center sm:text-left">
-                  <CardDescription className="text-gray-300 text-sm sm:text-base">
+                  <CardDescription className="text-white text-sm sm:text-base">
                     Community Members
                   </CardDescription>
                 </CardContent>
@@ -414,7 +663,7 @@ export default function Home() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-center sm:text-left">
-                  <CardDescription className="text-gray-300 text-sm sm:text-base">
+                  <CardDescription className="text-white text-sm sm:text-base">
                     Countries Impacted
                   </CardDescription>
                 </CardContent>
@@ -448,33 +697,33 @@ export default function Home() {
             </h2>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
+              <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
                 <CardHeader>
-                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-purple-900/50 text-purple-400 mb-4">
+                  <div className="goal-icon-container">
                     <svg
-                      className="w-6 h-6"
                       fill="none"
                       stroke="currentColor"
+                      strokeWidth="2"
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
+                      className="text-purple-400"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="2"
                         d="M13 10V3L4 14h7v7l9-11h-7z"
                       ></path>
                     </svg>
                   </div>
-                  <CardTitle className="text-white">
+                  <CardTitle className="text-white text-center">
                     Accelerating Soft Skills
                   </CardTitle>
-                  <CardDescription className="text-gray-300">
+                  <CardDescription className="text-gray-300 text-center">
                     Beyond just coding mechanics
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-300">
+                  <p className="text-gray-300 text-center">
                     We teach more than just mechanical coding skills: As the
                     world rapidly evolves, we envision an inclusive platform
                     where everyone can learn about the exciting advancements in
@@ -484,33 +733,33 @@ export default function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
+              <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
                 <CardHeader>
-                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-purple-900/50 text-purple-400 mb-4">
+                  <div className="goal-icon-container">
                     <svg
-                      className="w-6 h-6"
                       fill="none"
                       stroke="currentColor"
+                      strokeWidth="2"
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
+                      className="text-purple-400"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="2"
                         d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
                       ></path>
                     </svg>
                   </div>
-                  <CardTitle className="text-white">
+                  <CardTitle className="text-white text-center">
                     Practical Applications
                   </CardTitle>
-                  <CardDescription className="text-gray-300">
+                  <CardDescription className="text-gray-300 text-center">
                     Real-world problem solving
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-300">
+                  <p className="text-gray-300 text-center">
                     We emphasize practical applications of programming and
                     technology to prepare community members for the rapidly
                     changing future. Our hackathons help exemplify our goals as
@@ -519,33 +768,33 @@ export default function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
+              <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
                 <CardHeader>
-                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-purple-900/50 text-purple-400 mb-4">
+                  <div className="goal-icon-container">
                     <svg
-                      className="w-6 h-6"
                       fill="none"
                       stroke="currentColor"
+                      strokeWidth="2"
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
+                      className="text-purple-400"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="2"
                         d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
                       ></path>
                     </svg>
                   </div>
-                  <CardTitle className="text-white">
+                  <CardTitle className="text-white text-center">
                     Connecting Innovators
                   </CardTitle>
-                  <CardDescription className="text-gray-300">
+                  <CardDescription className="text-gray-300 text-center">
                     Building a supportive community
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-300">
+                  <p className="text-gray-300 text-center">
                     Our community provides a platform for innovators to learn,
                     grow, and support each other. We connect like-minded
                     individuals to overcome the challenges of acquiring new
@@ -582,45 +831,62 @@ export default function Home() {
             </h2>
 
             <div className="max-w-4xl mx-auto">
-              <Tabs defaultValue="v5" className="w-full">
-                <TabsList className="w-full grid grid-cols-5 mb-8 lg:mb-12 h-12 sm:h-14 bg-gray-900/80 border border-purple-500/30">
-                  <TabsTrigger
-                    value="v1"
-                    className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
-                  >
-                    V1
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="v2"
-                    className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
-                  >
-                    V2
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="v3"
-                    className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
-                  >
-                    V3
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="v4"
-                    className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
-                  >
-                    V4
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="v5"
-                    className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
-                  >
-                    V5
-                  </TabsTrigger>
-                </TabsList>
+              <Tabs
+                defaultValue="v5"
+                className="w-full"
+                onValueChange={(value) => {
+                  setActiveTab(value);
+                }}
+              >
+                <div className="tabs-slider-container mb-8 lg:mb-12">
+                  <TabsList className="w-full grid grid-cols-5 h-12 sm:h-14 bg-transparent border-none p-0 relative">
+                    <div
+                      className="tabs-slider-indicator"
+                      style={{
+                        transform: `translateX(${
+                          ["v1", "v2", "v3", "v4", "v5"].indexOf(activeTab) *
+                          100
+                        }%)`,
+                      }}
+                    />
+                    <TabsTrigger
+                      value="v1"
+                      className="tab-trigger-custom text-xs sm:text-sm"
+                    >
+                      V1
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="v2"
+                      className="tab-trigger-custom text-xs sm:text-sm"
+                    >
+                      V2
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="v3"
+                      className="tab-trigger-custom text-xs sm:text-sm"
+                    >
+                      V3
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="v4"
+                      className="tab-trigger-custom text-xs sm:text-sm"
+                    >
+                      V4
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="v5"
+                      className="tab-trigger-custom text-xs sm:text-sm"
+                    >
+                      V5
+                    </TabsTrigger>
+                  </TabsList>
+                </div>
 
                 <TabsContent
                   value="v1"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm">
+                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -640,7 +906,7 @@ export default function Home() {
                             judges.
                           </p>
                           <div className="grid grid-cols-2 gap-4 mb-6">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 400+
                               </div>
@@ -648,7 +914,7 @@ export default function Home() {
                                 Participants
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 50+
                               </div>
@@ -656,7 +922,7 @@ export default function Home() {
                                 Projects
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 $5,000+
                               </div>
@@ -664,7 +930,7 @@ export default function Home() {
                                 Prize Pool
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 10+
                               </div>
@@ -674,7 +940,7 @@ export default function Home() {
                             </div>
                           </div>
                           <div className="grid grid-cols-2 gap-4">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 100+
                               </div>
@@ -682,7 +948,7 @@ export default function Home() {
                                 Workshop Attendees
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 10
                               </div>
@@ -718,11 +984,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/60 px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200"
+                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
                           asChild
                         >
                           <a
@@ -736,7 +1002,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200"
+                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
                           asChild
                         >
                           <a
@@ -757,7 +1023,7 @@ export default function Home() {
                   value="v2"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm">
+                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -777,7 +1043,7 @@ export default function Home() {
                             professional & student judges.
                           </p>
                           <div className="grid grid-cols-2 gap-4 mb-6">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 400+
                               </div>
@@ -785,7 +1051,7 @@ export default function Home() {
                                 Participants
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 75+
                               </div>
@@ -793,7 +1059,7 @@ export default function Home() {
                                 Projects
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 $15,000+
                               </div>
@@ -801,7 +1067,7 @@ export default function Home() {
                                 Prize Pool
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 15+
                               </div>
@@ -811,7 +1077,7 @@ export default function Home() {
                             </div>
                           </div>
                           <div className="grid grid-cols-2 gap-4">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 100+
                               </div>
@@ -819,7 +1085,7 @@ export default function Home() {
                                 Workshop Attendees
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 10
                               </div>
@@ -855,11 +1121,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/60 px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200"
+                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
                           asChild
                         >
                           <a
@@ -873,7 +1139,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200"
+                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
                           asChild
                         >
                           <a
@@ -894,7 +1160,7 @@ export default function Home() {
                   value="v3"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm">
+                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -914,7 +1180,7 @@ export default function Home() {
                             more intimate setting.
                           </p>
                           <div className="grid grid-cols-2 gap-4 mb-6">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 150+
                               </div>
@@ -922,7 +1188,7 @@ export default function Home() {
                                 Participants
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 $2,000+
                               </div>
@@ -930,7 +1196,7 @@ export default function Home() {
                                 Prize Pool
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 75+
                               </div>
@@ -938,7 +1204,7 @@ export default function Home() {
                                 Workshop Attendees
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 10
                               </div>
@@ -982,11 +1248,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/60 px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200"
+                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
                           asChild
                         >
                           <a
@@ -1000,7 +1266,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200"
+                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
                           asChild
                         >
                           <a
@@ -1021,7 +1287,7 @@ export default function Home() {
                   value="v4"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm">
+                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -1041,7 +1307,7 @@ export default function Home() {
                             professional judges.
                           </p>
                           <div className="grid grid-cols-2 gap-4 mb-6">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 400+
                               </div>
@@ -1049,7 +1315,7 @@ export default function Home() {
                                 Participants
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 80+
                               </div>
@@ -1057,7 +1323,7 @@ export default function Home() {
                                 Projects
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 $10,000+
                               </div>
@@ -1065,7 +1331,7 @@ export default function Home() {
                                 Prize Pool
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 10+
                               </div>
@@ -1075,7 +1341,7 @@ export default function Home() {
                             </div>
                           </div>
                           <div className="grid grid-cols-2 gap-4">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 100+
                               </div>
@@ -1083,7 +1349,7 @@ export default function Home() {
                                 Workshop Attendees
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 10
                               </div>
@@ -1119,11 +1385,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/60 px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200"
+                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
                           asChild
                         >
                           <a
@@ -1137,7 +1403,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200"
+                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
                           asChild
                         >
                           <a
@@ -1157,7 +1423,7 @@ export default function Home() {
                   value="v5"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm">
+                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -1177,7 +1443,7 @@ export default function Home() {
                             professional judges.
                           </p>
                           <div className="grid grid-cols-2 gap-4 mb-6">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 1250+
                               </div>
@@ -1185,7 +1451,7 @@ export default function Home() {
                                 Participants
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 200+
                               </div>
@@ -1193,7 +1459,7 @@ export default function Home() {
                                 Projects
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 $50,000+
                               </div>
@@ -1201,7 +1467,7 @@ export default function Home() {
                                 Prize Pool
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 10+
                               </div>
@@ -1211,7 +1477,7 @@ export default function Home() {
                             </div>
                           </div>
                           <div className="grid grid-cols-2 gap-4">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 250+
                               </div>
@@ -1219,7 +1485,7 @@ export default function Home() {
                                 Workshop Attendees
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 8
                               </div>
@@ -1255,11 +1521,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/60 px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200"
+                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
                           asChild
                         >
                           <a
@@ -1273,7 +1539,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200"
+                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
                           asChild
                         >
                           <a
@@ -1293,6 +1559,53 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Past Sponsors Section */}
+        <div className="py-12 sm:py-16 relative overflow-hidden">
+          <h2
+            className={`headingText purpleGradient mt-4 mb-8 text-center ${playfairDisplay.className}`}
+          >
+            PAST SPONSORS
+          </h2>
+
+          <div className="bg-white rounded-lg py-4">
+            {/* First carousel - left to right */}
+            <div className="container mx-auto px-4 md:px-8 companiesLogo flex overflow-hidden relative mb-4">
+              <div className="sponsorContainer flex" data-carousel="1">
+                {[...sponsors1, ...sponsors1, ...sponsors1, ...sponsors1].map(
+                  (sponsor, index) => (
+                    <img
+                      key={`sponsor-1-${index}`}
+                      src={sponsor.src}
+                      alt={sponsor.alt}
+                      className="cursor-pointer"
+                    />
+                  )
+                )}
+              </div>
+              <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-l from-white to-transparent" />
+              <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-r from-white to-transparent" />
+            </div>
+
+            {/* Third carousel - left to right */}
+            <div className="container mx-auto px-4 md:px-8 companiesLogo flex overflow-hidden relative">
+              <div className="sponsorContainer flex" data-carousel="3">
+                {[...sponsors3, ...sponsors3, ...sponsors3, ...sponsors3].map(
+                  (sponsor, index) => (
+                    <img
+                      key={`sponsor-3-${index}`}
+                      src={sponsor.src}
+                      alt={sponsor.alt}
+                      className="cursor-pointer"
+                    />
+                  )
+                )}
+              </div>
+              <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-l from-white to-transparent" />
+              <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-r from-white to-transparent" />
+            </div>
+          </div>
+        </div>
 
         {/* CTA Section */}
         <section className="py-24 relative overflow-hidden">
