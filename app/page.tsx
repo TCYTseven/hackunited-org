@@ -349,13 +349,15 @@ export default function Home() {
                   </a>
                 </div>
                 <div className="relative flex items-center justify-center min-h-[200px] sm:min-h-[300px] lg:min-h-auto bg-gradient-to-br from-purple-900/30 to-black rounded-r-xl p-4 sm:p-6">
-                  <div className="text-center">
-                    <h3 className="text-2xl font-bold text-white">
-                      Trailer Coming Soon
-                    </h3>
-                    <p className="text-white/70 mt-2">
-                      Stay tuned for the official trailer!
-                    </p>
+                  <div className="w-full h-full flex items-center justify-center">
+                    <iframe
+                      className="w-full h-full min-h-[200px] sm:min-h-[300px] rounded-lg"
+                      src="https://www.youtube.com/embed/x31T6gw_eVw"
+                      title="United Hacks V6 Trailer"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    ></iframe>
                   </div>
                 </div>
               </div>
