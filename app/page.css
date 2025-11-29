@@ -5,7 +5,8 @@ a {
 
 .headingText {
   font-size: 55px;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: inherit;
   background: linear-gradient(
     111deg,
     rgba(255, 255, 255, 1) 0%,
@@ -22,10 +23,15 @@ a {
   font-weight: 400;
 }
 .subHeading {
-  height: 58px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .subHeading {
+    height: auto;
+  }
 }
 
 .purpleGradient {
@@ -73,6 +79,13 @@ a {
 .glassCard h3 {
   font-size: 24px;
   font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .headingText {
+    font-size: 32px;
+    line-height: 1.2;
+  }
 }
 
 @media (max-width: 768px) {
