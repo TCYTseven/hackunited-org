@@ -60,9 +60,9 @@ const headsTeam: TeamMember[] = [
     image: "/images/team-images/Avyakt.png",
   },
   {
-    name: "Namish J.",
+    name: "Danny",
     position: "Head of Blog",
-    image: "/images/team-images/namish.png",
+    image: "https://ui-avatars.com/api/?name=D&background=8B5CF6&color=fff&size=128",
   },
   {
     name: "Akshay",
@@ -141,6 +141,11 @@ const membersTeam: TeamMember[] = [
     name: "Aarjit A.",
     position: "Article Writer",
     image: "/images/team-images/Aarjit.jpg",
+  },
+  {
+    name: "Namish J.",
+    position: "Article Writer",
+    image: "/images/team-images/namish.png",
   },
   {
     name: "Joey",

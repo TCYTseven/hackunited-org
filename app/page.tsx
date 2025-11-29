@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -22,7 +22,6 @@ import NewsCarousel from "@/components/ui/news-carousel";
 import HeroButton from "../components/ui/HeroButton/HeroButton";
 import "./page.css";
 import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 import { Playfair_Display } from "next/font/google";
 
 const playfairDisplay = Playfair_Display({
@@ -116,6 +115,15 @@ const sponsors2SecondHalf = allSponsors.slice(
 const sponsors1 = [...allSponsors.slice(0, firstThird), ...sponsors2FirstHalf];
 const sponsors3 = [...sponsors2SecondHalf, ...allSponsors.slice(secondThird)];
 
+const judges = [
+  { src: "/judgesfrom/Amazon-Logo.png", alt: "Amazon" },
+  { src: "/judgesfrom/Google-Logo.png", alt: "Google" },
+  { src: "/judgesfrom/Microsoft-Logo.png", alt: "Microsoft" },
+  { src: "/judgesfrom/Stanford-Logo.png", alt: "Stanford" },
+  { src: "/judgesfrom/Visa-Logo.png", alt: "Visa" },
+  { src: "/judgesfrom/YC-Logo.png", alt: "Y Combinator" },
+];
+
 // Simple animations
 const styles = `
   @keyframes fadeIn {
@@ -201,6 +209,7 @@ const styles = `
   .logoContainer {
     will-change: transform;
     align-items: center;
+    transform: translateX(0);
   }
 
   .logoContainer img {
@@ -231,24 +240,142 @@ const styles = `
     will-change: transform;
     align-items: center;
     backface-visibility: hidden;
-    transform: translateZ(0);
+    min-height: 80px;
+    padding: 20px 0;
+    display: flex;
+    transform: translateX(0);
+  }
+
+  .judgeContainer {
+    will-change: transform;
+    align-items: center;
+    backface-visibility: hidden;
+    min-height: 80px;
+    padding: 20px 0;
+    display: flex;
+    transform: translateX(0);
+  }
+
+  .judgeContainer img {
+    height: 60px;
+    width: auto;
+    max-width: 200px;
+    min-width: 80px;
+    object-fit: contain;
+    margin: 0 40px;
+    display: block;
+    flex-shrink: 0;
+    padding: 8px 0;
+    filter: brightness(0) invert(1);
+  }
+
+  .judgeContainer img[alt="Y Combinator"] {
+    filter: none;
+  }
+
+  @media (max-width: 768px) {
+    .judgeContainer {
+      min-height: 70px;
+      padding: 15px 0;
+    }
+    .judgeContainer img {
+      height: 45px;
+      margin: 0 25px;
+      max-width: 150px;
+      min-width: 60px;
+      padding: 6px 0;
+    }
+  }
+
+  @keyframes heroFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-badge {
+    animation: heroFadeUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  .hero-heading {
+    animation: heroFadeUp 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+  }
+
+  .hero-subheading {
+    animation: heroFadeUp 0.8s ease-out 0.4s forwards;
+    opacity: 0;
+  }
+
+  .hero-buttons {
+    animation: heroFadeUp 0.8s ease-out 0.6s forwards;
+    opacity: 0;
+  }
+
+  .hero-logo {
+    animation: heroFadeUp 0.8s ease-out 0.3s forwards;
+    opacity: 0;
+  }
+
+  .glassCard1 {
+    animation: heroFadeUp 0.8s ease-out 0.8s forwards;
+    opacity: 0;
+  }
+
+  .glassCard2 {
+    animation: heroFadeUp 0.8s ease-out 1s forwards;
+    opacity: 0;
+  }
+
+  .glassCard3 {
+    animation: heroFadeUp 0.8s ease-out 1.2s forwards;
+    opacity: 0;
+  }
+
+  .stat-card-1 {
+    animation: heroFadeUp 0.8s ease-out 0.8s forwards;
+    opacity: 0;
+  }
+
+  .stat-card-2 {
+    animation: heroFadeUp 0.8s ease-out 1s forwards;
+    opacity: 0;
+  }
+
+  .stat-card-3 {
+    animation: heroFadeUp 0.8s ease-out 1.2s forwards;
+    opacity: 0;
   }
 
   .sponsorContainer img {
     height: 60px;
     width: auto;
     max-width: 200px;
+    min-width: 80px;
     object-fit: contain;
     margin: 0 40px;
     display: block;
     flex-shrink: 0;
+    padding: 8px 0;
   }
 
   @media (max-width: 768px) {
+    .sponsorContainer {
+      min-height: 70px;
+      padding: 15px 0;
+    }
     .sponsorContainer img {
       height: 45px;
       margin: 0 25px;
       max-width: 150px;
+      min-width: 60px;
+      padding: 6px 0;
     }
   }
 `;
@@ -271,6 +398,7 @@ function DiscordWidget() {
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("v5");
+  const [mounted, setMounted] = useState(false);
 
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
@@ -282,7 +410,20 @@ export default function Home() {
     }
   };
 
-  useGSAP(() => {
+  // Set mounted state after hydration
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+
+  // Fix hydration by only running animations on client side after hydration
+  useEffect(() => {
+    // Only run on client side after hydration
+    if (typeof window === "undefined" || !mounted) return;
+
+    // Small delay to ensure DOM is fully ready
+    const timeoutId = setTimeout(() => {
+
     const logoContainer = document.querySelector(".logoContainer");
     if (logoContainer) {
       // Wait for images to load before calculating
@@ -360,7 +501,48 @@ export default function Home() {
         });
       }
     });
-  });
+
+    // Judges carousel animation
+    const judgeContainer = document.querySelector(".judgeContainer");
+    if (judgeContainer) {
+      const images = judgeContainer.querySelectorAll("img");
+      let loadedCount = 0;
+
+      const checkAndAnimate = () => {
+        loadedCount++;
+        if (loadedCount === images.length || images.length === 0) {
+          const firstSetWidth = judgeContainer.scrollWidth / 4;
+          gsap.set(judgeContainer, { x: 0 });
+          gsap.fromTo(
+            judgeContainer,
+            { x: 0 },
+            {
+              x: -firstSetWidth,
+              duration: 15,
+              ease: "none",
+              repeat: -1,
+            }
+          );
+        }
+      };
+
+      if (images.length === 0) {
+        checkAndAnimate();
+      } else {
+        images.forEach((img) => {
+          if (img.complete) {
+            checkAndAnimate();
+          } else {
+            img.addEventListener("load", checkAndAnimate);
+            img.addEventListener("error", checkAndAnimate);
+          }
+        });
+      }
+    }
+    }, 100); // Small delay to ensure hydration is complete
+
+    return () => clearTimeout(timeoutId);
+  }, [mounted]);
 
   return (
     <>
@@ -369,36 +551,32 @@ export default function Home() {
         {/* Hero Section */}
         <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat w-full pt-[30px] md:min-h-screen relative">
           <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black to-transparent" />
-          <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-[140px] pb-[160px] px-4 md:px-8 relative">
+          <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-16 sm:mt-24 md:mt-[140px] pb-12 sm:pb-16 md:pb-[160px] px-6 sm:px-8 md:px-8 relative">
             <div className="right text-center md:text-left">
-              <div className="mb-4 inline-flex items-center rounded-full bg-green-500/10 px-4 py-1 text-sm font-medium text-green-400">
+              <div className="hero-badge mb-4 sm:mb-6 inline-flex items-center justify-center md:justify-start rounded-full bg-green-500/10 px-3 py-1 sm:px-4 text-xs sm:text-sm font-medium text-green-400">
                 <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-500" />
                 discord.gg/hackunited
               </div>
-              <h1 className="headingText">
+              <h1 className="hero-heading headingText mb-4 sm:mb-6 text-center md:text-left">
                 <span className="purpleGradient">Empowering</span>
                 <br />
                 the Next Generation
                 <br />
                 of Tech Innovators
               </h1>
-              <div className="subHeading mt-[20px]">
+              <div className="hero-subheading subHeading mt-4 sm:mt-6 text-center md:text-left">
                 <p className="hidden md:block">
-                  A student-led non-profit hosting free hackathons and workshop
+                  A non-profit hosting free hackathons and workshops
                   <br />
-                  to build both tech skills and soft skills for high school and
+                  focused on building essential soft skills through hands-on
                   <br />
-                  college students.
+                  tech projects and real-world application.
                 </p>
-                <p className="md:hidden">
-                  A student-led non-profit hosting free hackathons
-                  <br />
-                  and workshop to build both tech skills and soft
-                  <br />
-                  skills for high school and college students.
+                <p className="md:hidden text-sm sm:text-base">
+                  A non-profit hosting free hackathons and workshops focused on building essential soft skills through hands-on tech projects and real-world application.
                 </p>
               </div>
-              <div className="flex w-[288px] justify-center md:justify-between mt-[31px] mx-auto md:mx-0">
+              <div className="hero-buttons flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto sm:max-w-[288px] justify-center items-center md:justify-between mt-6 sm:mt-8">
                 <HeroButton onClick={() => scrollTo("who-are-we")}>
                   Learn More
                 </HeroButton>
@@ -410,15 +588,15 @@ export default function Home() {
                 </HeroButton>
               </div>
             </div>
-            <div className="left flex items-center justify-center md:justify-end mt-16 md:mt-0">
+            <div className="left flex items-center justify-center md:justify-end mt-8 sm:mt-12 md:mt-0">
               <img
-                className="h-[280px] md:h-[350px] md:mr-[48px]"
+                className="hero-logo h-[200px] sm:h-[240px] md:h-[350px] md:mr-[48px]"
                 src="./images/Logo.png"
                 alt=""
               />
               <div className="glassCard glassCard1 hidden h-[79.24px] w-[240.8px] pl-[16px] md:block">
                 <h3 className="purpleGradient mt-[5px]">25,000+</h3>
-                <p>Individuals Impacted</p>
+                <p>Engineers Impacted</p>
               </div>
               <div className="glassCard glassCard2 hidden h-[79.24px] w-[240.8px] pl-[16px] md:block">
                 <h3 className="purpleGradient mt-[5px]">3,000+</h3>
@@ -426,7 +604,7 @@ export default function Home() {
               </div>
               <div className="glassCard glassCard3 hidden h-[79.24px] w-[240.8px] pl-[16px] md:block">
                 <h3 className="purpleGradient mt-[5px]">50+</h3>
-                <p>Countries Impacted</p>
+                <p>Countries Reached</p>
               </div>
             </div>
           </div>
@@ -437,9 +615,9 @@ export default function Home() {
           >
             RECOGNIZED BY
           </h2>
-          <div className="container mx-auto px-4 md:px-8 companiesLogo flex overflow-hidden relative">
+          <div className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative" suppressHydrationWarning>
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-            <div className="logoContainer flex">
+            <div className="logoContainer flex" suppressHydrationWarning>
               {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
                 <img
                   key={index}
@@ -447,11 +625,12 @@ export default function Home() {
                   alt={logo.alt}
                   onClick={() => window.open(logo.href, "_blank")}
                   className="cursor-pointer"
+                  loading="lazy"
                 />
               ))}
             </div>
-            <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-l from-black to-transparent" />
-            <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-black to-transparent" />
+            <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black via-black to-transparent z-30 pointer-events-none" />
+            <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-black via-black to-transparent z-30 pointer-events-none" />
           </div>
         </div>
         {/* Who Are We Section */}
@@ -477,41 +656,41 @@ export default function Home() {
           {/* <div className="container relative max-w-3xl mx-auto px-2 sm:px-4">
             <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-purple-500/20 animate-fade-in hover:border-purple-500/40 transition-all duration-500">
               <p className="text-base sm:text-lg text-gray-200 leading-relaxed">
-                Hack United is a 501(c)(3) non-profit organization founded by
-                teenagers with a passion for programming and technology. Our
+                Hack United is a 501(c)(3) non-profit organization with a passion for programming and technology. Our
                 mission is to inspire and educate the next generation of
                 innovators through hackathons and workshops. We address a
-                problem not as commonly talked about, aiming to equip high
-                school and college students with the essential soft skills
-                needed to thrive in their chosen career paths. This is done
-                through hands on application such as our free to enter
-                hackathons. Through our initiatives, we ultimately aim to help
-                students prosper in the realm of technology.
+                problem not as commonly talked about, focusing on equipping
+                participants with the essential soft skills needed to thrive in
+                their chosen career paths. This is done through hands-on
+                application such as our free to enter hackathons, where participants
+                develop communication, teamwork, problem-solving, and presentation
+                skills alongside their technical abilities. Through our initiatives,
+                we ultimately aim to help individuals prosper in the realm of technology.
               </p>
             </div>
           </div> */}
 
-          <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center w-full md:h-[300px] font-light text-base md:text-[21px] text-[#E8E8E8] text-center md:text-left">
-            <div className="md:w-2/3">
-              <h2 className="headingText purpleGradient mt-[15px] mb-[15px] ">
+          <div className="container mx-auto px-6 sm:px-8 md:px-8 flex flex-col md:flex-row items-center w-full md:h-[300px] font-light text-sm sm:text-base md:text-[21px] text-[#E8E8E8] text-center md:text-left py-8 md:py-0">
+            <div className="md:w-2/3 w-full">
+              <h2 className="headingText purpleGradient mt-[15px] mb-4 sm:mb-6">
                 ABOUT US
               </h2>
-              <p>
+              <p className="leading-relaxed">
                 {" "}
-                Hack United is a 501(c)(3) non-profit organization founded by
-                teenagers with a passion for programming and technology. Our
+                Hack United is a 501(c)(3) non-profit organization with a passion for programming and technology. Our
                 mission is to inspire and educate the next generation of
                 innovators through hackathons and workshops. We address a
-                problem not as commonly talked about, aiming to equip high
-                school and college students with the essential soft skills
-                needed to thrive in their chosen career paths. This is done
-                through hands on application such as our free to enter
-                hackathons. Through our initiatives, we ultimately aim to help
-                students prosper in the realm of technology.
+                problem not as commonly talked about, focusing on equipping
+                participants with the essential soft skills needed to thrive in
+                their chosen career paths. This is done through hands-on
+                application such as our free to enter hackathons, where participants
+                develop communication, teamwork, problem-solving, and presentation
+                skills alongside their technical abilities. Through our initiatives,
+                we ultimately aim to help individuals prosper in the realm of technology.
               </p>
             </div>
             <img
-              className="w-1/2 md:w-[400px] mt-8 md:mt-0 md:mr-[70px]"
+              className="w-48 sm:w-64 md:w-[400px] mt-8 md:mt-0 md:mr-[70px]"
               src="./images/globe-icon.png"
               alt=""
             />
@@ -519,7 +698,7 @@ export default function Home() {
         </section>
 
         {/* Featured Event */}
-        <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
+        <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden px-6 sm:px-8 md:px-4">
           {/* Dot grid background pattern */}
           <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
@@ -527,9 +706,8 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
 
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-          <div className="absolute -top-40 right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl hidden lg:block"></div>
 
-          <div className="container relative max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto px-2 sm:px-4">
+          <div className="container relative max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto px-6 sm:px-8 md:px-4">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 lg:mb-12">
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
@@ -624,47 +802,65 @@ export default function Home() {
 
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
 
-          {/* Background elements for stats */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-purple-600/10 rounded-full blur-3xl hidden lg:block"></div>
-            <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-purple-600/10 rounded-full blur-3xl hidden lg:block"></div>
-          </div>
 
-          <div className="container relative px-4 mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 animate-fade-in hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
-                <CardHeader className="pb-2 text-center sm:text-left">
-                  <CardTitle className="text-3xl sm:text-4xl font-bold text-purple-400">
+          <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
+            <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-12">
+              <h2 className="headingText purpleGradient mt-[15px] mb-4 sm:mb-6">
+                OUR IMPACT
+              </h2>
+              <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6 px-2">
+                Through hackathons, workshops, and community initiatives, we've built a global network of innovators. 
+                But our mission extends beyond hackathons.
+              </p>
+              <div className="bg-black/60 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-500">
+                <p className="text-gray-200 text-xs sm:text-sm md:text-base leading-relaxed">
+                  <span className="text-purple-400 font-semibold">Beyond hackathons:</span> Check out{" "}
+                  <a
+                    href="https://fund.hackunited.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-purple-400 hover:text-purple-300 underline transition-colors"
+                  >
+                    United Fund
+                  </a>
+                  {" "}— our initiative backing builders, creatives, and dreamers with $50–$500 grants, no strings attached.
+                </p>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 px-6 sm:px-8 md:px-2">
+              <Card className="stat-card-1 border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
+                <CardHeader className="pb-2 p-4 sm:p-6 text-center sm:text-left">
+                  <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-400">
                     25,000+
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-center sm:text-left">
-                  <CardDescription className="text-white text-sm sm:text-base">
-                    Individuals Impacted
+                <CardContent className="text-center sm:text-left p-4 sm:p-6 pt-0">
+                  <CardDescription className="text-white text-xs sm:text-sm md:text-base">
+                    Engineers Impacted
                   </CardDescription>
                 </CardContent>
               </Card>
-              <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 animate-fade-in hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
-                <CardHeader className="pb-2 text-center sm:text-left">
-                  <CardTitle className="text-3xl sm:text-4xl font-bold text-purple-400">
+              <Card className="stat-card-2 border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
+                <CardHeader className="pb-2 p-4 sm:p-6 text-center sm:text-left">
+                  <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-400">
                     3,000+
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-center sm:text-left">
-                  <CardDescription className="text-white text-sm sm:text-base">
+                <CardContent className="text-center sm:text-left p-4 sm:p-6 pt-0">
+                  <CardDescription className="text-white text-xs sm:text-sm md:text-base">
                     Community Members
                   </CardDescription>
                 </CardContent>
               </Card>
-              <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 animate-fade-in hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
-                <CardHeader className="pb-2 text-center sm:text-left">
-                  <CardTitle className="text-3xl sm:text-4xl font-bold text-purple-400">
+              <Card className="stat-card-3 border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
+                <CardHeader className="pb-2 p-4 sm:p-6 text-center sm:text-left">
+                  <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-400">
                     50+
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-center sm:text-left">
-                  <CardDescription className="text-white text-sm sm:text-base">
-                    Countries Impacted
+                <CardContent className="text-center sm:text-left p-4 sm:p-6 pt-0">
+                  <CardDescription className="text-white text-xs sm:text-sm md:text-base">
+                    Countries Reached
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -681,10 +877,9 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
 
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-          <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl hidden lg:block"></div>
 
-          <div className="container relative px-4 mx-auto">
-            <div className="flex items-center justify-center mb-6">
+          <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
+            <div className="flex items-center justify-center mb-4 sm:mb-6">
               <Badge
                 variant="outline"
                 className="px-3 py-1 sm:px-4 border-purple-500/50 text-purple-300 text-xs sm:text-sm"
@@ -692,11 +887,11 @@ export default function Home() {
                 Our Vision
               </Badge>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-12 lg:mb-16 text-white">
-              Our Goals
+            <h2 className="headingText purpleGradient mt-[15px] mb-6 sm:mb-8 md:mb-12 text-center">
+              OUR GOALS
             </h2>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-2">
               <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
                 <CardHeader>
                   <div className="goal-icon-container">
@@ -815,10 +1010,9 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
 
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-          <div className="absolute -top-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl hidden lg:block"></div>
 
-          <div className="container relative px-4 mx-auto">
-            <div className="flex items-center justify-center mb-6">
+          <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
+            <div className="flex items-center justify-center mb-4 sm:mb-6">
               <Badge
                 variant="outline"
                 className="px-3 py-1 sm:px-4 border-purple-500/50 text-purple-300 text-xs sm:text-sm"
@@ -826,8 +1020,8 @@ export default function Home() {
                 Our Legacy
               </Badge>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-12 lg:mb-16 text-white">
-              Check Out Our Previous Hackathons!
+            <h2 className="headingText purpleGradient mt-[15px] mb-6 sm:mb-8 md:mb-12 text-center">
+              PREVIOUS HACKATHONS
             </h2>
 
             <div className="max-w-4xl mx-auto">
@@ -1560,50 +1754,39 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Past Sponsors Section */}
-        <div className="py-12 sm:py-16 relative overflow-hidden">
+        {/* Judges From Section */}
+        <div className="py-8 sm:py-12 md:py-16 relative overflow-hidden">
           <h2
-            className={`headingText purpleGradient mt-4 mb-8 text-center ${playfairDisplay.className}`}
+            className={`headingText purpleGradient mt-4 mb-3 sm:mb-4 text-center ${playfairDisplay.className}`}
           >
-            PAST SPONSORS
+            JUDGES FROM
           </h2>
+          <p className="text-gray-400 text-xs sm:text-sm md:text-base text-center mb-4 sm:mb-6 px-6 sm:px-8">
+            Interested in judging our event? Email{" "}
+            <a
+              href="mailto:humans@hackunited.org"
+              className="text-purple-400 hover:text-purple-300 underline transition-colors break-all sm:break-normal"
+            >
+              humans@hackunited.org
+            </a>
+          </p>
 
-          <div className="bg-white rounded-lg py-4">
-            {/* First carousel - left to right */}
-            <div className="container mx-auto px-4 md:px-8 companiesLogo flex overflow-hidden relative mb-4">
-              <div className="sponsorContainer flex" data-carousel="1">
-                {[...sponsors1, ...sponsors1, ...sponsors1, ...sponsors1].map(
-                  (sponsor, index) => (
-                    <img
-                      key={`sponsor-1-${index}`}
-                      src={sponsor.src}
-                      alt={sponsor.alt}
-                      className="cursor-pointer"
-                    />
-                  )
-                )}
-              </div>
-              <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-l from-white to-transparent" />
-              <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-r from-white to-transparent" />
+          <div className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative py-6" suppressHydrationWarning>
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent z-10"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent z-10"></div>
+            <div className="judgeContainer flex" suppressHydrationWarning>
+              {[...judges, ...judges, ...judges, ...judges].map((judge, index) => (
+                <img
+                  key={`judge-${index}`}
+                  src={judge.src}
+                  alt={judge.alt}
+                  className="cursor-pointer"
+                  loading="lazy"
+                />
+              ))}
             </div>
-
-            {/* Third carousel - left to right */}
-            <div className="container mx-auto px-4 md:px-8 companiesLogo flex overflow-hidden relative">
-              <div className="sponsorContainer flex" data-carousel="3">
-                {[...sponsors3, ...sponsors3, ...sponsors3, ...sponsors3].map(
-                  (sponsor, index) => (
-                    <img
-                      key={`sponsor-3-${index}`}
-                      src={sponsor.src}
-                      alt={sponsor.alt}
-                      className="cursor-pointer"
-                    />
-                  )
-                )}
-              </div>
-              <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-l from-white to-transparent" />
-              <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-r from-white to-transparent" />
-            </div>
+            <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black via-black to-transparent z-30 pointer-events-none" />
+            <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-black via-black to-transparent z-30 pointer-events-none" />
           </div>
         </div>
 
@@ -1614,9 +1797,6 @@ export default function Home() {
 
           {/* Subtle gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
-
-          <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute -top-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
 
           <div className="container relative px-4 mx-auto">
             <div className="max-w-4xl mx-auto text-center">
