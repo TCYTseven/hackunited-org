@@ -134,6 +134,12 @@ export default function RootLayout({
                     Team
                   </Link>
                   <Link
+                    href="/judges"
+                    className="text-gray-300 transition-colors hover:text-white"
+                  >
+                    Judges
+                  </Link>
+                  <Link
                     href="/apply"
                     className="text-gray-300 transition-colors hover:text-white"
                   >
@@ -189,6 +195,12 @@ export default function RootLayout({
                           className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
                         >
                           Team
+                        </Link>
+                        <Link
+                          href="/judges"
+                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
+                        >
+                          Judges
                         </Link>
                         <Link
                           href="/apply"
