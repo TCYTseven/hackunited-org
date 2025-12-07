@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -21,7 +22,6 @@ import NewsCarousel from "@/components/ui/news-carousel";
 import HeroButton from "../components/ui/HeroButton/HeroButton";
 import "./page.css";
 import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 import { Playfair_Display } from "next/font/google";
 
 const playfairDisplay = Playfair_Display({
@@ -31,9 +31,9 @@ const playfairDisplay = Playfair_Display({
 
 const logos = [
   {
-    src: "/images/companies logo/benzinga_00000.png",
-    alt: "Benzinga",
-    href: "https://www.benzinga.com/content/46087906/hack-united-unveils-united-hacks-v5-a-global-hackathon-equipping-youth-innovation-with-essential-sof",
+    src: "/images/companies logo/TechBullionLogo.webp",
+    alt: "TechBullion",
+    href: "https://techbullion.com/teenage-founder-creates-hackathon-program-to-help-peers/",
   },
   {
     src: "/images/companies logo/asocciatePress_00000.png",
@@ -58,8 +58,70 @@ const logos = [
   {
     src: "/images/companies logo/theGlobe_00000.png",
     alt: "The Globe and Mail",
-    href: "https://www.barchart.com/story/news/32321966/wall-street-giants-are-quietly-pouring-billions-into-this-overlooked-asset-class-and-now-you-can-too",
+    href: "https://www.barchart.com/story/news/33037092/hack-united-empowers-youth-with-soft-skills-at-united-hacks-v5",
   },
+];
+
+const allSponsors = [
+  { src: "/images/sponsors/launchx.png", alt: "LaunchX" },
+  { src: "/images/sponsors/YRI.jpg", alt: "YRI" },
+  { src: "/images/sponsors/cp-logo-dark.svg", alt: "CodePath" },
+  { src: "/images/sponsors/Coder.com_logo.png", alt: "Coder.com" },
+  { src: "/images/sponsors/incogni_black.png", alt: "Incogni" },
+  { src: "/images/sponsors/saily-logo-black_(3).png", alt: "Saily" },
+  { src: "/images/sponsors/interviewbuddy.png", alt: "InterviewBuddy" },
+  { src: "/images/sponsors/opennote.png", alt: "OpenNote" },
+  { src: "/images/sponsors/images.png", alt: "Sponsor" },
+  { src: "/images/sponsors/devIT.png", alt: "DevIT" },
+  {
+    src: "/images/sponsors/algoverse_logo_max_quality_-_compresed_(1).png",
+    alt: "Algoverse",
+  },
+  { src: "/images/sponsors/aops_logo.png", alt: "AOPS" },
+  { src: "/images/sponsors/axure_logo.png", alt: "Axure" },
+  { src: "/images/sponsors/cake_logo_blue_gray.png", alt: "Cake" },
+  { src: "/images/sponsors/CoCalc-Image.png", alt: "CoCalc" },
+  { src: "/images/sponsors/codepath-1x1_icon-dark_1.jpg", alt: "CodePath" },
+  { src: "/images/sponsors/desmossss_logo.png", alt: "Desmos" },
+  { src: "/images/sponsors/devtranet_logo_with_text.png", alt: "Devtranet" },
+  { src: "/images/sponsors/echo_3d.png", alt: "Echo3D" },
+  { src: "/images/sponsors/FearedMediaLogo.png", alt: "Feared Media" },
+  { src: "/images/sponsors/givemycertificate.png", alt: "GiveMyCertificate" },
+  { src: "/images/sponsors/images_(2).png", alt: "Sponsor" },
+  { src: "/images/sponsors/Logomark_(With_color).png", alt: "Sponsor" },
+  { src: "/images/sponsors/NordVPN_horizontal.svg.png", alt: "NordVPN" },
+  { src: "/images/sponsors/Postman.png", alt: "Postman" },
+  { src: "/images/sponsors/StreamYardLogo.png", alt: "StreamYard" },
+  { src: "/images/sponsors/SwishSwoosh_Logo_Light_BG.png", alt: "SwishSwoosh" },
+  { src: "/images/sponsors/VerbwireLogoHackathonn.png", alt: "Verbwire" },
+  { src: "/images/sponsors/Vue_School_logo.png", alt: "Vue School" },
+  { src: "/images/sponsors/WoflramLogo.png", alt: "Wolfram" },
+  { src: "/images/sponsors/1200px-.xyz_logo.svg.png", alt: ".xyz" },
+  { src: "/images/sponsors/1_pass.jpg", alt: "1Pass" },
+];
+
+// Split sponsors into 2 groups (removed middle group, split it between first and third)
+const firstThird = Math.ceil(allSponsors.length / 3);
+const secondThird = Math.ceil((allSponsors.length * 2) / 3);
+const sponsors2FirstHalf = allSponsors.slice(
+  firstThird,
+  Math.ceil((firstThird + secondThird) / 2)
+);
+const sponsors2SecondHalf = allSponsors.slice(
+  Math.ceil((firstThird + secondThird) / 2),
+  secondThird
+);
+
+const sponsors1 = [...allSponsors.slice(0, firstThird), ...sponsors2FirstHalf];
+const sponsors3 = [...sponsors2SecondHalf, ...allSponsors.slice(secondThird)];
+
+const judges = [
+  { src: "/judgesfrom/Amazon-Logo.png", alt: "Amazon" },
+  { src: "/judgesfrom/Google-Logo.png", alt: "Google" },
+  { src: "/judgesfrom/Microsoft-Logo.png", alt: "Microsoft" },
+  { src: "/judgesfrom/Stanford-Logo.png", alt: "Stanford" },
+  { src: "/judgesfrom/Visa-Logo.png", alt: "Visa" },
+  { src: "/judgesfrom/YC-Logo.png", alt: "Y Combinator" },
 ];
 
 // Simple animations
@@ -77,6 +139,244 @@ const styles = `
 
   .animate-fade-in {
     animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .tabs-slider-container {
+    position: relative;
+  }
+
+  .tabs-slider-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: calc(100% / 5);
+    border: 3px solid rgba(168, 85, 247, 0.5);
+    border-radius: 9999px;
+    background: transparent;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .goal-icon-container {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    border-radius: 9999px;
+    background: rgba(139, 92, 246, 0.1);
+    box-shadow: 0 0 20px 5px rgba(168, 85, 247, 0.4);
+  }
+
+  .goal-icon-container svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  @media (max-width: 768px) {
+    .goal-icon-container {
+      width: 64px;
+      height: 64px;
+    }
+    .goal-icon-container svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  .tab-trigger-custom {
+    position: relative;
+    z-index: 1;
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    background: transparent;
+    transition: all 0.3s ease;
+  }
+
+  .tab-trigger-custom[data-state="active"] {
+    color: white;
+    opacity: 1;
+  }
+
+  .tab-trigger-custom[data-state="inactive"] {
+    color: rgba(255, 255, 255, 0.5);
+    opacity: 0.6;
+  }
+
+  .logoContainer {
+    will-change: transform;
+    align-items: center;
+    transform: translateX(0);
+  }
+
+  .logoContainer img {
+    margin: 0 40px;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .logoContainer img[alt="TechBullion"] {
+    height: 40px;
+    width: auto;
+    max-width: 120px;
+    object-fit: contain;
+    align-self: center;
+  }
+
+  @media (max-width: 768px) {
+    .logoContainer img {
+      margin: 0 25px;
+    }
+    .logoContainer img[alt="TechBullion"] {
+      height: 30px;
+      max-width: 90px;
+    }
+  }
+
+  .sponsorContainer {
+    will-change: transform;
+    align-items: center;
+    backface-visibility: hidden;
+    min-height: 80px;
+    padding: 20px 0;
+    display: flex;
+    transform: translateX(0);
+  }
+
+  .judgeContainer {
+    will-change: transform;
+    align-items: center;
+    backface-visibility: hidden;
+    min-height: 80px;
+    padding: 20px 0;
+    display: flex;
+    transform: translateX(0);
+  }
+
+  .judgeContainer img {
+    height: 60px;
+    width: auto;
+    max-width: 200px;
+    min-width: 80px;
+    object-fit: contain;
+    margin: 0 40px;
+    display: block;
+    flex-shrink: 0;
+    padding: 8px 0;
+    filter: brightness(0) invert(1);
+  }
+
+  .judgeContainer img[alt="Y Combinator"] {
+    filter: none;
+  }
+
+  @media (max-width: 768px) {
+    .judgeContainer {
+      min-height: 70px;
+      padding: 15px 0;
+    }
+    .judgeContainer img {
+      height: 45px;
+      margin: 0 25px;
+      max-width: 150px;
+      min-width: 60px;
+      padding: 6px 0;
+    }
+  }
+
+  @keyframes heroFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-badge {
+    animation: heroFadeUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  .hero-heading {
+    animation: heroFadeUp 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+  }
+
+  .hero-subheading {
+    animation: heroFadeUp 0.8s ease-out 0.4s forwards;
+    opacity: 0;
+  }
+
+  .hero-buttons {
+    animation: heroFadeUp 0.8s ease-out 0.6s forwards;
+    opacity: 0;
+  }
+
+  .hero-logo {
+    animation: heroFadeUp 0.8s ease-out 0.3s forwards;
+    opacity: 0;
+  }
+
+  .glassCard1 {
+    animation: heroFadeUp 0.8s ease-out 0.8s forwards;
+    opacity: 0;
+  }
+
+  .glassCard2 {
+    animation: heroFadeUp 0.8s ease-out 1s forwards;
+    opacity: 0;
+  }
+
+  .glassCard3 {
+    animation: heroFadeUp 0.8s ease-out 1.2s forwards;
+    opacity: 0;
+  }
+
+  .stat-card-1 {
+    animation: heroFadeUp 0.8s ease-out 0.8s forwards;
+    opacity: 0;
+  }
+
+  .stat-card-2 {
+    animation: heroFadeUp 0.8s ease-out 1s forwards;
+    opacity: 0;
+  }
+
+  .stat-card-3 {
+    animation: heroFadeUp 0.8s ease-out 1.2s forwards;
+    opacity: 0;
+  }
+
+  .sponsorContainer img {
+    height: 60px;
+    width: auto;
+    max-width: 200px;
+    min-width: 80px;
+    object-fit: contain;
+    margin: 0 40px;
+    display: block;
+    flex-shrink: 0;
+    padding: 8px 0;
+  }
+
+  @media (max-width: 768px) {
+    .sponsorContainer {
+      min-height: 70px;
+      padding: 15px 0;
+    }
+    .sponsorContainer img {
+      height: 45px;
+      margin: 0 25px;
+      max-width: 150px;
+      min-width: 60px;
+      padding: 6px 0;
+    }
   }
 `;
 
@@ -97,6 +397,9 @@ function DiscordWidget() {
 }
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState("v5");
+  const [mounted, setMounted] = useState(false);
+
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -107,14 +410,139 @@ export default function Home() {
     }
   };
 
-  useGSAP(() => {
-    gsap.to(".logoContainer", {
-      transform: "translateX(-876px)",
-      duration: 6,
-      ease: "none",
-      repeat: -1,
+  // Set mounted state after hydration
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+
+  // Fix hydration by only running animations on client side after hydration
+  useEffect(() => {
+    // Only run on client side after hydration
+    if (typeof window === "undefined" || !mounted) return;
+
+    // Small delay to ensure DOM is fully ready
+    const timeoutId = setTimeout(() => {
+
+    const logoContainer = document.querySelector(".logoContainer");
+    if (logoContainer) {
+      // Wait for images to load before calculating
+      const images = logoContainer.querySelectorAll("img");
+      let loadedCount = 0;
+
+      const checkAndAnimate = () => {
+        loadedCount++;
+        if (loadedCount === images.length || images.length === 0) {
+          // Calculate the width of one set of logos
+          const firstSetWidth = logoContainer.scrollWidth / 4;
+
+          gsap.to(".logoContainer", {
+            x: -firstSetWidth,
+            duration: 10,
+            ease: "none",
+            repeat: -1,
+          });
+        }
+      };
+
+      if (images.length === 0) {
+        checkAndAnimate();
+      } else {
+        images.forEach((img) => {
+          if (img.complete) {
+            checkAndAnimate();
+          } else {
+            img.addEventListener("load", checkAndAnimate);
+            img.addEventListener("error", checkAndAnimate);
+          }
+        });
+      }
+    }
+
+    // Sponsor carousels animations
+    const sponsorContainers = document.querySelectorAll(".sponsorContainer");
+    sponsorContainers.forEach((container) => {
+      const carouselIndex = container.getAttribute("data-carousel");
+      const images = container.querySelectorAll("img");
+      let loadedCount = 0;
+
+      const checkAndAnimate = () => {
+        loadedCount++;
+        if (loadedCount === images.length || images.length === 0) {
+          // Calculate the width of one set of sponsors
+          const firstSetWidth = container.scrollWidth / 4;
+
+          // Both carousels: left to right
+          // Start from 0, animate to negative (container moves left, content appears to move right)
+          gsap.set(container, { x: 0 });
+          gsap.fromTo(
+            container,
+            { x: 0 },
+            {
+              x: -firstSetWidth,
+              duration: 20,
+              ease: "none",
+              repeat: -1,
+            }
+          );
+        }
+      };
+
+      if (images.length === 0) {
+        checkAndAnimate();
+      } else {
+        images.forEach((img) => {
+          if (img.complete) {
+            checkAndAnimate();
+          } else {
+            img.addEventListener("load", checkAndAnimate);
+            img.addEventListener("error", checkAndAnimate);
+          }
+        });
+      }
     });
-  });
+
+    // Judges carousel animation
+    const judgeContainer = document.querySelector(".judgeContainer");
+    if (judgeContainer) {
+      const images = judgeContainer.querySelectorAll("img");
+      let loadedCount = 0;
+
+      const checkAndAnimate = () => {
+        loadedCount++;
+        if (loadedCount === images.length || images.length === 0) {
+          const firstSetWidth = judgeContainer.scrollWidth / 4;
+          gsap.set(judgeContainer, { x: 0 });
+          gsap.fromTo(
+            judgeContainer,
+            { x: 0 },
+            {
+              x: -firstSetWidth,
+              duration: 15,
+              ease: "none",
+              repeat: -1,
+            }
+          );
+        }
+      };
+
+      if (images.length === 0) {
+        checkAndAnimate();
+      } else {
+        images.forEach((img) => {
+          if (img.complete) {
+            checkAndAnimate();
+          } else {
+            img.addEventListener("load", checkAndAnimate);
+            img.addEventListener("error", checkAndAnimate);
+          }
+        });
+      }
+    }
+    }, 100); // Small delay to ensure hydration is complete
+
+    return () => clearTimeout(timeoutId);
+  }, [mounted]);
 
   return (
     <>
@@ -123,36 +551,32 @@ export default function Home() {
         {/* Hero Section */}
         <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat w-full pt-[30px] md:min-h-screen relative">
           <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black to-transparent" />
-          <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-[140px] pb-[160px] px-4 md:px-8 relative">
+          <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-16 sm:mt-24 md:mt-[140px] pb-12 sm:pb-16 md:pb-[160px] px-6 sm:px-8 md:px-8 relative">
             <div className="right text-center md:text-left">
-              <div className="mb-4 inline-flex items-center rounded-full bg-green-500/10 px-4 py-1 text-sm font-medium text-green-400">
+              <div className="hero-badge mb-4 sm:mb-6 inline-flex items-center justify-center md:justify-start rounded-full bg-green-500/10 px-3 py-1 sm:px-4 text-xs sm:text-sm font-medium text-green-400">
                 <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-500" />
                 discord.gg/hackunited
               </div>
-              <h1 className="headingText">
+              <h1 className="hero-heading headingText mb-4 sm:mb-6 text-center md:text-left">
                 <span className="purpleGradient">Empowering</span>
                 <br />
                 the Next Generation
                 <br />
                 of Tech Innovators
               </h1>
-              <div className="subHeading mt-[20px]">
+              <div className="hero-subheading subHeading mt-4 sm:mt-6 text-center md:text-left">
                 <p className="hidden md:block">
-                  A student-led non-profit hosting free hackathons and workshop
+                  A non-profit hosting free hackathons and workshops
                   <br />
-                  to build both tech skills and soft skills for high school and
+                  focused on building essential soft skills through hands-on
                   <br />
-                  college students.
+                  tech projects and real-world application.
                 </p>
-                <p className="md:hidden">
-                  A student-led non-profit hosting free hackathons
-                  <br />
-                  and workshop to build both tech skills and soft
-                  <br />
-                  skills for high school and college students.
+                <p className="md:hidden text-sm sm:text-base">
+                  A non-profit hosting free hackathons and workshops focused on building essential soft skills through hands-on tech projects and real-world application.
                 </p>
               </div>
-              <div className="flex w-[288px] justify-center md:justify-between mt-[31px] mx-auto md:mx-0">
+              <div className="hero-buttons flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto sm:max-w-[288px] justify-center items-center md:justify-between mt-6 sm:mt-8">
                 <HeroButton onClick={() => scrollTo("who-are-we")}>
                   Learn More
                 </HeroButton>
@@ -164,15 +588,15 @@ export default function Home() {
                 </HeroButton>
               </div>
             </div>
-            <div className="left flex items-center justify-center md:justify-end mt-16 md:mt-0">
+            <div className="left flex items-center justify-center md:justify-end mt-8 sm:mt-12 md:mt-0">
               <img
-                className="h-[280px] md:h-[350px] md:mr-[48px]"
+                className="hero-logo h-[200px] sm:h-[240px] md:h-[350px] md:mr-[48px]"
                 src="./images/Logo.png"
                 alt=""
               />
               <div className="glassCard glassCard1 hidden h-[79.24px] w-[240.8px] pl-[16px] md:block">
                 <h3 className="purpleGradient mt-[5px]">25,000+</h3>
-                <p>Individuals Impacted</p>
+                <p>Engineers Impacted</p>
               </div>
               <div className="glassCard glassCard2 hidden h-[79.24px] w-[240.8px] pl-[16px] md:block">
                 <h3 className="purpleGradient mt-[5px]">3,000+</h3>
@@ -180,7 +604,7 @@ export default function Home() {
               </div>
               <div className="glassCard glassCard3 hidden h-[79.24px] w-[240.8px] pl-[16px] md:block">
                 <h3 className="purpleGradient mt-[5px]">50+</h3>
-                <p>Countries Impacted</p>
+                <p>Countries Reached</p>
               </div>
             </div>
           </div>
@@ -191,9 +615,9 @@ export default function Home() {
           >
             RECOGNIZED BY
           </h2>
-          <div className="container mx-auto px-4 md:px-8 companiesLogo flex overflow-hidden relative">
+          <div className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative" suppressHydrationWarning>
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-            <div className="logoContainer flex">
+            <div className="logoContainer flex" suppressHydrationWarning>
               {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
                 <img
                   key={index}
@@ -201,15 +625,19 @@ export default function Home() {
                   alt={logo.alt}
                   onClick={() => window.open(logo.href, "_blank")}
                   className="cursor-pointer"
+                  loading="lazy"
                 />
               ))}
             </div>
-            <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-l from-black to-transparent" />
-            <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-black to-transparent" />
+            <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black via-black to-transparent z-30 pointer-events-none" />
+            <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-black via-black to-transparent z-30 pointer-events-none" />
           </div>
         </div>
         {/* Who Are We Section */}
-        <section id="who-are-we" className="relative overflow-hidden py-16 md:py-24">
+        <section
+          id="who-are-we"
+          className="relative overflow-hidden py-16 md:py-24"
+        >
           {/* Dot grid background pattern */}
           {/* <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div> */}
 
@@ -228,41 +656,41 @@ export default function Home() {
           {/* <div className="container relative max-w-3xl mx-auto px-2 sm:px-4">
             <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-purple-500/20 animate-fade-in hover:border-purple-500/40 transition-all duration-500">
               <p className="text-base sm:text-lg text-gray-200 leading-relaxed">
-                Hack United is a 501(c)(3) non-profit organization founded by
-                teenagers with a passion for programming and technology. Our
+                Hack United is a 501(c)(3) non-profit organization with a passion for programming and technology. Our
                 mission is to inspire and educate the next generation of
                 innovators through hackathons and workshops. We address a
-                problem not as commonly talked about, aiming to equip high
-                school and college students with the essential soft skills
-                needed to thrive in their chosen career paths. This is done
-                through hands on application such as our free to enter
-                hackathons. Through our initiatives, we ultimately aim to help
-                students prosper in the realm of technology.
+                problem not as commonly talked about, focusing on equipping
+                participants with the essential soft skills needed to thrive in
+                their chosen career paths. This is done through hands-on
+                application such as our free to enter hackathons, where participants
+                develop communication, teamwork, problem-solving, and presentation
+                skills alongside their technical abilities. Through our initiatives,
+                we ultimately aim to help individuals prosper in the realm of technology.
               </p>
             </div>
           </div> */}
 
-          <div className="container mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center w-full md:h-[300px] font-light text-base md:text-[21px] text-[#E8E8E8] text-center md:text-left">
-            <div className="md:w-2/3">
-              <h2 className="headingText purpleGradient mt-[15px] mb-[15px] ">
+          <div className="container mx-auto px-6 sm:px-8 md:px-8 flex flex-col md:flex-row items-center w-full md:h-[300px] font-light text-sm sm:text-base md:text-[21px] text-[#E8E8E8] text-center md:text-left py-8 md:py-0">
+            <div className="md:w-2/3 w-full">
+              <h2 className="headingText purpleGradient mt-[15px] mb-4 sm:mb-6">
                 ABOUT US
               </h2>
-              <p>
+              <p className="leading-relaxed">
                 {" "}
-                Hack United is a 501(c)(3) non-profit organization founded by
-                teenagers with a passion for programming and technology. Our
+                Hack United is a 501(c)(3) non-profit organization with a passion for programming and technology. Our
                 mission is to inspire and educate the next generation of
                 innovators through hackathons and workshops. We address a
-                problem not as commonly talked about, aiming to equip high
-                school and college students with the essential soft skills
-                needed to thrive in their chosen career paths. This is done
-                through hands on application such as our free to enter
-                hackathons. Through our initiatives, we ultimately aim to help
-                students prosper in the realm of technology.
+                problem not as commonly talked about, focusing on equipping
+                participants with the essential soft skills needed to thrive in
+                their chosen career paths. This is done through hands-on
+                application such as our free to enter hackathons, where participants
+                develop communication, teamwork, problem-solving, and presentation
+                skills alongside their technical abilities. Through our initiatives,
+                we ultimately aim to help individuals prosper in the realm of technology.
               </p>
             </div>
             <img
-              className="w-1/2 md:w-[400px] mt-8 md:mt-0 md:mr-[70px]"
+              className="w-48 sm:w-64 md:w-[400px] mt-8 md:mt-0 md:mr-[70px]"
               src="./images/globe-icon.png"
               alt=""
             />
@@ -270,7 +698,7 @@ export default function Home() {
         </section>
 
         {/* Featured Event */}
-        <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
+        <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden px-6 sm:px-8 md:px-4">
           {/* Dot grid background pattern */}
           <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
@@ -278,9 +706,8 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
 
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-          <div className="absolute -top-40 right-20 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl hidden lg:block"></div>
 
-          <div className="container relative max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto px-2 sm:px-4">
+          <div className="container relative max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto px-6 sm:px-8 md:px-4">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 lg:mb-12">
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
@@ -292,9 +719,9 @@ export default function Home() {
               </div>
             </div>
 
-            <Card className="overflow-hidden border border-purple-500/30 bg-black/60 backdrop-blur-sm animate-fade-in hover:border-purple-500/50 transition-all duration-300">
+            <Card className="overflow-hidden border border-purple-500/30 bg-black/40 backdrop-blur-md animate-fade-in hover:border-purple-500/50 transition-all duration-300">
               <div className="grid lg:grid-cols-2">
-                <div className="p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-purple-900/50 to-purple-950/50">
+                <div className="p-6 sm:p-8 lg:p-10 bg-black/30 backdrop-blur-sm">
                   <Badge className="bg-white/10 text-white hover:bg-white/20 mb-4 sm:mb-6 border-purple-500/50 text-xs sm:text-sm">
                     Registration Open
                   </Badge>
@@ -343,19 +770,21 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Button className="bg-white text-purple-900 hover:bg-white/90 hover:scale-105 w-full sm:w-auto text-sm sm:text-base transition-all duration-300">
+                    <Button className="bg-white text-purple-900 hover:bg-white/90 hover:scale-105 w-full sm:w-auto text-sm sm:text-base transition-all duration-300 rounded-full">
                       Register Now
                     </Button>
                   </a>
                 </div>
-                <div className="relative flex items-center justify-center min-h-[200px] sm:min-h-[300px] lg:min-h-auto bg-gradient-to-br from-purple-900/30 to-black rounded-r-xl p-4 sm:p-6">
-                  <div className="text-center">
-                    <h3 className="text-2xl font-bold text-white">
-                      Trailer Coming Soon
-                    </h3>
-                    <p className="text-white/70 mt-2">
-                      Stay tuned for the official trailer!
-                    </p>
+                <div className="relative flex items-center justify-center min-h-[200px] sm:min-h-[300px] lg:min-h-auto bg-black/30 backdrop-blur-sm rounded-r-xl p-4 sm:p-6">
+                  <div className="w-full h-full flex items-center justify-center">
+                    <iframe
+                      className="w-full h-full min-h-[200px] sm:min-h-[300px] rounded-lg"
+                      src="https://www.youtube.com/embed/x31T6gw_eVw"
+                      title="United Hacks V6 Trailer"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    ></iframe>
                   </div>
                 </div>
               </div>
@@ -373,47 +802,65 @@ export default function Home() {
 
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
 
-          {/* Background elements for stats */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-1/4 left-1/4 w-1/2 h-1/2 bg-purple-600/10 rounded-full blur-3xl hidden lg:block"></div>
-            <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-purple-600/10 rounded-full blur-3xl hidden lg:block"></div>
-          </div>
 
-          <div className="container relative px-4 mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm animate-fade-in hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
-                <CardHeader className="pb-2 text-center sm:text-left">
-                  <CardTitle className="text-3xl sm:text-4xl font-bold text-purple-400">
+          <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
+            <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-12">
+              <h2 className="headingText purpleGradient mt-[15px] mb-4 sm:mb-6">
+                OUR IMPACT
+              </h2>
+              <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6 px-2">
+                Through hackathons, workshops, and community initiatives, we've built a global network of innovators. 
+                But our mission extends beyond hackathons.
+              </p>
+              <div className="bg-black/60 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-500">
+                <p className="text-gray-200 text-xs sm:text-sm md:text-base leading-relaxed">
+                  <span className="text-purple-400 font-semibold">Beyond hackathons:</span> Check out{" "}
+                  <a
+                    href="https://fund.hackunited.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-purple-400 hover:text-purple-300 underline transition-colors"
+                  >
+                    United Fund
+                  </a>
+                  {" "}— our initiative backing builders, creatives, and dreamers with $50–$500 grants, no strings attached.
+                </p>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 px-6 sm:px-8 md:px-2">
+              <Card className="stat-card-1 border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
+                <CardHeader className="pb-2 p-4 sm:p-6 text-center sm:text-left">
+                  <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-400">
                     25,000+
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-center sm:text-left">
-                  <CardDescription className="text-gray-300 text-sm sm:text-base">
-                    Individuals Impacted
+                <CardContent className="text-center sm:text-left p-4 sm:p-6 pt-0">
+                  <CardDescription className="text-white text-xs sm:text-sm md:text-base">
+                    Engineers Impacted
                   </CardDescription>
                 </CardContent>
               </Card>
-              <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm animate-fade-in hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
-                <CardHeader className="pb-2 text-center sm:text-left">
-                  <CardTitle className="text-3xl sm:text-4xl font-bold text-purple-400">
+              <Card className="stat-card-2 border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
+                <CardHeader className="pb-2 p-4 sm:p-6 text-center sm:text-left">
+                  <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-400">
                     3,000+
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-center sm:text-left">
-                  <CardDescription className="text-gray-300 text-sm sm:text-base">
+                <CardContent className="text-center sm:text-left p-4 sm:p-6 pt-0">
+                  <CardDescription className="text-white text-xs sm:text-sm md:text-base">
                     Community Members
                   </CardDescription>
                 </CardContent>
               </Card>
-              <Card className="border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 animate-fade-in hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
-                <CardHeader className="pb-2 text-center sm:text-left">
-                  <CardTitle className="text-3xl sm:text-4xl font-bold text-purple-400">
+              <Card className="stat-card-3 border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
+                <CardHeader className="pb-2 p-4 sm:p-6 text-center sm:text-left">
+                  <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-400">
                     50+
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-center sm:text-left">
-                  <CardDescription className="text-gray-300 text-sm sm:text-base">
-                    Countries Impacted
+                <CardContent className="text-center sm:text-left p-4 sm:p-6 pt-0">
+                  <CardDescription className="text-white text-xs sm:text-sm md:text-base">
+                    Countries Reached
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -430,10 +877,9 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
 
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-          <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl hidden lg:block"></div>
 
-          <div className="container relative px-4 mx-auto">
-            <div className="flex items-center justify-center mb-6">
+          <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
+            <div className="flex items-center justify-center mb-4 sm:mb-6">
               <Badge
                 variant="outline"
                 className="px-3 py-1 sm:px-4 border-purple-500/50 text-purple-300 text-xs sm:text-sm"
@@ -441,38 +887,38 @@ export default function Home() {
                 Our Vision
               </Badge>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-12 lg:mb-16 text-white">
-              Our Goals
+            <h2 className="headingText purpleGradient mt-[15px] mb-6 sm:mb-8 md:mb-12 text-center">
+              OUR GOALS
             </h2>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-2">
+              <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
                 <CardHeader>
-                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-purple-900/50 text-purple-400 mb-4">
+                  <div className="goal-icon-container">
                     <svg
-                      className="w-6 h-6"
                       fill="none"
                       stroke="currentColor"
+                      strokeWidth="2"
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
+                      className="text-purple-400"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="2"
                         d="M13 10V3L4 14h7v7l9-11h-7z"
                       ></path>
                     </svg>
                   </div>
-                  <CardTitle className="text-white">
+                  <CardTitle className="text-white text-center">
                     Accelerating Soft Skills
                   </CardTitle>
-                  <CardDescription className="text-gray-300">
+                  <CardDescription className="text-gray-300 text-center">
                     Beyond just coding mechanics
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-300">
+                  <p className="text-gray-300 text-center">
                     We teach more than just mechanical coding skills: As the
                     world rapidly evolves, we envision an inclusive platform
                     where everyone can learn about the exciting advancements in
@@ -482,33 +928,33 @@ export default function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
+              <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
                 <CardHeader>
-                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-purple-900/50 text-purple-400 mb-4">
+                  <div className="goal-icon-container">
                     <svg
-                      className="w-6 h-6"
                       fill="none"
                       stroke="currentColor"
+                      strokeWidth="2"
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
+                      className="text-purple-400"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="2"
                         d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
                       ></path>
                     </svg>
                   </div>
-                  <CardTitle className="text-white">
+                  <CardTitle className="text-white text-center">
                     Practical Applications
                   </CardTitle>
-                  <CardDescription className="text-gray-300">
+                  <CardDescription className="text-gray-300 text-center">
                     Real-world problem solving
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-300">
+                  <p className="text-gray-300 text-center">
                     We emphasize practical applications of programming and
                     technology to prepare community members for the rapidly
                     changing future. Our hackathons help exemplify our goals as
@@ -517,33 +963,33 @@ export default function Home() {
                 </CardContent>
               </Card>
 
-              <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
+              <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
                 <CardHeader>
-                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-purple-900/50 text-purple-400 mb-4">
+                  <div className="goal-icon-container">
                     <svg
-                      className="w-6 h-6"
                       fill="none"
                       stroke="currentColor"
+                      strokeWidth="2"
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
+                      className="text-purple-400"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth="2"
                         d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
                       ></path>
                     </svg>
                   </div>
-                  <CardTitle className="text-white">
+                  <CardTitle className="text-white text-center">
                     Connecting Innovators
                   </CardTitle>
-                  <CardDescription className="text-gray-300">
+                  <CardDescription className="text-gray-300 text-center">
                     Building a supportive community
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-300">
+                  <p className="text-gray-300 text-center">
                     Our community provides a platform for innovators to learn,
                     grow, and support each other. We connect like-minded
                     individuals to overcome the challenges of acquiring new
@@ -564,10 +1010,9 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
 
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-          <div className="absolute -top-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl hidden lg:block"></div>
 
-          <div className="container relative px-4 mx-auto">
-            <div className="flex items-center justify-center mb-6">
+          <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
+            <div className="flex items-center justify-center mb-4 sm:mb-6">
               <Badge
                 variant="outline"
                 className="px-3 py-1 sm:px-4 border-purple-500/50 text-purple-300 text-xs sm:text-sm"
@@ -575,50 +1020,67 @@ export default function Home() {
                 Our Legacy
               </Badge>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-12 lg:mb-16 text-white">
-              Check Out Our Previous Hackathons!
+            <h2 className="headingText purpleGradient mt-[15px] mb-6 sm:mb-8 md:mb-12 text-center">
+              PREVIOUS HACKATHONS
             </h2>
 
             <div className="max-w-4xl mx-auto">
-              <Tabs defaultValue="v5" className="w-full">
-                <TabsList className="w-full grid grid-cols-5 mb-8 lg:mb-12 h-12 sm:h-14 bg-gray-900/80 border border-purple-500/30">
-                  <TabsTrigger
-                    value="v1"
-                    className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
-                  >
-                    V1
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="v2"
-                    className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
-                  >
-                    V2
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="v3"
-                    className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
-                  >
-                    V3
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="v4"
-                    className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
-                  >
-                    V4
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="v5"
-                    className="data-[state=active]:bg-purple-600/50 data-[state=active]:text-white text-xs sm:text-sm"
-                  >
-                    V5
-                  </TabsTrigger>
-                </TabsList>
+              <Tabs
+                defaultValue="v5"
+                className="w-full"
+                onValueChange={(value) => {
+                  setActiveTab(value);
+                }}
+              >
+                <div className="tabs-slider-container mb-8 lg:mb-12">
+                  <TabsList className="w-full grid grid-cols-5 h-12 sm:h-14 bg-transparent border-none p-0 relative">
+                    <div
+                      className="tabs-slider-indicator"
+                      style={{
+                        transform: `translateX(${
+                          ["v1", "v2", "v3", "v4", "v5"].indexOf(activeTab) *
+                          100
+                        }%)`,
+                      }}
+                    />
+                    <TabsTrigger
+                      value="v1"
+                      className="tab-trigger-custom text-xs sm:text-sm"
+                    >
+                      V1
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="v2"
+                      className="tab-trigger-custom text-xs sm:text-sm"
+                    >
+                      V2
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="v3"
+                      className="tab-trigger-custom text-xs sm:text-sm"
+                    >
+                      V3
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="v4"
+                      className="tab-trigger-custom text-xs sm:text-sm"
+                    >
+                      V4
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="v5"
+                      className="tab-trigger-custom text-xs sm:text-sm"
+                    >
+                      V5
+                    </TabsTrigger>
+                  </TabsList>
+                </div>
 
                 <TabsContent
                   value="v1"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm">
+                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -638,7 +1100,7 @@ export default function Home() {
                             judges.
                           </p>
                           <div className="grid grid-cols-2 gap-4 mb-6">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 400+
                               </div>
@@ -646,7 +1108,7 @@ export default function Home() {
                                 Participants
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 50+
                               </div>
@@ -654,7 +1116,7 @@ export default function Home() {
                                 Projects
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 $5,000+
                               </div>
@@ -662,7 +1124,7 @@ export default function Home() {
                                 Prize Pool
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 10+
                               </div>
@@ -672,7 +1134,7 @@ export default function Home() {
                             </div>
                           </div>
                           <div className="grid grid-cols-2 gap-4">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 100+
                               </div>
@@ -680,7 +1142,7 @@ export default function Home() {
                                 Workshop Attendees
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 10
                               </div>
@@ -716,11 +1178,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/60 px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200"
+                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
                           asChild
                         >
                           <a
@@ -734,7 +1196,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200"
+                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
                           asChild
                         >
                           <a
@@ -755,7 +1217,7 @@ export default function Home() {
                   value="v2"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm">
+                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -775,7 +1237,7 @@ export default function Home() {
                             professional & student judges.
                           </p>
                           <div className="grid grid-cols-2 gap-4 mb-6">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 400+
                               </div>
@@ -783,7 +1245,7 @@ export default function Home() {
                                 Participants
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 75+
                               </div>
@@ -791,7 +1253,7 @@ export default function Home() {
                                 Projects
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 $15,000+
                               </div>
@@ -799,7 +1261,7 @@ export default function Home() {
                                 Prize Pool
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 15+
                               </div>
@@ -809,7 +1271,7 @@ export default function Home() {
                             </div>
                           </div>
                           <div className="grid grid-cols-2 gap-4">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 100+
                               </div>
@@ -817,7 +1279,7 @@ export default function Home() {
                                 Workshop Attendees
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 10
                               </div>
@@ -853,11 +1315,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/60 px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200"
+                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
                           asChild
                         >
                           <a
@@ -871,7 +1333,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200"
+                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
                           asChild
                         >
                           <a
@@ -892,7 +1354,7 @@ export default function Home() {
                   value="v3"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm">
+                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -912,7 +1374,7 @@ export default function Home() {
                             more intimate setting.
                           </p>
                           <div className="grid grid-cols-2 gap-4 mb-6">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 150+
                               </div>
@@ -920,7 +1382,7 @@ export default function Home() {
                                 Participants
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 $2,000+
                               </div>
@@ -928,7 +1390,7 @@ export default function Home() {
                                 Prize Pool
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 75+
                               </div>
@@ -936,7 +1398,7 @@ export default function Home() {
                                 Workshop Attendees
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 10
                               </div>
@@ -980,11 +1442,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/60 px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200"
+                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
                           asChild
                         >
                           <a
@@ -998,7 +1460,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200"
+                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
                           asChild
                         >
                           <a
@@ -1019,7 +1481,7 @@ export default function Home() {
                   value="v4"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm">
+                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -1039,7 +1501,7 @@ export default function Home() {
                             professional judges.
                           </p>
                           <div className="grid grid-cols-2 gap-4 mb-6">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 400+
                               </div>
@@ -1047,7 +1509,7 @@ export default function Home() {
                                 Participants
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 80+
                               </div>
@@ -1055,7 +1517,7 @@ export default function Home() {
                                 Projects
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 $10,000+
                               </div>
@@ -1063,7 +1525,7 @@ export default function Home() {
                                 Prize Pool
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 10+
                               </div>
@@ -1073,7 +1535,7 @@ export default function Home() {
                             </div>
                           </div>
                           <div className="grid grid-cols-2 gap-4">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 100+
                               </div>
@@ -1081,7 +1543,7 @@ export default function Home() {
                                 Workshop Attendees
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 10
                               </div>
@@ -1117,11 +1579,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/60 px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200"
+                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
                           asChild
                         >
                           <a
@@ -1135,7 +1597,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200"
+                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
                           asChild
                         >
                           <a
@@ -1155,7 +1617,7 @@ export default function Home() {
                   value="v5"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-gradient-to-br from-black/90 to-purple-950/20 backdrop-blur-sm">
+                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -1175,7 +1637,7 @@ export default function Home() {
                             professional judges.
                           </p>
                           <div className="grid grid-cols-2 gap-4 mb-6">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 1250+
                               </div>
@@ -1183,7 +1645,7 @@ export default function Home() {
                                 Participants
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 200+
                               </div>
@@ -1191,7 +1653,7 @@ export default function Home() {
                                 Projects
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 $50,000+
                               </div>
@@ -1199,7 +1661,7 @@ export default function Home() {
                                 Prize Pool
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 10+
                               </div>
@@ -1209,7 +1671,7 @@ export default function Home() {
                             </div>
                           </div>
                           <div className="grid grid-cols-2 gap-4">
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 250+
                               </div>
@@ -1217,7 +1679,7 @@ export default function Home() {
                                 Workshop Attendees
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-gray-800/50 rounded-lg">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
                               <div className="text-xl font-bold text-purple-400">
                                 8
                               </div>
@@ -1253,11 +1715,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/60 px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200"
+                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
                           asChild
                         >
                           <a
@@ -1271,7 +1733,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200"
+                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
                           asChild
                         >
                           <a
@@ -1292,6 +1754,42 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Judges From Section */}
+        <div className="py-8 sm:py-12 md:py-16 relative overflow-hidden">
+          <h2
+            className={`headingText purpleGradient mt-4 mb-3 sm:mb-4 text-center ${playfairDisplay.className}`}
+          >
+            JUDGES FROM
+          </h2>
+          <p className="text-gray-400 text-xs sm:text-sm md:text-base text-center mb-4 sm:mb-6 px-6 sm:px-8">
+            Interested in judging our event? Email{" "}
+            <a
+              href="mailto:humans@hackunited.org"
+              className="text-purple-400 hover:text-purple-300 underline transition-colors break-all sm:break-normal"
+            >
+              humans@hackunited.org
+            </a>
+          </p>
+
+          <div className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative py-6" suppressHydrationWarning>
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent z-10"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent z-10"></div>
+            <div className="judgeContainer flex" suppressHydrationWarning>
+              {[...judges, ...judges, ...judges, ...judges].map((judge, index) => (
+                <img
+                  key={`judge-${index}`}
+                  src={judge.src}
+                  alt={judge.alt}
+                  className="cursor-pointer"
+                  loading="lazy"
+                />
+              ))}
+            </div>
+            <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black via-black to-transparent z-30 pointer-events-none" />
+            <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-black via-black to-transparent z-30 pointer-events-none" />
+          </div>
+        </div>
+
         {/* CTA Section */}
         <section className="py-24 relative overflow-hidden">
           {/* Dot grid background pattern */}
@@ -1299,9 +1797,6 @@ export default function Home() {
 
           {/* Subtle gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
-
-          <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute -top-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
 
           <div className="container relative px-4 mx-auto">
             <div className="max-w-4xl mx-auto text-center">

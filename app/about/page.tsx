@@ -27,7 +27,7 @@ export default function AboutPage() {
             <section>
               <h2 className="text-2xl font-bold mb-4 text-purple-400">Our Story</h2>
               <p className="text-gray-300 leading-relaxed">
-                Founded by a group of passionate teenagers who recognized the gap between traditional education and
+                Started by a group of passionate developers who recognized the gap between traditional education and
                 industry demands, Hack United began as a small community initiative and has since grown into a
                 recognized 501(c)(3) non-profit organization. Our founders experienced firsthand the challenges of
                 breaking into the tech industry and were determined to create a supportive environment for others facing

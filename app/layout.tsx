@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://hackunited.org"),
   title: "Hack United",
   description:
-    "Hack United is a 501(c)(3) non-profit organization founded by teenagers with a passion for programming and technology. Join our community of young developers, participate in hackathons, and make an impact through code.",
+    "Hack United is a 501(c)(3) non-profit organization with a passion for programming and technology. Join our community of developers, participate in hackathons, and make an impact through code.",
   keywords:
     "hackathon, teen developers, programming, technology, non-profit, coding competitions, United Hacks",
   authors: [{ name: "Hack United Team" }],
@@ -88,7 +88,7 @@ export default function RootLayout({
         />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={inter.className}>
+      <body className={inter.className} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -106,11 +106,8 @@ export default function RootLayout({
                     height={28}
                     className="h-7 w-7"
                   />
-                  <span className="text-xl font-bold">
-                    Hack{" "}
-                    <span className="bg-gradient-to-r from-purple-400 to-violet-600 bg-clip-text text-transparent">
-                      United
-                    </span>
+                  <span className="text-xl font-bold text-white">
+                    Hack United
                   </span>
                 </Link>
 
@@ -157,7 +154,7 @@ export default function RootLayout({
                     rel="noopener noreferrer"
                     className="text-gray-300 transition-colors hover:text-white"
                   >
-                    Blogs
+                    Blog
                   </a>
                 </nav>
 
@@ -220,7 +217,7 @@ export default function RootLayout({
                           rel="noopener noreferrer"
                           className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
                         >
-                          Blogs
+                          Blog
                         </a>
                       </div>
                     </SheetContent>
@@ -247,8 +244,7 @@ export default function RootLayout({
                       <span>Hack United</span>
                     </Link>
                     <p className="text-sm text-gray-400">
-                      A 501(c)(3) non-profit organization founded by teenagers
-                      with a passion for programming and technology.
+                      A 501(c)(3) non-profit organization with a passion for programming and technology.
                     </p>
                     <p className="text-sm text-gray-400">EIN: 81-2908499</p>
                     <div className="flex gap-2">
