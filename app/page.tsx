@@ -415,7 +415,6 @@ export default function Home() {
     setMounted(true);
   }, []);
 
-
   // Fix hydration by only running animations on client side after hydration
   useEffect(() => {
     // Only run on client side after hydration
@@ -423,122 +422,121 @@ export default function Home() {
 
     // Small delay to ensure DOM is fully ready
     const timeoutId = setTimeout(() => {
+      const logoContainer = document.querySelector(".logoContainer");
+      if (logoContainer) {
+        // Wait for images to load before calculating
+        const images = logoContainer.querySelectorAll("img");
+        let loadedCount = 0;
 
-    const logoContainer = document.querySelector(".logoContainer");
-    if (logoContainer) {
-      // Wait for images to load before calculating
-      const images = logoContainer.querySelectorAll("img");
-      let loadedCount = 0;
+        const checkAndAnimate = () => {
+          loadedCount++;
+          if (loadedCount === images.length || images.length === 0) {
+            // Calculate the width of one set of logos
+            const firstSetWidth = logoContainer.scrollWidth / 4;
 
-      const checkAndAnimate = () => {
-        loadedCount++;
-        if (loadedCount === images.length || images.length === 0) {
-          // Calculate the width of one set of logos
-          const firstSetWidth = logoContainer.scrollWidth / 4;
+            gsap.to(".logoContainer", {
+              x: -firstSetWidth,
+              duration: 10,
+              ease: "none",
+              repeat: -1,
+            });
+          }
+        };
 
-          gsap.to(".logoContainer", {
-            x: -firstSetWidth,
-            duration: 10,
-            ease: "none",
-            repeat: -1,
+        if (images.length === 0) {
+          checkAndAnimate();
+        } else {
+          images.forEach((img) => {
+            if (img.complete) {
+              checkAndAnimate();
+            } else {
+              img.addEventListener("load", checkAndAnimate);
+              img.addEventListener("error", checkAndAnimate);
+            }
           });
         }
-      };
-
-      if (images.length === 0) {
-        checkAndAnimate();
-      } else {
-        images.forEach((img) => {
-          if (img.complete) {
-            checkAndAnimate();
-          } else {
-            img.addEventListener("load", checkAndAnimate);
-            img.addEventListener("error", checkAndAnimate);
-          }
-        });
       }
-    }
 
-    // Sponsor carousels animations
-    const sponsorContainers = document.querySelectorAll(".sponsorContainer");
-    sponsorContainers.forEach((container) => {
-      const carouselIndex = container.getAttribute("data-carousel");
-      const images = container.querySelectorAll("img");
-      let loadedCount = 0;
+      // Sponsor carousels animations
+      const sponsorContainers = document.querySelectorAll(".sponsorContainer");
+      sponsorContainers.forEach((container) => {
+        const carouselIndex = container.getAttribute("data-carousel");
+        const images = container.querySelectorAll("img");
+        let loadedCount = 0;
 
-      const checkAndAnimate = () => {
-        loadedCount++;
-        if (loadedCount === images.length || images.length === 0) {
-          // Calculate the width of one set of sponsors
-          const firstSetWidth = container.scrollWidth / 4;
+        const checkAndAnimate = () => {
+          loadedCount++;
+          if (loadedCount === images.length || images.length === 0) {
+            // Calculate the width of one set of sponsors
+            const firstSetWidth = container.scrollWidth / 4;
 
-          // Both carousels: left to right
-          // Start from 0, animate to negative (container moves left, content appears to move right)
-          gsap.set(container, { x: 0 });
-          gsap.fromTo(
-            container,
-            { x: 0 },
-            {
-              x: -firstSetWidth,
-              duration: 20,
-              ease: "none",
-              repeat: -1,
+            // Both carousels: left to right
+            // Start from 0, animate to negative (container moves left, content appears to move right)
+            gsap.set(container, { x: 0 });
+            gsap.fromTo(
+              container,
+              { x: 0 },
+              {
+                x: -firstSetWidth,
+                duration: 20,
+                ease: "none",
+                repeat: -1,
+              }
+            );
+          }
+        };
+
+        if (images.length === 0) {
+          checkAndAnimate();
+        } else {
+          images.forEach((img) => {
+            if (img.complete) {
+              checkAndAnimate();
+            } else {
+              img.addEventListener("load", checkAndAnimate);
+              img.addEventListener("error", checkAndAnimate);
             }
-          );
+          });
         }
-      };
+      });
 
-      if (images.length === 0) {
-        checkAndAnimate();
-      } else {
-        images.forEach((img) => {
-          if (img.complete) {
-            checkAndAnimate();
-          } else {
-            img.addEventListener("load", checkAndAnimate);
-            img.addEventListener("error", checkAndAnimate);
+      // Judges carousel animation
+      const judgeContainer = document.querySelector(".judgeContainer");
+      if (judgeContainer) {
+        const images = judgeContainer.querySelectorAll("img");
+        let loadedCount = 0;
+
+        const checkAndAnimate = () => {
+          loadedCount++;
+          if (loadedCount === images.length || images.length === 0) {
+            const firstSetWidth = judgeContainer.scrollWidth / 4;
+            gsap.set(judgeContainer, { x: 0 });
+            gsap.fromTo(
+              judgeContainer,
+              { x: 0 },
+              {
+                x: -firstSetWidth,
+                duration: 15,
+                ease: "none",
+                repeat: -1,
+              }
+            );
           }
-        });
-      }
-    });
+        };
 
-    // Judges carousel animation
-    const judgeContainer = document.querySelector(".judgeContainer");
-    if (judgeContainer) {
-      const images = judgeContainer.querySelectorAll("img");
-      let loadedCount = 0;
-
-      const checkAndAnimate = () => {
-        loadedCount++;
-        if (loadedCount === images.length || images.length === 0) {
-          const firstSetWidth = judgeContainer.scrollWidth / 4;
-          gsap.set(judgeContainer, { x: 0 });
-          gsap.fromTo(
-            judgeContainer,
-            { x: 0 },
-            {
-              x: -firstSetWidth,
-              duration: 15,
-              ease: "none",
-              repeat: -1,
+        if (images.length === 0) {
+          checkAndAnimate();
+        } else {
+          images.forEach((img) => {
+            if (img.complete) {
+              checkAndAnimate();
+            } else {
+              img.addEventListener("load", checkAndAnimate);
+              img.addEventListener("error", checkAndAnimate);
             }
-          );
+          });
         }
-      };
-
-      if (images.length === 0) {
-        checkAndAnimate();
-      } else {
-        images.forEach((img) => {
-          if (img.complete) {
-            checkAndAnimate();
-          } else {
-            img.addEventListener("load", checkAndAnimate);
-            img.addEventListener("error", checkAndAnimate);
-          }
-        });
       }
-    }
     }, 100); // Small delay to ensure hydration is complete
 
     return () => clearTimeout(timeoutId);
@@ -553,10 +551,6 @@ export default function Home() {
           <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black to-transparent" />
           <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-16 sm:mt-24 md:mt-[140px] pb-12 sm:pb-16 md:pb-[160px] px-6 sm:px-8 md:px-8 relative">
             <div className="right text-center md:text-left">
-              <div className="hero-badge mb-4 sm:mb-6 inline-flex items-center justify-center md:justify-start rounded-full bg-green-500/10 px-3 py-1 sm:px-4 text-xs sm:text-sm font-medium text-green-400">
-                <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-500" />
-                discord.gg/hackunited
-              </div>
               <h1 className="hero-heading headingText mb-4 sm:mb-6 text-center md:text-left">
                 <span className="purpleGradient">Empowering</span>
                 <br />
@@ -573,7 +567,9 @@ export default function Home() {
                   tech projects and real-world application.
                 </p>
                 <p className="md:hidden text-sm sm:text-base">
-                  A non-profit hosting free hackathons and workshops focused on building essential soft skills through hands-on tech projects and real-world application.
+                  A non-profit hosting free hackathons and workshops focused on
+                  building essential soft skills through hands-on tech projects
+                  and real-world application.
                 </p>
               </div>
               <div className="hero-buttons flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto sm:max-w-[288px] justify-center items-center md:justify-between mt-6 sm:mt-8">
@@ -615,7 +611,10 @@ export default function Home() {
           >
             RECOGNIZED BY
           </h2>
-          <div className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative" suppressHydrationWarning>
+          <div
+            className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative"
+            suppressHydrationWarning
+          >
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
             <div className="logoContainer flex" suppressHydrationWarning>
               {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
@@ -677,16 +676,18 @@ export default function Home() {
               </h2>
               <p className="leading-relaxed">
                 {" "}
-                Hack United is a 501(c)(3) non-profit organization with a passion for programming and technology. Our
-                mission is to inspire and educate the next generation of
-                innovators through hackathons and workshops. We address a
-                problem not as commonly talked about, focusing on equipping
-                participants with the essential soft skills needed to thrive in
-                their chosen career paths. This is done through hands-on
-                application such as our free to enter hackathons, where participants
-                develop communication, teamwork, problem-solving, and presentation
-                skills alongside their technical abilities. Through our initiatives,
-                we ultimately aim to help individuals prosper in the realm of technology.
+                Hack United is a 501(c)(3) non-profit organization with a
+                passion for programming and technology. Our mission is to
+                inspire and educate the next generation of innovators through
+                hackathons and workshops. We address a problem not as commonly
+                talked about, focusing on equipping participants with the
+                essential soft skills needed to thrive in their chosen career
+                paths. This is done through hands-on application such as our
+                free to enter hackathons, where participants develop
+                communication, teamwork, problem-solving, and presentation
+                skills alongside their technical abilities. Through our
+                initiatives, we ultimately aim to help individuals prosper in
+                the realm of technology.
               </p>
             </div>
             <img
@@ -802,19 +803,22 @@ export default function Home() {
 
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
 
-
           <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
             <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-12">
               <h2 className="headingText purpleGradient mt-[15px] mb-4 sm:mb-6">
                 OUR IMPACT
               </h2>
               <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6 px-2">
-                Through hackathons, workshops, and community initiatives, we've built a global network of innovators. 
-                But our mission extends beyond hackathons.
+                Through hackathons, workshops, and community initiatives, we've
+                built a global network of innovators. But our mission extends
+                beyond hackathons.
               </p>
               <div className="bg-black/60 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-500">
                 <p className="text-gray-200 text-xs sm:text-sm md:text-base leading-relaxed">
-                  <span className="text-purple-400 font-semibold">Beyond hackathons:</span> Check out{" "}
+                  <span className="text-purple-400 font-semibold">
+                    Beyond hackathons:
+                  </span>{" "}
+                  Check out{" "}
                   <a
                     href="https://fund.hackunited.org/"
                     target="_blank"
@@ -822,8 +826,9 @@ export default function Home() {
                     className="text-purple-400 hover:text-purple-300 underline transition-colors"
                   >
                     United Fund
-                  </a>
-                  {" "}— our initiative backing builders, creatives, and dreamers with $50–$500 grants, no strings attached.
+                  </a>{" "}
+                  — our initiative backing builders, creatives, and dreamers
+                  with $50–$500 grants, no strings attached.
                 </p>
               </div>
             </div>
@@ -1771,19 +1776,24 @@ export default function Home() {
             </a>
           </p>
 
-          <div className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative py-6" suppressHydrationWarning>
+          <div
+            className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative py-6"
+            suppressHydrationWarning
+          >
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent z-10"></div>
             <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent z-10"></div>
             <div className="judgeContainer flex" suppressHydrationWarning>
-              {[...judges, ...judges, ...judges, ...judges].map((judge, index) => (
-                <img
-                  key={`judge-${index}`}
-                  src={judge.src}
-                  alt={judge.alt}
-                  className="cursor-pointer"
-                  loading="lazy"
-                />
-              ))}
+              {[...judges, ...judges, ...judges, ...judges].map(
+                (judge, index) => (
+                  <img
+                    key={`judge-${index}`}
+                    src={judge.src}
+                    alt={judge.alt}
+                    className="cursor-pointer"
+                    loading="lazy"
+                  />
+                )
+              )}
             </div>
             <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black via-black to-transparent z-30 pointer-events-none" />
             <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-black via-black to-transparent z-30 pointer-events-none" />
