@@ -1042,10 +1042,9 @@ export default function Home() {
                     <div
                       className="tabs-slider-indicator"
                       style={{
-                        transform: `translateX(${
-                          ["v1", "v2", "v3", "v4", "v5"].indexOf(activeTab) *
+                        transform: `translateX(${["v1", "v2", "v3", "v4", "v5"].indexOf(activeTab) *
                           100
-                        }%)`,
+                          }%)`,
                       }}
                     />
                     <TabsTrigger
