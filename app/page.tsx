@@ -150,7 +150,7 @@ const styles = `
     top: 0;
     left: 0;
     height: 100%;
-    width: calc(100% / 5);
+    width: calc(100% / 6);
     border: 3px solid rgba(168, 85, 247, 0.5);
     border-radius: 9999px;
     background: transparent;
@@ -397,7 +397,7 @@ function DiscordWidget() {
 }
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState("v5");
+  const [activeTab, setActiveTab] = useState("v6");
   const [mounted, setMounted] = useState(false);
 
   const scrollTo = (id: string) => {
@@ -698,101 +698,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Featured Event */}
-        <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden px-6 sm:px-8 md:px-4">
-          {/* Dot grid background pattern */}
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
-
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
-
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-
-          <div className="container relative max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto px-6 sm:px-8 md:px-4">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 lg:mb-12">
-              <div>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
-                  Upcoming Event
-                </h2>
-                <p className="text-gray-300 mt-2 text-sm sm:text-base">
-                  Register now for our next hackathon
-                </p>
-              </div>
-            </div>
-
-            <Card className="overflow-hidden border border-purple-500/30 bg-black/40 backdrop-blur-md animate-fade-in hover:border-purple-500/50 transition-all duration-300">
-              <div className="grid lg:grid-cols-2">
-                <div className="p-6 sm:p-8 lg:p-10 bg-black/30 backdrop-blur-sm">
-                  <Badge className="bg-white/10 text-white hover:bg-white/20 mb-4 sm:mb-6 border-purple-500/50 text-xs sm:text-sm">
-                    Registration Open
-                  </Badge>
-                  <h3 className="text-2xl sm:text-3xl font-bold mb-4">
-                    United Hacks V6
-                  </h3>
-                  <p className="text-white/90 mb-6 text-sm sm:text-base">
-                    Join us for our biggest hackathon yet! Connect with other
-                    innovators, learn from industry experts, and build amazing
-                    projects.
-                  </p>
-                  <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
-                    <div>
-                      <h4 className="text-white/70 text-xs sm:text-sm font-medium mb-1">
-                        Date
-                      </h4>
-                      <p className="font-medium text-sm sm:text-base">
-                        Jan 16-18, 2026
-                      </p>
-                    </div>
-                    <div>
-                      <h4 className="text-white/70 text-xs sm:text-sm font-medium mb-1">
-                        Location
-                      </h4>
-                      <p className="font-medium text-sm sm:text-base">
-                        Online (Virtual)
-                      </p>
-                    </div>
-                    <div>
-                      <h4 className="text-white/70 text-xs sm:text-sm font-medium mb-1">
-                        Team Size
-                      </h4>
-                      <p className="font-medium text-sm sm:text-base">
-                        1-4 Members
-                      </p>
-                    </div>
-                    <div>
-                      <h4 className="text-white/70 text-xs sm:text-sm font-medium mb-1">
-                        Entry Fee
-                      </h4>
-                      <p className="font-medium text-sm sm:text-base">Free</p>
-                    </div>
-                  </div>
-                  <a
-                    href="https://unitedhacksv6.devpost.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button className="bg-white text-purple-900 hover:bg-white/90 hover:scale-105 w-full sm:w-auto text-sm sm:text-base transition-all duration-300 rounded-full">
-                      Register Now
-                    </Button>
-                  </a>
-                </div>
-                <div className="relative flex items-center justify-center min-h-[200px] sm:min-h-[300px] lg:min-h-auto bg-black/30 backdrop-blur-sm rounded-r-xl p-4 sm:p-6">
-                  <div className="w-full h-full flex items-center justify-center">
-                    <iframe
-                      className="w-full h-full min-h-[200px] sm:min-h-[300px] rounded-lg"
-                      src="https://www.youtube.com/embed/x31T6gw_eVw"
-                      title="United Hacks V6 Trailer"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div>
-        </section>
-
         {/* Stats Section */}
         <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
           {/* Dot grid background pattern */}
@@ -1031,18 +936,18 @@ export default function Home() {
 
             <div className="max-w-4xl mx-auto">
               <Tabs
-                defaultValue="v5"
+                defaultValue="v6"
                 className="w-full"
                 onValueChange={(value) => {
                   setActiveTab(value);
                 }}
               >
                 <div className="tabs-slider-container mb-8 lg:mb-12">
-                  <TabsList className="w-full grid grid-cols-5 h-12 sm:h-14 bg-transparent border-none p-0 relative">
+                  <TabsList className="w-full grid grid-cols-6 h-12 sm:h-14 bg-transparent border-none p-0 relative">
                     <div
                       className="tabs-slider-indicator"
                       style={{
-                        transform: `translateX(${["v1", "v2", "v3", "v4", "v5"].indexOf(activeTab) *
+                        transform: `translateX(${["v1", "v2", "v3", "v4", "v5", "v6"].indexOf(activeTab) *
                           100
                           }%)`,
                       }}
@@ -1076,6 +981,12 @@ export default function Home() {
                       className="tab-trigger-custom text-xs sm:text-sm"
                     >
                       V5
+                    </TabsTrigger>
+                    <TabsTrigger
+                      value="v6"
+                      className="tab-trigger-custom text-xs sm:text-sm"
+                    >
+                      V6
                     </TabsTrigger>
                   </TabsList>
                 </div>
@@ -1742,6 +1653,138 @@ export default function Home() {
                         >
                           <a
                             href="https://unitedhacksv5.devpost.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            DEVPOST
+                            <ArrowRightIcon className="h-4 w-4" />
+                          </a>
+                        </Button>
+                      </div>
+                    </CardFooter>
+                  </Card>
+                </TabsContent>
+                <TabsContent
+                  value="v6"
+                  className="focus-visible:outline-none focus-visible:ring-0"
+                >
+                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
+                    <CardContent className="p-6 md:p-8">
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div>
+                          <h3 className="text-xl font-bold mb-4 text-white">
+                            United Hacks V6
+                          </h3>
+                          <p className="text-gray-300 mb-2">
+                            <span className="text-purple-400 font-semibold">
+                              January 2026
+                            </span>{" "}
+                            • Human Interaction Theme
+                          </p>
+                          <p className="text-gray-300 mb-6">
+                            Our sixth hackathon focused on solutions embracing human interaction, bringing together 1200+ participants to tackle real-world challenges, while connecting in our Discord community of 3000+ programmers.
+                          </p>
+                          <div className="grid grid-cols-2 gap-4 mb-6">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
+                              <div className="text-xl font-bold text-purple-400">
+                                1200+
+                              </div>
+                              <div className="text-xs text-gray-400">
+                                Participants
+                              </div>
+                            </div>
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
+                              <div className="text-xl font-bold text-purple-400">
+                                160+
+                              </div>
+                              <div className="text-xs text-gray-400">
+                                Projects
+                              </div>
+                            </div>
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
+                              <div className="text-xl font-bold text-purple-400">
+                                $20,000+
+                              </div>
+                              <div className="text-xs text-gray-400">
+                                Prize Pool
+                              </div>
+                            </div>
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
+                              <div className="text-xl font-bold text-purple-400">
+                                11+
+                              </div>
+                              <div className="text-xs text-gray-400">
+                                Sponsors
+                              </div>
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-2 gap-4">
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
+                              <div className="text-xl font-bold text-purple-400">
+                                200+
+                              </div>
+                              <div className="text-xs text-gray-400">
+                                Workshop Attendees
+                              </div>
+                            </div>
+                            <div className="text-center p-3 bg-black/40 backdrop-blur-sm rounded-lg">
+                              <div className="text-xl font-bold text-purple-400">
+                                6
+                              </div>
+                              <div className="text-xs text-gray-400">
+                                Workshops
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="relative rounded-xl overflow-hidden">
+                          <AspectRatio ratio={4 / 3}>
+                            <Image
+                              src="/images/v6.webp"
+                              alt="United Hacks V6 winning projects"
+                              fill
+                              className="object-cover"
+                            />
+                          </AspectRatio>
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end">
+                            <div className="p-4">
+                              <Badge className="bg-purple-600 hover:bg-purple-700 mb-2">
+                                Human Interaction
+                              </Badge>
+                              <h4 className="text-white font-medium">
+                                January 2026
+                              </h4>
+                              <p className="text-white/80 text-sm">
+                                Featuring winning projects from our human interaction themed hackathon.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
+                      <div className="flex gap-3">
+                        <Button
+                          variant="outline"
+                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
+                          asChild
+                        >
+                          <a
+                            href="https://blog.hackunited.org/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Article Recap
+                            <ArrowRightIcon className="h-4 w-4" />
+                          </a>
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
+                          asChild
+                        >
+                          <a
+                            href="https://unitedhacksv6.devpost.com/"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
