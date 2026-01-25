@@ -1770,7 +1770,7 @@ export default function Home() {
                           asChild
                         >
                           <a
-                            href="https://blog.hackunited.org/"
+                            href="https://blog.hackunited.org/united-hacks-v6-hackathon-recap"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
