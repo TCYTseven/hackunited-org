@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -468,131 +469,204 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="recognizedCompanies">
-          <h2
-            className={`headingText purpleGradient mt-4 mb-4 text-center ${playfairDisplay.className}`}
-          >
-            RECOGNIZED BY
-          </h2>
-          <div
-            className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative"
-            suppressHydrationWarning
-          >
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-            <div className="logoContainer flex" suppressHydrationWarning>
-              {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
-                <a
-                  key={`logo-${index}`}
-                  href={logo.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${logo.alt} article`}
-                  className="block"
+        <section className="relative py-10 sm:py-14">
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent" />
+          <div className="container mx-auto px-6 sm:px-8 md:px-8">
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div className="space-y-3">
+                <Badge
+                  variant="outline"
+                  className="w-fit border-purple-500/40 text-purple-300"
                 >
-                  <img
-                    src={logo.src}
-                    alt={logo.alt}
-                    className="cursor-pointer"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </a>
-              ))}
+                  Press
+                </Badge>
+                <h2
+                  className={`headingText purpleGradient text-left ${playfairDisplay.className}`}
+                >
+                  RECOGNIZED BY
+                </h2>
+                <p className="text-sm sm:text-base text-gray-400 max-w-xl">
+                  Highlighted by global outlets for empowering student builders
+                  with real-world tech projects and soft skill development.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3 text-xs sm:text-sm text-gray-400">
+                <div className="flex items-center gap-2 rounded-full border border-purple-500/20 bg-black/40 px-3 py-1">
+                  <span className="h-2 w-2 rounded-full bg-purple-400" />
+                  Global coverage
+                </div>
+                <div className="flex items-center gap-2 rounded-full border border-purple-500/20 bg-black/40 px-3 py-1">
+                  <span className="h-2 w-2 rounded-full bg-purple-400" />
+                  Youth-led nonprofit
+                </div>
+                <div className="flex items-center gap-2 rounded-full border border-purple-500/20 bg-black/40 px-3 py-1">
+                  <span className="h-2 w-2 rounded-full bg-purple-400" />
+                  Hackathon innovation
+                </div>
+              </div>
             </div>
-            <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black via-black to-transparent z-30 pointer-events-none" />
-            <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-black via-black to-transparent z-30 pointer-events-none" />
           </div>
-        </div>
+          <div className="container mx-auto mt-6 px-6 sm:px-8 md:px-8">
+            <div className="relative overflow-hidden rounded-2xl border border-purple-500/20 bg-black/30 px-2 py-6 sm:px-4">
+              <div className="logoContainer flex items-center" suppressHydrationWarning>
+                {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
+                  <a
+                    key={`logo-${index}`}
+                    href={logo.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${logo.alt} article`}
+                    className="block"
+                  >
+                    <img
+                      src={logo.src}
+                      alt={logo.alt}
+                      className="cursor-pointer"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </a>
+                ))}
+              </div>
+              <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black via-black to-transparent z-30 pointer-events-none" />
+              <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-black via-black to-transparent z-30 pointer-events-none" />
+            </div>
+          </div>
+        </section>
         {/* Who Are We Section */}
         <section
           id="who-are-we"
           className="relative overflow-hidden py-16 md:py-24"
         >
-          {/* Dot grid background pattern */}
-          {/* <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div> */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" />
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent" />
 
-          {/* Subtle gradient overlay */}
-          {/* <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div> */}
-
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-
-          {/* Large "About Us" background text */}
-          {/* <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <h2 className="text-[20rem] sm:text-[28vw] md:text-[25vw] lg:text-[20vw] xl:text-[25vw] xl:h-[25vw] font-bold text-white/10 select-none leading-[0.8] whitespace-nowrap">
-              ABOUT US
-            </h2>
-          </div> */}
-
-          {/* <div className="container relative max-w-3xl mx-auto px-2 sm:px-4">
-            <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-purple-500/20 animate-fade-in hover:border-purple-500/40 transition-all duration-500">
-              <p className="text-base sm:text-lg text-gray-200 leading-relaxed">
-                Hack United is a 501(c)(3) non-profit organization with a passion for programming and technology. Our
-                mission is to inspire and educate the next generation of
-                innovators through hackathons and workshops. We address a
-                problem not as commonly talked about, focusing on equipping
-                participants with the essential soft skills needed to thrive in
-                their chosen career paths. This is done through hands-on
-                application such as our free to enter hackathons, where participants
-                develop communication, teamwork, problem-solving, and presentation
-                skills alongside their technical abilities. Through our initiatives,
-                we ultimately aim to help individuals prosper in the realm of technology.
-              </p>
+          <div className="container relative mx-auto px-6 sm:px-8 md:px-8 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-center">
+            <div className="space-y-6 text-left">
+              <Badge
+                variant="outline"
+                className="w-fit border-purple-500/40 text-purple-300"
+              >
+                About
+              </Badge>
+              <h2 className="headingText purpleGradient">ABOUT US</h2>
+              <div className="space-y-4 text-sm sm:text-base text-gray-200 leading-relaxed">
+                <p>
+                  Hack United is a 501(c)(3) non-profit organization with a
+                  passion for programming and technology. We build welcoming
+                  spaces where students collaborate, learn, and create with
+                  confidence.
+                </p>
+                <p>
+                  Through free hackathons and workshops, participants develop
+                  communication, teamwork, problem-solving, and presentation
+                  skills alongside their technical growth.
+                </p>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <Card className="border border-purple-500/20 bg-black/40 backdrop-blur-sm">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-white text-base">
+                      Free Hackathons
+                    </CardTitle>
+                    <CardDescription className="text-gray-400">
+                      Real-world themes
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-sm text-gray-300">
+                    Build meaningful projects with mentorship and feedback.
+                  </CardContent>
+                </Card>
+                <Card className="border border-purple-500/20 bg-black/40 backdrop-blur-sm">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-white text-base">
+                      Skill Workshops
+                    </CardTitle>
+                    <CardDescription className="text-gray-400">
+                      Hands-on learning
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-sm text-gray-300">
+                    Learn from industry professionals and student leaders.
+                  </CardContent>
+                </Card>
+                <Card className="border border-purple-500/20 bg-black/40 backdrop-blur-sm">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-white text-base">
+                      Community First
+                    </CardTitle>
+                    <CardDescription className="text-gray-400">
+                      Global connections
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-sm text-gray-300">
+                    Meet builders worldwide in a supportive, creative space.
+                  </CardContent>
+                </Card>
+              </div>
             </div>
-          </div> */}
-
-          <div className="container mx-auto px-6 sm:px-8 md:px-8 flex flex-col md:flex-row items-center w-full md:h-[300px] font-light text-sm sm:text-base md:text-[21px] text-[#E8E8E8] text-center md:text-left py-8 md:py-0">
-            <div className="md:w-2/3 w-full">
-              <h2 className="headingText purpleGradient mt-[15px] mb-4 sm:mb-6">
-                ABOUT US
-              </h2>
-              <p className="leading-relaxed">
-                {" "}
-                Hack United is a 501(c)(3) non-profit organization with a
-                passion for programming and technology. Our mission is to
-                inspire and educate the next generation of innovators through
-                hackathons and workshops. We address a problem not as commonly
-                talked about, focusing on equipping participants with the
-                essential soft skills needed to thrive in their chosen career
-                paths. This is done through hands-on application such as our
-                free to enter hackathons, where participants develop
-                communication, teamwork, problem-solving, and presentation
-                skills alongside their technical abilities. Through our
-                initiatives, we ultimately aim to help individuals prosper in
-                the realm of technology.
-              </p>
+            <div className="relative">
+              <div className="rounded-3xl border border-purple-500/30 bg-gradient-to-br from-purple-900/20 via-black to-black p-6 sm:p-8">
+                <div className="flex items-center gap-4">
+                  <img
+                    className="h-16 w-16 sm:h-20 sm:w-20"
+                    src="/images/globe-icon.png"
+                    alt="Hack United globe icon"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div>
+                    <p className="text-xs uppercase text-gray-400">
+                      501(c)(3) nonprofit
+                    </p>
+                    <p className="text-lg sm:text-xl font-semibold text-white">
+                      Youth-led, global community
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-6 grid grid-cols-2 gap-3">
+                  <div className="rounded-xl border border-purple-500/20 bg-black/40 p-3 text-center">
+                    <p className="text-2xl font-bold text-purple-400">25k+</p>
+                    <p className="text-xs text-gray-400">Engineers impacted</p>
+                  </div>
+                  <div className="rounded-xl border border-purple-500/20 bg-black/40 p-3 text-center">
+                    <p className="text-2xl font-bold text-purple-400">50+</p>
+                    <p className="text-xs text-gray-400">Countries reached</p>
+                  </div>
+                </div>
+                <div className="mt-6 rounded-2xl border border-purple-500/20 bg-black/40 p-4 text-sm text-gray-300">
+                  We build confidence through real collaboration, storytelling,
+                  and projects that matter.
+                </div>
+              </div>
             </div>
-            <img
-              className="w-48 sm:w-64 md:w-[400px] mt-8 md:mt-0 md:mr-[70px]"
-              src="/images/globe-icon.png"
-              alt="Hack United globe icon"
-              loading="lazy"
-              decoding="async"
-            />
           </div>
         </section>
 
         {/* Stats Section */}
         <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
-          {/* Dot grid background pattern */}
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
-
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
-
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/95 to-black/90" />
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent" />
 
           <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
-            <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-12">
-              <h2 className="headingText purpleGradient mt-[15px] mb-4 sm:mb-6">
-                OUR IMPACT
-              </h2>
-              <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6 px-2">
-                Through hackathons, workshops, and community initiatives, we've
-                built a global network of innovators. But our mission extends
-                beyond hackathons.
-              </p>
-              <div className="bg-black/60 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-500">
-                <p className="text-gray-200 text-xs sm:text-sm md:text-base leading-relaxed">
+            <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-start mb-10 sm:mb-12">
+              <div className="space-y-4">
+                <Badge
+                  variant="outline"
+                  className="w-fit border-purple-500/50 text-purple-300 text-xs sm:text-sm"
+                >
+                  Impact
+                </Badge>
+                <h2 className="headingText purpleGradient">OUR IMPACT</h2>
+                <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed">
+                  Through hackathons, workshops, and community initiatives,
+                  we've built a global network of innovators. But our mission
+                  extends beyond hackathons.
+                </p>
+              </div>
+              <div className="bg-black/60 backdrop-blur-sm rounded-2xl p-5 sm:p-6 border border-purple-500/20">
+                <p className="text-gray-200 text-sm sm:text-base leading-relaxed">
                   <span className="text-purple-400 font-semibold">
                     Beyond hackathons:
                   </span>{" "}
@@ -608,6 +682,28 @@ export default function Home() {
                   — our initiative backing builders, creatives, and dreamers
                   with $50–$500 grants, no strings attached.
                 </p>
+                <div className="mt-4 flex flex-col sm:flex-row gap-3">
+                  <Button
+                    variant="outline"
+                    className="border-purple-500/40 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200"
+                    asChild
+                  >
+                    <a
+                      href="https://fund.hackunited.org/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Explore United Fund
+                    </a>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="border-gray-700 text-gray-200 hover:bg-gray-800/40"
+                    asChild
+                  >
+                    <Link href="/apply">Volunteer with us</Link>
+                  </Button>
+                </div>
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 px-6 sm:px-8 md:px-2">
@@ -653,26 +749,27 @@ export default function Home() {
 
         {/* Our Goals Section */}
         <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
-          {/* Dot grid background pattern */}
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
-
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/90 to-black/85" />
 
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
 
           <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
-            <div className="flex items-center justify-center mb-4 sm:mb-6">
+            <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-12 space-y-4">
               <Badge
                 variant="outline"
                 className="px-3 py-1 sm:px-4 border-purple-500/50 text-purple-300 text-xs sm:text-sm"
               >
                 Our Vision
               </Badge>
+              <h2 className="headingText purpleGradient mt-[15px] text-center">
+                OUR GOALS
+              </h2>
+              <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed">
+                We focus on more than code. Every initiative is designed to
+                grow confidence, collaboration, and real-world impact.
+              </p>
             </div>
-            <h2 className="headingText purpleGradient mt-[15px] mb-6 sm:mb-8 md:mb-12 text-center">
-              OUR GOALS
-            </h2>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-2">
               <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
@@ -781,31 +878,53 @@ export default function Home() {
                 </CardContent>
               </Card>
             </div>
+            <div className="mt-10 flex justify-center">
+              <Button
+                variant="outline"
+                className="border-purple-500/40 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200"
+                asChild
+              >
+                <Link href="/apply">See volunteer roles</Link>
+              </Button>
+            </div>
           </div>
         </section>
 
         {/* Past Events Section */}
         <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
-          {/* Dot grid background pattern */}
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
-
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/75 via-black/90 to-black/85" />
 
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
 
           <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
-            <div className="flex items-center justify-center mb-4 sm:mb-6">
+            <div className="max-w-4xl mx-auto text-center mb-8 sm:mb-12 space-y-4">
               <Badge
                 variant="outline"
                 className="px-3 py-1 sm:px-4 border-purple-500/50 text-purple-300 text-xs sm:text-sm"
               >
                 Our Legacy
               </Badge>
+              <h2 className="headingText purpleGradient mt-[15px] text-center">
+                PREVIOUS HACKATHONS
+              </h2>
+              <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed">
+                Six editions, dozens of workshops, and thousands of student
+                builders. Each season explores a new theme while elevating
+                creativity and collaboration.
+              </p>
+              <div className="flex flex-wrap justify-center gap-3 text-xs sm:text-sm text-gray-400">
+                <div className="rounded-full border border-purple-500/20 bg-black/40 px-3 py-1">
+                  6 editions
+                </div>
+                <div className="rounded-full border border-purple-500/20 bg-black/40 px-3 py-1">
+                  Global participation
+                </div>
+                <div className="rounded-full border border-purple-500/20 bg-black/40 px-3 py-1">
+                  Youth-led themes
+                </div>
+              </div>
             </div>
-            <h2 className="headingText purpleGradient mt-[15px] mb-6 sm:mb-8 md:mb-12 text-center">
-              PREVIOUS HACKATHONS
-            </h2>
 
             <div className="max-w-4xl mx-auto">
               <Tabs
@@ -1675,24 +1794,51 @@ export default function Home() {
         </section>
 
         {/* Judges From Section */}
-        <div className="py-8 sm:py-12 md:py-16 relative overflow-hidden">
-          <h2
-            className={`headingText purpleGradient mt-4 mb-3 sm:mb-4 text-center ${playfairDisplay.className}`}
-          >
-            JUDGES FROM
-          </h2>
-          <p className="text-gray-400 text-xs sm:text-sm md:text-base text-center mb-4 sm:mb-6 px-6 sm:px-8">
-            Interested in judging our event? Email{" "}
-            <a
-              href="mailto:humans@hackunited.org"
-              className="text-purple-400 hover:text-purple-300 underline transition-colors break-all sm:break-normal"
-            >
-              humans@hackunited.org
-            </a>
-          </p>
+        <section className="py-8 sm:py-12 md:py-16 relative overflow-hidden">
+          <div className="container mx-auto px-6 sm:px-8 md:px-8">
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div className="space-y-3">
+                <Badge
+                  variant="outline"
+                  className="w-fit border-purple-500/40 text-purple-300"
+                >
+                  Judges
+                </Badge>
+                <h2
+                  className={`headingText purpleGradient text-left ${playfairDisplay.className}`}
+                >
+                  JUDGES FROM
+                </h2>
+                <p className="text-gray-400 text-xs sm:text-sm md:text-base max-w-xl">
+                  Our panels include leaders from top companies and universities
+                  who care about youth innovation.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-purple-500/20 bg-black/40 p-4 text-sm text-gray-300">
+                <p>
+                  Interested in judging our event? Email{" "}
+                  <a
+                    href="mailto:humans@hackunited.org"
+                    className="text-purple-400 hover:text-purple-300 underline transition-colors break-all sm:break-normal"
+                  >
+                    humans@hackunited.org
+                  </a>
+                </p>
+                <div className="mt-3">
+                  <Button
+                    variant="outline"
+                    className="border-purple-500/40 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200"
+                    asChild
+                  >
+                    <a href="mailto:humans@hackunited.org">Become a judge</a>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div
-            className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative py-6"
+            className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative py-6 mt-6"
             suppressHydrationWarning
           >
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent z-10"></div>
@@ -1713,26 +1859,72 @@ export default function Home() {
             <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black via-black to-transparent z-30 pointer-events-none" />
             <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-black via-black to-transparent z-30 pointer-events-none" />
           </div>
-        </div>
+        </section>
 
         {/* CTA Section */}
         <section className="py-24 relative overflow-hidden">
-          {/* Dot grid background pattern */}
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
-
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/95 to-black/90" />
 
           <div className="container relative px-4 mx-auto">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white animate-fade-in">
-                Ready to Join Our Community?
-              </h2>
-              <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in">
-                Whether you're a beginner or an experienced developer, there's a
-                place for you in our community. Join us for our next hackathon
-                or become a part of our Discord community.
-              </p>
+            <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] items-start">
+              <div className="space-y-6">
+                <Badge
+                  variant="outline"
+                  className="w-fit border-purple-500/40 text-purple-300"
+                >
+                  Get Involved
+                </Badge>
+                <h2 className="text-3xl md:text-4xl font-bold text-white animate-fade-in">
+                  Ready to Join Our Community?
+                </h2>
+                <p className="text-lg text-gray-300 max-w-2xl animate-fade-in">
+                  Whether you're a beginner or an experienced developer,
+                  there's a place for you. Join our next hackathon or connect
+                  with builders in our Discord community.
+                </p>
+                <div className="grid gap-4">
+                  <div className="rounded-2xl border border-purple-500/20 bg-black/50 p-4">
+                    <h3 className="text-white font-semibold mb-1">
+                      Join the Discord
+                    </h3>
+                    <p className="text-sm text-gray-300">
+                      Meet mentors, form teams, and get updates on upcoming
+                      events.
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-purple-500/20 bg-black/50 p-4">
+                    <h3 className="text-white font-semibold mb-1">
+                      Volunteer or Partner
+                    </h3>
+                    <p className="text-sm text-gray-300">
+                      Help run workshops, mentor participants, or support our
+                      nonprofit mission.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button
+                    className="bg-purple-600 hover:bg-purple-700 text-white"
+                    asChild
+                  >
+                    <a
+                      href="https://discord.gg/hackunited"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Join Discord
+                    </a>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="border-purple-500/40 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200"
+                    asChild
+                  >
+                    <Link href="/apply">Volunteer</Link>
+                  </Button>
+                </div>
+              </div>
               <div className="flex justify-center animate-fade-in">
                 <DiscordWidget />
               </div>
