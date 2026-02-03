@@ -114,56 +114,84 @@ export default function DonatePage() {
   useEffect(() => {
     if (typeof window === "undefined" || !mounted) return;
 
-    const timeoutId = setTimeout(() => {
-      const sponsorContainers = document.querySelectorAll(".sponsorContainer");
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) return;
+
+    const tweens: gsap.core.Tween[] = [];
+    const innerTimeouts: number[] = [];
+
+    const timeoutId = window.setTimeout(() => {
+      const sponsorContainers = Array.from(
+        document.querySelectorAll<HTMLElement>(".sponsorContainer")
+      );
+
       sponsorContainers.forEach((container) => {
-        const images = container.querySelectorAll("img");
+        const images = Array.from(container.querySelectorAll("img"));
         let loadedCount = 0;
         let hasAnimated = false;
 
-        const checkAndAnimate = () => {
-          loadedCount++;
-          if ((loadedCount === images.length || images.length === 0) && !hasAnimated) {
-            hasAnimated = true;
-            // Small delay to ensure container width is calculated correctly
-            setTimeout(() => {
-              const firstSetWidth = container.scrollWidth / 4;
-              gsap.set(container, { x: 0 });
-              gsap.fromTo(
-                container,
-                { x: 0 },
-                {
-                  x: -firstSetWidth,
-                  duration: 20,
-                  ease: "none",
-                  repeat: -1,
-                }
-              );
-            }, 50);
+        const startAnimation = () => {
+          if (hasAnimated) return;
+          hasAnimated = true;
+
+          // Small delay to ensure container width is calculated correctly
+          const innerTimeoutId = window.setTimeout(() => {
+            const firstSetWidth = container.scrollWidth / 4;
+            if (!firstSetWidth) return;
+
+            gsap.set(container, { x: 0 });
+            const tween = gsap.fromTo(
+              container,
+              { x: 0 },
+              {
+                x: -firstSetWidth,
+                duration: 20,
+                ease: "none",
+                repeat: -1,
+              }
+            );
+            tweens.push(tween);
+          }, 50);
+          innerTimeouts.push(innerTimeoutId);
+        };
+
+        const handleImageReady = () => {
+          loadedCount += 1;
+          if (loadedCount >= images.length) {
+            startAnimation();
           }
         };
 
         if (images.length === 0) {
-          checkAndAnimate();
-        } else {
-          let allLoaded = true;
-          images.forEach((img) => {
-            if (img.complete) {
-              loadedCount++;
-            } else {
-              allLoaded = false;
-              img.addEventListener("load", checkAndAnimate, { once: true });
-              img.addEventListener("error", checkAndAnimate, { once: true });
-            }
-          });
-          if (allLoaded && images.length > 0) {
-            checkAndAnimate();
+          startAnimation();
+          return;
+        }
+
+        let allLoaded = true;
+        images.forEach((img) => {
+          if (img.complete) {
+            handleImageReady();
+          } else {
+            allLoaded = false;
+            img.addEventListener("load", handleImageReady, { once: true });
+            img.addEventListener("error", handleImageReady, { once: true });
           }
+        });
+
+        if (allLoaded) {
+          startAnimation();
         }
       });
     }, 200); // Increased delay to ensure DOM is ready
 
-    return () => clearTimeout(timeoutId);
+    return () => {
+      clearTimeout(timeoutId);
+      innerTimeouts.forEach((id) => clearTimeout(id));
+      tweens.forEach((tween) => tween.kill());
+    };
   }, [mounted]);
 
   return (
