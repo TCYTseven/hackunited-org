@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -175,50 +175,64 @@ export default function RootLayout({
                       className="border-gray-700 bg-gray-900"
                     >
                       <div className="mt-8 flex flex-col gap-6">
-                        <Link
-                          href="/"
-                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
-                        >
-                          Home
-                        </Link>
-                        <Link
-                          href="/donate"
-                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
-                        >
-                          Donate
-                        </Link>
-                        <Link
-                          href="/team"
-                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
-                        >
-                          Team
-                        </Link>
-                        <Link
-                          href="/judges"
-                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
-                        >
-                          Judges
-                        </Link>
-                        <Link
-                          href="/apply"
-                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
-                        >
-                          Apply
-                        </Link>
-                        <Link
-                          href="/social"
-                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
-                        >
-                          Socials
-                        </Link>
-                        <a
-                          href="https://blog.hackunited.org/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
-                        >
-                          Blog
-                        </a>
+                        <SheetClose asChild>
+                          <Link
+                            href="/"
+                            className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
+                          >
+                            Home
+                          </Link>
+                        </SheetClose>
+                        <SheetClose asChild>
+                          <Link
+                            href="/donate"
+                            className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
+                          >
+                            Donate
+                          </Link>
+                        </SheetClose>
+                        <SheetClose asChild>
+                          <Link
+                            href="/team"
+                            className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
+                          >
+                            Team
+                          </Link>
+                        </SheetClose>
+                        <SheetClose asChild>
+                          <Link
+                            href="/judges"
+                            className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
+                          >
+                            Judges
+                          </Link>
+                        </SheetClose>
+                        <SheetClose asChild>
+                          <Link
+                            href="/apply"
+                            className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
+                          >
+                            Apply
+                          </Link>
+                        </SheetClose>
+                        <SheetClose asChild>
+                          <Link
+                            href="/social"
+                            className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
+                          >
+                            Socials
+                          </Link>
+                        </SheetClose>
+                        <SheetClose asChild>
+                          <a
+                            href="https://blog.hackunited.org/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
+                          >
+                            Blog
+                          </a>
+                        </SheetClose>
                       </div>
                     </SheetContent>
                   </Sheet>

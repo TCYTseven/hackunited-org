@@ -1,8 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { 
   Users, 
@@ -14,13 +13,20 @@ import {
   Megaphone, 
   Briefcase,
   MessageSquare,
-  FileText,
-  ExternalLink,
   X
 } from "lucide-react"
 
+type PositionDetail = {
+  department: string
+  color: string
+  responsibilities: string[]
+  requirements: string[]
+}
+
+type SelectedPosition = PositionDetail & { name: string }
+
 export default function ApplyPage() {
-  const [selectedPosition, setSelectedPosition] = useState<any>(null)
+  const [selectedPosition, setSelectedPosition] = useState<SelectedPosition | null>(null)
 
   const benefits = [
     "Service Hours*", 
@@ -30,7 +36,7 @@ export default function ApplyPage() {
     "Free Swag**"
   ]
 
-  const positionDetails = {
+  const positionDetails: Record<string, PositionDetail> = {
     "Social Media Manager": {
       department: "Growth",
       color: "text-pink-400",
@@ -216,9 +222,11 @@ export default function ApplyPage() {
   ]
 
   const openPositionModal = (positionName: string) => {
+    const details = positionDetails[positionName]
+    if (!details) return
     setSelectedPosition({
       name: positionName,
-      ...positionDetails[positionName as keyof typeof positionDetails]
+      ...details
     })
   }
 
@@ -303,6 +311,7 @@ export default function ApplyPage() {
                   department.positions.map((position, posIndex) => (
                     <button
                       key={`${department.title}-${posIndex}`}
+                      type="button"
                       onClick={() => openPositionModal(position)}
                       className="text-left p-3 sm:p-4 bg-gray-900/60 border border-purple-500/20 rounded-lg hover:border-purple-400/40 hover:bg-gray-800/60 transition-all duration-300 group"
                     >
@@ -453,13 +462,16 @@ export default function ApplyPage() {
               </div>
               <div className="flex gap-2 flex-shrink-0 ml-2">
                 <button
+                  type="button"
                   onClick={scrollToApplication}
                   className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300"
                 >
                   Apply
                 </button>
                 <button
+                  type="button"
                   onClick={closeModal}
+                  aria-label="Close position details"
                   className="p-2 hover:bg-gray-800 rounded-lg transition-colors duration-200 flex-shrink-0"
                 >
                   <X className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
@@ -534,12 +546,14 @@ export default function ApplyPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <button
+                  type="button"
                   onClick={scrollToApplication}
                   className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-300 flex-1 text-sm sm:text-base"
                 >
                   Apply for this Position
                 </button>
                 <button
+                  type="button"
                   onClick={closeModal}
                   className="border border-gray-600 text-gray-300 hover:bg-gray-800 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg transition-all duration-300 text-sm sm:text-base"
                 >

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,11 +13,8 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { CheckIcon, ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import InteractiveLogo from "@/components/interactive-logo";
-import { ScrollButton, ScrollButtonWithIcon } from "@/components/scroll-button";
-import NewsCarousel from "@/components/ui/news-carousel";
 import HeroButton from "../components/ui/HeroButton/HeroButton";
 import "./page.css";
 import gsap from "gsap";
@@ -61,59 +57,6 @@ const logos = [
     href: "https://www.barchart.com/story/news/33037092/hack-united-empowers-youth-with-soft-skills-at-united-hacks-v5",
   },
 ];
-
-const allSponsors = [
-  { src: "/images/sponsors/launchx.png", alt: "LaunchX" },
-  { src: "/images/sponsors/YRI.jpg", alt: "YRI" },
-  { src: "/images/sponsors/cp-logo-dark.svg", alt: "CodePath" },
-  { src: "/images/sponsors/Coder.com_logo.png", alt: "Coder.com" },
-  { src: "/images/sponsors/incogni_black.png", alt: "Incogni" },
-  { src: "/images/sponsors/saily-logo-black_(3).png", alt: "Saily" },
-  { src: "/images/sponsors/interviewbuddy.png", alt: "InterviewBuddy" },
-  { src: "/images/sponsors/opennote.png", alt: "OpenNote" },
-  { src: "/images/sponsors/images.png", alt: "Sponsor" },
-  { src: "/images/sponsors/devIT.png", alt: "DevIT" },
-  {
-    src: "/images/sponsors/algoverse_logo_max_quality_-_compresed_(1).png",
-    alt: "Algoverse",
-  },
-  { src: "/images/sponsors/aops_logo.png", alt: "AOPS" },
-  { src: "/images/sponsors/axure_logo.png", alt: "Axure" },
-  { src: "/images/sponsors/cake_logo_blue_gray.png", alt: "Cake" },
-  { src: "/images/sponsors/CoCalc-Image.png", alt: "CoCalc" },
-  { src: "/images/sponsors/codepath-1x1_icon-dark_1.jpg", alt: "CodePath" },
-  { src: "/images/sponsors/desmossss_logo.png", alt: "Desmos" },
-  { src: "/images/sponsors/devtranet_logo_with_text.png", alt: "Devtranet" },
-  { src: "/images/sponsors/echo_3d.png", alt: "Echo3D" },
-  { src: "/images/sponsors/FearedMediaLogo.png", alt: "Feared Media" },
-  { src: "/images/sponsors/givemycertificate.png", alt: "GiveMyCertificate" },
-  { src: "/images/sponsors/images_(2).png", alt: "Sponsor" },
-  { src: "/images/sponsors/Logomark_(With_color).png", alt: "Sponsor" },
-  { src: "/images/sponsors/NordVPN_horizontal.svg.png", alt: "NordVPN" },
-  { src: "/images/sponsors/Postman.png", alt: "Postman" },
-  { src: "/images/sponsors/StreamYardLogo.png", alt: "StreamYard" },
-  { src: "/images/sponsors/SwishSwoosh_Logo_Light_BG.png", alt: "SwishSwoosh" },
-  { src: "/images/sponsors/VerbwireLogoHackathonn.png", alt: "Verbwire" },
-  { src: "/images/sponsors/Vue_School_logo.png", alt: "Vue School" },
-  { src: "/images/sponsors/WoflramLogo.png", alt: "Wolfram" },
-  { src: "/images/sponsors/1200px-.xyz_logo.svg.png", alt: ".xyz" },
-  { src: "/images/sponsors/1_pass.jpg", alt: "1Pass" },
-];
-
-// Split sponsors into 2 groups (removed middle group, split it between first and third)
-const firstThird = Math.ceil(allSponsors.length / 3);
-const secondThird = Math.ceil((allSponsors.length * 2) / 3);
-const sponsors2FirstHalf = allSponsors.slice(
-  firstThird,
-  Math.ceil((firstThird + secondThird) / 2)
-);
-const sponsors2SecondHalf = allSponsors.slice(
-  Math.ceil((firstThird + secondThird) / 2),
-  secondThird
-);
-
-const sponsors1 = [...allSponsors.slice(0, firstThird), ...sponsors2FirstHalf];
-const sponsors3 = [...sponsors2SecondHalf, ...allSponsors.slice(secondThird)];
 
 const judges = [
   { src: "/judgesfrom/Amazon-Logo.png", alt: "Amazon" },
@@ -236,16 +179,6 @@ const styles = `
     }
   }
 
-  .sponsorContainer {
-    will-change: transform;
-    align-items: center;
-    backface-visibility: hidden;
-    min-height: 80px;
-    padding: 20px 0;
-    display: flex;
-    transform: translateX(0);
-  }
-
   .judgeContainer {
     will-change: transform;
     align-items: center;
@@ -353,31 +286,6 @@ const styles = `
     opacity: 0;
   }
 
-  .sponsorContainer img {
-    height: 60px;
-    width: auto;
-    max-width: 200px;
-    min-width: 80px;
-    object-fit: contain;
-    margin: 0 40px;
-    display: block;
-    flex-shrink: 0;
-    padding: 8px 0;
-  }
-
-  @media (max-width: 768px) {
-    .sponsorContainer {
-      min-height: 70px;
-      padding: 15px 0;
-    }
-    .sponsorContainer img {
-      height: 45px;
-      margin: 0 25px;
-      max-width: 150px;
-      min-width: 60px;
-      padding: 6px 0;
-    }
-  }
 `;
 
 function DiscordWidget() {
@@ -388,6 +296,7 @@ function DiscordWidget() {
         width="100%"
         height="600"
         frameBorder="0"
+        loading="lazy"
         sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
         className="rounded-lg border border-purple-500/30 bg-gray-900"
         title="Hack United Discord Community"
@@ -417,129 +326,81 @@ export default function Home() {
 
   // Fix hydration by only running animations on client side after hydration
   useEffect(() => {
-    // Only run on client side after hydration
     if (typeof window === "undefined" || !mounted) return;
 
-    // Small delay to ensure DOM is fully ready
-    const timeoutId = setTimeout(() => {
-      const logoContainer = document.querySelector(".logoContainer");
-      if (logoContainer) {
-        // Wait for images to load before calculating
-        const images = logoContainer.querySelectorAll("img");
-        let loadedCount = 0;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-        const checkAndAnimate = () => {
-          loadedCount++;
-          if (loadedCount === images.length || images.length === 0) {
-            // Calculate the width of one set of logos
-            const firstSetWidth = logoContainer.scrollWidth / 4;
+    if (prefersReducedMotion) return;
 
-            gsap.to(".logoContainer", {
-              x: -firstSetWidth,
-              duration: 10,
-              ease: "none",
-              repeat: -1,
-            });
-          }
-        };
+    const tweens: gsap.core.Tween[] = [];
 
-        if (images.length === 0) {
-          checkAndAnimate();
-        } else {
-          images.forEach((img) => {
-            if (img.complete) {
-              checkAndAnimate();
-            } else {
-              img.addEventListener("load", checkAndAnimate);
-              img.addEventListener("error", checkAndAnimate);
-            }
-          });
+    const animateMarquee = (container: Element, duration: number) => {
+      const images = Array.from(container.querySelectorAll("img"));
+      let loadedCount = 0;
+      let hasAnimated = false;
+
+      const startAnimation = () => {
+        if (hasAnimated) return;
+        hasAnimated = true;
+        const firstSetWidth = container.scrollWidth / 4;
+        if (!firstSetWidth) return;
+
+        gsap.set(container, { x: 0 });
+        const tween = gsap.to(container, {
+          x: -firstSetWidth,
+          duration,
+          ease: "none",
+          repeat: -1,
+        });
+        tweens.push(tween);
+      };
+
+      const handleImageReady = () => {
+        loadedCount += 1;
+        if (loadedCount >= images.length) {
+          startAnimation();
         }
+      };
+
+      if (images.length === 0) {
+        startAnimation();
+        return;
       }
 
-      // Sponsor carousels animations
-      const sponsorContainers = document.querySelectorAll(".sponsorContainer");
-      sponsorContainers.forEach((container) => {
-        const carouselIndex = container.getAttribute("data-carousel");
-        const images = container.querySelectorAll("img");
-        let loadedCount = 0;
-
-        const checkAndAnimate = () => {
-          loadedCount++;
-          if (loadedCount === images.length || images.length === 0) {
-            // Calculate the width of one set of sponsors
-            const firstSetWidth = container.scrollWidth / 4;
-
-            // Both carousels: left to right
-            // Start from 0, animate to negative (container moves left, content appears to move right)
-            gsap.set(container, { x: 0 });
-            gsap.fromTo(
-              container,
-              { x: 0 },
-              {
-                x: -firstSetWidth,
-                duration: 20,
-                ease: "none",
-                repeat: -1,
-              }
-            );
-          }
-        };
-
-        if (images.length === 0) {
-          checkAndAnimate();
+      let allLoaded = true;
+      images.forEach((img) => {
+        if (img.complete) {
+          handleImageReady();
         } else {
-          images.forEach((img) => {
-            if (img.complete) {
-              checkAndAnimate();
-            } else {
-              img.addEventListener("load", checkAndAnimate);
-              img.addEventListener("error", checkAndAnimate);
-            }
-          });
+          allLoaded = false;
+          img.addEventListener("load", handleImageReady, { once: true });
+          img.addEventListener("error", handleImageReady, { once: true });
         }
       });
 
-      // Judges carousel animation
+      if (allLoaded) {
+        startAnimation();
+      }
+    };
+
+    const timeoutId = window.setTimeout(() => {
+      const logoContainer = document.querySelector(".logoContainer");
+      if (logoContainer) {
+        animateMarquee(logoContainer, 10);
+      }
+
       const judgeContainer = document.querySelector(".judgeContainer");
       if (judgeContainer) {
-        const images = judgeContainer.querySelectorAll("img");
-        let loadedCount = 0;
-
-        const checkAndAnimate = () => {
-          loadedCount++;
-          if (loadedCount === images.length || images.length === 0) {
-            const firstSetWidth = judgeContainer.scrollWidth / 4;
-            gsap.set(judgeContainer, { x: 0 });
-            gsap.fromTo(
-              judgeContainer,
-              { x: 0 },
-              {
-                x: -firstSetWidth,
-                duration: 15,
-                ease: "none",
-                repeat: -1,
-              }
-            );
-          }
-        };
-
-        if (images.length === 0) {
-          checkAndAnimate();
-        } else {
-          images.forEach((img) => {
-            if (img.complete) {
-              checkAndAnimate();
-            } else {
-              img.addEventListener("load", checkAndAnimate);
-              img.addEventListener("error", checkAndAnimate);
-            }
-          });
-        }
+        animateMarquee(judgeContainer, 15);
       }
-    }, 100); // Small delay to ensure hydration is complete
+    }, 100);
 
-    return () => clearTimeout(timeoutId);
+    return () => {
+      clearTimeout(timeoutId);
+      tweens.forEach((tween) => tween.kill());
+    };
   }, [mounted]);
 
   return (
@@ -587,8 +448,10 @@ export default function Home() {
             <div className="left flex items-center justify-center md:justify-end mt-8 sm:mt-12 md:mt-0">
               <img
                 className="hero-logo h-[200px] sm:h-[240px] md:h-[350px] md:mr-[48px]"
-                src="./images/Logo.png"
-                alt=""
+                src="/images/Logo.png"
+                alt="Hack United logo"
+                loading="eager"
+                decoding="async"
               />
               <div className="glassCard glassCard1 hidden h-[79.24px] w-[240.8px] pl-[16px] md:block">
                 <h3 className="purpleGradient mt-[5px]">25,000+</h3>
@@ -618,14 +481,22 @@ export default function Home() {
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
             <div className="logoContainer flex" suppressHydrationWarning>
               {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
-                <img
-                  key={index}
-                  src={logo.src}
-                  alt={logo.alt}
-                  onClick={() => window.open(logo.href, "_blank")}
-                  className="cursor-pointer"
-                  loading="lazy"
-                />
+                <a
+                  key={`logo-${index}`}
+                  href={logo.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${logo.alt} article`}
+                  className="block"
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="cursor-pointer"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
               ))}
             </div>
             <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black via-black to-transparent z-30 pointer-events-none" />
@@ -692,8 +563,10 @@ export default function Home() {
             </div>
             <img
               className="w-48 sm:w-64 md:w-[400px] mt-8 md:mt-0 md:mr-[70px]"
-              src="./images/globe-icon.png"
-              alt=""
+              src="/images/globe-icon.png"
+              alt="Hack United globe icon"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </section>
