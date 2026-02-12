@@ -124,6 +124,45 @@ const judges = [
   { src: "/judgesfrom/YC-Logo.png", alt: "Y Combinator" },
 ];
 
+const impactHighlights = [
+  {
+    value: "25,000+",
+    label: "Engineers Impacted",
+    detail: "Students reached through hackathons, workshops, and year-round programming.",
+  },
+  {
+    value: "3,000+",
+    label: "Community Members",
+    detail: "Builders collaborating in our Discord and event ecosystem.",
+  },
+  {
+    value: "50+",
+    label: "Countries Reached",
+    detail: "Global participation from students across diverse learning environments.",
+  },
+];
+
+const goalPillars = [
+  {
+    title: "Accelerating Soft Skills",
+    tagline: "Beyond just coding mechanics",
+    description:
+      "We teach more than just mechanical coding skills: As the world rapidly evolves, we envision an inclusive platform where everyone can learn about the exciting advancements in the tech field and the knowledge needed to continue their programming journey.",
+  },
+  {
+    title: "Practical Applications",
+    tagline: "Real-world problem solving",
+    description:
+      "We emphasize practical applications of programming and technology to prepare community members for the rapidly changing future. Our hackathons help exemplify our goals as we consistently use real-world problems to develop themes.",
+  },
+  {
+    title: "Connecting Innovators",
+    tagline: "Building a supportive community",
+    description:
+      "Our community provides a platform for innovators to learn, grow, and support each other. We connect like-minded individuals to overcome the challenges of acquiring new skills. Join us to thrive in a collaborative environment.",
+  },
+];
+
 // Simple animations
 const styles = `
   @keyframes fadeIn {
@@ -157,34 +196,6 @@ const styles = `
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
     z-index: 0;
-  }
-
-  .goal-icon-container {
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    border-radius: 9999px;
-    background: rgba(139, 92, 246, 0.1);
-    box-shadow: 0 0 20px 5px rgba(168, 85, 247, 0.4);
-  }
-
-  .goal-icon-container svg {
-    width: 40px;
-    height: 40px;
-  }
-
-  @media (max-width: 768px) {
-    .goal-icon-container {
-      width: 64px;
-      height: 64px;
-    }
-    .goal-icon-container svg {
-      width: 32px;
-      height: 32px;
-    }
   }
 
   .tab-trigger-custom {
@@ -334,21 +345,6 @@ const styles = `
   }
 
   .glassCard3 {
-    animation: heroFadeUp 0.8s ease-out 1.2s forwards;
-    opacity: 0;
-  }
-
-  .stat-card-1 {
-    animation: heroFadeUp 0.8s ease-out 0.8s forwards;
-    opacity: 0;
-  }
-
-  .stat-card-2 {
-    animation: heroFadeUp 0.8s ease-out 1s forwards;
-    opacity: 0;
-  }
-
-  .stat-card-3 {
     animation: heroFadeUp 0.8s ease-out 1.2s forwards;
     opacity: 0;
   }
@@ -698,215 +694,151 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Stats Section */}
+        {/* Impact Section */}
         <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
-          {/* Dot grid background pattern */}
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
-
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
-
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
+          <div className="absolute inset-0 bg-[#05030a]"></div>
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.018),transparent_35%,rgba(255,255,255,0.01))]"></div>
+          <div className="absolute inset-0 opacity-12 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:28px_28px]"></div>
+          <div className="absolute top-0 left-0 right-0 h-px bg-purple-400/35"></div>
 
           <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
-            <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-12">
-              <h2 className="headingText purpleGradient mt-[15px] mb-4 sm:mb-6">
+            <div className="max-w-4xl mb-8 sm:mb-12">
+              <Badge
+                variant="outline"
+                className="mb-4 border-purple-300/40 text-purple-200 bg-white/[0.03] hover:bg-white/[0.03]"
+              >
+                Global Footprint
+              </Badge>
+              <h2 className="headingText mt-[15px] mb-4 sm:mb-5 text-white">
                 OUR IMPACT
               </h2>
-              <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6 px-2">
+              <p className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed">
                 Through hackathons, workshops, and community initiatives, we've
                 built a global network of innovators. But our mission extends
                 beyond hackathons.
               </p>
-              <div className="bg-black/60 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-500">
-                <p className="text-gray-200 text-xs sm:text-sm md:text-base leading-relaxed">
-                  <span className="text-purple-400 font-semibold">
-                    Beyond hackathons:
-                  </span>{" "}
-                  Check out{" "}
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-12">
+              <div className="lg:col-span-8 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl overflow-hidden shadow-[0_10px_28px_rgba(0,0,0,0.38)]">
+                <div className="divide-y divide-white/10">
+                  {impactHighlights.map((item, index) => (
+                    <article
+                      key={item.label}
+                      className="group grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center px-5 py-6 sm:px-7 sm:py-7"
+                    >
+                      <div>
+                        <p className="text-[11px] tracking-[0.18em] text-slate-300 mb-2">
+                          METRIC 0{index + 1}
+                        </p>
+                        <h3 className="text-white text-xl sm:text-2xl font-semibold mb-2 group-hover:text-purple-200 transition-colors">
+                          {item.label}
+                        </h3>
+                        <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+                          {item.detail}
+                        </p>
+                      </div>
+                      <p className="text-4xl sm:text-5xl font-semibold text-purple-300 tracking-tight">
+                        {item.value}
+                      </p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+
+              <aside className="lg:col-span-4 flex flex-col gap-6">
+                <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 sm:p-6 shadow-[0_10px_28px_rgba(0,0,0,0.34)]">
+                  <p className="text-xs tracking-[0.15em] text-slate-300 mb-3">
+                    BEYOND HACKATHONS
+                  </p>
+                  <p className="text-gray-100 text-sm sm:text-base leading-relaxed">
+                    United Fund backs young builders with micro-grants between
+                    $50 and $500 so promising projects can move from prototypes
+                    to launch.
+                  </p>
                   <a
                     href="https://fund.hackunited.org/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-purple-400 hover:text-purple-300 underline transition-colors"
+                    className="inline-flex items-center mt-5 text-sm font-semibold text-purple-300 hover:text-purple-200 transition-colors"
                   >
-                    United Fund
-                  </a>{" "}
-                  — our initiative backing builders, creatives, and dreamers
-                  with $50–$500 grants, no strings attached.
-                </p>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 px-6 sm:px-8 md:px-2">
-              <Card className="stat-card-1 border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
-                <CardHeader className="pb-2 p-4 sm:p-6 text-center sm:text-left">
-                  <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-400">
-                    25,000+
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-center sm:text-left p-4 sm:p-6 pt-0">
-                  <CardDescription className="text-white text-xs sm:text-sm md:text-base">
-                    Engineers Impacted
-                  </CardDescription>
-                </CardContent>
-              </Card>
-              <Card className="stat-card-2 border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
-                <CardHeader className="pb-2 p-4 sm:p-6 text-center sm:text-left">
-                  <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-400">
-                    3,000+
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-center sm:text-left p-4 sm:p-6 pt-0">
-                  <CardDescription className="text-white text-xs sm:text-sm md:text-base">
-                    Community Members
-                  </CardDescription>
-                </CardContent>
-              </Card>
-              <Card className="stat-card-3 border border-purple-500/30 bg-gradient-to-br from-purple-900/30 to-black/80 backdrop-blur-sm sm:col-span-2 lg:col-span-1 hover:border-purple-500/50 hover:scale-105 transition-all duration-300">
-                <CardHeader className="pb-2 p-4 sm:p-6 text-center sm:text-left">
-                  <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-400">
-                    50+
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-center sm:text-left p-4 sm:p-6 pt-0">
-                  <CardDescription className="text-white text-xs sm:text-sm md:text-base">
-                    Countries Reached
-                  </CardDescription>
-                </CardContent>
-              </Card>
+                    Explore United Fund <ArrowRightIcon className="ml-2 h-4 w-4" />
+                  </a>
+                </div>
+
+                <div className="rounded-2xl border border-white/10 bg-white/[0.025] p-5 sm:p-6">
+                  <p className="text-xs tracking-[0.15em] text-gray-300 mb-4">
+                    WHAT THIS MEANS
+                  </p>
+                  <ul className="space-y-3 text-sm sm:text-base text-gray-200">
+                    <li className="flex items-start gap-2">
+                      <CheckIcon className="w-4 h-4 mt-1 text-purple-300" />
+                      More first-time builders are shipping complete projects.
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckIcon className="w-4 h-4 mt-1 text-purple-300" />
+                      Cross-border teams are collaborating consistently.
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckIcon className="w-4 h-4 mt-1 text-purple-300" />
+                      Students stay involved beyond a single event cycle.
+                    </li>
+                  </ul>
+                </div>
+              </aside>
             </div>
           </div>
         </section>
 
-        {/* Our Goals Section */}
+        {/* Goals Section */}
         <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
-          {/* Dot grid background pattern */}
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
-
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
-
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
+          <div className="absolute inset-0 bg-[#0a0813]"></div>
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.025),transparent_40%,rgba(255,255,255,0.015))]"></div>
+          <div className="absolute top-0 left-0 right-0 h-px bg-purple-400/35"></div>
+          <div className="absolute inset-0 opacity-15 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:30px_30px]"></div>
 
           <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
-            <div className="flex items-center justify-center mb-4 sm:mb-6">
-              <Badge
-                variant="outline"
-                className="px-3 py-1 sm:px-4 border-purple-500/50 text-purple-300 text-xs sm:text-sm"
-              >
-                Our Vision
-              </Badge>
-            </div>
-            <h2 className="headingText purpleGradient mt-[15px] mb-6 sm:mb-8 md:mb-12 text-center">
-              OUR GOALS
-            </h2>
+            <div className="grid gap-8 lg:grid-cols-12">
+              <div className="lg:col-span-4">
+                <Badge
+                  variant="outline"
+                  className="mb-5 border-purple-300/40 text-purple-200 bg-white/[0.04]"
+                >
+                  Our Vision
+                </Badge>
+                <h2 className="headingText mt-[15px] mb-4 text-white">OUR GOALS</h2>
+                <p className="text-gray-200 text-sm sm:text-base leading-relaxed max-w-md">
+                  Hack United is designed as a long-term growth path, not a
+                  one-week sprint. These pillars guide how we build programs and
+                  how participants progress through them.
+                </p>
+              </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 px-2">
-              <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
-                <CardHeader>
-                  <div className="goal-icon-container">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="text-purple-400"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M13 10V3L4 14h7v7l9-11h-7z"
-                      ></path>
-                    </svg>
-                  </div>
-                  <CardTitle className="text-white text-center">
-                    Accelerating Soft Skills
-                  </CardTitle>
-                  <CardDescription className="text-gray-300 text-center">
-                    Beyond just coding mechanics
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-300 text-center">
-                    We teach more than just mechanical coding skills: As the
-                    world rapidly evolves, we envision an inclusive platform
-                    where everyone can learn about the exciting advancements in
-                    the tech field and the knowledge needed to continue their
-                    programming journey.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
-                <CardHeader>
-                  <div className="goal-icon-container">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="text-purple-400"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                      ></path>
-                    </svg>
-                  </div>
-                  <CardTitle className="text-white text-center">
-                    Practical Applications
-                  </CardTitle>
-                  <CardDescription className="text-gray-300 text-center">
-                    Real-world problem solving
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-300 text-center">
-                    We emphasize practical applications of programming and
-                    technology to prepare community members for the rapidly
-                    changing future. Our hackathons help exemplify our goals as
-                    we consistently use real-world problems to develop themes.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md hover:border-purple-500/60 hover:scale-105 transition-all duration-300 animate-fade-in">
-                <CardHeader>
-                  <div className="goal-icon-container">
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="text-purple-400"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                      ></path>
-                    </svg>
-                  </div>
-                  <CardTitle className="text-white text-center">
-                    Connecting Innovators
-                  </CardTitle>
-                  <CardDescription className="text-gray-300 text-center">
-                    Building a supportive community
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-300 text-center">
-                    Our community provides a platform for innovators to learn,
-                    grow, and support each other. We connect like-minded
-                    individuals to overcome the challenges of acquiring new
-                    skills. Join us to thrive in a collaborative environment.
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="lg:col-span-8 space-y-5">
+                {goalPillars.map((goal, index) => (
+                  <article
+                    key={goal.title}
+                    className="relative rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-xl px-5 py-6 sm:px-7 sm:py-7 shadow-[0_10px_28px_rgba(0,0,0,0.24)]"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-purple-300/70 bg-purple-300/15 text-xs font-semibold text-purple-200">
+                        {index + 1}
+                      </span>
+                      <p className="text-xs tracking-[0.12em] text-purple-200/80">
+                        {goal.tagline}
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="text-white text-xl sm:text-2xl font-semibold mb-3">
+                        {goal.title}
+                      </h3>
+                      <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+                        {goal.description}
+                      </p>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </section>

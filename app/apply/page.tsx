@@ -188,7 +188,7 @@ export default function ApplyPage() {
     {
       title: "Growth",
       icon: <Megaphone className="w-5 h-5" />,
-      color: "from-pink-500 to-rose-600",
+      iconColor: "text-purple-200",
       positions: [
         "Social Media Manager",
         "Short-Form Creator",
@@ -198,19 +198,19 @@ export default function ApplyPage() {
     {
       title: "Human Resources",
       icon: <Briefcase className="w-5 h-5" />,
-      color: "from-blue-500 to-indigo-600",
+      iconColor: "text-purple-200",
       positions: ["Talent Acquisition Manager", "Administrative Coordinator"],
     },
     {
       title: "Strategy",
       icon: <MessageSquare className="w-5 h-5" />,
-      color: "from-green-500 to-emerald-600",
+      iconColor: "text-purple-200",
       positions: ["Outreach Manager", "Project Manager"],
     },
     {
       title: "Community & Content",
       icon: <Code className="w-5 h-5" />,
-      color: "from-purple-500 to-violet-600",
+      iconColor: "text-purple-200",
       positions: ["Article Writer", "Community Manager"],
     },
   ]
@@ -235,20 +235,19 @@ export default function ApplyPage() {
     <main className="bg-black text-white">
       {/* Mobile-Responsive Hero */}
       <section className="relative py-16 sm:py-20 lg:py-24 -mt-20 pt-24 sm:pt-28 lg:pt-32">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(#ffffff_0.5px,transparent_1px)] [background-size:20px_20px] opacity-20"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-purple-600/8 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-[#0a0812]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),transparent_40%,rgba(255,255,255,0.015))]"></div>
+        <div className="absolute inset-0 opacity-15 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:30px_30px]"></div>
+        <div className="absolute top-0 left-0 right-0 h-px bg-purple-400/35"></div>
         
         <div className="container relative px-4 mx-auto text-center">
-          <Badge className="bg-purple-600/10 text-purple-300/80 border-purple-500/20 mb-4 text-xs sm:text-sm">
+          <Badge className="bg-white/[0.04] hover:bg-white/[0.04] text-purple-200 border-purple-300/30 mb-4 text-xs sm:text-sm">
             Join Our Mission
           </Badge>
           
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
             Join The{" "}
-            <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
-              Team
-            </span>
+            <span className="text-purple-300">Team</span>
           </h1>
           
           <p className="text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base lg:text-lg">
@@ -258,7 +257,7 @@ export default function ApplyPage() {
           <div className="flex justify-center">
             <a 
               href="mailto:jobs@hackunited.org"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base"
+              className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold transition-colors text-sm sm:text-base shadow-[0_8px_18px_rgba(0,0,0,0.3)]"
             >
               <Mail className="w-4 h-4" />
               Apply Now
@@ -268,14 +267,14 @@ export default function ApplyPage() {
       </section>
 
       {/* Mobile-Responsive Benefits & Positions */}
-      <section className="py-8 sm:py-12 lg:py-16">
+      <section className="py-8 sm:py-12 lg:py-16 bg-[#08070d]">
         <div className="container px-4 mx-auto">
           <div className="grid lg:grid-cols-4 gap-6 lg:gap-8">
             
             {/* Benefits Column - Mobile First */}
             <div className="lg:col-span-1">
               <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Benefits</h2>
-              <Card className="bg-gray-900/60 border-purple-500/20">
+              <Card className="bg-white/[0.05] border-white/10 backdrop-blur-xl shadow-[0_10px_24px_rgba(0,0,0,0.25)]">
                 <CardContent className="p-4 sm:p-6">
                   <p className="text-xs sm:text-sm text-gray-300 mb-4">While positions are unpaid, we provide valuable benefits:</p>
                   <ul className="space-y-2 sm:space-y-3">
@@ -304,27 +303,17 @@ export default function ApplyPage() {
                     <button
                       key={`${department.title}-${posIndex}`}
                       onClick={() => openPositionModal(position)}
-                      className="text-left p-3 sm:p-4 bg-gray-900/60 border border-purple-500/20 rounded-lg hover:border-purple-400/40 hover:bg-gray-800/60 transition-all duration-300 group"
+                      className="text-left p-3 sm:p-4 bg-white/[0.05] border border-white/10 rounded-lg hover:border-purple-300/40 hover:bg-white/[0.08] transition-colors duration-200 group"
                     >
                       <div className="flex items-start gap-2 sm:gap-3">
-                        <div className={`p-1.5 sm:p-2 bg-gradient-to-r ${department.color} rounded-lg text-white flex-shrink-0`}>
+                        <div className={`p-1.5 sm:p-2 bg-white/[0.08] border border-white/10 rounded-lg ${department.iconColor} flex-shrink-0`}>
                           {department.icon}
                         </div>
                         <div className="min-w-0 flex-1">
-                          <h3 className="font-semibold text-white text-xs sm:text-sm mb-1 group-hover:text-purple-300 transition-colors duration-200 leading-tight">
+                          <h3 className="font-semibold text-white text-xs sm:text-sm mb-1 group-hover:text-purple-200 transition-colors duration-200 leading-tight">
                             {position}
                           </h3>
-                          <Badge
-                            className={`${
-                              department.title === "Growth"
-                                ? "text-yellow-400"
-                                : department.title === "Human Resources"
-                                ? "text-blue-400"
-                                : department.title === "Strategy"
-                                ? "text-green-400"
-                                : "text-purple-400"
-                            } bg-gray-800 text-xs`}
-                          >
+                          <Badge className="text-purple-200 bg-white/[0.08] hover:bg-white/[0.08] border border-white/10 text-xs">
                             {department.title.toUpperCase()}
                           </Badge>
                         </div>
@@ -340,7 +329,7 @@ export default function ApplyPage() {
       </section>
 
       {/* Mobile-Responsive How to Apply Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gray-900/30">
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#0a0910]">
         <div className="container px-4 mx-auto">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8 sm:mb-12">
@@ -352,7 +341,7 @@ export default function ApplyPage() {
 
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
               {/* Application Process */}
-              <Card className="bg-gray-900/60 border-purple-500/20" id="application-section">
+              <Card className="bg-white/[0.05] border-white/10 backdrop-blur-xl shadow-[0_10px_24px_rgba(0,0,0,0.25)]" id="application-section">
                 <CardContent className="p-4 sm:p-6 lg:p-8">
                   <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-white">Application Process</h3>
                   <div className="space-y-4 sm:space-y-6">
@@ -382,7 +371,7 @@ export default function ApplyPage() {
               </Card>
 
               {/* Email Requirements */}
-              <Card className="bg-gray-900/60 border-purple-500/20">
+              <Card className="bg-white/[0.05] border-white/10 backdrop-blur-xl shadow-[0_10px_24px_rgba(0,0,0,0.25)]">
                 <CardContent className="p-4 sm:p-6 lg:p-8">
                   <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-white">Include in Your Email</h3>
                   <ul className="space-y-2 sm:space-y-3 text-gray-300">
@@ -423,7 +412,7 @@ export default function ApplyPage() {
             <div className="text-center">
               <a 
                 href="mailto:jobs@hackunited.org?subject=Application for [Position Name]&body=Hi! I'm interested in applying for [position]. Here are my details:%0D%0A%0D%0AFull Name: %0D%0AEmail: %0D%0AAge: %0D%0ALocation: %0D%0A%0D%0APosition(s) applying for: %0D%0A%0D%0AWhy I'm interested: %0D%0A%0D%0ARelevant skills/experience: %0D%0A%0D%0ATime commitment: %0D%0A%0D%0AThanks!"
-                className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-6 sm:px-8 lg:px-10 py-3 sm:py-4 rounded-lg text-sm sm:text-base lg:text-lg font-semibold transition-all duration-300 hover:scale-105"
+                className="inline-flex items-center gap-2 sm:gap-3 bg-purple-600 hover:bg-purple-500 text-white px-6 sm:px-8 lg:px-10 py-3 sm:py-4 rounded-lg text-sm sm:text-base lg:text-lg font-semibold transition-colors"
               >
                 <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                 Send Application Email
@@ -441,12 +430,12 @@ export default function ApplyPage() {
 
       {/* Mobile-Responsive Position Modal */}
       {selectedPosition && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
-          <div className="bg-gray-900 border border-purple-500/20 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
+          <div className="bg-[#14111b] border border-white/10 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-[0_14px_34px_rgba(0,0,0,0.45)]">
             {/* Modal Header - Mobile Responsive */}
             <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-700">
               <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
-                <Badge className={`${selectedPosition.color} bg-gray-800 text-xs`}>
+                <Badge className="text-purple-200 bg-white/[0.08] hover:bg-white/[0.08] border border-white/10 text-xs">
                   {selectedPosition.department.toUpperCase()}
                 </Badge>
                 <h3 className="text-lg sm:text-xl font-bold text-white truncate">{selectedPosition.name}</h3>
@@ -454,7 +443,7 @@ export default function ApplyPage() {
               <div className="flex gap-2 flex-shrink-0 ml-2">
                 <button
                   onClick={scrollToApplication}
-                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-300"
+                  className="bg-purple-600 hover:bg-purple-500 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors"
                 >
                   Apply
                 </button>
@@ -535,13 +524,13 @@ export default function ApplyPage() {
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <button
                   onClick={scrollToApplication}
-                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-300 flex-1 text-sm sm:text-base"
+                  className="bg-purple-600 hover:bg-purple-500 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-colors flex-1 text-sm sm:text-base"
                 >
                   Apply for this Position
                 </button>
                 <button
                   onClick={closeModal}
-                  className="border border-gray-600 text-gray-300 hover:bg-gray-800 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg transition-all duration-300 text-sm sm:text-base"
+                  className="border border-gray-600 text-gray-300 hover:bg-gray-800 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg transition-colors text-sm sm:text-base"
                 >
                   Close
                 </button>

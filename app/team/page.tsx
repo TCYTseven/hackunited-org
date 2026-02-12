@@ -54,30 +54,32 @@ const headsTeam: TeamMember[] = [
     position: "Head of Product",
     image: "/images/team-images/fionaa.png",
   },
-  {
-    name: "Avyakt",
-    position: "Head of Human Resources",
-    image: "/images/team-images/Avyakt.png",
-  },
-  {
-    name: "Danny",
-    position: "Head of Blog",
-    image: "https://ui-avatars.com/api/?name=D&background=8B5CF6&color=fff&size=128",
-  },
+
   {
     name: "Akshay",
     position: "Head of Finance",
     image: "/images/team-images/akshay.png",
   },
   {
+    name: "Eldiiar Bekbolotov",
+    position: "Head of Technology",
+    image: "/images/team-images/Eldiiar Bekbolotov.png",
+  },
+  {
+    name: "Avyakt",
+    position: "Head of Human Resources",
+    image: "/images/team-images/Avyakt.png",
+  },
+  
+  {
+    name: "Danny",
+    position: "Head of Blog",
+    image: "https://ui-avatars.com/api/?name=D&background=8B5CF6&color=fff&size=128",
+  },
+  {
     name: "Ishaan P.",
     position: "Officer",
     image: "/images/team-images/ishaan.png",
-  },
-  {
-    name: "Eldiiar Bekbolotov",
-    position: "Head of Web Dev",
-    image: "/images/team-images/Eldiiar Bekbolotov.png",
   },
   {
     name: "Alexa S.",
