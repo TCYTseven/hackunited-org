@@ -52,7 +52,7 @@ const headsTeam: TeamMember[] = [
   {
     name: "Fiona F.",
     position: "Head of Product",
-    image: "/images/team-images/fionaa.png",
+    image: "/images/team-images/fiona.webp",
   },
 
   {
@@ -89,6 +89,11 @@ const headsTeam: TeamMember[] = [
 ];
 
 const membersTeam: TeamMember[] = [
+  {
+    name: "Yukta P.",
+    position: "Outreach Manager",
+    image: "/images/team-images/yukta.png",
+  },
   {
     name: "Kyungjin O.",
     position: "Outreach Associate",
@@ -544,11 +549,6 @@ const previousVolunteers: TeamMember[][] = [
       position: "Community Planner",
       image:
         "https://ui-avatars.com/api/?name=T&background=DB2777&color=fff&size=128",
-    },
-    {
-      name: "Yukta P.",
-      position: "Outreach Associate",
-      image: "/images/team-images/yukta.png",
     },
   ],
 ];
