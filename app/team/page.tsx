@@ -40,32 +40,43 @@ const executiveTeam: TeamMember[] = [
 
 const headsTeam: TeamMember[] = [
   {
-    name: "Rehan Raj",
+    name: "Rehan R.",
     position: "Head of Marketing",
     image: "/images/team-images/rehan.png",
   },
   {
-    name: "Sahana Prakash",
+    name: "Sahana P.",
     position: "Head of Outreach",
     image: "/images/team-images/sahana.png",
   },
   {
-    name: "Fiona Fung",
+    name: "Fiona F.",
     position: "Head of Product",
     image: "/images/team-images/fiona.webp",
   },
   {
-    name: "Eldiiar Bekbolotov",
+    name: "Eldiiar B.",
     position: "Head of Technology",
     image: "/images/team-images/Eldiiar Bekbolotov.png",
   },
+
   {
-    name: "Danny Zhebg",
+    name: "Avyakt",
+    position: "Head of Human Resources",
+    image: "/images/team-images/Avyakt.png",
+  },
+  {
+    name: "Akshay K.",
+    position: "Head of Finance",
+    image: "/images/team-images/akshay.png",
+  },
+  {
+    name: "Danny",
     position: "Head of Blog",
     image: "https://ui-avatars.com/api/?name=D&background=8B5CF6&color=fff&size=128",
   },
   {
-    name: "Alexa Santos",
+    name: "Alexa S.",
     position: "Social Media Manager",
     image: "/images/team-images/ALEXA_HEADSHOT.png",
   },
@@ -73,17 +84,12 @@ const headsTeam: TeamMember[] = [
 
 const membersTeam: TeamMember[] = [
   {
-    name: "Karthik Chawla",
+    name: "Karthik S.",
     position: "Talent Acquisition Manager",
     image: "/images/team-images/karthik.webp",
   },
   {
-    name: "Akmal Mohaideen",
-    position: "Outreach Associate",
-    image: "/images/team-images/akmal.png",
-  },
-  {
-    name: "Ritvik Peddi",
+    name: "Ritvik",
     position: "Outreach Associate",
     image: "/images/team-images/ritvik.png",
   },
@@ -93,27 +99,17 @@ const membersTeam: TeamMember[] = [
     image: "/images/team-images/Austin.png",
   },
   {
-    name: "Derrick Wong",
-    position: "Graphics Design",
-    image: "/images/team-images/derrick.png",
-  },
-  {
-    name: "James Yuri R. Avila",
-    position: "Graphics Design",
-    image: "/images/team-images/james.png",
-  },
-  {
-    name: "Aarjit Adhikari",
+    name: "Aarjit A.",
     position: "Article Writer",
     image: "/images/team-images/Aarjit.jpg",
   },
   {
-    name: "Namish Joshi",
+    name: "Namish J",
     position: "Article Writer",
     image: "/images/team-images/namish.png",
   },
   {
-    name: "Joey Chen",
+    name: "Joey C.",
     position: "Project Manager",
     image: "/images/team-images/joey.png",
   },
