@@ -40,25 +40,19 @@ const executiveTeam: TeamMember[] = [
 
 const headsTeam: TeamMember[] = [
   {
-    name: "Rehan R.",
+    name: "Rehan Raj",
     position: "Head of Marketing",
     image: "/images/team-images/rehan.png",
   },
   {
-    name: "Sahana P.",
+    name: "Sahana Prakash",
     position: "Head of Outreach",
     image: "/images/team-images/sahana.png",
   },
   {
-    name: "Fiona F.",
+    name: "Fiona Fung",
     position: "Head of Product",
     image: "/images/team-images/fiona.webp",
-  },
-
-  {
-    name: "Akshay",
-    position: "Head of Finance",
-    image: "/images/team-images/akshay.png",
   },
   {
     name: "Eldiiar Bekbolotov",
@@ -66,23 +60,12 @@ const headsTeam: TeamMember[] = [
     image: "/images/team-images/Eldiiar Bekbolotov.png",
   },
   {
-    name: "Avyakt",
-    position: "Head of Human Resources",
-    image: "/images/team-images/Avyakt.png",
-  },
-  
-  {
-    name: "Danny",
+    name: "Danny Zhebg",
     position: "Head of Blog",
     image: "https://ui-avatars.com/api/?name=D&background=8B5CF6&color=fff&size=128",
   },
   {
-    name: "Ishaan P.",
-    position: "Officer",
-    image: "/images/team-images/ishaan.png",
-  },
-  {
-    name: "Alexa S.",
+    name: "Alexa Santos",
     position: "Social Media Manager",
     image: "/images/team-images/ALEXA_HEADSHOT.png",
   },
@@ -90,84 +73,49 @@ const headsTeam: TeamMember[] = [
 
 const membersTeam: TeamMember[] = [
   {
-    name: "Karthik C.",
+    name: "Karthik Chawla",
     position: "Talent Acquisition Manager",
     image: "/images/team-images/karthik.webp",
   },
   {
-    name: "Yukta P.",
-    position: "Outreach Manager",
-    image: "/images/team-images/yukta.png",
-  },
-  {
-    name: "Kyungjin O.",
-    position: "Outreach Associate",
-    image: "/images/team-images/kyungjin.png",
-  },
-  {
-    name: "Rishi R.",
-    position: "Outreach Associate",
-    image: "/images/team-images/rishi.png",
-  },
-  {
-    name: "Akmal M.",
+    name: "Akmal Mohaideen",
     position: "Outreach Associate",
     image: "/images/team-images/akmal.png",
   },
   {
-    name: "Ritvik P.",
+    name: "Ritvik Peddi",
     position: "Outreach Associate",
     image: "/images/team-images/ritvik.png",
   },
   {
-    name: "Austin H.",
+    name: "Austin Huynh",
     position: "Outreach Associate",
     image: "/images/team-images/Austin.png",
   },
   {
-    name: "Derrick W.",
+    name: "Derrick Wong",
     position: "Graphics Design",
     image: "/images/team-images/derrick.png",
   },
   {
-    name: "James A.",
+    name: "James Yuri R. Avila",
     position: "Graphics Design",
     image: "/images/team-images/james.png",
   },
   {
-    name: "Sujal T.",
-    position: "Web Developer",
-    image: "/images/team-images/sujal.png",
-  },
-  {
-    name: "Emily F.",
-    position: "Article Writer",
-    image: "/images/team-images/emily.png",
-  },
-  {
-    name: "Alexander N.",
-    position: "Article Writer",
-    image: "/images/team-images/alexander.png",
-  },
-  {
-    name: "Aarjit A.",
+    name: "Aarjit Adhikari",
     position: "Article Writer",
     image: "/images/team-images/Aarjit.jpg",
   },
   {
-    name: "Namish J.",
+    name: "Namish Joshi",
     position: "Article Writer",
     image: "/images/team-images/namish.png",
   },
   {
-    name: "Joey",
+    name: "Joey Chen",
     position: "Project Manager",
     image: "/images/team-images/joey.png",
-  },
-  {
-    name: "Vedant M.",
-    position: "Bot Developer",
-    image: "/images/team-images/Vedant.png",
   },
 ];
 
