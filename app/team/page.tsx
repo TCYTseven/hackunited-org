@@ -23,11 +23,17 @@ const executiveTeam: TeamMember[] = [
       "Tejas started Hack United to share his lifelong passion for coding and tech with other students around the world. For him, Hack United is more than just events, it's a way to help students explore, create, and connect through technology.",
   },
   {
-    name: "Pranav A.",
+    name: "Akshay K.",
     position: "Chief Operations Officer",
-    image: "/images/team-images/PranavA.png",
+    image: "/images/team-images/akshay.png",
     blurb:
-      "As Chief Operating Officer, Pranav ensures Hack United’s events run seamlessly from start to finish. With a sharp eye for logistics, scheduling, and process optimization, he’s the backbone of the organization’s operational success. Pranav thrives on turning ambitious plans into smooth, impactful experiences for participants worldwide.",
+      "As Chief Operating Officer, Akshay ensures Hack United’s events run seamlessly from start to finish. With a sharp eye for logistics, scheduling, and process optimization, he’s the backbone of the organization’s operational success. Pranav thrives on turning ambitious plans into smooth, impactful experiences for participants worldwide.",
+  },
+  {
+    name: "Pranav A.",
+    position: "Executive",
+    image: "/images/team-images/PranavA.png",
+    blurb: "",
   },
   {
     name: "Kavin A.",
@@ -66,14 +72,10 @@ const headsTeam: TeamMember[] = [
     image: "/images/team-images/Avyakt.png",
   },
   {
-    name: "Akshay K.",
-    position: "Head of Finance",
-    image: "/images/team-images/akshay.png",
-  },
-  {
     name: "Danny",
     position: "Head of Blog",
-    image: "https://ui-avatars.com/api/?name=D&background=8B5CF6&color=fff&size=128",
+    image:
+      "https://ui-avatars.com/api/?name=D&background=8B5CF6&color=fff&size=128",
   },
   {
     name: "Alexa S.",
@@ -516,9 +518,12 @@ function TeamMemberCard({
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, (index || 0) * 100);
+    const timer = setTimeout(
+      () => {
+        setIsVisible(true);
+      },
+      (index || 0) * 100,
+    );
     return () => clearTimeout(timer);
   }, [index]);
 
@@ -526,26 +531,26 @@ function TeamMemberCard({
     size === "large"
       ? "w-32 h-32"
       : size === "compact"
-      ? "w-12 h-12"
-      : size === "card"
-      ? "w-10 h-10"
-      : "w-20 h-20";
+        ? "w-12 h-12"
+        : size === "card"
+          ? "w-10 h-10"
+          : "w-20 h-20";
   const textSize =
     size === "large"
       ? "text-lg"
       : size === "compact"
-      ? "text-xs"
-      : size === "card"
-      ? "text-sm"
-      : "text-sm";
+        ? "text-xs"
+        : size === "card"
+          ? "text-sm"
+          : "text-sm";
   const positionSize =
     size === "large"
       ? "text-sm"
       : size === "compact"
-      ? "text-[10px]"
-      : size === "card"
-      ? "text-xs"
-      : "text-xs";
+        ? "text-[10px]"
+        : size === "card"
+          ? "text-xs"
+          : "text-xs";
   const marginBottom =
     size === "compact" ? "mb-1" : size === "card" ? "mb-2" : "mb-3";
   const borderWidth =
@@ -717,7 +722,7 @@ export default function TeamPage() {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (executiveSectionRef.current) {
