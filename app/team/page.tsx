@@ -27,7 +27,7 @@ const executiveTeam: TeamMember[] = [
     position: "Chief Operations Officer",
     image: "/images/team-images/akshay.png",
     blurb:
-      "As Chief Operating Officer, Akshay ensures Hack United’s events run seamlessly from start to finish. With a sharp eye for logistics, scheduling, and process optimization, he’s the backbone of the organization’s operational success. Pranav thrives on turning ambitious plans into smooth, impactful experiences for participants worldwide.",
+      "As Chief Operating Officer, Akshay ensures Hack United’s events run seamlessly from start to finish. With a sharp eye for logistics, scheduling, and process optimization, he’s the backbone of the organization’s operational success. Akshay thrives on turning ambitious plans into smooth, impactful experiences for participants worldwide.",
   },
   {
     name: "Pranav A.",
