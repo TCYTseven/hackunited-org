@@ -65,7 +65,6 @@ const headsTeam: TeamMember[] = [
     position: "Head of Technology",
     image: "/images/team-images/Eldiiar Bekbolotov.png",
   },
-
   {
     name: "Avyakt",
     position: "Head of Human Resources",
