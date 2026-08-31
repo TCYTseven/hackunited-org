@@ -85,8 +85,8 @@ const headsTeam: TeamMember[] = [
 
 const membersTeam: TeamMember[] = [
   {
-    name: "Karthik S.",
-    position: "Talent Acquisition Manager",
+    name: "Karthik C.",
+    position: "Head of Human Resources",
     image: "/images/team-images/karthik.webp",
   },
   {
