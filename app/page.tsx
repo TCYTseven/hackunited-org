@@ -545,7 +545,20 @@ export default function Home() {
         {/* Hero Section */}
         <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat w-full pt-[30px] md:min-h-screen relative">
           <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black to-transparent" />
-          <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-16 sm:mt-24 md:mt-[140px] pb-12 sm:pb-16 md:pb-[160px] px-6 sm:px-8 md:px-8 relative">
+          {/* Organizer applications announcement */}
+          <div className="hero-badge relative z-10 flex justify-center px-6 sm:px-8">
+            <div className="inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-purple-300/30 bg-white/[0.05] backdrop-blur-md px-4 py-2 text-xs sm:text-sm text-purple-100 text-center">
+              <span className="h-2 w-2 flex-shrink-0 rounded-full bg-purple-400" />
+              <span>Organizer Applications for V8 are open!</span>
+              <Link
+                href="/organizer"
+                className="font-semibold text-white underline underline-offset-4 decoration-purple-300/70 hover:decoration-white transition-colors"
+              >
+                See more →
+              </Link>
+            </div>
+          </div>
+          <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-12 sm:mt-20 md:mt-[100px] pb-12 sm:pb-16 md:pb-[160px] px-6 sm:px-8 md:px-8 relative">
             <div className="right text-center md:text-left">
               <h1 className="hero-heading headingText mb-4 sm:mb-6 text-center md:text-left">
                 <span className="purpleGradient">Empowering</span>
