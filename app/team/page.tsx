@@ -2,8 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Montserrat } from "next/font/google";
-import { useState, useEffect, useRef } from "react";
-import { useInView } from "framer-motion";
+import { useState, useEffect } from "react";
 
 const montserrat = Montserrat({ subsets: ["latin"], weight: ["700"] });
 
@@ -31,7 +30,7 @@ const executiveTeam: TeamMember[] = [
   },
   {
     name: "Pranav A.",
-    position: "Executive",
+    position: "Chief Strategy Officer",
     image: "/images/team-images/PranavA.png",
     blurb: "",
   },
@@ -507,12 +506,10 @@ function TeamMemberCard({
   member,
   size = "small",
   index,
-  onClick,
 }: {
   member: TeamMember;
   size?: "small" | "large" | "compact" | "card";
   index?: number;
-  onClick?: () => void;
 }) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -596,7 +593,6 @@ function TeamMemberCard({
       } transition-all duration-500 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
       }`}
-      onClick={onClick}
     >
       <div className={`relative ${imageSize} ${marginBottom} group`}>
         <Image
@@ -617,131 +613,7 @@ function TeamMemberCard({
   );
 }
 
-function useTypewriter(text: string | undefined, speed = 50) {
-  const [displayText, setDisplayText] = useState("");
-
-  useEffect(() => {
-    if (text) {
-      const typingInterval = setInterval(() => {
-        setDisplayText((prev) => {
-          if (prev.length < text.length) {
-            return text.slice(0, prev.length + 1);
-          } else {
-            clearInterval(typingInterval);
-            return prev;
-          }
-        });
-      }, speed);
-
-      return () => {
-        clearInterval(typingInterval);
-        setDisplayText("");
-      };
-    }
-  }, [text, speed]);
-
-  return displayText;
-}
-
-function BlurbModal({
-  member,
-  onClose,
-}: {
-  member: TeamMember | null;
-  onClose: () => void;
-}) {
-  const [isVisible, setIsVisible] = useState(false);
-  const displayText = useTypewriter(member?.blurb, 25);
-
-  useEffect(() => {
-    if (member) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  }, [member]);
-
-  if (!member) return null;
-
-  return (
-    <div
-      className={`fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 transition-opacity duration-300 ${
-        isVisible ? "opacity-100" : "opacity-0"
-      }`}
-      onClick={onClose}
-    >
-      <div
-        className={`bg-gray-900 rounded-lg p-8 max-w-2xl w-full mx-4 border-2 border-purple-500/30 shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all duration-300 ${
-          isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
-        }`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="flex items-center gap-6">
-          <div className="relative w-32 h-32 flex-shrink-0">
-            <Image
-              src={member.image || "/placeholder.svg"}
-              alt={member.name}
-              fill
-              className="rounded-full object-cover border-4 border-purple-600"
-            />
-          </div>
-          <div>
-            <h2
-              className={`text-3xl font-bold text-white ${montserrat.className}`}
-            >
-              {member.name}
-            </h2>
-            <p className="text-purple-400 text-lg font-bold">
-              {member.position}
-            </p>
-          </div>
-        </div>
-        <p className="text-white mt-6 text-lg min-h-[150px]">{displayText}</p>
-        <button
-          onClick={onClose}
-          className="mt-6 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300"
-        >
-          Close
-        </button>
-      </div>
-    </div>
-  );
-}
-
 export default function TeamPage() {
-  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
-  const [showBanner, setShowBanner] = useState(false);
-  const executiveSectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShowBanner(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 },
-    );
-
-    if (executiveSectionRef.current) {
-      observer.observe(executiveSectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const handleMemberClick = (member: TeamMember) => {
-    if (member.blurb) {
-      setSelectedMember(member);
-      setShowBanner(false);
-    }
-  };
-
-  const handleCloseModal = () => {
-    setSelectedMember(null);
-  };
-
   return (
     <main
       className={`flex flex-col items-center bg-black text-white min-h-screen ${montserrat.className}`}
@@ -756,17 +628,16 @@ export default function TeamPage() {
         </div>
 
         {/* Executive Team */}
-        <div className="mb-16" ref={executiveSectionRef}>
+        <div className="mb-16">
           {/* Core Executives - Dark Background with White Glow */}
           <div className="bg-gray-900/50 rounded-lg p-8 mb-12 border-2 border-purple-500/30 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 justify-items-center">
               {executiveTeam.map((member, index) => (
                 <TeamMemberCard
                   key={index}
                   member={member}
                   size="large"
                   index={index}
-                  onClick={() => handleMemberClick(member)}
                 />
               ))}
             </div>
@@ -854,7 +725,6 @@ export default function TeamPage() {
           </p>
         </div>
       </section>
-      <BlurbModal member={selectedMember} onClose={handleCloseModal} />
     </main>
   );
 }
