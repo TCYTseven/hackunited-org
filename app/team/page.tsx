@@ -46,7 +46,7 @@ const executiveTeam: TeamMember[] = [
 const headsTeam: TeamMember[] = [
   {
     name: "Rehan R.",
-    position: "Head of Marketing",
+    position: "Marketing Associate",
     image: "/images/team-images/rehan.png",
   },
   {
@@ -56,18 +56,18 @@ const headsTeam: TeamMember[] = [
   },
   {
     name: "Fiona F.",
-    position: "Head of Product",
+    position: "Head of Marketing",
     image: "/images/team-images/fiona.webp",
   },
   {
     name: "Eldiiar B.",
-    position: "Head of Technology",
+    position: "Chief Technology Officer",
     image: "/images/team-images/Eldiiar Bekbolotov.png",
   },
   {
-    name: "Avyakt",
+    name: "Karthik C.",
     position: "Head of Human Resources",
-    image: "/images/team-images/Avyakt.png",
+    image: "/images/team-images/karthik.webp",
   },
   {
     name: "Danny",
@@ -84,9 +84,9 @@ const headsTeam: TeamMember[] = [
 
 const membersTeam: TeamMember[] = [
   {
-    name: "Karthik C.",
-    position: "Head of Human Resources",
-    image: "/images/team-images/karthik.webp",
+    name: "Avyakt",
+    position: "HR Associate",
+    image: "/images/team-images/Avyakt.png",
   },
   {
     name: "Ritvik",
