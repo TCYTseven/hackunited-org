@@ -555,7 +555,7 @@ function TeamMemberCard({
   if (size === "card") {
     return (
       <div
-        className={`bg-gray-900/50 rounded-lg p-3 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 hover:bg-gray-800/50 ${
+        className={`bg-neutral-950 rounded-lg p-3 border border-white/[0.08] hover:border-white/15 transition-colors ${
           montserrat.className
         } ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
@@ -568,7 +568,7 @@ function TeamMemberCard({
               src={member.image || "/placeholder.svg"}
               alt={member.name}
               fill
-              className={`rounded-full object-cover ${borderWidth} border-purple-600`}
+              className={`rounded-full object-cover ${borderWidth} border-white/15`}
             />
           </div>
           <div className="flex-1 min-w-0">
@@ -576,7 +576,7 @@ function TeamMemberCard({
               {member.name}
             </h3>
             <p
-              className={`text-purple-400 ${positionSize} font-medium truncate`}
+              className={`text-neutral-400 ${positionSize} font-medium truncate`}
             >
               {member.position}
             </p>
@@ -599,14 +599,14 @@ function TeamMemberCard({
           src={member.image || "/placeholder.svg"}
           alt={member.name}
           fill
-          className={`rounded-full object-cover ${borderWidth} border-purple-600 transition-transform duration-300 group-hover:scale-110`}
+          className={`rounded-full object-cover ${borderWidth} border-white/15`}
         />
         <div className="absolute inset-0 bg-black bg-opacity-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
       <h3 className={`font-bold text-white ${textSize} mb-0.5`}>
         {member.name}
       </h3>
-      <p className={`text-purple-400 ${positionSize} font-bold`}>
+      <p className={`text-neutral-400 ${positionSize} font-medium`}>
         {member.position}
       </p>
     </div>
@@ -616,21 +616,15 @@ function TeamMemberCard({
 export default function TeamPage() {
   return (
     <main
-      className={`flex flex-col items-center bg-black text-white min-h-screen ${montserrat.className}`}
+      className={`flex flex-col items-center bg-[#050505] text-white min-h-screen ${montserrat.className}`}
     >
       <section className="w-full max-w-7xl mx-auto px-4 py-16 md:py-24">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h1
-            className={`text-5xl md:text-7xl font-bold text-white mb-4 ${montserrat.className}`}
-          >
-            Meet The Team
-          </h1>
+        <div className="max-w-3xl mx-auto text-center mb-14">
+          <h1 className="hu-title">Team</h1>
         </div>
 
-        {/* Executive Team */}
         <div className="mb-16">
-          {/* Core Executives - Dark Background with White Glow */}
-          <div className="bg-gray-900/50 rounded-lg p-8 mb-12 border-2 border-purple-500/30 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+          <div className="rounded-lg p-8 mb-12 border border-white/[0.08] bg-neutral-950/50">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 justify-items-center">
               {executiveTeam.map((member, index) => (
                 <TeamMemberCard
@@ -684,18 +678,13 @@ export default function TeamPage() {
 
         {/* Purple Divider - Thicker, Shorter, Darker */}
         <div className="flex justify-center mb-16">
-          <div className="w-32 h-1 bg-purple-800"></div>
+          <div className="w-24 h-px bg-white/10" />
         </div>
 
-        {/* Previous Volunteers */}
         <div className="mb-12">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-white mb-2">
-              Previous Volunteers
-            </h2>
-            <p className="text-gray-400 text-sm">
-              Thank you to all who have contributed to our journey
-            </p>
+            <h2 className="text-lg font-semibold text-white mb-2">Previous volunteers</h2>
+            <p className="text-neutral-500 text-sm">Alumni who helped run past events.</p>
           </div>
 
           {/* All Previous Volunteers in Card Format */}
@@ -713,15 +702,12 @@ export default function TeamPage() {
 
         {/* Call to Action */}
         <div className="text-center mt-16">
-          <p className="text-white italic text-lg font-bold">
-            Want to join the team? Read{" "}
-            <Link
-              href="/apply"
-              className="text-purple-400 hover:text-purple-300 underline"
-            >
+          <p className="text-neutral-400 text-sm">
+            Open roles on the{" "}
+            <Link href="/apply" className="hu-link">
               apply
             </Link>{" "}
-            to become a part of the team!
+            page.
           </p>
         </div>
       </section>

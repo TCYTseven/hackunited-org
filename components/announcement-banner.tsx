@@ -12,13 +12,13 @@ export default function AnnouncementBanner() {
   if (pathname !== "/" || dismissed) return null;
 
   return (
-    <div className="relative w-full bg-white text-black">
-      <div className="mx-auto flex min-h-[44px] max-w-7xl items-center justify-center px-12 py-2.5 text-center text-[13px] sm:text-[15px] leading-snug">
+    <div className="relative w-full border-b border-white/[0.07] bg-neutral-950 text-neutral-200">
+      <div className="mx-auto flex min-h-[40px] max-w-7xl items-center justify-center px-12 py-2 text-center text-[12px] sm:text-[13px] leading-snug">
         <p>
           Organizer Applications for V8 are open!{" "}
           <Link
             href="/organizer"
-            className="whitespace-nowrap font-semibold underline-offset-4 hover:underline"
+            className="whitespace-nowrap text-white underline-offset-4 hover:underline"
           >
             See more
           </Link>
@@ -28,7 +28,7 @@ export default function AnnouncementBanner() {
         type="button"
         onClick={() => setDismissed(true)}
         aria-label="Dismiss announcement"
-        className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex h-8 w-8 items-center justify-center rounded-sm text-black/70 transition-colors hover:bg-black/5 hover:text-black"
+        className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex h-8 w-8 items-center justify-center rounded-sm text-neutral-500 transition-colors hover:bg-white/5 hover:text-white"
       >
         <X className="h-4 w-4" />
       </button>

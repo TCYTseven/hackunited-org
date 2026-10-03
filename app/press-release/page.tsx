@@ -25,7 +25,7 @@ export default function PressRelease() {
             <h3>Registration and Event Details:</h3>
             <ul>
               <li><b>Event Name:</b> United Hacks V5</li>
-              <li><b>Dates:</b> July 11–13, 2025</li>
+              <li><b>Dates:</b> July 11-13, 2025</li>
               <li><b>Format:</b> 100% Virtual</li>
               <li><b>Eligibility:</b> High school and university students worldwide</li>
               <li><b>Cost:</b> Free</li>

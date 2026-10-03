@@ -82,3 +82,25 @@
 .glow-white {
   box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.1);
 }
+
+@layer components {
+  .hu-section {
+    @apply py-20 md:py-32 border-t border-white/[0.04];
+  }
+
+  .hu-title {
+    @apply text-[1.75rem] sm:text-4xl font-semibold tracking-tight text-white;
+  }
+
+  .hu-body {
+    @apply text-[17px] leading-[1.47059] text-neutral-500 font-normal;
+  }
+
+  .hu-panel {
+    @apply rounded-2xl bg-white/[0.04];
+  }
+
+  .hu-link {
+    @apply text-[#2997ff] hover:underline underline-offset-2 transition-opacity hover:opacity-80;
+  }
+}

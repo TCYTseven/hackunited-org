@@ -119,7 +119,7 @@ const positionDetails = {
   "Article Writer": {
     department: "Community & Content",
     responsibilities: [
-      "Write 1–2 page articles for the Hack United blog",
+      "Write 1-2 page articles for the Hack United blog",
       "Cite sources and write for a high-school audience",
       "Revise based on editor feedback",
     ],
@@ -193,10 +193,10 @@ export default function ApplyPage() {
     "mailto:jobs@hackunited.org?subject=Hack%20United%20volunteer%20application&body=Full%20name%3A%0D%0AEmail%3A%0D%0AAge%3A%0D%0ALocation%20(country%2C%20state%2Fregion)%3A%0D%0A%0D%0ARole(s)%3A%0D%0A%0D%0AWhy%20you%20want%20to%20volunteer%3A%0D%0A%0D%0ARelevant%20experience%3A%0D%0A%0D%0AHours%20per%20week%3A%0D%0A%0D%0A(Optional)%20Resume%20or%20LinkedIn%3A%0D%0A"
 
   return (
-    <main className="bg-black text-white">
+    <main className="bg-[#050505] text-white">
       <section className="border-b border-white/10 pt-28 pb-12 sm:pb-16">
         <div className="container px-4 mx-auto max-w-3xl">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-4">Volunteer applications</h1>
+          <h1 className="hu-title mb-4">Apply</h1>
           <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-8">
             Hack United is a student-run nonprofit. Roles are unpaid. We review applications on a rolling basis and
             reply by email when we have a match.
@@ -216,7 +216,7 @@ export default function ApplyPage() {
           <div className="grid lg:grid-cols-4 gap-8">
             <div className="lg:col-span-1">
               <h2 className="text-lg font-semibold mb-4">What you get</h2>
-              <Card className="bg-neutral-950 border-white/10">
+              <Card className="hu-panel border-0 shadow-none">
                 <CardContent className="p-5">
                   <ul className="space-y-2 text-sm text-gray-300">
                     {benefits.map((benefit) => (
@@ -242,7 +242,7 @@ export default function ApplyPage() {
                       key={position}
                       type="button"
                       onClick={() => openPositionModal(position)}
-                      className="text-left p-4 bg-neutral-950 border border-white/10 rounded-md hover:border-purple-500/40 transition-colors"
+                      className="text-left p-4 hu-panel hover:bg-white/[0.06] transition-colors"
                     >
                       <div className="flex items-start gap-3">
                         <div className="p-2 rounded-md bg-white/5 text-purple-200 shrink-0">{department.icon}</div>

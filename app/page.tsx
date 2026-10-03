@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,11 +13,8 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { CheckIcon, ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import InteractiveLogo from "@/components/interactive-logo";
-import { ScrollButton, ScrollButtonWithIcon } from "@/components/scroll-button";
-import NewsCarousel from "@/components/ui/news-carousel";
 import HeroButton from "../components/ui/HeroButton/HeroButton";
 import "./page.css";
 import gsap from "gsap";
@@ -127,39 +123,36 @@ const judges = [
 const impactHighlights = [
   {
     value: "25,000+",
-    label: "Engineers Impacted",
-    detail: "Students reached through hackathons, workshops, and year-round programming.",
+    label: "Engineers impacted",
+    detail: "Hackathons, workshops, and Discord programming.",
   },
   {
     value: "3,000+",
-    label: "Community Members",
-    detail: "Builders collaborating in our Discord and event ecosystem.",
+    label: "Community members",
+    detail: "Students building together year-round.",
   },
   {
     value: "50+",
-    label: "Countries Reached",
-    detail: "Global participation from students across diverse learning environments.",
+    label: "Countries reached",
+    detail: "Participants from every major region.",
   },
 ];
 
 const goalPillars = [
   {
-    title: "Accelerating Soft Skills",
-    tagline: "Beyond just coding mechanics",
+    title: "Soft skills",
     description:
-      "We teach more than just mechanical coding skills: As the world rapidly evolves, we envision an inclusive platform where everyone can learn about the exciting advancements in the tech field and the knowledge needed to continue their programming journey.",
+      "Communication, teamwork, and presenting work matter as much as the code. Our events are built around that.",
   },
   {
-    title: "Practical Applications",
-    tagline: "Real-world problem solving",
+    title: "Real projects",
     description:
-      "We emphasize practical applications of programming and technology to prepare community members for the rapidly changing future. Our hackathons help exemplify our goals as we consistently use real-world problems to develop themes.",
+      "Each hackathon theme ties to problems people actually face. You ship something, not just a tutorial clone.",
   },
   {
-    title: "Connecting Innovators",
-    tagline: "Building a supportive community",
+    title: "Community",
     description:
-      "Our community provides a platform for innovators to learn, grow, and support each other. We connect like-minded individuals to overcome the challenges of acquiring new skills. Join us to thrive in a collaborative environment.",
+      "Discord, mentors, and repeat participants. Most people stay after their first event.",
   },
 ];
 
@@ -190,7 +183,8 @@ const styles = `
     left: 0;
     height: 100%;
     width: calc(100% / 6);
-    border: 3px solid rgba(168, 85, 247, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
     border-radius: 9999px;
     background: transparent;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -385,7 +379,7 @@ function DiscordWidget() {
         height="600"
         frameBorder="0"
         sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-        className="rounded-lg border border-purple-500/30 bg-gray-900"
+        className="rounded-2xl bg-white/[0.04]"
         title="Hack United Discord Community"
       />
     </div>
@@ -541,7 +535,7 @@ export default function Home() {
   return (
     <>
       <style jsx>{styles}</style>
-      <main className="bg-black text-white overflow-hidden">
+      <main className="bg-[#050505] text-white overflow-hidden">
         {/* Hero Section */}
         <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat w-full pt-[30px] md:min-h-screen relative">
           <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black to-transparent" />
@@ -586,16 +580,16 @@ export default function Home() {
                 src="./images/Logo.png"
                 alt=""
               />
-              <div className="glassCard glassCard1 hidden h-[79.24px] w-[240.8px] pl-[16px] md:block">
-                <h3 className="purpleGradient mt-[5px]">25,000+</h3>
+              <div className="glassCard glassCard1 hidden md:flex">
+                <h3 className="purpleGradient">25,000+</h3>
                 <p>Engineers Impacted</p>
               </div>
-              <div className="glassCard glassCard2 hidden h-[79.24px] w-[240.8px] pl-[16px] md:block">
-                <h3 className="purpleGradient mt-[5px]">3,000+</h3>
+              <div className="glassCard glassCard2 hidden md:flex">
+                <h3 className="purpleGradient">3,000+</h3>
                 <p>Community Members</p>
               </div>
-              <div className="glassCard glassCard3 hidden h-[79.24px] w-[240.8px] pl-[16px] md:block">
-                <h3 className="purpleGradient mt-[5px]">50+</h3>
+              <div className="glassCard glassCard3 hidden md:flex">
+                <h3 className="purpleGradient">50+</h3>
                 <p>Countries Reached</p>
               </div>
             </div>
@@ -603,15 +597,14 @@ export default function Home() {
         </div>
         <div className="recognizedCompanies">
           <h2
-            className={`headingText purpleGradient mt-4 mb-4 text-center ${playfairDisplay.className}`}
+            className={`recognizedByTitle mt-4 mb-4 text-center ${playfairDisplay.className}`}
           >
-            RECOGNIZED BY
+            Recognized By
           </h2>
           <div
             className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative"
             suppressHydrationWarning
           >
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
             <div className="logoContainer flex" suppressHydrationWarning>
               {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
                 <img
@@ -629,241 +622,65 @@ export default function Home() {
           </div>
         </div>
         {/* Who Are We Section */}
-        <section
-          id="who-are-we"
-          className="relative overflow-hidden py-16 md:py-24"
-        >
-          {/* Dot grid background pattern */}
-          {/* <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div> */}
-
-          {/* Subtle gradient overlay */}
-          {/* <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div> */}
-
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-
-          {/* Large "About Us" background text */}
-          {/* <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <h2 className="text-[20rem] sm:text-[28vw] md:text-[25vw] lg:text-[20vw] xl:text-[25vw] xl:h-[25vw] font-bold text-white/10 select-none leading-[0.8] whitespace-nowrap">
-              ABOUT US
-            </h2>
-          </div> */}
-
-          {/* <div className="container relative max-w-3xl mx-auto px-2 sm:px-4">
-            <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-purple-500/20 animate-fade-in hover:border-purple-500/40 transition-all duration-500">
-              <p className="text-base sm:text-lg text-gray-200 leading-relaxed">
-                Hack United is a 501(c)(3) non-profit organization with a passion for programming and technology. Our
-                mission is to inspire and educate the next generation of
-                innovators through hackathons and workshops. We address a
-                problem not as commonly talked about, focusing on equipping
-                participants with the essential soft skills needed to thrive in
-                their chosen career paths. This is done through hands-on
-                application such as our free to enter hackathons, where participants
-                develop communication, teamwork, problem-solving, and presentation
-                skills alongside their technical abilities. Through our initiatives,
-                we ultimately aim to help individuals prosper in the realm of technology.
-              </p>
-            </div>
-          </div> */}
-
-          <div className="container mx-auto px-6 sm:px-8 md:px-8 flex flex-col md:flex-row items-center w-full md:h-[300px] font-light text-sm sm:text-base md:text-[21px] text-[#E8E8E8] text-center md:text-left py-8 md:py-0">
-            <div className="md:w-2/3 w-full">
-              <h2 className="headingText purpleGradient mt-[15px] mb-4 sm:mb-6">
-                ABOUT US
-              </h2>
-              <p className="leading-relaxed">
-                {" "}
-                Hack United is a 501(c)(3) non-profit organization with a
-                passion for programming and technology. Our mission is to
-                inspire and educate the next generation of innovators through
-                hackathons and workshops. We address a problem not as commonly
-                talked about, focusing on equipping participants with the
-                essential soft skills needed to thrive in their chosen career
-                paths. This is done through hands-on application such as our
-                free to enter hackathons, where participants develop
-                communication, teamwork, problem-solving, and presentation
-                skills alongside their technical abilities. Through our
-                initiatives, we ultimately aim to help individuals prosper in
-                the realm of technology.
+        <section id="who-are-we" className="hu-section">
+          <div className="container mx-auto px-6 sm:px-8 md:px-8 flex flex-col md:flex-row md:items-center gap-10 md:gap-16">
+            <div className="md:w-3/5">
+              <h2 className="hu-title mb-5">About us</h2>
+              <p className="hu-body max-w-xl">
+                Hack United is a 501(c)(3) nonprofit. We run free hackathons and workshops for students who want to
+                build real projects, not just pad a resume. Alongside technical work, we focus on communication,
+                teamwork, and presenting ideas clearly, because that&apos;s what sticks after the event ends.
               </p>
             </div>
             <img
-              className="w-48 sm:w-64 md:w-[400px] mt-8 md:mt-0 md:mr-[70px]"
+              className="w-40 sm:w-52 md:w-72 md:ml-auto opacity-90"
               src="./images/globe-icon.png"
               alt=""
             />
           </div>
         </section>
 
-        {/* Impact Section */}
-        <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[#05030a]"></div>
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.018),transparent_35%,rgba(255,255,255,0.01))]"></div>
-          <div className="absolute inset-0 opacity-12 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:28px_28px]"></div>
-          <div className="absolute top-0 left-0 right-0 h-px bg-purple-400/35"></div>
+        <section className="hu-section">
+          <div className="container px-6 sm:px-8 md:px-4 mx-auto">
+            <h2 className="hu-title mb-4">Our impact</h2>
+            <p className="hu-body max-w-2xl mb-12">
+              We also run{" "}
+              <a href="https://fund.hackunited.org/" className="hu-link" target="_blank" rel="noopener noreferrer">
+                United Fund
+              </a>
+              , small grants ($50-$500) for student projects.
+            </p>
 
-          <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
-            <div className="max-w-4xl mb-8 sm:mb-12">
-              <Badge
-                variant="outline"
-                className="mb-4 border-purple-300/40 text-purple-200 bg-white/[0.03] hover:bg-white/[0.03]"
-              >
-                Global Footprint
-              </Badge>
-              <h2 className="headingText mt-[15px] mb-4 sm:mb-5 text-white">
-                OUR IMPACT
-              </h2>
-              <p className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed">
-                Through hackathons, workshops, and community initiatives, we've
-                built a global network of innovators. But our mission extends
-                beyond hackathons.
-              </p>
-            </div>
-
-            <div className="grid gap-6 lg:grid-cols-12">
-              <div className="lg:col-span-8 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl overflow-hidden shadow-[0_10px_28px_rgba(0,0,0,0.38)]">
-                <div className="divide-y divide-white/10">
-                  {impactHighlights.map((item, index) => (
-                    <article
-                      key={item.label}
-                      className="group grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center px-5 py-6 sm:px-7 sm:py-7"
-                    >
-                      <div>
-                        <p className="text-[11px] tracking-[0.18em] text-slate-300 mb-2">
-                          METRIC 0{index + 1}
-                        </p>
-                        <h3 className="text-white text-xl sm:text-2xl font-semibold mb-2 group-hover:text-purple-200 transition-colors">
-                          {item.label}
-                        </h3>
-                        <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-2xl">
-                          {item.detail}
-                        </p>
-                      </div>
-                      <p className="text-4xl sm:text-5xl font-semibold text-purple-300 tracking-tight">
-                        {item.value}
-                      </p>
-                    </article>
-                  ))}
-                </div>
-              </div>
-
-              <aside className="lg:col-span-4 flex flex-col gap-6">
-                <div className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 sm:p-6 shadow-[0_10px_28px_rgba(0,0,0,0.34)]">
-                  <p className="text-xs tracking-[0.15em] text-slate-300 mb-3">
-                    BEYOND HACKATHONS
-                  </p>
-                  <p className="text-gray-100 text-sm sm:text-base leading-relaxed">
-                    United Fund backs young builders with micro-grants between
-                    $50 and $500 so promising projects can move from prototypes
-                    to launch.
-                  </p>
-                  <a
-                    href="https://fund.hackunited.org/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center mt-5 text-sm font-semibold text-purple-300 hover:text-purple-200 transition-colors"
-                  >
-                    Explore United Fund <ArrowRightIcon className="ml-2 h-4 w-4" />
-                  </a>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/[0.025] p-5 sm:p-6">
-                  <p className="text-xs tracking-[0.15em] text-gray-300 mb-4">
-                    WHAT THIS MEANS
-                  </p>
-                  <ul className="space-y-3 text-sm sm:text-base text-gray-200">
-                    <li className="flex items-start gap-2">
-                      <CheckIcon className="w-4 h-4 mt-1 text-purple-300" />
-                      More first-time builders are shipping complete projects.
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckIcon className="w-4 h-4 mt-1 text-purple-300" />
-                      Cross-border teams are collaborating consistently.
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckIcon className="w-4 h-4 mt-1 text-purple-300" />
-                      Students stay involved beyond a single event cycle.
-                    </li>
-                  </ul>
-                </div>
-              </aside>
+            <div className="grid md:grid-cols-3 gap-10 md:gap-8">
+              {impactHighlights.map((item) => (
+                <article key={item.label}>
+                  <p className="text-3xl sm:text-4xl font-semibold tracking-tight text-white mb-1">{item.value}</p>
+                  <h3 className="text-[17px] text-white mb-2">{item.label}</h3>
+                  <p className="text-[15px] leading-relaxed text-neutral-500">{item.detail}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Goals Section */}
-        <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[#0a0813]"></div>
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.025),transparent_40%,rgba(255,255,255,0.015))]"></div>
-          <div className="absolute top-0 left-0 right-0 h-px bg-purple-400/35"></div>
-          <div className="absolute inset-0 opacity-15 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:30px_30px]"></div>
-
-          <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
-            <div className="grid gap-8 lg:grid-cols-12">
-              <div className="lg:col-span-4">
-                <Badge
-                  variant="outline"
-                  className="mb-5 border-purple-300/40 text-purple-200 bg-white/[0.04]"
-                >
-                  Our Vision
-                </Badge>
-                <h2 className="headingText mt-[15px] mb-4 text-white">OUR GOALS</h2>
-                <p className="text-gray-200 text-sm sm:text-base leading-relaxed max-w-md">
-                  Hack United is designed as a long-term growth path, not a
-                  one-week sprint. These pillars guide how we build programs and
-                  how participants progress through them.
-                </p>
-              </div>
-
-              <div className="lg:col-span-8 space-y-5">
-                {goalPillars.map((goal, index) => (
-                  <article
-                    key={goal.title}
-                    className="relative rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-xl px-5 py-6 sm:px-7 sm:py-7 shadow-[0_10px_28px_rgba(0,0,0,0.24)]"
-                  >
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-purple-300/70 bg-purple-300/15 text-xs font-semibold text-purple-200">
-                        {index + 1}
-                      </span>
-                      <p className="text-xs tracking-[0.12em] text-purple-200/80">
-                        {goal.tagline}
-                      </p>
-                    </div>
-                    <div>
-                      <h3 className="text-white text-xl sm:text-2xl font-semibold mb-3">
-                        {goal.title}
-                      </h3>
-                      <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-                        {goal.description}
-                      </p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
+        <section className="hu-section">
+          <div className="container px-6 sm:px-8 md:px-4 mx-auto max-w-4xl">
+            <h2 className="hu-title mb-12">Our goals</h2>
+            <ul className="space-y-10">
+              {goalPillars.map((goal) => (
+                <li key={goal.title} className="border-b border-white/[0.04] pb-10 last:border-0 last:pb-0">
+                  <h3 className="text-[19px] font-semibold text-white mb-2">{goal.title}</h3>
+                  <p className="hu-body">{goal.description}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
-        {/* Past Events Section */}
-        <section className="py-12 sm:py-16 lg:py-24 relative overflow-hidden">
-          {/* Dot grid background pattern */}
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
-
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
-
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-
+        <section className="hu-section">
           <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
-            <div className="flex items-center justify-center mb-4 sm:mb-6">
-              <Badge
-                variant="outline"
-                className="px-3 py-1 sm:px-4 border-purple-500/50 text-purple-300 text-xs sm:text-sm"
-              >
-                Our Legacy
-              </Badge>
-            </div>
-            <h2 className="headingText purpleGradient mt-[15px] mb-6 sm:mb-8 md:mb-12 text-center">
-              PREVIOUS HACKATHONS
+            <h2 className="hu-title mb-10 md:mb-14 text-center">
+              Previous hackathons
             </h2>
 
             <div className="max-w-4xl mx-auto">
@@ -927,7 +744,7 @@ export default function Home() {
                   value="v1"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
+                  <Card className="border border-white/[0.08] bg-neutral-950/80">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -1025,11 +842,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="px-6 md:px-8 py-4 border-t border-white/[0.08] bg-transparent">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
+                          className="gap-2 border-white/15 text-neutral-200 hover:bg-white/5 rounded-md"
                           asChild
                         >
                           <a
@@ -1043,7 +860,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
+                          className="gap-2 border-white/10 text-neutral-400 hover:bg-white/5 rounded-md"
                           asChild
                         >
                           <a
@@ -1064,7 +881,7 @@ export default function Home() {
                   value="v2"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
+                  <Card className="border border-white/[0.08] bg-neutral-950/80">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -1162,11 +979,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="px-6 md:px-8 py-4 border-t border-white/[0.08] bg-transparent">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
+                          className="gap-2 border-white/15 text-neutral-200 hover:bg-white/5 rounded-md"
                           asChild
                         >
                           <a
@@ -1180,7 +997,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
+                          className="gap-2 border-white/10 text-neutral-400 hover:bg-white/5 rounded-md"
                           asChild
                         >
                           <a
@@ -1201,7 +1018,7 @@ export default function Home() {
                   value="v3"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
+                  <Card className="border border-white/[0.08] bg-neutral-950/80">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -1289,11 +1106,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="px-6 md:px-8 py-4 border-t border-white/[0.08] bg-transparent">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
+                          className="gap-2 border-white/15 text-neutral-200 hover:bg-white/5 rounded-md"
                           asChild
                         >
                           <a
@@ -1307,7 +1124,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
+                          className="gap-2 border-white/10 text-neutral-400 hover:bg-white/5 rounded-md"
                           asChild
                         >
                           <a
@@ -1328,7 +1145,7 @@ export default function Home() {
                   value="v4"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
+                  <Card className="border border-white/[0.08] bg-neutral-950/80">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -1426,11 +1243,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="px-6 md:px-8 py-4 border-t border-white/[0.08] bg-transparent">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
+                          className="gap-2 border-white/15 text-neutral-200 hover:bg-white/5 rounded-md"
                           asChild
                         >
                           <a
@@ -1444,7 +1261,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
+                          className="gap-2 border-white/10 text-neutral-400 hover:bg-white/5 rounded-md"
                           asChild
                         >
                           <a
@@ -1464,7 +1281,7 @@ export default function Home() {
                   value="v5"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
+                  <Card className="border border-white/[0.08] bg-neutral-950/80">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -1562,11 +1379,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="px-6 md:px-8 py-4 border-t border-white/[0.08] bg-transparent">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
+                          className="gap-2 border-white/15 text-neutral-200 hover:bg-white/5 rounded-md"
                           asChild
                         >
                           <a
@@ -1580,7 +1397,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
+                          className="gap-2 border-white/10 text-neutral-400 hover:bg-white/5 rounded-md"
                           asChild
                         >
                           <a
@@ -1600,7 +1417,7 @@ export default function Home() {
                   value="v6"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-purple-500/30 bg-black/40 backdrop-blur-md">
+                  <Card className="border border-white/[0.08] bg-neutral-950/80">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -1694,11 +1511,11 @@ export default function Home() {
                         </div>
                       </div>
                     </CardContent>
-                    <CardFooter className="bg-black/30 backdrop-blur-sm px-6 md:px-8 py-4 border-t border-purple-500/20">
+                    <CardFooter className="px-6 md:px-8 py-4 border-t border-white/[0.08] bg-transparent">
                       <div className="flex gap-3">
                         <Button
                           variant="outline"
-                          className="gap-2 border-purple-500 text-purple-300 hover:bg-purple-900/30 hover:text-purple-200 rounded-full"
+                          className="gap-2 border-white/15 text-neutral-200 hover:bg-white/5 rounded-md"
                           asChild
                         >
                           <a
@@ -1712,7 +1529,7 @@ export default function Home() {
                         </Button>
                         <Button
                           variant="outline"
-                          className="gap-2 border-gray-500 text-gray-300 hover:bg-gray-800/30 hover:text-gray-200 rounded-full"
+                          className="gap-2 border-white/10 text-neutral-400 hover:bg-white/5 rounded-md"
                           asChild
                         >
                           <a
@@ -1733,29 +1550,19 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Judges From Section */}
-        <div className="py-8 sm:py-12 md:py-16 relative overflow-hidden">
-          <h2
-            className={`headingText purpleGradient mt-4 mb-3 sm:mb-4 text-center ${playfairDisplay.className}`}
-          >
-            JUDGES FROM
-          </h2>
-          <p className="text-gray-400 text-xs sm:text-sm md:text-base text-center mb-4 sm:mb-6 px-6 sm:px-8">
-            Interested in judging our event? Email{" "}
-            <a
-              href="mailto:humans@hackunited.org"
-              className="text-purple-400 hover:text-purple-300 underline transition-colors break-all sm:break-normal"
-            >
+        <div className="hu-section py-12 md:py-16">
+          <h2 className="hu-title mb-3 text-center">Judges from</h2>
+          <p className="hu-body text-center mb-10 px-6">
+            Want to judge?{" "}
+            <a href="mailto:humans@hackunited.org" className="hu-link">
               humans@hackunited.org
             </a>
           </p>
 
           <div
-            className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative py-6"
+            className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative py-4"
             suppressHydrationWarning
           >
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent z-10"></div>
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent z-10"></div>
             <div className="judgeContainer flex" suppressHydrationWarning>
               {[...judges, ...judges, ...judges, ...judges].map(
                 (judge, index) => (
@@ -1774,28 +1581,13 @@ export default function Home() {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <section className="py-24 relative overflow-hidden">
-          {/* Dot grid background pattern */}
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
-
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/90 to-black/80"></div>
-
-          <div className="container relative px-4 mx-auto">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white animate-fade-in">
-                Ready to Join Our Community?
-              </h2>
-              <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in">
-                Whether you're a beginner or an experienced developer, there's a
-                place for you in our community. Join us for our next hackathon
-                or become a part of our Discord community.
-              </p>
-              <div className="flex justify-center animate-fade-in">
-                <DiscordWidget />
-              </div>
-            </div>
+        <section className="hu-section pb-24">
+          <div className="container px-4 mx-auto max-w-3xl text-center">
+            <h2 className="hu-title mb-4">Discord</h2>
+            <p className="hu-body mb-10 max-w-md mx-auto">
+              Most coordination happens here: help channels, announcements, and team chat during hackathons.
+            </p>
+            <DiscordWidget />
           </div>
         </section>
       </main>

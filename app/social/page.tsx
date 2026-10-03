@@ -4,8 +4,6 @@ import { useState } from "react"
 import Link from "next/link"
 import { Home, Heart, Mail, Star, Copy, Check } from "lucide-react"
 import { Instagram, Linkedin, Youtube, Twitter } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-
 export default function SocialPage() {
   const [showCopiedMessage, setShowCopiedMessage] = useState(false)
 
@@ -34,26 +32,18 @@ export default function SocialPage() {
   ]
 
   return (
-    <main className="bg-black text-white">
-      <section className="relative min-h-screen -mt-20 pt-28 pb-14">
-        <div className="absolute inset-0 bg-[#0b0a0f]"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.025),transparent_35%,rgba(255,255,255,0.015))]"></div>
-        <div className="absolute inset-0 opacity-15 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:28px_28px]"></div>
-        <div className="absolute top-0 left-0 right-0 h-px bg-purple-400/35"></div>
-
-        <div className="container relative px-4 mx-auto">
+    <main className="bg-[#050505] text-white">
+      <section className="min-h-screen -mt-20 pt-28 pb-14 border-b border-white/[0.07]">
+        <div className="container px-4 mx-auto">
           <div className="max-w-xl mx-auto">
             <div className="text-center mb-8">
-              <Badge className="mb-4 bg-white/[0.04] hover:bg-white/[0.04] border border-purple-300/40 text-purple-200">
-                Connect With Us
-              </Badge>
-              <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-4">Social Links</h1>
-              <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-                Connect with us across all platforms and stay updated with the latest from Hack United.
+              <h1 className="hu-title mb-3">Social</h1>
+              <p className="hu-body">
+                Quick links and profiles. Email is humans@hackunited.org if you need a direct line.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-xl shadow-[0_10px_28px_rgba(0,0,0,0.28)] p-4 sm:p-5">
+            <div className="hu-panel p-4 sm:p-5">
               <div className="space-y-2">
                 {quickLinks.map((item) => {
                   const Icon = item.icon

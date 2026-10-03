@@ -4,24 +4,27 @@ a {
 }
 
 .headingText {
-  font-size: 55px;
+  font-size: clamp(2rem, 5vw, 3.25rem);
   font-weight: 700;
   font-family: inherit;
   background: linear-gradient(
     111deg,
     rgba(255, 255, 255, 1) 0%,
-    rgba(153, 153, 153, 1) 100%
+    rgba(160, 160, 160, 1) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  line-height: 97%;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
 }
 
 .subHeading p {
-  color: #d3d3d3;
-  font-size: 14px;
+  color: #86868b;
+  font-size: 17px;
   font-weight: 400;
+  line-height: 1.47059;
 }
+
 .subHeading {
   display: flex;
   flex-direction: column;
@@ -37,19 +40,28 @@ a {
 .purpleGradient {
   background: linear-gradient(
     111deg,
-    rgb(200, 152, 255) 0%,
-    rgb(170, 0, 237) 100%
+    rgb(196, 181, 253) 0%,
+    rgb(139, 92, 246) 55%,
+    rgb(124, 58, 237) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .glassCard {
-  backdrop-filter: blur(12px);
-  background-color: rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 15px;
+  backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
   position: absolute;
+  box-sizing: border-box;
+  width: 252px;
+  min-height: 104px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
 }
 
 .glassCard1 {
@@ -72,28 +84,33 @@ a {
 }
 
 .glassCard p {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
+  line-height: 1.15;
+  color: #a1a1a6;
+  margin: 0;
 }
 
 .glassCard h3 {
-  font-size: 24px;
+  font-size: 34px;
   font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0;
 }
 
-@media (max-width: 640px) {
-  .headingText {
-    font-size: 32px;
-    line-height: 1.2;
-  }
+.recognizedCompanies {
+  padding-bottom: 2rem;
+}
+
+.recognizedByTitle {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -0.01em;
 }
 
 @media (max-width: 768px) {
-  .headingText {
-    font-size: 36px;
-    line-height: 1.2;
-  }
-
   .subHeading p {
     font-size: 14px;
     line-height: 1.6;
