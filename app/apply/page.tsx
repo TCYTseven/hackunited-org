@@ -1,8 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import {
   Mail,
   Code,
@@ -193,66 +191,58 @@ export default function ApplyPage() {
     "mailto:jobs@hackunited.org?subject=Hack%20United%20volunteer%20application&body=Full%20name%3A%0D%0AEmail%3A%0D%0AAge%3A%0D%0ALocation%20(country%2C%20state%2Fregion)%3A%0D%0A%0D%0ARole(s)%3A%0D%0A%0D%0AWhy%20you%20want%20to%20volunteer%3A%0D%0A%0D%0ARelevant%20experience%3A%0D%0A%0D%0AHours%20per%20week%3A%0D%0A%0D%0A(Optional)%20Resume%20or%20LinkedIn%3A%0D%0A"
 
   return (
-    <main className="bg-[#050505] text-white">
-      <section className="border-b border-white/10 pt-28 pb-12 sm:pb-16">
-        <div className="container px-4 mx-auto max-w-3xl">
-          <h1 className="hu-title mb-4">Apply</h1>
-          <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-8">
+    <main className="atelier">
+      <section className="border-b border-[#2c2438] pt-20 pb-14">
+        <div className="container mx-auto max-w-5xl px-4">
+          <h1 className="atelier-title mb-6">
+            <em>Apply</em>
+          </h1>
+          <p className="atelier-lead mb-8">
             Hack United is a student-run nonprofit. Roles are unpaid. We review applications on a rolling basis and
             reply by email when we have a match.
           </p>
-          <a
-            href="mailto:jobs@hackunited.org"
-            className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white px-5 py-2.5 rounded-md text-sm font-medium transition-colors"
-          >
+          <a href="mailto:jobs@hackunited.org" className="atelier-btn">
             <Mail className="w-4 h-4" />
             jobs@hackunited.org
           </a>
         </div>
       </section>
 
-      <section className="py-12 sm:py-16 border-b border-white/10">
-        <div className="container px-4 mx-auto">
-          <div className="grid lg:grid-cols-4 gap-8">
+      <section className="border-b border-[#2c2438] py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-10 lg:grid-cols-4">
             <div className="lg:col-span-1">
-              <h2 className="text-lg font-semibold mb-4">What you get</h2>
-              <Card className="hu-panel border-0 shadow-none">
-                <CardContent className="p-5">
-                  <ul className="space-y-2 text-sm text-gray-300">
+              <h2 className="atelier-sub mb-5">What you get</h2>
+              <div className="atelier-frame">
+                <div className="atelier-frame-inner">
+                  <ul className="space-y-3 text-sm text-[#e7e1d6]">
                     {benefits.map((benefit) => (
-                      <li key={benefit} className="leading-snug">
+                      <li key={benefit} className="border-b border-[#2c2438] pb-3 last:border-0 last:pb-0">
                         {benefit}
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-4 pt-4 border-t border-white/10 text-xs text-gray-500">
+                  <p className="mt-5 text-xs leading-relaxed text-[#9a93ad]">
                     Swag and official service-hour credit depend on your role and tenure. Ask HR if you need
                     documentation for school programs.
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </div>
 
             <div className="lg:col-span-3">
-              <h2 className="text-lg font-semibold mb-4">Open roles</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <h2 className="atelier-sub mb-5">Open roles</h2>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {departments.flatMap((department) =>
                   department.positions.map((position) => (
                     <button
                       key={position}
                       type="button"
                       onClick={() => openPositionModal(position)}
-                      className="text-left p-4 hu-panel hover:bg-white/[0.06] transition-colors"
+                      className="border border-[#2c2438] bg-[#14111a] p-4 text-left transition-colors hover:border-[#c4b5fd]"
                     >
-                      <div className="flex items-start gap-3">
-                        <div className="p-2 rounded-md bg-white/5 text-purple-200 shrink-0">{department.icon}</div>
-                        <div className="min-w-0">
-                          <h3 className="font-medium text-sm text-white mb-1">{position}</h3>
-                          <Badge variant="outline" className="text-xs border-white/15 text-gray-400 font-normal">
-                            {department.title}
-                          </Badge>
-                        </div>
-                      </div>
+                      <p className="mb-2 text-[11px] text-[#c4b5fd]">{department.title}</p>
+                      <h3 className="text-[15px] text-[#f3efe6]">{position}</h3>
                     </button>
                   ))
                 )}
@@ -262,34 +252,38 @@ export default function ApplyPage() {
         </div>
       </section>
 
-      <section className="py-12 sm:py-16" id="application-section">
-        <div className="container px-4 mx-auto max-w-4xl">
-          <h2 className="text-lg font-semibold mb-2">How to apply</h2>
-          <p className="text-gray-400 text-sm mb-8">
+      <section className="py-16" id="application-section">
+        <div className="container mx-auto max-w-5xl px-4">
+          <h2 className="atelier-sub mb-4">
+            <em>How</em> to apply
+          </h2>
+          <p className="atelier-lead mb-8">
             Send one email to{" "}
-            <a href="mailto:jobs@hackunited.org" className="text-purple-400 hover:underline">
+            <a href="mailto:jobs@hackunited.org" className="atelier-link">
               jobs@hackunited.org
             </a>
-            . Use the subject line{" "}
-            <span className="text-gray-300">Hack United volunteer application</span> and include the items below.
+            . Use the subject line Hack United volunteer application and include the items below.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card className="bg-neutral-950 border-white/10">
-              <CardContent className="p-5 sm:p-6">
-                <h3 className="font-medium mb-4">Process</h3>
-                <ol className="space-y-4 text-sm text-gray-300 list-decimal list-inside marker:text-gray-500">
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="atelier-frame">
+              <div className="atelier-frame-inner">
+                <h3 className="mb-4 text-[#f3efe6]" style={{ fontFamily: "var(--font-serif), serif", fontSize: "1.35rem" }}>
+                  Process
+                </h3>
+                <ol className="list-decimal space-y-3 pl-5 text-sm text-[#c8c2b6]">
                   <li>Email your application with the details on the right.</li>
                   <li>We read applications as they arrive. You may get a follow-up interview on Discord.</li>
                   <li>If we offer you a role, HR will send onboarding steps and a team invite.</li>
                 </ol>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-neutral-950 border-white/10">
-              <CardContent className="p-5 sm:p-6">
-                <h3 className="font-medium mb-4">Include in your email</h3>
-                <ul className="space-y-2 text-sm text-gray-300">
+              </div>
+            </div>
+            <div className="atelier-frame">
+              <div className="atelier-frame-inner">
+                <h3 className="mb-4 text-[#f3efe6]" style={{ fontFamily: "var(--font-serif), serif", fontSize: "1.35rem" }}>
+                  Include in your email
+                </h3>
+                <ul className="space-y-2 text-sm text-[#c8c2b6]">
                   <li>Full name and contact email</li>
                   <li>Age and location (country and state or region)</li>
                   <li>Role(s) you want</li>
@@ -298,15 +292,12 @@ export default function ApplyPage() {
                   <li>Hours per week you can commit</li>
                   <li>Resume or LinkedIn (optional)</li>
                 </ul>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
 
-          <div className="mt-8 text-center">
-            <a
-              href={mailtoApply}
-              className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white px-6 py-2.5 rounded-md text-sm font-medium transition-colors"
-            >
+          <div className="mt-10">
+            <a href={mailtoApply} className="atelier-btn">
               <Mail className="w-4 h-4" />
               Open application email
             </a>
@@ -315,57 +306,46 @@ export default function ApplyPage() {
       </section>
 
       {selectedPosition && (
-        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-          <div className="bg-neutral-950 border border-white/10 rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto">
-            <div className="flex items-start justify-between gap-3 p-5 border-b border-white/10">
-              <div>
-                <p className="text-xs text-gray-500 mb-1">{selectedPosition.department}</p>
-                <h3 className="text-lg font-semibold">{selectedPosition.name}</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
+          <div className="atelier-frame max-h-[90vh] w-full max-w-lg overflow-y-auto">
+            <div className="atelier-frame-inner">
+              <div className="mb-6 flex items-start justify-between gap-3 border-b border-[#2c2438] pb-4">
+                <div>
+                  <p className="mb-1 text-xs text-[#c4b5fd]">{selectedPosition.department}</p>
+                  <h3 className="text-2xl text-[#f3efe6]" style={{ fontFamily: "var(--font-serif), serif" }}>
+                    {selectedPosition.name}
+                  </h3>
+                </div>
+                <button type="button" onClick={closeModal} className="text-[#b4adc4]" aria-label="Close">
+                  <X className="h-5 w-5" />
+                </button>
               </div>
-              <button
-                type="button"
-                onClick={closeModal}
-                className="p-1.5 rounded-md hover:bg-white/10 text-gray-400"
-                aria-label="Close"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="p-5 space-y-5 text-sm">
-              <div>
-                <h4 className="font-medium mb-2">Responsibilities</h4>
-                <ul className="space-y-1.5 text-gray-400 list-disc list-inside">
-                  {selectedPosition.responsibilities.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
+              <div className="space-y-5 text-sm text-[#c8c2b6]">
+                <div>
+                  <h4 className="mb-2 text-[#f3efe6]">Responsibilities</h4>
+                  <ul className="list-disc space-y-1.5 pl-4">
+                    {selectedPosition.responsibilities.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="mb-2 text-[#f3efe6]">Requirements</h4>
+                  <ul className="list-disc space-y-1.5 pl-4">
+                    {selectedPosition.requirements.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <div>
-                <h4 className="font-medium mb-2">Requirements</h4>
-                <ul className="space-y-1.5 text-gray-400 list-disc list-inside">
-                  {selectedPosition.requirements.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
+              <div className="mt-6 flex flex-col gap-2 sm:flex-row">
+                <button type="button" onClick={scrollToApplication} className="atelier-btn flex-1">
+                  Apply
+                </button>
+                <button type="button" onClick={closeModal} className="atelier-btn-ghost flex-1">
+                  Close
+                </button>
               </div>
-            </div>
-
-            <div className="p-5 border-t border-white/10 flex flex-col sm:flex-row gap-2">
-              <button
-                type="button"
-                onClick={scrollToApplication}
-                className="flex-1 bg-purple-600 hover:bg-purple-500 text-white py-2.5 rounded-md text-sm font-medium"
-              >
-                Apply
-              </button>
-              <button
-                type="button"
-                onClick={closeModal}
-                className="flex-1 border border-white/15 text-gray-300 py-2.5 rounded-md text-sm hover:bg-white/5"
-              >
-                Close
-              </button>
             </div>
           </div>
         </div>

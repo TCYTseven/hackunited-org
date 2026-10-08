@@ -1,7 +1,7 @@
 import type React from "react";
 import type { Metadata } from "next";
 import "@/app/globals.css";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,11 @@ import Image from "next/image";
 import AnnouncementBanner from "@/components/announcement-banner";
 
 const inter = Inter({ subsets: ["latin"] });
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-serif",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hackunited.org"),
@@ -89,7 +94,7 @@ export default function RootLayout({
         />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={`${inter.className} ${playfair.variable}`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

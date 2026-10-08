@@ -1,15 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
-import { Playfair_Display } from "next/font/google";
 import gsap from "gsap";
-import "../page.css";
-
-const playfairDisplay = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
 
 const allSponsors = [
   { src: "/images/sponsors/launchx.png", alt: "LaunchX" },
@@ -168,32 +160,32 @@ export default function DonatePage() {
   return (
     <>
       <style jsx>{sponsorStyles}</style>
-      <main className="bg-[#050505] text-white">
-        <section className="min-h-screen flex items-center -mt-20 pt-24 pb-16 border-b border-white/[0.07]">
-        <div className="container px-4 mx-auto">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="text-center lg:text-left order-2 lg:order-1">
-                <h1 className="hu-title mb-5">Donate</h1>
+      <main className="atelier">
+        <section className="border-b border-[#2c2438] pb-16 pt-16">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-6xl">
+            <div className="grid items-center gap-10 lg:grid-cols-2">
+              <div className="order-2 lg:order-1">
+                <h1 className="atelier-title mb-6">
+                  <em>Donate</em>
+                </h1>
 
-                <p className="hu-body mb-6">
+                <p className="atelier-lead mb-6">
                   Donations are optional. They help cover servers, tooling, and prize pools for free student events.
                 </p>
 
-                <div className="hu-panel p-4 sm:p-5 mb-6 lg:mb-0">
-                  <p className="text-sm text-neutral-400 leading-relaxed">
-                    Hack Club Bank processes payments. Hack United is a 501(c)(3); EIN 81-2908499.
-                  </p>
-                </div>
-
-                <div className="mt-6 lg:mt-8 flex items-center gap-3 justify-center lg:justify-start flex-wrap">
-                  <Image src="/images/globe-icon.png" alt="Hack United" width={24} height={24} className="h-6 w-6 opacity-80" />
-                  <span className="text-neutral-500 text-xs sm:text-sm">Tax-deductible where applicable</span>
+                <div className="atelier-frame">
+                  <div className="atelier-frame-inner">
+                    <p className="text-sm leading-relaxed text-[#c8c2b6]">
+                      Hack Club Bank processes payments. Hack United is a 501(c)(3). EIN 81-2908499. Tax-deductible where applicable.
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex justify-center order-1 lg:order-2">
-                <div className="hu-panel p-4 sm:p-6 lg:p-8 w-full max-w-md lg:max-w-none">
+              <div className="order-1 flex justify-center lg:order-2">
+                <div className="atelier-frame w-full max-w-md lg:max-w-none">
+                  <div className="atelier-frame-inner">
                   <iframe
                     src="https://hcb.hackclub.com/donations/start/hackunited"
                     style={{ border: "none" }}
@@ -207,6 +199,7 @@ export default function DonatePage() {
                     className="rounded-lg w-full min-w-0 sm:min-w-[350px] lg:min-w-[400px] max-w-[500px] mx-auto"
                     title="Donation Form"
                   />
+                  </div>
                 </div>
               </div>
             </div>
@@ -216,14 +209,14 @@ export default function DonatePage() {
 
       {/* Past Sponsors Section */}
       <div className="py-12 sm:py-16 relative overflow-hidden">
-        <h2
-          className={`headingText purpleGradient mt-4 mb-4 text-center ${playfairDisplay.className}`}
-        >
-          PAST SPONSORS
-        </h2>
+        <div className="mx-auto mb-8 max-w-6xl px-4">
+          <h2 className="atelier-sub">
+            <em>Past</em> sponsors
+          </h2>
+        </div>
 
         <div className="container mx-auto px-4 md:px-8 companiesLogo flex overflow-hidden relative mb-4 py-6" suppressHydrationWarning>
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent z-10"></div>
+          <div className="absolute top-0 left-0 right-0 h-px bg-[#3f3458] z-10"></div>
           {/* First carousel - left to right */}
           <div className="sponsorContainer flex" data-carousel="1" suppressHydrationWarning>
             {[...sponsors1, ...sponsors1, ...sponsors1, ...sponsors1].map(
@@ -243,7 +236,7 @@ export default function DonatePage() {
         </div>
 
         <div className="container mx-auto px-4 md:px-8 companiesLogo flex overflow-hidden relative py-6" suppressHydrationWarning>
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent z-10"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-[#3f3458] z-10"></div>
           {/* Third carousel - left to right */}
           <div className="sponsorContainer flex" data-carousel="3" suppressHydrationWarning>
             {[...sponsors3, ...sponsors3, ...sponsors3, ...sponsors3].map(

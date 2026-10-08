@@ -95,24 +95,19 @@
     left: 8%;
     right: 8%;
     height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(167, 139, 250, 0.55),
-      transparent
-    );
+    background: #3f3458;
   }
 
   .hu-title {
-    @apply text-3xl sm:text-5xl font-semibold tracking-tight text-white;
+    font-family: var(--font-serif), "Times New Roman", serif;
+    @apply text-3xl sm:text-5xl font-medium tracking-tight text-white;
   }
 
   .hu-rule {
-    width: 56px;
-    height: 2px;
-    border-radius: 999px;
+    width: 42px;
+    height: 3px;
     margin-bottom: 1.25rem;
-    background: linear-gradient(90deg, #ddd6fe, #7c3aed);
+    background: #c4b5fd;
   }
 
   .hu-body {
@@ -129,18 +124,180 @@
 
   .saas-card {
     position: relative;
-    border-radius: 20px;
-    padding: 1.5rem 1.4rem;
-    background:
-      linear-gradient(180deg, rgba(18, 16, 24, 0.96), rgba(8, 8, 10, 0.96)) padding-box,
-      linear-gradient(160deg, rgba(196, 181, 253, 0.55), rgba(255, 255, 255, 0.08) 42%, rgba(124, 58, 237, 0.25)) border-box;
-    border: 1px solid transparent;
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border-radius: 0;
+    padding: 1.5rem 1.35rem;
+    background: #14111a;
+    border: 1px solid #3f3458;
+    box-shadow: inset 0 3px 0 #c4b5fd;
+    transition: border-color 0.2s ease, transform 0.2s ease;
   }
 
   .saas-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 22px 48px rgba(0, 0, 0, 0.4), 0 0 40px rgba(124, 58, 237, 0.12);
+    border-color: #c4b5fd;
   }
+}
+
+.atelier {
+  color: #f3efe6;
+  min-height: 100vh;
+  background-color: #141416;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #19191c 0px,
+    #19191c 1px,
+    #121214 1px,
+    #121214 3px
+  );
+}
+
+.atelier-title {
+  font-family: var(--font-serif), "Times New Roman", serif;
+  font-weight: 500;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: #f7f3ea;
+}
+
+.atelier-title em {
+  font-style: italic;
+  color: #d4c4ff;
+  font-weight: 500;
+}
+
+.atelier-sub {
+  font-family: var(--font-serif), "Times New Roman", serif;
+  font-weight: 500;
+  font-size: clamp(1.75rem, 3vw, 2.4rem);
+  letter-spacing: -0.02em;
+  color: #f7f3ea;
+}
+
+.atelier-sub em {
+  font-style: italic;
+  color: #d4c4ff;
+}
+
+.atelier-lead {
+  color: #c8c2b6;
+  font-size: 17px;
+  line-height: 1.65;
+  max-width: 38rem;
+}
+
+.atelier-mark {
+  display: block;
+  width: 42px;
+  height: 3px;
+  background: #c4b5fd;
+  margin-bottom: 1.25rem;
+}
+
+.atelier-frame {
+  border: 1px solid #2a2a2e;
+  padding: 10px;
+  background-color: #2a2a2e;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.045) 0px,
+    rgba(255, 255, 255, 0.045) 1px,
+    rgba(0, 0, 0, 0.18) 1px,
+    rgba(0, 0, 0, 0.18) 2px
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.55);
+}
+
+.atelier-frame-inner {
+  border: 1px solid #1a1a1e;
+  background-color: #1a1a1e;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #1e1e22 0px,
+    #1e1e22 1px,
+    #17171a 1px,
+    #17171a 3px
+  );
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.55);
+  padding: 1.5rem;
+}
+
+.atelier-link {
+  color: #c4b5fd;
+  border-bottom: 1px solid #c4b5fd;
+  text-decoration: none;
+}
+
+.atelier-link:hover {
+  color: #f3efe6;
+  border-bottom-color: #f3efe6;
+}
+
+.atelier-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #f3efe6;
+  color: #141210;
+  padding: 0.8rem 1.15rem;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  border: 1px solid #f3efe6;
+}
+
+.atelier-btn:hover {
+  background: #fff;
+}
+
+.atelier-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #f3efe6;
+  padding: 0.8rem 1.15rem;
+  font-size: 14px;
+  border: 1px solid #3f3458;
+  text-decoration: none;
+}
+
+.atelier-btn-ghost:hover {
+  border-color: #c4b5fd;
+  color: #c4b5fd;
+}
+
+.atelier-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #2c2438;
+  color: #f3efe6;
+  text-decoration: none;
+}
+
+.atelier-row:hover {
+  color: #c4b5fd;
+}
+
+.atelier-portrait {
+  width: 156px;
+  height: 196px;
+  padding: 5px;
+  border: 1px solid #c4b5fd;
+  background: #0b0b0b;
+}
+
+.atelier-portrait-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #1c1b19;
 }

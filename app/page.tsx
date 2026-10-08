@@ -179,14 +179,14 @@ const styles = `
 
   .tabs-slider-indicator {
     position: absolute;
-    top: 0;
+    top: auto;
+    bottom: 0;
     left: 0;
-    height: 100%;
+    height: 2px;
     width: calc(100% / 6);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 9999px;
-    background: transparent;
+    border: none;
+    border-radius: 0;
+    background: #d4c4ff;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
     z-index: 0;
@@ -195,10 +195,10 @@ const styles = `
   .tab-trigger-custom {
     position: relative;
     z-index: 1;
-    border: 1px solid transparent;
-    border-radius: 9999px;
+    border: none;
+    border-radius: 0;
     background: transparent;
-    transition: all 0.3s ease;
+    transition: color 0.2s ease;
   }
 
   .tab-trigger-custom[data-state="active"] {
@@ -541,8 +541,8 @@ export default function Home() {
           <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black to-transparent" />
           <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-16 sm:mt-24 md:mt-[140px] pb-12 sm:pb-16 md:pb-[160px] px-6 sm:px-8 md:px-8 relative">
             <div className="right text-center md:text-left">
-              <h1 className="hero-heading headingText mb-4 sm:mb-6 text-center md:text-left">
-                <span className="purpleGradient">Empowering</span>
+              <h1 className="hero-heading heroTitle mb-4 sm:mb-6 text-center md:text-left">
+                <span className="heroAccent">Empowering</span>
                 <br />
                 the Next Generation
                 <br />
@@ -581,15 +581,15 @@ export default function Home() {
                 alt=""
               />
               <div className="glassCard glassCard1 hidden md:flex">
-                <h3 className="purpleGradient">25,000+</h3>
+                <h3 className="heroAccent">25,000+</h3>
                 <p>Engineers Impacted</p>
               </div>
               <div className="glassCard glassCard2 hidden md:flex">
-                <h3 className="purpleGradient">3,000+</h3>
+                <h3 className="heroAccent">3,000+</h3>
                 <p>Community Members</p>
               </div>
               <div className="glassCard glassCard3 hidden md:flex">
-                <h3 className="purpleGradient">50+</h3>
+                <h3 className="heroAccent">50+</h3>
                 <p>Countries Reached</p>
               </div>
             </div>
@@ -622,51 +622,55 @@ export default function Home() {
           </div>
         </div>
         {/* Who Are We Section */}
-        <section id="who-are-we" className="hu-section">
-          <div className="container mx-auto px-6 sm:px-8 md:px-8 grid md:grid-cols-[1.15fr_0.85fr] items-center gap-10 md:gap-16">
-            <div>
-              <div className="hu-rule" />
-              <h2 className="hu-title mb-5">About us</h2>
-              <p className="hu-body max-w-xl">
-                Hack United is a 501(c)(3) nonprofit. We run free hackathons and workshops for students who want to
-                build real projects, not just pad a resume. Alongside technical work, we focus on communication,
-                teamwork, and presenting ideas clearly, because that&apos;s what sticks after the event ends.
-              </p>
-            </div>
-            <div className="about-visual">
-              <img src="./images/globe-icon.png" alt="" />
+        <section id="who-are-we" className="band">
+          <div className="container mx-auto px-6 sm:px-8">
+            <div className="about-layout">
+              <div>
+                <h2 className="display">
+                  <em>About</em>
+                  <br />
+                  us
+                </h2>
+                <p className="about-copy">
+                  Hack United is a 501(c)(3) nonprofit. We run free hackathons and workshops for students who want to
+                  build real projects, not just pad a resume. Alongside technical work, we focus on communication,
+                  teamwork, and presenting ideas clearly, because that&apos;s what sticks after the event ends.
+                </p>
+              </div>
+              <div className="about-visual">
+                <img src="./images/globe-icon.png" alt="" />
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="hu-section">
-          <div className="container px-6 sm:px-8 md:px-4 mx-auto">
-            <div className="hu-rule" />
-            <h2 className="hu-title mb-4">Our impact</h2>
-            <p className="hu-body max-w-2xl mb-10">
-              Hackathons, workshops, and a year-round Discord. The same numbers from the hero, with a bit more context.
-            </p>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <section className="band">
+          <div className="container px-6 sm:px-8 mx-auto">
+            <h2 className="display">
+              <em>Our</em>
+              <br />
+              impact
+            </h2>
+            <div className="impact-board">
               {impactHighlights.map((item) => (
-                <article key={item.label} className="saas-card">
-                  <p className="text-4xl sm:text-5xl font-semibold tracking-tight purpleGradient mb-3">{item.value}</p>
-                  <h3 className="text-base font-medium text-white mb-2">{item.label}</h3>
-                  <p className="text-sm leading-relaxed text-neutral-400">{item.detail}</p>
+                <article key={item.label} className="impact-cell">
+                  <p className="impact-num">{item.value}</p>
+                  <h3 className="impact-label">{item.label}</h3>
+                  <p className="impact-detail">{item.detail}</p>
                 </article>
               ))}
               <a
                 href="https://fund.hackunited.org/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="saas-card flex flex-col no-underline"
+                className="impact-cell no-underline"
               >
-                <p className="text-4xl sm:text-5xl font-semibold tracking-tight purpleGradient mb-3">Fund</p>
-                <h3 className="text-base font-medium text-white mb-2">United Fund</h3>
-                <p className="text-sm leading-relaxed text-neutral-400 flex-1">
+                <p className="impact-num">Fund</p>
+                <h3 className="impact-label">United Fund</h3>
+                <p className="impact-detail">
                   Small grants ($50-$500) so student projects can ship past the prototype.
                 </p>
-                <span className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-violet-200">
+                <span className="impact-link">
                   Learn more
                   <ArrowRightIcon className="h-4 w-4" />
                 </span>
@@ -675,27 +679,33 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="hu-section">
-          <div className="container px-6 sm:px-8 md:px-4 mx-auto">
-            <div className="hu-rule" />
-            <h2 className="hu-title mb-10">Our goals</h2>
-            <div className="grid md:grid-cols-3 gap-4">
+        <section className="band">
+          <div className="container px-6 sm:px-8 mx-auto">
+            <h2 className="display">
+              <em>Our</em>
+              <br />
+              goals
+            </h2>
+            <div className="goal-list">
               {goalPillars.map((goal) => (
-                <article key={goal.title} className="saas-card min-h-[220px]">
-                  <h3 className="text-xl font-semibold text-white mb-3">{goal.title}</h3>
-                  <p className="hu-body">{goal.description}</p>
+                <article key={goal.title} className="goal-row">
+                  <h3>{goal.title}</h3>
+                  <p>{goal.description}</p>
                 </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="hu-section">
-          <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
-            <div className="hu-rule mx-auto" />
-            <h2 className="hu-title mb-10 md:mb-14 text-center">
-              Previous hackathons
-            </h2>
+        <section className="band">
+          <div className="container relative px-6 sm:px-8 mx-auto">
+            <div className="spread-head">
+              <h2 className="display">
+                <em>Previous</em>
+                <br />
+                hackathons
+              </h2>
+            </div>
 
             <div className="max-w-4xl mx-auto">
               <Tabs
@@ -706,7 +716,7 @@ export default function Home() {
                 }}
               >
                 <div className="tabs-slider-container mb-8 lg:mb-12">
-                  <TabsList className="w-full grid grid-cols-6 h-12 sm:h-14 bg-transparent border-none p-0 relative">
+                  <TabsList className="w-full grid grid-cols-6 h-12 sm:h-14 bg-transparent border-b border-[#2a2140] p-0 relative rounded-none">
                     <div
                       className="tabs-slider-indicator"
                       style={{
@@ -758,7 +768,7 @@ export default function Home() {
                   value="v1"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-white/[0.08] bg-neutral-950/80">
+                  <Card className="osx-well border border-[#2a2a2e] rounded-none shadow-none">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -895,7 +905,7 @@ export default function Home() {
                   value="v2"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-white/[0.08] bg-neutral-950/80">
+                  <Card className="osx-well border border-[#2a2a2e] rounded-none shadow-none">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -1032,7 +1042,7 @@ export default function Home() {
                   value="v3"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-white/[0.08] bg-neutral-950/80">
+                  <Card className="osx-well border border-[#2a2a2e] rounded-none shadow-none">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -1159,7 +1169,7 @@ export default function Home() {
                   value="v4"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-white/[0.08] bg-neutral-950/80">
+                  <Card className="osx-well border border-[#2a2a2e] rounded-none shadow-none">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -1295,7 +1305,7 @@ export default function Home() {
                   value="v5"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-white/[0.08] bg-neutral-950/80">
+                  <Card className="osx-well border border-[#2a2a2e] rounded-none shadow-none">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -1431,7 +1441,7 @@ export default function Home() {
                   value="v6"
                   className="focus-visible:outline-none focus-visible:ring-0"
                 >
-                  <Card className="border border-white/[0.08] bg-neutral-950/80">
+                  <Card className="osx-well border border-[#2a2a2e] rounded-none shadow-none">
                     <CardContent className="p-6 md:p-8">
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
@@ -1564,10 +1574,15 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="hu-section py-16 md:py-20">
-          <div className="hu-rule mx-auto" />
-          <h2 className="hu-title mb-3 text-center">Judges from</h2>
-          <p className="hu-body text-center mb-10 px-6">
+        <div className="band">
+          <div className="container mx-auto px-6 sm:px-8 mb-8">
+            <h2 className="display">
+              <em>Judges</em>
+              <br />
+              from
+            </h2>
+          </div>
+          <p className="container mx-auto px-6 sm:px-8 text-[#b7b3c7] text-base mb-8">
             Want to judge?{" "}
             <a href="mailto:humans@hackunited.org" className="hu-link">
               humans@hackunited.org
@@ -1596,13 +1611,16 @@ export default function Home() {
           </div>
         </div>
 
-        <section className="hu-section pb-24">
-          <div className="container px-4 mx-auto max-w-4xl text-center">
-            <div className="hu-rule mx-auto" />
-            <h2 className="hu-title mb-4">Discord</h2>
-            <p className="hu-body mb-10 max-w-lg mx-auto">
-              Most coordination happens here: help channels, announcements, and team chat during hackathons.
-            </p>
+        <section className="band pb-24">
+          <div className="container px-6 sm:px-8 mx-auto">
+            <div className="spread-head">
+              <h2 className="display">
+                <em>Discord</em>
+              </h2>
+              <p className="max-w-sm text-[#b7b3c7] text-base leading-relaxed pb-2">
+                Most coordination happens here: help channels, announcements, and team chat during hackathons.
+              </p>
+            </div>
             <div className="discord-frame">
               <DiscordWidget />
             </div>
