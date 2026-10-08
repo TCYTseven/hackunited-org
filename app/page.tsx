@@ -379,7 +379,7 @@ function DiscordWidget() {
         height="600"
         frameBorder="0"
         sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-        className="rounded-2xl bg-white/[0.04]"
+        className="rounded-2xl border border-violet-400/25 bg-[#0c0a10] shadow-[0_24px_60px_rgba(0,0,0,0.45)]"
         title="Hack United Discord Community"
       />
     </div>
@@ -623,8 +623,9 @@ export default function Home() {
         </div>
         {/* Who Are We Section */}
         <section id="who-are-we" className="hu-section">
-          <div className="container mx-auto px-6 sm:px-8 md:px-8 flex flex-col md:flex-row md:items-center gap-10 md:gap-16">
-            <div className="md:w-3/5">
+          <div className="container mx-auto px-6 sm:px-8 md:px-8 grid md:grid-cols-[1.15fr_0.85fr] items-center gap-10 md:gap-16">
+            <div>
+              <div className="hu-rule" />
               <h2 className="hu-title mb-5">About us</h2>
               <p className="hu-body max-w-xl">
                 Hack United is a 501(c)(3) nonprofit. We run free hackathons and workshops for students who want to
@@ -632,31 +633,57 @@ export default function Home() {
                 teamwork, and presenting ideas clearly, because that&apos;s what sticks after the event ends.
               </p>
             </div>
-            <img
-              className="w-40 sm:w-52 md:w-72 md:ml-auto opacity-90"
-              src="./images/globe-icon.png"
-              alt=""
-            />
+            <div className="about-visual">
+              <img src="./images/globe-icon.png" alt="" />
+            </div>
           </div>
         </section>
 
         <section className="hu-section">
           <div className="container px-6 sm:px-8 md:px-4 mx-auto">
+            <div className="hu-rule" />
             <h2 className="hu-title mb-4">Our impact</h2>
-            <p className="hu-body max-w-2xl mb-12">
-              We also run{" "}
-              <a href="https://fund.hackunited.org/" className="hu-link" target="_blank" rel="noopener noreferrer">
-                United Fund
-              </a>
-              , small grants ($50-$500) for student projects.
+            <p className="hu-body max-w-2xl mb-10">
+              Hackathons, workshops, and a year-round Discord. The same numbers from the hero, with a bit more context.
             </p>
 
-            <div className="grid md:grid-cols-3 gap-10 md:gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {impactHighlights.map((item) => (
-                <article key={item.label}>
-                  <p className="text-3xl sm:text-4xl font-semibold tracking-tight text-white mb-1">{item.value}</p>
-                  <h3 className="text-[17px] text-white mb-2">{item.label}</h3>
-                  <p className="text-[15px] leading-relaxed text-neutral-500">{item.detail}</p>
+                <article key={item.label} className="saas-card">
+                  <p className="text-4xl sm:text-5xl font-semibold tracking-tight purpleGradient mb-3">{item.value}</p>
+                  <h3 className="text-base font-medium text-white mb-2">{item.label}</h3>
+                  <p className="text-sm leading-relaxed text-neutral-400">{item.detail}</p>
+                </article>
+              ))}
+              <a
+                href="https://fund.hackunited.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="saas-card flex flex-col no-underline"
+              >
+                <p className="text-4xl sm:text-5xl font-semibold tracking-tight purpleGradient mb-3">Fund</p>
+                <h3 className="text-base font-medium text-white mb-2">United Fund</h3>
+                <p className="text-sm leading-relaxed text-neutral-400 flex-1">
+                  Small grants ($50-$500) so student projects can ship past the prototype.
+                </p>
+                <span className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-violet-200">
+                  Learn more
+                  <ArrowRightIcon className="h-4 w-4" />
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section className="hu-section">
+          <div className="container px-6 sm:px-8 md:px-4 mx-auto">
+            <div className="hu-rule" />
+            <h2 className="hu-title mb-10">Our goals</h2>
+            <div className="grid md:grid-cols-3 gap-4">
+              {goalPillars.map((goal) => (
+                <article key={goal.title} className="saas-card min-h-[220px]">
+                  <h3 className="text-xl font-semibold text-white mb-3">{goal.title}</h3>
+                  <p className="hu-body">{goal.description}</p>
                 </article>
               ))}
             </div>
@@ -664,21 +691,8 @@ export default function Home() {
         </section>
 
         <section className="hu-section">
-          <div className="container px-6 sm:px-8 md:px-4 mx-auto max-w-4xl">
-            <h2 className="hu-title mb-12">Our goals</h2>
-            <ul className="space-y-10">
-              {goalPillars.map((goal) => (
-                <li key={goal.title} className="border-b border-white/[0.04] pb-10 last:border-0 last:pb-0">
-                  <h3 className="text-[19px] font-semibold text-white mb-2">{goal.title}</h3>
-                  <p className="hu-body">{goal.description}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        <section className="hu-section">
           <div className="container relative px-6 sm:px-8 md:px-4 mx-auto">
+            <div className="hu-rule mx-auto" />
             <h2 className="hu-title mb-10 md:mb-14 text-center">
               Previous hackathons
             </h2>
@@ -1550,7 +1564,8 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="hu-section py-12 md:py-16">
+        <div className="hu-section py-16 md:py-20">
+          <div className="hu-rule mx-auto" />
           <h2 className="hu-title mb-3 text-center">Judges from</h2>
           <p className="hu-body text-center mb-10 px-6">
             Want to judge?{" "}
@@ -1582,12 +1597,15 @@ export default function Home() {
         </div>
 
         <section className="hu-section pb-24">
-          <div className="container px-4 mx-auto max-w-3xl text-center">
+          <div className="container px-4 mx-auto max-w-4xl text-center">
+            <div className="hu-rule mx-auto" />
             <h2 className="hu-title mb-4">Discord</h2>
-            <p className="hu-body mb-10 max-w-md mx-auto">
+            <p className="hu-body mb-10 max-w-lg mx-auto">
               Most coordination happens here: help channels, announcements, and team chat during hackathons.
             </p>
-            <DiscordWidget />
+            <div className="discord-frame">
+              <DiscordWidget />
+            </div>
           </div>
         </section>
       </main>
