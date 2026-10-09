@@ -1,10 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Montserrat } from "next/font/google";
 import { useState, useEffect } from "react";
-
-const montserrat = Montserrat({ subsets: ["latin"], weight: ["700"] });
 
 interface TeamMember {
   name: string;
@@ -554,59 +551,42 @@ function TeamMemberCard({
 
   if (size === "card") {
     return (
-      <div
-        className={`bg-gray-900/50 rounded-lg p-3 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 hover:bg-gray-800/50 ${
-          montserrat.className
-        } ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-        }`}
-        style={{ transitionDuration: "500ms" }}
-      >
-        <div className="flex items-center gap-3">
-          <div className={`relative ${imageSize} flex-shrink-0`}>
-            <Image
-              src={member.image || "/placeholder.svg"}
-              alt={member.name}
-              fill
-              className={`rounded-full object-cover ${borderWidth} border-purple-600`}
-            />
-          </div>
-          <div className="flex-1 min-w-0">
-            <h3 className={`font-bold text-white ${textSize} mb-0.5 truncate`}>
-              {member.name}
-            </h3>
-            <p
-              className={`text-purple-400 ${positionSize} font-medium truncate`}
-            >
-              {member.position}
-            </p>
-          </div>
+      <div className="flex items-center gap-3 border border-[#2c2438] bg-[#14111a] px-3 py-2.5">
+        <div className="relative h-12 w-10 shrink-0 overflow-hidden border border-[#3f3458]">
+          <Image
+            src={member.image || "/placeholder.svg"}
+            alt={member.name}
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="min-w-0 flex-1">
+          <h3 className="truncate text-sm text-[#f3efe6]">{member.name}</h3>
+          <p className="truncate text-xs text-[#b4adc4]">{member.position}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div
-      className={`flex flex-col items-center text-center ${
-        montserrat.className
-      } transition-all duration-500 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-      }`}
-    >
-      <div className={`relative ${imageSize} ${marginBottom} group`}>
-        <Image
-          src={member.image || "/placeholder.svg"}
-          alt={member.name}
-          fill
-          className={`rounded-full object-cover ${borderWidth} border-purple-600 transition-transform duration-300 group-hover:scale-110`}
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    <div className="flex flex-col items-center text-center">
+      <div className="atelier-portrait mb-4">
+        <div className="atelier-portrait-inner">
+          <Image
+            src={member.image || "/placeholder.svg"}
+            alt={member.name}
+            fill
+            className="object-cover"
+          />
+        </div>
       </div>
-      <h3 className={`font-bold text-white ${textSize} mb-0.5`}>
+      <h3
+        className="text-[17px] text-[#f3efe6]"
+        style={{ fontFamily: "var(--font-serif), serif" }}
+      >
         {member.name}
       </h3>
-      <p className={`text-purple-400 ${positionSize} font-bold`}>
+      <p className="mt-1 max-w-[11rem] text-[12px] leading-snug text-[#b4adc4]">
         {member.position}
       </p>
     </div>
@@ -615,22 +595,17 @@ function TeamMemberCard({
 
 export default function TeamPage() {
   return (
-    <main
-      className={`flex flex-col items-center bg-black text-white min-h-screen ${montserrat.className}`}
-    >
+    <main className="atelier flex flex-col items-center">
       <section className="w-full max-w-7xl mx-auto px-4 py-16 md:py-24">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h1
-            className={`text-5xl md:text-7xl font-bold text-white mb-4 ${montserrat.className}`}
-          >
-            Meet The Team
+        <div className="mb-16 max-w-3xl">
+          <h1 className="atelier-title">
+            <em>The</em> team
           </h1>
         </div>
 
-        {/* Executive Team */}
         <div className="mb-16">
-          {/* Core Executives - Dark Background with White Glow */}
-          <div className="bg-gray-900/50 rounded-lg p-8 mb-12 border-2 border-purple-500/30 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+          <div className="atelier-frame mb-14">
+            <div className="atelier-frame-inner">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 justify-items-center">
               {executiveTeam.map((member, index) => (
                 <TeamMemberCard
@@ -640,6 +615,7 @@ export default function TeamPage() {
                   index={index}
                 />
               ))}
+            </div>
             </div>
           </div>
 
@@ -683,19 +659,12 @@ export default function TeamPage() {
         </div>
 
         {/* Purple Divider - Thicker, Shorter, Darker */}
-        <div className="flex justify-center mb-16">
-          <div className="w-32 h-1 bg-purple-800"></div>
-        </div>
-
-        {/* Previous Volunteers */}
         <div className="mb-12">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-white mb-2">
-              Previous Volunteers
+          <div className="mb-8">
+            <h2 className="atelier-sub">
+              <em>Previous</em> volunteers
             </h2>
-            <p className="text-gray-400 text-sm">
-              Thank you to all who have contributed to our journey
-            </p>
+            <p className="mt-3 text-sm text-[#b4adc4]">Alumni who helped run past events.</p>
           </div>
 
           {/* All Previous Volunteers in Card Format */}
@@ -713,15 +682,12 @@ export default function TeamPage() {
 
         {/* Call to Action */}
         <div className="text-center mt-16">
-          <p className="text-white italic text-lg font-bold">
-            Want to join the team? Read{" "}
-            <Link
-              href="/apply"
-              className="text-purple-400 hover:text-purple-300 underline"
-            >
+          <p className="text-sm text-[#c8c2b6]">
+            Open roles are listed on the{" "}
+            <Link href="/apply" className="atelier-link">
               apply
             </Link>{" "}
-            to become a part of the team!
+            page.
           </p>
         </div>
       </section>
