@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, type CSSProperties } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,6 +19,7 @@ import HeroButton from "../components/ui/HeroButton/HeroButton";
 import "./page.css";
 import gsap from "gsap";
 import { Playfair_Display } from "next/font/google";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
@@ -386,9 +387,13 @@ function DiscordWidget() {
   );
 }
 
+const revealDelay = (ms: number) => ({ "--reveal-delay": `${ms}ms` }) as CSSProperties;
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState("v6");
   const [mounted, setMounted] = useState(false);
+  const mainRef = useRef<HTMLElement>(null);
+  useScrollReveal(mainRef);
 
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
@@ -535,7 +540,7 @@ export default function Home() {
   return (
     <>
       <style jsx>{styles}</style>
-      <main className="bg-[#050505] text-white overflow-hidden">
+      <main ref={mainRef} className="bg-[#050505] text-white overflow-hidden">
         {/* Hero Section */}
         <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat w-full pt-[30px] md:min-h-screen relative">
           <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black to-transparent" />
@@ -598,12 +603,15 @@ export default function Home() {
         <div className="recognizedCompanies">
           <h2
             className={`recognizedByTitle mt-4 mb-4 text-center ${playfairDisplay.className}`}
+            data-reveal
           >
             Recognized By
           </h2>
           <div
             className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative"
             suppressHydrationWarning
+            data-reveal
+            style={revealDelay(120)}
           >
             <div className="logoContainer flex" suppressHydrationWarning>
               {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
@@ -626,18 +634,18 @@ export default function Home() {
           <div className="container mx-auto px-6 sm:px-8">
             <div className="about-layout">
               <div>
-                <h2 className="display">
+                <h2 className="display" data-reveal>
                   <em>About</em>
                   <br />
                   us
                 </h2>
-                <p className="about-copy">
+                <p className="about-copy" data-reveal style={revealDelay(120)}>
                   Hack United is a 501(c)(3) nonprofit. We run free hackathons and workshops for students who want to
                   build real projects, not just pad a resume. Alongside technical work, we focus on communication,
                   teamwork, and presenting ideas clearly, because that&apos;s what sticks after the event ends.
                 </p>
               </div>
-              <div className="about-visual">
+              <div className="about-visual" data-reveal style={revealDelay(200)}>
                 <img src="./images/globe-icon.png" alt="" />
               </div>
             </div>
@@ -646,14 +654,14 @@ export default function Home() {
 
         <section className="band">
           <div className="container px-6 sm:px-8 mx-auto">
-            <h2 className="display">
+            <h2 className="display" data-reveal>
               <em>Our</em>
               <br />
               impact
             </h2>
             <div className="impact-board">
-              {impactHighlights.map((item) => (
-                <article key={item.label} className="impact-cell">
+              {impactHighlights.map((item, i) => (
+                <article key={item.label} className="impact-cell" data-reveal style={revealDelay(i * 90)}>
                   <p className="impact-num">{item.value}</p>
                   <h3 className="impact-label">{item.label}</h3>
                   <p className="impact-detail">{item.detail}</p>
@@ -664,6 +672,8 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="impact-cell no-underline"
+                data-reveal
+                style={revealDelay(270)}
               >
                 <p className="impact-num">Fund</p>
                 <h3 className="impact-label">United Fund</h3>
@@ -681,14 +691,14 @@ export default function Home() {
 
         <section className="band">
           <div className="container px-6 sm:px-8 mx-auto">
-            <h2 className="display">
+            <h2 className="display" data-reveal>
               <em>Our</em>
               <br />
               goals
             </h2>
             <div className="goal-list">
-              {goalPillars.map((goal) => (
-                <article key={goal.title} className="goal-row">
+              {goalPillars.map((goal, i) => (
+                <article key={goal.title} className="goal-row" data-reveal style={revealDelay(i * 100)}>
                   <h3>{goal.title}</h3>
                   <p>{goal.description}</p>
                 </article>
@@ -700,14 +710,14 @@ export default function Home() {
         <section className="band">
           <div className="container relative px-6 sm:px-8 mx-auto">
             <div className="spread-head">
-              <h2 className="display">
+              <h2 className="display" data-reveal>
                 <em>Previous</em>
                 <br />
                 hackathons
               </h2>
             </div>
 
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto" data-reveal style={revealDelay(120)}>
               <Tabs
                 defaultValue="v6"
                 className="w-full"
@@ -1576,13 +1586,13 @@ export default function Home() {
 
         <div className="band">
           <div className="container mx-auto px-6 sm:px-8 mb-8">
-            <h2 className="display">
+            <h2 className="display" data-reveal>
               <em>Judges</em>
               <br />
               from
             </h2>
           </div>
-          <p className="container mx-auto px-6 sm:px-8 text-[#b7b3c7] text-base mb-8">
+          <p className="container mx-auto px-6 sm:px-8 text-[#b7b3c7] text-base mb-8" data-reveal style={revealDelay(100)}>
             Want to judge?{" "}
             <a href="mailto:humans@hackunited.org" className="hu-link">
               humans@hackunited.org
@@ -1592,6 +1602,8 @@ export default function Home() {
           <div
             className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative py-4"
             suppressHydrationWarning
+            data-reveal
+            style={revealDelay(180)}
           >
             <div className="judgeContainer flex" suppressHydrationWarning>
               {[...judges, ...judges, ...judges, ...judges].map(
@@ -1614,14 +1626,14 @@ export default function Home() {
         <section className="band pb-24">
           <div className="container px-6 sm:px-8 mx-auto">
             <div className="spread-head">
-              <h2 className="display">
+              <h2 className="display" data-reveal>
                 <em>Discord</em>
               </h2>
-              <p className="max-w-sm text-[#b7b3c7] text-base leading-relaxed pb-2">
+              <p className="max-w-sm text-[#b7b3c7] text-base leading-relaxed pb-2" data-reveal style={revealDelay(120)}>
                 Most coordination happens here: help channels, announcements, and team chat during hackathons.
               </p>
             </div>
-            <div className="discord-frame">
+            <div className="discord-frame" data-reveal style={revealDelay(180)}>
               <DiscordWidget />
             </div>
           </div>
