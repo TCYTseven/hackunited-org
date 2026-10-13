@@ -1,7 +1,9 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useRef, type CSSProperties } from "react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import "./team.css";
 
 interface TeamMember {
   name: string;
@@ -93,7 +95,7 @@ const membersTeam: TeamMember[] = [
   {
     name: "Austin Huynh",
     position: "Outreach Associate",
-    image: "/images/team-images/Austin.png",
+    image: "/images/team-images/austin.png",
   },
   {
     name: "Aarjit A.",
@@ -508,17 +510,9 @@ function TeamMemberCard({
   size?: "small" | "large" | "compact" | "card";
   index?: number;
 }) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(
-      () => {
-        setIsVisible(true);
-      },
-      (index || 0) * 100,
-    );
-    return () => clearTimeout(timer);
-  }, [index]);
+  const revealStyle = {
+    "--reveal-delay": `${((index || 0) % (size === "card" ? 4 : 5)) * 70}ms`,
+  } as CSSProperties;
 
   const imageSize =
     size === "large"
@@ -551,7 +545,11 @@ function TeamMemberCard({
 
   if (size === "card") {
     return (
-      <div className="flex items-center gap-3 border border-[#2c2438] bg-[#14111a] px-3 py-2.5">
+      <div
+        className="alum-card flex items-center gap-3 border border-[#2c2438] bg-[#14111a] px-3 py-2.5"
+        data-reveal
+        style={revealStyle}
+      >
         <div className="relative h-12 w-10 shrink-0 overflow-hidden border border-[#3f3458]">
           <Image
             src={member.image || "/placeholder.svg"}
@@ -569,8 +567,8 @@ function TeamMemberCard({
   }
 
   return (
-    <div className="flex flex-col items-center text-center">
-      <div className="atelier-portrait mb-4">
+    <div className="team-card flex flex-col items-center text-center" data-reveal style={revealStyle}>
+      <div className="atelier-portrait team-portrait mb-4">
         <div className="atelier-portrait-inner">
           <Image
             src={member.image || "/placeholder.svg"}
@@ -594,11 +592,14 @@ function TeamMemberCard({
 }
 
 export default function TeamPage() {
+  const mainRef = useRef<HTMLElement>(null);
+  useScrollReveal(mainRef);
+
   return (
-    <main className="atelier flex flex-col items-center">
+    <main ref={mainRef} className="atelier flex flex-col items-center">
       <section className="w-full max-w-7xl mx-auto px-4 py-16 md:py-24">
         <div className="mb-16 max-w-3xl">
-          <h1 className="atelier-title">
+          <h1 className="atelier-title" data-reveal>
             <em>The</em> team
           </h1>
         </div>
@@ -661,10 +662,10 @@ export default function TeamPage() {
         {/* Purple Divider - Thicker, Shorter, Darker */}
         <div className="mb-12">
           <div className="mb-8">
-            <h2 className="atelier-sub">
+            <h2 className="atelier-sub" data-reveal>
               <em>Previous</em> volunteers
             </h2>
-            <p className="mt-3 text-sm text-[#b4adc4]">Alumni who helped run past events.</p>
+            <p className="mt-3 text-sm text-[#b4adc4]" data-reveal>Alumni who helped run past events.</p>
           </div>
 
           {/* All Previous Volunteers in Card Format */}

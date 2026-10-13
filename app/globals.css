@@ -83,6 +83,35 @@
   box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.1);
 }
 
+/* Scroll reveal (see hooks/use-scroll-reveal.ts). Uses an animation on the
+   `translate` property so it never fights an element's own hover transitions. */
+@keyframes hu-reveal {
+  from {
+    opacity: 0;
+    translate: 0 26px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.reveal-ready [data-reveal]:not(.is-shown):not(.is-revealed) {
+  opacity: 0;
+}
+
+.reveal-ready [data-reveal].is-revealed {
+  animation: hu-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready [data-reveal] {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+
 @layer components {
   .hu-section {
     @apply relative py-20 md:py-28;

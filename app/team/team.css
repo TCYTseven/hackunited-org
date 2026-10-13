@@ -1,0 +1,96 @@
+/* Team page hover detail. Colors and sizes follow the existing atelier styles. */
+
+.team-portrait {
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.3s ease,
+    box-shadow 0.5s ease;
+}
+
+.team-card:hover .team-portrait {
+  transform: translateY(-6px);
+  border-color: #e4daff;
+  box-shadow: 0 18px 36px -16px rgba(196, 181, 253, 0.45);
+}
+
+.team-portrait img {
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.team-card:hover .team-portrait img {
+  transform: scale(1.07);
+}
+
+/* A light glint passes over the photo on hover. */
+.team-portrait .atelier-portrait-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.22) 50%, transparent 65%);
+  transform: translateX(-120%);
+}
+
+.team-card:hover .team-portrait .atelier-portrait-inner::after {
+  transform: translateX(120%);
+  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.team-card h3 {
+  transition: color 0.3s ease;
+}
+
+.team-card:hover h3 {
+  color: #d4c4ff;
+}
+
+.alum-card {
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.alum-card:hover {
+  border-color: #c4b5fd;
+  background-color: #18141f;
+  transform: translateY(-2px);
+}
+
+.alum-card img {
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.alum-card:hover img {
+  transform: scale(1.08);
+}
+
+.alum-card h3 {
+  transition: color 0.25s ease;
+}
+
+.alum-card:hover h3 {
+  color: #d4c4ff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-portrait,
+  .team-portrait img,
+  .team-card:hover .team-portrait .atelier-portrait-inner::after,
+  .alum-card,
+  .alum-card img {
+    transition: none;
+  }
+
+  .team-card:hover .team-portrait,
+  .team-card:hover .team-portrait img,
+  .alum-card:hover,
+  .alum-card:hover img {
+    transform: none;
+  }
+
+  .team-portrait .atelier-portrait-inner::after {
+    display: none;
+  }
+}

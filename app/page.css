@@ -369,3 +369,170 @@ a {
     line-height: 1.6;
   }
 }
+
+/* ---------- Hover detail: impact, goals, about ---------- */
+
+.impact-cell {
+  position: relative;
+  transition: background-color 0.35s ease;
+}
+
+.impact-cell::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #c4b5fd;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+.impact-cell:hover {
+  background-color: rgba(196, 181, 253, 0.045);
+}
+
+.impact-cell:hover::before {
+  transform: scaleX(1);
+}
+
+.impact-num {
+  font-variant-numeric: tabular-nums;
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    color 0.3s ease;
+}
+
+.impact-cell:hover .impact-num {
+  transform: translateY(-3px);
+  color: #e4daff;
+}
+
+.impact-link svg {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.impact-cell:hover .impact-link {
+  color: #fff;
+}
+
+.impact-cell:hover .impact-link svg {
+  transform: translateX(4px);
+}
+
+.goal-row {
+  position: relative;
+}
+
+.goal-row::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #c4b5fd;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+.goal-row:hover::after {
+  transform: scaleX(1);
+}
+
+.goal-row h3 {
+  transition:
+    color 0.2s ease,
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.goal-row:hover h3 {
+  transform: translateX(8px);
+}
+
+.goal-row p {
+  transition: color 0.3s ease;
+}
+
+.goal-row:hover p {
+  color: #d9d5e6;
+}
+
+/* About globe box leans toward the pointer; the globe drifts and turns. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .about-visual {
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .about-visual img {
+    translate: var(--px, 0px) var(--py, 0px);
+    transition:
+      translate 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      rotate 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .about-visual:hover img {
+    rotate: -14deg;
+  }
+}
+
+/* ---------- V1–V6 switcher ---------- */
+
+.tab-date {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+}
+
+.tabs-slider-container .tab-trigger-custom[data-state="inactive"]:hover {
+  color: rgba(255, 255, 255, 0.85);
+  opacity: 1;
+}
+
+.tabs-slider-container .tab-trigger-custom[data-state="active"] {
+  background: rgba(212, 196, 255, 0.06);
+  box-shadow: none;
+}
+
+.hack-stat {
+  box-shadow: inset 0 0 0 1px transparent;
+  transition:
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.hack-stat:hover {
+  box-shadow: inset 0 0 0 1px rgba(196, 181, 253, 0.35);
+}
+
+.hack-link svg {
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hack-link:hover svg {
+  transform: translateX(3px);
+}
+
+/* ---------- Logo strips: spotlight the hovered logo ---------- */
+
+.logo-strip img {
+  transition:
+    opacity 0.35s ease,
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.logo-strip:hover img {
+  opacity: 0.4;
+}
+
+.logo-strip:hover img:hover {
+  opacity: 1;
+  transform: scale(1.06);
+}
