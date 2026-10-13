@@ -481,3 +481,41 @@ a {
     rotate: -14deg;
   }
 }
+
+/* ---------- V1–V6 switcher ---------- */
+
+.tab-date {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+}
+
+.tabs-slider-container .tab-trigger-custom[data-state="inactive"]:hover {
+  color: rgba(255, 255, 255, 0.85);
+  opacity: 1;
+}
+
+.tabs-slider-container .tab-trigger-custom[data-state="active"] {
+  background: rgba(212, 196, 255, 0.06);
+  box-shadow: none;
+}
+
+.hack-stat {
+  box-shadow: inset 0 0 0 1px transparent;
+  transition:
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.hack-stat:hover {
+  box-shadow: inset 0 0 0 1px rgba(196, 181, 253, 0.35);
+}
+
+.hack-link svg {
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hack-link:hover svg {
+  transform: translateX(3px);
+}
