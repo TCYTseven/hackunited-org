@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowRight, X } from "lucide-react";
+import { X } from "lucide-react";
 
 export default function AnnouncementBanner() {
   const pathname = usePathname();
@@ -12,25 +12,26 @@ export default function AnnouncementBanner() {
   if (pathname !== "/" || dismissed) return null;
 
   return (
-    <div className="announce surface-iris">
-      <div className="wrap flex min-h-[40px] items-center justify-between gap-4 py-2">
-        <p className="t-label flex flex-wrap items-center gap-x-3 gap-y-1 text-[11.5px]">
-          <span className="dot bg-ink" aria-hidden="true" />
-          <span>Organizer Applications for V8 are open!</span>{" "}
-          <Link href="/organizer" className="announce-link">
+    <div className="relative w-full border-b border-white/[0.07] bg-neutral-950 text-neutral-200">
+      <div className="mx-auto flex min-h-[40px] max-w-7xl items-center justify-center px-12 py-2 text-center text-[12px] sm:text-[13px] leading-snug">
+        <p>
+          Organizer Applications for V8 are open!{" "}
+          <Link
+            href="/organizer"
+            className="whitespace-nowrap text-white underline-offset-4 hover:underline"
+          >
             See more
-            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </Link>
         </p>
-        <button
-          type="button"
-          onClick={() => setDismissed(true)}
-          aria-label="Dismiss announcement"
-          className="announce-close"
-        >
-          <X className="h-4 w-4" />
-        </button>
       </div>
+      <button
+        type="button"
+        onClick={() => setDismissed(true)}
+        aria-label="Dismiss announcement"
+        className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex h-8 w-8 items-center justify-center rounded-sm text-neutral-500 transition-colors hover:bg-white/5 hover:text-white"
+      >
+        <X className="h-4 w-4" />
+      </button>
     </div>
   );
 }
