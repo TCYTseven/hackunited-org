@@ -19,7 +19,36 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+      },
       colors: {
+        // Brand palette. Channels live in globals.css so alpha modifiers work.
+        ink: {
+          DEFAULT: "rgb(var(--ink) / <alpha-value>)",
+          2: "rgb(var(--ink-2) / <alpha-value>)",
+          3: "rgb(var(--ink-3) / <alpha-value>)",
+        },
+        paper: {
+          DEFAULT: "rgb(var(--paper) / <alpha-value>)",
+          2: "rgb(var(--paper-2) / <alpha-value>)",
+        },
+        iris: {
+          DEFAULT: "rgb(var(--iris) / <alpha-value>)",
+          deep: "rgb(var(--iris-deep) / <alpha-value>)",
+        },
+        mint: "rgb(var(--mint) / <alpha-value>)",
+        fog: "rgb(var(--fog) / <alpha-value>)",
+        smoke: "rgb(var(--smoke) / <alpha-value>)",
+        graphite: "rgb(var(--graphite) / <alpha-value>)",
+        // Surface-relative colors: they follow .surface-ink / .surface-paper / .surface-iris.
+        fg: "rgb(var(--fg) / <alpha-value>)",
+        fg2: "rgb(var(--fg-2) / <alpha-value>)",
+        line: "rgb(var(--line-rgb) / <alpha-value>)",
+        surface: "rgb(var(--bg) / <alpha-value>)",
+        hl: "rgb(var(--hl) / <alpha-value>)",
+
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -52,19 +81,6 @@ const config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
-        },
-        purple: {
-          50: "#faf5ff",
-          100: "#f3e8ff",
-          200: "#e9d5ff",
-          300: "#d8b4fe",
-          400: "#c084fc",
-          500: "#a855f7",
-          600: "#9333ea",
-          700: "#7e22ce",
-          800: "#6b21a8",
-          900: "#581c87",
-          950: "#3b0764",
         },
       },
       borderRadius: {
