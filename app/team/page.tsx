@@ -1,7 +1,12 @@
-"use client";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { ArrowRight } from "lucide-react";
+import Rail from "@/components/site/rail";
+import Tilt from "@/components/team/tilt";
+import Barcode from "@/components/team/barcode";
+import AlumniRoster from "@/components/team/alumni-roster";
+import "./team.css";
 
 interface TeamMember {
   name: string;
@@ -93,7 +98,7 @@ const membersTeam: TeamMember[] = [
   {
     name: "Austin Huynh",
     position: "Outreach Associate",
-    image: "/images/team-images/Austin.png",
+    image: "/images/team-images/austin.png",
   },
   {
     name: "Aarjit A.",
@@ -113,9 +118,6 @@ const membersTeam: TeamMember[] = [
 ];
 
 const otherMembers = [...headsTeam, ...membersTeam];
-const otherMembersRow1 = otherMembers.slice(0, 5);
-const otherMembersRow2 = otherMembers.slice(5, 10);
-const otherMembersRow3 = otherMembers.slice(10);
 
 // Previous Volunteers - 11 rows total, last row has 2 people
 // Using colored avatars with initials for previous volunteers
@@ -499,193 +501,127 @@ const previousVolunteers: TeamMember[][] = [
   ],
 ];
 
-function TeamMemberCard({
+
+const isGenerated = (src: string) => src.includes("ui-avatars.com");
+
+function Badge({
   member,
-  size = "small",
-  index,
+  number,
+  variant,
 }: {
   member: TeamMember;
-  size?: "small" | "large" | "compact" | "card";
-  index?: number;
+  number: number;
+  variant: "lead" | "core";
 }) {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(
-      () => {
-        setIsVisible(true);
-      },
-      (index || 0) * 100,
-    );
-    return () => clearTimeout(timer);
-  }, [index]);
-
-  const imageSize =
-    size === "large"
-      ? "w-32 h-32"
-      : size === "compact"
-        ? "w-12 h-12"
-        : size === "card"
-          ? "w-10 h-10"
-          : "w-20 h-20";
-  const textSize =
-    size === "large"
-      ? "text-lg"
-      : size === "compact"
-        ? "text-xs"
-        : size === "card"
-          ? "text-sm"
-          : "text-sm";
-  const positionSize =
-    size === "large"
-      ? "text-sm"
-      : size === "compact"
-        ? "text-[10px]"
-        : size === "card"
-          ? "text-xs"
-          : "text-xs";
-  const marginBottom =
-    size === "compact" ? "mb-1" : size === "card" ? "mb-2" : "mb-3";
-  const borderWidth =
-    size === "compact" ? "border-2" : size === "card" ? "border-2" : "border-4";
-
-  if (size === "card") {
-    return (
-      <div className="flex items-center gap-3 border border-[#2c2438] bg-[#14111a] px-3 py-2.5">
-        <div className="relative h-12 w-10 shrink-0 overflow-hidden border border-[#3f3458]">
-          <Image
-            src={member.image || "/placeholder.svg"}
-            alt={member.name}
-            fill
-            className="object-cover"
-          />
-        </div>
-        <div className="min-w-0 flex-1">
-          <h3 className="truncate text-sm text-[#f3efe6]">{member.name}</h3>
-          <p className="truncate text-xs text-[#b4adc4]">{member.position}</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="flex flex-col items-center text-center">
-      <div className="atelier-portrait mb-4">
-        <div className="atelier-portrait-inner">
+    <Tilt className={`badge badge-${variant}`}>
+      <span className="badge-slot" aria-hidden="true" />
+      <div className="badge-top t-label tabular" aria-hidden="true">
+        <span>#{String(number).padStart(2, "0")}</span>
+        <span className="badge-pip" />
+      </div>
+      <div className="badge-photo">
+        {isGenerated(member.image) ? (
+          <span className="badge-mono" aria-hidden="true">
+            {member.name.charAt(0)}
+          </span>
+        ) : (
           <Image
             src={member.image || "/placeholder.svg"}
             alt={member.name}
             fill
+            sizes={variant === "lead" ? "(min-width: 1024px) 300px, 50vw" : "(min-width: 1024px) 240px, 50vw"}
             className="object-cover"
           />
-        </div>
+        )}
       </div>
-      <h3
-        className="text-[17px] text-[#f3efe6]"
-        style={{ fontFamily: "var(--font-serif), serif" }}
-      >
-        {member.name}
-      </h3>
-      <p className="mt-1 max-w-[11rem] text-[12px] leading-snug text-[#b4adc4]">
-        {member.position}
-      </p>
-    </div>
+      <div className="badge-body">
+        <h3 className="badge-name">{member.name}</h3>
+        <p className="badge-role">{member.position}</p>
+      </div>
+      <Barcode seed={member.name} className="badge-code" />
+    </Tilt>
   );
 }
 
+const stagger = (i: number) => ({ "--reveal-delay": `${i * 70}ms` }) as CSSProperties;
+
 export default function TeamPage() {
   return (
-    <main className="atelier flex flex-col items-center">
-      <section className="w-full max-w-7xl mx-auto px-4 py-16 md:py-24">
-        <div className="mb-16 max-w-3xl">
-          <h1 className="atelier-title">
-            <em>The</em> team
+    <main className="team surface-ink">
+      <section className="team-hero">
+        <div className="wrap">
+          <h1 className="t-mega lines" data-reveal>
+            <span className="line">
+              <span>The</span>
+            </span>
+            <span className="line">
+              <span>team</span>
+            </span>
           </h1>
         </div>
+      </section>
 
-        <div className="mb-16">
-          <div className="atelier-frame mb-14">
-            <div className="atelier-frame-inner">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 justify-items-center">
-              {executiveTeam.map((member, index) => (
-                <TeamMemberCard
-                  key={index}
-                  member={member}
-                  size="large"
-                  index={index}
-                />
-              ))}
-            </div>
-            </div>
-          </div>
-
-          {/* Other Members Row 1 */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 justify-items-center mb-12">
-            {otherMembersRow1.map((member, index) => (
-              <TeamMemberCard
-                key={index}
-                member={member}
-                size="large"
-                index={index}
-              />
+      <section className="team-leads" aria-label="Executive team">
+        <div className="wrap">
+          <ul className="lead-grid">
+            {executiveTeam.map((member, index) => (
+              <li key={member.name} className="lanyard" data-reveal="drop" style={stagger(index)}>
+                <span className="lanyard-strap" aria-hidden="true" />
+                <span className="lanyard-clip" aria-hidden="true" />
+                <Badge member={member} number={index + 1} variant="lead" />
+              </li>
             ))}
-          </div>
-
-          {/* Other Members Row 2 */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 justify-items-center mb-12">
-            {otherMembersRow2.map((member, index) => (
-              <TeamMemberCard
-                key={index}
-                member={member}
-                size="large"
-                index={index + otherMembersRow1.length}
-              />
-            ))}
-          </div>
-
-          {/* Other Members Row 3 */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 justify-items-center">
-            {otherMembersRow3.map((member, index) => (
-              <TeamMemberCard
-                key={index}
-                member={member}
-                size="large"
-                index={
-                  index + otherMembersRow1.length + otherMembersRow2.length
-                }
-              />
-            ))}
-          </div>
+          </ul>
         </div>
+      </section>
 
-        {/* Purple Divider - Thicker, Shorter, Darker */}
-        <div className="mb-12">
-          <div className="mb-8">
-            <h2 className="atelier-sub">
-              <em>Previous</em> volunteers
+      <section className="team-core" aria-label="Team">
+        <div className="wrap">
+          <Rail index="01" />
+          <ul className="core-grid">
+            {otherMembers.map((member, index) => (
+              <li key={member.name} data-reveal style={stagger(index % 5)}>
+                <Badge member={member} number={executiveTeam.length + index + 1} variant="core" />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="team-alumni">
+        <div className="wrap">
+          <Rail index="02" />
+          <div className="alumni-head">
+            <h2 className="t-display lines" data-reveal>
+              <span className="line">
+                <span>Previous</span>
+              </span>
+              <span className="line">
+                <span>volunteers</span>
+              </span>
             </h2>
-            <p className="mt-3 text-sm text-[#b4adc4]">Alumni who helped run past events.</p>
+            <p className="alumni-sub" data-reveal style={stagger(2)}>
+              Alumni who helped run past events.
+            </p>
           </div>
-
-          {/* All Previous Volunteers in Card Format */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-            {previousVolunteers.flat().map((member, index) => (
-              <TeamMemberCard
-                key={index}
-                member={member}
-                size="card"
-                index={index}
-              />
-            ))}
-          </div>
+          <AlumniRoster
+            members={previousVolunteers.flat().map(({ name, position, image }) => ({
+              name,
+              position,
+              image,
+            }))}
+          />
         </div>
+      </section>
 
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <p className="text-sm text-[#c8c2b6]">
+      <section className="team-cta">
+        <div className="wrap">
+          <p className="team-cta-text" data-reveal>
             Open roles are listed on the{" "}
-            <Link href="/apply" className="atelier-link">
+            <Link href="/apply" className="team-cta-link">
               apply
+              <ArrowRight className="h-[0.7em] w-[0.7em]" aria-hidden="true" />
             </Link>{" "}
             page.
           </p>
