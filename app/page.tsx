@@ -1,6 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef, type CSSProperties } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  type CSSProperties,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,6 +26,7 @@ import "./page.css";
 import gsap from "gsap";
 import { Playfair_Display } from "next/font/google";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import CountUp from "@/components/count-up";
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
@@ -395,6 +402,24 @@ export default function Home() {
   const mainRef = useRef<HTMLElement>(null);
   useScrollReveal(mainRef);
 
+  const tiltAbout = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== "mouse") return;
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    el.style.setProperty("--rx", `${(-y * 10).toFixed(2)}deg`);
+    el.style.setProperty("--ry", `${(x * 12).toFixed(2)}deg`);
+    el.style.setProperty("--px", `${(x * 16).toFixed(1)}px`);
+    el.style.setProperty("--py", `${(y * 16).toFixed(1)}px`);
+  };
+
+  const resetAbout = (e: ReactPointerEvent<HTMLDivElement>) => {
+    for (const prop of ["--rx", "--ry", "--px", "--py"]) {
+      e.currentTarget.style.removeProperty(prop);
+    }
+  };
+
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -645,7 +670,13 @@ export default function Home() {
                   teamwork, and presenting ideas clearly, because that&apos;s what sticks after the event ends.
                 </p>
               </div>
-              <div className="about-visual" data-reveal style={revealDelay(200)}>
+              <div
+                className="about-visual"
+                data-reveal
+                style={revealDelay(200)}
+                onPointerMove={tiltAbout}
+                onPointerLeave={resetAbout}
+              >
                 <img src="./images/globe-icon.png" alt="" />
               </div>
             </div>
@@ -662,7 +693,9 @@ export default function Home() {
             <div className="impact-board">
               {impactHighlights.map((item, i) => (
                 <article key={item.label} className="impact-cell" data-reveal style={revealDelay(i * 90)}>
-                  <p className="impact-num">{item.value}</p>
+                  <p className="impact-num">
+                    <CountUp value={item.value} />
+                  </p>
                   <h3 className="impact-label">{item.label}</h3>
                   <p className="impact-detail">{item.detail}</p>
                 </article>
