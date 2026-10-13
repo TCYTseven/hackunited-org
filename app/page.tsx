@@ -654,6 +654,8 @@ export default function Home() {
     // Only run on client side after hydration
     if (typeof window === "undefined" || !mounted) return;
 
+    const animated: Element[] = [];
+
     // Small delay to ensure DOM is fully ready
     const timeoutId = setTimeout(() => {
       const logoContainer = document.querySelector(".logoContainer");
@@ -668,6 +670,7 @@ export default function Home() {
             // Calculate the width of one set of logos
             const firstSetWidth = logoContainer.scrollWidth / 4;
 
+            animated.push(logoContainer);
             gsap.to(".logoContainer", {
               x: -firstSetWidth,
               duration: 10,
@@ -744,6 +747,7 @@ export default function Home() {
           loadedCount++;
           if (loadedCount === images.length || images.length === 0) {
             const firstSetWidth = judgeContainer.scrollWidth / 4;
+            animated.push(judgeContainer);
             gsap.set(judgeContainer, { x: 0 });
             gsap.fromTo(
               judgeContainer,
@@ -773,8 +777,39 @@ export default function Home() {
       }
     }, 100); // Small delay to ensure hydration is complete
 
-    return () => clearTimeout(timeoutId);
+    return () => {
+      clearTimeout(timeoutId);
+      gsap.killTweensOf(animated);
+    };
   }, [mounted]);
+
+  // Logo strips ease to a stop while hovered, then pick back up.
+  useEffect(() => {
+    const strips = Array.from(document.querySelectorAll<HTMLElement>(".logo-strip"));
+    const detach = strips.map((strip) => {
+      const track = strip.firstElementChild;
+      const easeTo = (timeScale: number) => () => {
+        if (!track) return;
+        for (const tween of gsap.getTweensOf(track)) {
+          gsap.to(tween, {
+            timeScale,
+            duration: timeScale ? 0.8 : 0.6,
+            ease: timeScale ? "power2.in" : "power2.out",
+            overwrite: true,
+          });
+        }
+      };
+      const slow = easeTo(0);
+      const resume = easeTo(1);
+      strip.addEventListener("mouseenter", slow);
+      strip.addEventListener("mouseleave", resume);
+      return () => {
+        strip.removeEventListener("mouseenter", slow);
+        strip.removeEventListener("mouseleave", resume);
+      };
+    });
+    return () => detach.forEach((off) => off());
+  }, []);
 
   return (
     <>
@@ -847,7 +882,7 @@ export default function Home() {
             Recognized By
           </h2>
           <div
-            className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative"
+            className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo logo-strip flex overflow-hidden relative"
             suppressHydrationWarning
             data-reveal
             style={revealDelay(120)}
@@ -1095,7 +1130,7 @@ export default function Home() {
           </p>
 
           <div
-            className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo flex overflow-hidden relative py-4"
+            className="container mx-auto px-6 sm:px-8 md:px-8 companiesLogo logo-strip flex overflow-hidden relative py-4"
             suppressHydrationWarning
             data-reveal
             style={revealDelay(180)}

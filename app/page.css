@@ -519,3 +519,20 @@ a {
 .hack-link:hover svg {
   transform: translateX(3px);
 }
+
+/* ---------- Logo strips: spotlight the hovered logo ---------- */
+
+.logo-strip img {
+  transition:
+    opacity 0.35s ease,
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.logo-strip:hover img {
+  opacity: 0.4;
+}
+
+.logo-strip:hover img:hover {
+  opacity: 1;
+  transform: scale(1.06);
+}
