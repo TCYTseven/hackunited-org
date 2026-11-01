@@ -35,7 +35,7 @@ export default function NextStop() {
           code={`Hack United · Stop ${String(nextIndex + 1).padStart(2, "0")}/${String(route.length).padStart(2, "0")}`}
           from={routeName(pathname) || "Here"}
           to={next.name}
-          detail={next.blurb}
+          toNote={next.blurb}
           stub={
             <>
               <span className="hu-pass-stub-label hu-mono">Next stop</span>

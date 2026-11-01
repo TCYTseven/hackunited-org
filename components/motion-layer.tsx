@@ -4,18 +4,15 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
 import { MOTION, reducedMotion } from "@/lib/motion";
 
-if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger, SplitText);
-
-const sortByDocument = (nodes: Element[]) =>
-  nodes.sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
+if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Site-wide scroll motion, re-applied on every route:
- *  - [data-split] headings rise in word by word.
- *  - [data-drop] cards slide up into place as they enter.
+ * Site-wide scroll motion, re-applied on every route. Kept deliberately quiet
+ * so the content, not the motion, is what the reader notices:
+ *  - [data-split] headings fade up as one piece.
+ *  - [data-drop] cards fade up a short way as they enter.
  * Nothing runs for reduced-motion users, and transforms are cleared after
  * each animation so they never fight the cards' own hover lift.
  */
@@ -27,40 +24,27 @@ export default function MotionLayer() {
 
     media.add("all", () => {
       if (reducedMotion()) return;
-      const splits = gsap.utils.toArray<HTMLElement>("[data-split]").map((el) =>
-        SplitText.create(el, {
-          type: "words",
-          wordsClass: "hu-split-word",
-          // The accent-word sticker drops in as one piece, in reading order.
-          ignore: "em",
-          autoSplit: true,
-          onSplit: (self) =>
-            gsap.from(sortByDocument([...self.words, ...el.querySelectorAll("em")]), {
-              yPercent: 60,
-              opacity: 0,
+
+      const entrance = (targets: HTMLElement[], start: string, y: number) => {
+        gsap.set(targets, { opacity: 0, y });
+        return ScrollTrigger.batch(targets, {
+          start,
+          once: true,
+          onEnter: (batch) =>
+            gsap.fromTo(batch, { opacity: 0, y }, {
+              opacity: 1,
+              y: 0,
               duration: MOTION.duration,
               ease: MOTION.ease,
-              stagger: 0.05,
-              scrollTrigger: { trigger: el, start: "top 88%", once: true },
+              stagger: 0.06,
+              clearProps: "transform,opacity",
             }),
-        })
-      );
+        });
+      };
 
+      const headings = gsap.utils.toArray<HTMLElement>("[data-split]");
       const drops = gsap.utils.toArray<HTMLElement>("[data-drop]");
-      gsap.set(drops, { opacity: 0, y: 40 });
-      const batches = ScrollTrigger.batch(drops, {
-        start: "top 92%",
-        once: true,
-        onEnter: (batch) =>
-          gsap.fromTo(batch, { opacity: 0, y: 40 }, {
-            opacity: 1,
-            y: 0,
-            duration: MOTION.duration,
-            ease: MOTION.ease,
-            stagger: 0.08,
-            clearProps: "transform,opacity",
-          }),
-      });
+      const triggers = [...entrance(headings, "top 90%", 16), ...entrance(drops, "top 92%", 20)];
 
       // Layout can shift as fonts and images load.
       const refresh = () => ScrollTrigger.refresh();
@@ -70,9 +54,8 @@ export default function MotionLayer() {
       return () => {
         window.clearTimeout(timer);
         window.removeEventListener("load", refresh);
-        batches.forEach((t) => t.kill());
-        splits.forEach((s) => s.revert());
-        gsap.set(drops, { clearProps: "transform,opacity" });
+        triggers.forEach((t) => t.kill());
+        gsap.set([...headings, ...drops], { clearProps: "transform,opacity" });
       };
     });
 

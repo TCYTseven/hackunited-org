@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { reducedMotion } from "@/lib/motion";
 
 const socials = [
   { label: "Instagram", href: "https://instagram.com/hack_united" },
@@ -21,9 +20,7 @@ const company = [
 const WORD = "Hack United";
 
 /**
- * Footer wordmark, set solid and sized to fill the footer exactly. Letters
- * near the pointer lift and pick up a deeper lavender shadow; their shape
- * never changes, so the resting state always reads as finished.
+ * Footer wordmark, set solid and sized to fill the footer exactly.
  */
 function Wordmark() {
   const ref = useRef<HTMLDivElement>(null);
@@ -46,48 +43,6 @@ function Wordmark() {
     const ro = new ResizeObserver(fit);
     ro.observe(el);
     return () => ro.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || reducedMotion() || !window.matchMedia("(hover: hover)").matches) return;
-
-    const letters = Array.from(el.querySelectorAll<HTMLSpanElement>("[data-letter]"));
-    let frame = 0;
-    let pointer: { x: number; y: number } | null = null;
-
-    const paint = () => {
-      frame = 0;
-      for (const letter of letters) {
-        let lift = 0;
-        if (pointer) {
-          const box = letter.getBoundingClientRect();
-          const dx = pointer.x - (box.left + box.width / 2);
-          const dy = pointer.y - (box.top + box.height / 2);
-          const t = Math.max(0, 1 - Math.hypot(dx, dy * 0.6) / Math.max(220, box.width * 2.2));
-          lift = t * t * (3 - 2 * t);
-        }
-        letter.style.setProperty("--lift", lift.toFixed(3));
-      }
-    };
-
-    const onMove = (e: PointerEvent) => {
-      pointer = { x: e.clientX, y: e.clientY };
-      if (!frame) frame = requestAnimationFrame(paint);
-    };
-    const onLeave = () => {
-      pointer = null;
-      if (!frame) frame = requestAnimationFrame(paint);
-    };
-
-    const zone = el.closest("footer") ?? el;
-    zone.addEventListener("pointermove", onMove as EventListener);
-    zone.addEventListener("pointerleave", onLeave);
-    return () => {
-      cancelAnimationFrame(frame);
-      zone.removeEventListener("pointermove", onMove as EventListener);
-      zone.removeEventListener("pointerleave", onLeave);
-    };
   }, []);
 
   return (

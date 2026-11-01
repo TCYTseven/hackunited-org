@@ -370,7 +370,7 @@
   background: var(--nb-fill);
   color: var(--nb-fill-ink);
   box-shadow: 2px 2px 0 var(--nb-ink);
-  transform: translate(-1px, -1px) rotate(-6deg);
+  transform: translate(-1px, -1px);
 }
 
 .apply-checklist input:focus-visible + .apply-check {

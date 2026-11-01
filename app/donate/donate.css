@@ -100,12 +100,8 @@ html.light .donate-tile {
   box-shadow: 4px 4px 0 var(--nb-shadow-c2);
 }
 
-.obs-marquee-item:nth-child(odd) .donate-tile:hover {
-  transform: rotate(-3deg) translateY(-4px) scale(1.04);
-}
-
-.obs-marquee-item:nth-child(even) .donate-tile:hover {
-  transform: rotate(3deg) translateY(-4px) scale(1.04);
+.donate-tile:hover {
+  transform: translateY(-3px);
 }
 
 .donate-tile img {

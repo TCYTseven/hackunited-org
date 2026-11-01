@@ -93,11 +93,6 @@
 .hu-brand-mark {
   width: 26px;
   height: 26px;
-  transition: transform 0.9s var(--hu-ease);
-}
-
-.hu-brand:hover .hu-brand-mark {
-  transform: rotate(-200deg);
 }
 
 .hu-brand-name {
@@ -414,17 +409,11 @@
 }
 
 .hu-wordmark-inner span {
-  --lift: 0;
   display: inline-block;
   padding-top: 0.08em;
   font-variation-settings: "wght" 650, "wdth" 100, "opsz" 96;
-  color: color-mix(in srgb, var(--hu-accent) calc(var(--lift) * 100%), var(--hu-fg));
-  text-shadow: calc(0.025em + var(--lift) * 0.04em) calc(0.025em + var(--lift) * 0.04em) 0 var(--nb-shadow-c);
-  transform: translateY(calc(var(--lift) * -0.07em));
-  transition:
-    transform 0.35s var(--hu-ease),
-    text-shadow 0.35s var(--hu-ease),
-    color 0.35s var(--hu-ease);
+  color: var(--hu-fg);
+  text-shadow: 0.025em 0.025em 0 var(--nb-shadow-c);
 }
 
 .hu-wordmark-gap {

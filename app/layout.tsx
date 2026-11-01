@@ -10,7 +10,6 @@ import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import MotionLayer from "@/components/motion-layer";
 import JourneyRail from "@/components/journey/journey-rail";
-import RouteTransition from "@/components/journey/route-transition";
 import NextStop from "@/components/journey/next-stop";
 import ClickSpark from "@/components/obsidian/click-spark";
 
@@ -108,7 +107,6 @@ export default function RootLayout({
           </div>
           <MotionLayer />
           <JourneyRail />
-          <RouteTransition />
           <ClickSpark />
         </ThemeProvider>
       </body>

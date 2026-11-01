@@ -1,25 +1,22 @@
 "use client";
 
 import { useRef, type CSSProperties } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { Inter } from "next/font/google";
-import HeroButton from "../components/ui/HeroButton/HeroButton";
 import "./page.css";
 import "./home.css";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import DraggableMarquee from "@/components/obsidian/draggable-marquee";
-import Ribbons from "@/components/home/ribbons";
 import ScrollWords, { type WordSegment } from "@/components/home/scroll-words";
 import DotGlobe from "@/components/home/dot-globe";
 import ImpactBoard from "@/components/home/impact-board";
-import GrowthChart from "@/components/home/growth-chart";
 import GoalPanels from "@/components/home/goal-panels";
 import EditionScrubber from "@/components/home/edition-scrubber";
 import JudgesGrid from "@/components/home/judges-grid";
 import { pressLogos } from "@/components/home/data";
 
-// The hero keeps the typeface it was designed in; the rest of the site uses
-// the fonts set up in the root layout.
+// The hero's stat cards keep the typeface they were designed in; the copy
+// beside them uses the site's own fonts.
 const inter = Inter({ subsets: ["latin"] });
 
 // Hero entrance animations.
@@ -91,14 +88,11 @@ const styles = `
   }
 `;
 
-// The about copy, with the phrases that get a highlighter stroke marked.
+// The about copy, with the two phrases that matter most marked by a highlighter.
 const ABOUT: WordSegment[] = [
-  "Hack United is a",
-  { text: "501(c)(3) nonprofit.", mark: "b" },
-  "We run",
+  "Hack United is a 501(c)(3) nonprofit. We run",
   { text: "free hackathons and workshops", mark: "a" },
-  "for students who want to",
-  { text: "build real projects,", mark: "b" },
+  "for students who want to build real projects,",
   "not just pad a resume. Alongside technical work, we focus on",
   { text: "communication, teamwork, and presenting ideas clearly,", mark: "a" },
   "because that's what sticks after the event ends.",
@@ -169,43 +163,37 @@ export default function Home() {
     <>
       <style jsx>{styles}</style>
       <main ref={mainRef} className="hu-home overflow-hidden">
-        <div className={`${inter.className} bg-[#050505] text-white`}>
+        <div className={`${inter.className} hu-night bg-[#050505] text-white`}>
         {/* Hero Section */}
         <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat w-full pt-[30px] md:min-h-screen relative">
           <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black to-transparent" />
           <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-16 sm:mt-24 md:mt-[140px] pb-12 sm:pb-16 md:pb-[160px] px-6 sm:px-8 md:px-8 relative">
-            <div className="right text-center md:text-left">
-              <h1 className="hero-heading heroTitle mb-4 sm:mb-6 text-center md:text-left">
-                <span className="heroAccent">Empowering</span>
-                <br />
-                the Next Generation
-                <br />
-                of Tech Innovators
+            <div className="right hu-hero-copy">
+              <p className="hero-badge hu-hero-kicker hu-mono">
+                <span aria-hidden="true" />
+                501(c)(3) nonprofit · Free for students
+              </p>
+              <h1 className="hero-heading hu-hero-title">
+                Empowering the next generation of <em>tech innovators</em>
               </h1>
-              <div className="hero-subheading subHeading mt-4 sm:mt-6 text-center md:text-left">
-                <p className="hidden md:block">
-                  A non-profit hosting free hackathons and workshops
-                  <br />
-                  focused on building essential soft skills through hands-on
-                  <br />
-                  tech projects and real-world application.
-                </p>
-                <p className="md:hidden text-sm sm:text-base">
-                  A non-profit hosting free hackathons and workshops focused on
-                  building essential soft skills through hands-on tech projects
-                  and real-world application.
-                </p>
-              </div>
-              <div className="hero-buttons flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto sm:max-w-[288px] justify-center items-center md:justify-between mt-6 sm:mt-8">
-                <HeroButton onClick={() => scrollTo("who-are-we")}>
-                  Learn More
-                </HeroButton>
-                <HeroButton
-                  link="https://unitedhacks.hackunited.org"
-                  filled={false}
+              <p className="hero-subheading hu-hero-sub">
+                Free hackathons and workshops where students build real projects, and practise the skills that
+                outlast them: communication, teamwork, and presenting ideas clearly.
+              </p>
+              <div className="hero-buttons hu-hero-actions">
+                <a
+                  href="https://unitedhacks.hackunited.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hu-btn"
                 >
-                  Hackathons
-                </HeroButton>
+                  Join a hackathon
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+                <button type="button" onClick={() => scrollTo("who-are-we")} className="hu-btn hu-btn-ghost">
+                  Learn more
+                  <ArrowDown className="h-4 w-4" />
+                </button>
               </div>
             </div>
             <div className="left flex items-center justify-center md:justify-end mt-8 sm:mt-12 md:mt-0">
@@ -258,7 +246,7 @@ export default function Home() {
           </div>
         </section>
 
-        <Ribbons />
+        <div className="hu-dawn" aria-hidden="true" />
 
         {/* About */}
         <section id="who-are-we" className="hu-section scroll-mt-16" data-stop="Who we are">
@@ -289,7 +277,6 @@ export default function Home() {
               <em>Our</em> impact
             </SectionHead>
             <ImpactBoard />
-            <GrowthChart />
           </div>
         </section>
 

@@ -7,7 +7,6 @@ import { MOTION, reducedMotion } from "@/lib/motion";
 import type { Hackathon } from "./data";
 
 function Postcard({ h, leaving = false }: { h: Hackathon; leaving?: boolean }) {
-  const [month, year] = h.date.split(" ");
   return (
     <figure className={`hu-postcard${leaving ? " is-leaving" : ""}`} aria-hidden={leaving || undefined}>
       <div className="hu-postcard-photo">
@@ -16,11 +15,6 @@ function Postcard({ h, leaving = false }: { h: Hackathon; leaving?: boolean }) {
       <span className="hu-postcard-stamp" aria-hidden="true">
         <strong>{h.label}</strong>
         <small>{h.badge}</small>
-      </span>
-      <span className="hu-postcard-postmark" aria-hidden="true">
-        <small>United Hacks</small>
-        <strong>{month.slice(0, 3)}</strong>
-        <small>{year}</small>
       </span>
       <figcaption>
         <span className="hu-postcard-note">{h.caption}</span>
@@ -33,9 +27,8 @@ function Postcard({ h, leaving = false }: { h: Hackathon; leaving?: boolean }) {
 }
 
 /**
- * Past editions as a stack of postcards. Changing edition deals the top card
- * off in the direction of travel while the next one settles in from the
- * stack beneath it.
+ * Past editions as a postcard. Changing edition slides the current card a
+ * short way off in the direction of travel as the next one fades in.
  */
 export default function PostcardStack({
   editions,
@@ -67,13 +60,11 @@ export default function PostcardStack({
     }
     const tl = gsap.timeline({ onComplete: () => setLeaving(null) });
     tl.to(out, {
-      xPercent: -direction * 110,
-      yPercent: -6,
-      rotate: -direction * 12,
+      xPercent: -direction * 60,
       opacity: 0,
-      duration: 0.6,
+      duration: 0.4,
       ease: "power2.in",
-    }).from(incoming, { scale: 0.93, rotate: direction * 3, y: 14, duration: MOTION.duration, ease: MOTION.ease }, 0.15);
+    }).from(incoming, { opacity: 0, duration: MOTION.duration, ease: MOTION.ease }, 0.1);
     return () => {
       tl.kill();
     };
@@ -81,8 +72,7 @@ export default function PostcardStack({
 
   return (
     <div ref={stackRef} className="hu-postcards">
-      <span className="hu-postcard-back hu-postcard-back-1" aria-hidden="true" />
-      <span className="hu-postcard-back hu-postcard-back-2" aria-hidden="true" />
+      <span className="hu-postcard-back" aria-hidden="true" />
       <Postcard key={editions[active].value} h={editions[active]} />
       {leaving !== null && leaving !== active && <Postcard key={`out-${editions[leaving].value}`} h={editions[leaving]} leaving />}
     </div>

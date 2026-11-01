@@ -1,4 +1,4 @@
-/* Journey: route map rail, page-to-page curtain, next-stop hand-off. */
+/* Journey: route map rail, header progress line, next-stop hand-off. */
 
 /* ---------- Route map rail (wide screens) ---------- */
 
@@ -142,96 +142,6 @@
   transform-origin: left;
 }
 
-/* ---------- Page-to-page curtain ---------- */
-
-.hu-curtain {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  display: grid;
-  place-items: center;
-  background: var(--nb-fill);
-  color: var(--nb-fill-ink);
-  border-left: 3px solid var(--nb-fill-ink);
-  border-right: 3px solid var(--nb-fill-ink);
-  /* Position is owned by GSAP (route-transition.tsx); hidden until used. */
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.hu-curtain-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.hu-curtain-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.25rem 0.6rem;
-  border: var(--nb-bw) solid var(--nb-fill-ink);
-  border-radius: 6px;
-  background: var(--nb-fill-2);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.hu-curtain-kicker .hu-live {
-  background: var(--nb-fill-ink);
-}
-
-.hu-curtain-name {
-  font-size: clamp(3rem, 10vw, 8rem);
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.05em;
-}
-
-/* Mini route under the name: a dot rides from this page to the next. */
-.hu-curtain-route {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  margin-top: 0.75rem;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.hu-curtain-line {
-  position: relative;
-  width: clamp(120px, 22vw, 260px);
-  height: 3px;
-  border-radius: 2px;
-  background: color-mix(in srgb, var(--nb-fill-ink) 25%, transparent);
-}
-
-.hu-curtain-fill {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: var(--nb-fill-ink);
-  transform: scaleX(0);
-  transform-origin: left;
-}
-
-.hu-curtain-dot {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 14px;
-  height: 14px;
-  margin: -7px 0 0 -7px;
-  border: 2px solid var(--nb-fill-ink);
-  border-radius: 999px;
-  background: var(--nb-fill-2);
-}
-
 /* ---------- Next stop ---------- */
 
 .hu-next {
@@ -293,13 +203,7 @@
 
 .hu-next-line li[data-state="next"] .hu-next-dot {
   background: var(--hu-bg);
-  animation: hu-next-pulse 1.6s ease-in-out infinite;
-}
-
-@keyframes hu-next-pulse {
-  50% {
-    box-shadow: 0 0 0 6px color-mix(in srgb, var(--nb-fill) 55%, transparent);
-  }
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--nb-fill) 45%, transparent);
 }
 
 .hu-next-name {
@@ -434,6 +338,46 @@
   color: var(--hu-fg-2);
 }
 
+/* Destination ticket: a small "from" line, then the destination as the
+   headline with its description right under it. */
+.hu-pass-dest {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hu-pass-trip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: min(100%, 26rem);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hu-fg-3);
+}
+
+.hu-pass-trip .hu-pass-path {
+  flex: 1;
+  margin-top: 0;
+}
+
+.hu-pass-dest-name {
+  margin-top: 0.6rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.hu-pass-note {
+  margin-top: 0.6rem;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--hu-fg-2);
+}
+
 /* Stub: dashed perforation with a notch cut at each end. */
 .hu-pass-stub {
   position: relative;
@@ -533,9 +477,5 @@
   .hu-rail-dot,
   .hu-rail-label {
     transition: none;
-  }
-
-  .hu-next-line li[data-state="next"] .hu-next-dot {
-    animation: none;
   }
 }

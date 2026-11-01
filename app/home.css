@@ -62,9 +62,7 @@
   object-fit: contain;
   filter: var(--hu-press-filter);
   opacity: 0.8;
-  transition:
-    opacity 0.25s ease,
-    transform 0.35s var(--hu-ease-press);
+  transition: opacity 0.25s ease;
 }
 
 /* The wire-service PNGs carry wide transparent padding; TechBullion does not. */
@@ -75,53 +73,6 @@
 .hu-press-logo:hover img,
 .hu-press-logo:focus-visible img {
   opacity: 1;
-  transform: scale(1.1) rotate(-3deg);
-}
-
-/* ---------- Ribbons ---------- */
-
-.hu-ribbons {
-  position: relative;
-  height: clamp(120px, 12vw, 160px);
-  overflow: hidden;
-  border-top: var(--nb-bw) solid var(--nb-ink);
-}
-
-.hu-ribbon {
-  position: absolute;
-  top: 50%;
-  left: -5%;
-  width: 110%;
-  border-block: var(--nb-bw) solid var(--nb-ink);
-}
-
-.hu-ribbon-front {
-  z-index: 1;
-  background: var(--nb-fill-2);
-  transform: translateY(-50%) rotate(-3deg);
-  box-shadow: 0 6px 0 var(--nb-ink);
-}
-
-.hu-ribbon-back {
-  background: var(--nb-fill);
-  transform: translateY(-50%) rotate(2.5deg);
-}
-
-.hu-ribbon-phrase {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.9rem;
-  padding: 0.5rem 0 0.55rem 0.9rem;
-  font-size: clamp(0.95rem, 1.7vw, 1.35rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: var(--nb-fill-ink);
-}
-
-.hu-ribbon-star {
-  font-size: 0.8em;
 }
 
 /* ---------- About ---------- */
@@ -145,17 +96,6 @@
   letter-spacing: -0.03em;
   font-weight: 500;
   font-variation-settings: "opsz" 48;
-}
-
-/* Words flip up from below, so give the paragraph some depth. */
-.hu-scroll-words {
-  perspective: 900px;
-}
-
-.hu-sw-word {
-  display: inline-block;
-  transform-origin: 50% 100%;
-  will-change: transform, opacity, filter;
 }
 
 /* Highlighter stroke behind a marked phrase; GSAP sweeps it in. */
@@ -240,41 +180,6 @@ html.light .hu-globe-wrap {
   pointer-events: none;
 }
 
-/* Dashed orbit just outside the globe, with a small satellite riding it. */
-.hu-globe-orbit {
-  position: absolute;
-  inset: 2%;
-  border: 1px dashed rgba(212, 196, 255, 0.35);
-  border-radius: 999px;
-  animation: hu-orbit 48s linear infinite;
-  pointer-events: none;
-}
-
-.hu-globe-orbit::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: -5px;
-  width: 9px;
-  height: 9px;
-  margin-top: -4.5px;
-  border: 2px solid #130e24;
-  border-radius: 999px;
-  background: #ffb547;
-}
-
-@keyframes hu-orbit {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hu-globe-orbit {
-    animation: none;
-  }
-}
-
 .hu-globe-meta {
   display: flex;
   justify-content: space-between;
@@ -283,20 +188,14 @@ html.light .hu-globe-wrap {
 }
 
 .hu-globe-meta span {
-  padding: 0.2rem 0.5rem;
-  border: var(--nb-bw) solid var(--nb-ink);
-  border-radius: 6px;
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: var(--nb-fill);
-  color: var(--nb-fill-ink);
+  color: var(--hu-fg-3);
 }
 
-.hu-globe-meta span:last-child {
-  background: var(--nb-fill-2);
-}
+
 
 /* ---------- Impact (split-flap board) ---------- */
 
@@ -344,6 +243,12 @@ html.light .hu-globe-wrap {
 .hu-board-num {
   margin-top: auto;
   padding-top: 2.5rem;
+  font-size: clamp(2.5rem, 4.4vw, 3.75rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums;
+  color: var(--hu-fg);
 }
 
 .hu-board-detail {
@@ -390,11 +295,6 @@ html.light .hu-globe-wrap {
   }
 }
 
-.hu-board-cell:hover .hu-flap-cell {
-  background: var(--nb-fill);
-  color: var(--nb-fill-ink);
-}
-
 /* ---------- Goals ---------- */
 
 .hu-goals {
@@ -424,31 +324,6 @@ html.light .hu-globe-wrap {
   flex-grow: 2.4;
   background: var(--nb-fill);
   box-shadow: var(--nb-off) var(--nb-off) 0 var(--nb-ink);
-  transform: translate(-3px, -3px);
-}
-
-/* Oversized outline numeral behind each panel. */
-.hu-goal::after {
-  content: attr(data-num);
-  position: absolute;
-  top: -0.12em;
-  right: -0.04em;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-weight: 800;
-  font-size: clamp(6rem, 12vw, 10.5rem);
-  line-height: 1;
-  letter-spacing: -0.06em;
-  color: transparent;
-  -webkit-text-stroke: 2px var(--hu-line-2);
-  pointer-events: none;
-  transition:
-    transform 0.6s var(--hu-ease-press),
-    -webkit-text-stroke-color 0.3s ease;
-}
-
-.hu-goal[data-open]::after {
-  transform: rotate(-6deg);
-  -webkit-text-stroke-color: var(--nb-fill-ink);
 }
 
 .hu-goal-num {
@@ -905,15 +780,8 @@ html.light .hu-globe-wrap {
   background: #fbf8f1;
 }
 
-.hu-postcard-back-1 {
-  transform: rotate(-4deg) translate(-2%, 2%);
-  background-image: repeating-linear-gradient(180deg, transparent 0 22px, rgba(21, 19, 27, 0.14) 22px 23px);
-  background-position: 0 40px;
-}
-
-.hu-postcard-back-2 {
-  transform: rotate(3deg) translate(2%, 1%);
-  box-shadow: 5px 5px 0 var(--nb-shadow-c2);
+.hu-postcard-back {
+  transform: rotate(2deg) translate(1.5%, 1%);
 }
 
 .hu-postcard {
@@ -938,14 +806,6 @@ html.light .hu-globe-wrap {
   background: #e4ddcd;
 }
 
-.hu-postcard-photo img {
-  transition: transform 0.8s var(--hu-ease);
-}
-
-.hu-postcards:hover .hu-postcard:not(.is-leaving) .hu-postcard-photo img {
-  transform: scale(1.04);
-}
-
 /* Stamp: the dotted border in paper colour reads as a perforated edge. */
 .hu-postcard-stamp {
   position: absolute;
@@ -960,7 +820,6 @@ html.light .hu-globe-wrap {
   background: #ffb547;
   color: #130e24;
   box-shadow: inset 0 0 0 2px #15131b;
-  transform: rotate(4deg);
 }
 
 .hu-postcard-stamp strong {
@@ -979,41 +838,6 @@ html.light .hu-globe-wrap {
   line-height: 1.2;
   letter-spacing: 0.08em;
   text-align: center;
-  text-transform: uppercase;
-}
-
-/* Postmark: a dashed ring stamped over the corner of the stamp. */
-.hu-postcard-postmark {
-  position: absolute;
-  top: 70px;
-  right: 82px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 84px;
-  height: 84px;
-  border: 2px dashed rgba(21, 19, 27, 0.75);
-  border-radius: 999px;
-  background: rgba(251, 248, 241, 0.72);
-  backdrop-filter: blur(2px);
-  color: #15131b;
-  transform: rotate(-14deg);
-}
-
-.hu-postcard-postmark small {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 7.5px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.hu-postcard-postmark strong {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 1.15rem;
-  font-weight: 800;
-  line-height: 1.1;
   text-transform: uppercase;
 }
 
@@ -1044,13 +868,6 @@ html.light .hu-globe-wrap {
   .hu-postcards {
     aspect-ratio: 5 / 5.2;
   }
-
-  .hu-postcard-postmark {
-    top: 64px;
-    right: 70px;
-    width: 70px;
-    height: 70px;
-  }
 }
 
 /* ---------- Judges ---------- */
@@ -1080,50 +897,7 @@ html.light .hu-globe-wrap {
   width: auto;
   max-width: 62%;
   object-fit: contain;
-  opacity: 0.85;
-  transition:
-    opacity 0.25s ease,
-    transform 0.35s var(--hu-ease-press);
-}
-
-.hu-judge:hover .hu-judge-logo {
-  opacity: 1;
-  transform: scale(1.08) rotate(-2deg);
-}
-
-.hu-judge-index,
-.hu-judge-name {
-  position: absolute;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.hu-judge-index {
-  top: 0.85rem;
-  left: 0.85rem;
-  color: var(--hu-fg-3);
-}
-
-.hu-judge-name {
-  right: 0.85rem;
-  bottom: 0.85rem;
-  padding: 0.15rem 0.45rem;
-  border: var(--nb-bw) solid var(--nb-ink);
-  border-radius: 5px;
-  background: var(--nb-fill-2);
-  color: var(--nb-fill-ink);
-  opacity: 0;
-  transform: translateY(6px) rotate(3deg);
-  transition:
-    opacity 0.2s ease,
-    transform 0.3s var(--hu-ease-press);
-}
-
-.hu-judge:hover .hu-judge-name {
-  opacity: 1;
-  transform: rotate(-2deg);
+  opacity: 0.9;
 }
 
 /* ---------- Discord ---------- */
@@ -1154,137 +928,14 @@ html.light .hu-globe-wrap {
 
 /* ---------- Light theme: night to day ----------
    The hero is always night. In the light theme the press band stays dark
-   (it carries .hu-night) and the ribbon band is the sunrise between them. */
+   (it carries .hu-night) and a short sunrise band leads into the paper page. */
 
-html.light .hu-ribbons {
-  background: linear-gradient(180deg, #050505 0%, #2a2140 38%, #c9b8f0 72%, var(--hu-bg) 100%);
-  border-top-color: #050505;
+.hu-dawn {
+  display: none;
 }
 
-html.light .hu-ribbon {
-  border-color: #15131b;
-}
-
-html.light .hu-ribbon-front {
-  box-shadow: 0 6px 0 #15131b;
-}
-
-/* ---------- Growth chart ---------- */
-
-.hu-growth {
-  margin-top: 1.25rem;
-  padding: 1.4rem 1.4rem 1rem;
-}
-
-.hu-growth-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.25rem 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.hu-growth-title {
-  font-size: 1.05rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--hu-fg);
-}
-
-.hu-growth-sub {
-  font-size: 10.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--hu-fg-3);
-}
-
-.hu-growth-plot {
-  position: relative;
-  outline-offset: 4px;
-  touch-action: pan-y;
-}
-
-.hu-growth-plot svg {
+html.light .hu-dawn {
   display: block;
-  overflow: visible;
-}
-
-.hu-growth-grid {
-  stroke: var(--hu-line);
-  stroke-width: 1;
-}
-
-.hu-growth-tick,
-.hu-growth-x {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 10.5px;
-  fill: var(--hu-fg-3);
-}
-
-.hu-growth-x {
-  fill: var(--hu-fg-2);
-  font-weight: 600;
-}
-
-.hu-growth-area {
-  fill: color-mix(in srgb, var(--hu-chart) 14%, transparent);
-}
-
-.hu-growth-line {
-  fill: none;
-  stroke: var(--hu-chart);
-  stroke-width: 2;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-}
-
-.hu-growth-dot {
-  fill: var(--hu-chart);
-  stroke: var(--nb-surface);
-  stroke-width: 2;
-  transition: r 0.2s var(--hu-ease-press);
-}
-
-.hu-growth-cross {
-  stroke: var(--hu-fg-3);
-  stroke-width: 1;
-  stroke-dasharray: 3 3;
-}
-
-.hu-growth-end {
-  font-size: 13px;
-  font-weight: 700;
-  fill: var(--hu-fg);
-}
-
-.hu-growth-tip {
-  position: absolute;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-  min-width: 150px;
-  padding: 0.55rem 0.7rem;
-  border: var(--nb-bw) solid var(--nb-ink);
-  border-radius: 8px;
-  background: var(--nb-surface);
-  box-shadow: 3px 3px 0 var(--nb-ink);
-  transform: translate(-50%, -100%);
-  pointer-events: none;
-  font-size: 12.5px;
-  color: var(--hu-fg-2);
-}
-
-.hu-growth-tip .hu-mono {
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--hu-fg-3);
-}
-
-.hu-growth-tip strong {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--hu-fg);
+  height: clamp(56px, 7vw, 96px);
+  background: linear-gradient(180deg, #050505 0%, #2a2140 38%, #c9b8f0 72%, var(--hu-bg) 100%);
 }

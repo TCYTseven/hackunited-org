@@ -1,57 +1,12 @@
-/* Home hero. Kept exactly as designed — the redesign starts below the hero. */
+/* Home hero. The globe and its glass stat cards are kept as designed; the
+   copy column beside them uses the site's own type and buttons. */
 
 li,
 a {
   text-decoration: none;
 }
 
-.headingText {
-  font-size: clamp(2rem, 5vw, 3.25rem);
-  font-weight: 700;
-  font-family: inherit;
-  background: linear-gradient(
-    111deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(160, 160, 160, 1) 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-}
-
-.subHeading p {
-  color: #86868b;
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.47059;
-}
-
-.subHeading {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-@media (max-width: 768px) {
-  .subHeading {
-    height: auto;
-  }
-}
-
-.heroTitle {
-  font-size: clamp(2rem, 5vw, 3.25rem);
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-}
-
 .heroAccent {
-  color: #d4c4ff;
-}
-
-.purpleSolid {
   color: #d4c4ff;
 }
 
@@ -107,9 +62,96 @@ a {
   margin: 0;
 }
 
-@media (max-width: 768px) {
-  .subHeading p {
-    font-size: 14px;
-    line-height: 1.6;
+/* ---------- Copy column ---------- */
+
+.hu-hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .hu-hero-copy {
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
   }
+}
+
+.hu-hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid #3f3458;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #bdb8c8;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .hu-hero-kicker {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+}
+
+.hu-hero-kicker span {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #d4c4ff;
+}
+
+.hu-hero-title {
+  max-width: 13ch;
+  margin-top: 1.5rem;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(2.5rem, 5.4vw, 4.4rem);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  font-variation-settings: "opsz" 96;
+  color: #fff;
+}
+
+.hu-hero-title em {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: #d4c4ff;
+}
+
+.hu-hero-sub {
+  max-width: 34rem;
+  margin-top: 1.5rem;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: 1.6;
+  color: #a1a1a6;
+}
+
+.hu-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-top: 2.25rem;
+}
+
+@media (min-width: 768px) {
+  .hu-hero-actions {
+    justify-content: flex-start;
+  }
+}
+
+.hu-hero-actions .hu-btn {
+  font-family: var(--font-sans), system-ui, sans-serif;
 }

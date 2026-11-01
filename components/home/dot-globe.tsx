@@ -268,7 +268,6 @@ export default function DotGlobe({ className = "" }: { className?: string }) {
       role="img"
       aria-label="Spinning globe with arcs connecting cities around the world. Drag to rotate."
     >
-      <span className="hu-globe-orbit" aria-hidden="true" />
       <canvas ref={canvasRef} className="hu-globe" />
       <canvas ref={overlayRef} className="hu-globe hu-globe-overlay" />
     </div>

@@ -6,6 +6,11 @@ import type { ReactNode } from "react";
  * A ticket: main section, perforation with notches, and a tear-off stub.
  * Used wherever the site hands the visitor on to their next step. Renders
  * as a link when given an href.
+ *
+ * Two layouts: a From → To route with an optional `detail` line under the
+ * whole trip, or, when `toNote` is given, a destination ticket where the
+ * place you are leaving is a small line and the destination is the headline,
+ * with its description directly beneath it.
  */
 export default function BoardingPass({
   href,
@@ -13,6 +18,7 @@ export default function BoardingPass({
   code,
   from,
   to,
+  toNote,
   detail,
   stub,
   className = "",
@@ -22,6 +28,7 @@ export default function BoardingPass({
   code: string;
   from: string;
   to: string;
+  toNote?: ReactNode;
   detail?: ReactNode;
   stub: ReactNode;
   className?: string;
@@ -33,19 +40,33 @@ export default function BoardingPass({
           <span className="hu-pass-label">{label}</span>
           <span>{code}</span>
         </div>
-        <div className="hu-pass-route">
-          <span className="hu-pass-end">
-            <span className="hu-mono">From</span>
-            {from}
-          </span>
-          <span className="hu-pass-path" aria-hidden="true">
-            <Plane className="hu-pass-plane" />
-          </span>
-          <span className="hu-pass-end hu-pass-to">
-            <span className="hu-mono">To</span>
-            {to}
-          </span>
-        </div>
+        {toNote ? (
+          <div className="hu-pass-dest">
+            <span className="hu-pass-trip hu-mono">
+              <span>From {from}</span>
+              <span className="hu-pass-path" aria-hidden="true">
+                <Plane className="hu-pass-plane" />
+              </span>
+              <span>To</span>
+            </span>
+            <span className="hu-pass-dest-name">{to}</span>
+            <span className="hu-pass-note">{toNote}</span>
+          </div>
+        ) : (
+          <div className="hu-pass-route">
+            <span className="hu-pass-end">
+              <span className="hu-mono">From</span>
+              {from}
+            </span>
+            <span className="hu-pass-path" aria-hidden="true">
+              <Plane className="hu-pass-plane" />
+            </span>
+            <span className="hu-pass-end hu-pass-to">
+              <span className="hu-mono">To</span>
+              {to}
+            </span>
+          </div>
+        )}
         {detail && <div className="hu-pass-detail">{detail}</div>}
       </div>
       <div className="hu-pass-stub">

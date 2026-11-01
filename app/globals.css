@@ -269,23 +269,15 @@ html.light .hu-night {
     color: var(--hu-fg);
   }
 
-  /* The accent word in a heading sits in a tilted lavender block, like a
-     sticker slapped onto the page. */
+  /* The accent word in a heading is set in the serif italic, in lavender. */
   .hu-display em,
   .hu-h2 em {
-    display: inline-block;
-    margin-right: 0.08em;
-    padding: 0 0.1em 0.03em;
+    margin-right: 0.04em;
     font-family: var(--font-serif), Georgia, serif;
     font-style: italic;
     font-weight: 400;
     letter-spacing: -0.02em;
-    color: var(--nb-fill-ink);
-    background: var(--nb-fill);
-    border: var(--nb-bw) solid var(--nb-ink);
-    border-radius: 0.12em;
-    box-shadow: 0.06em 0.06em 0 var(--nb-ink);
-    transform: rotate(-2deg);
+    color: var(--hu-accent);
   }
 
   .hu-h3 em {
@@ -439,7 +431,7 @@ html.light .hu-night {
     color: var(--hu-fg);
   }
 
-  /* Pulsing "live" dot in the signal colour. */
+  /* Small "live" dot in the signal colour. */
   .hu-live {
     position: relative;
     width: 7px;
@@ -449,28 +441,7 @@ html.light .hu-night {
     flex-shrink: 0;
   }
 
-  .hu-live::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: inherit;
-    animation: hu-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-  }
-
-  @keyframes hu-ping {
-    75%,
-    100% {
-      transform: scale(2.6);
-      opacity: 0;
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .hu-live::after {
-      animation: none;
-    }
-
     .nb-hover,
     .hu-btn {
       transition: none;
@@ -510,11 +481,6 @@ html.light .hu-night {
 
 .hu-window-bar .hu-live {
   background: var(--nb-fill-ink);
-}
-
-/* Headings split by the motion layer animate per word; keep lines tidy. */
-[data-split] .hu-split-word {
-  display: inline-block;
 }
 
 /* A night band repaints itself with the dark palette it scopes. */
