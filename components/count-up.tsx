@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { reducedMotion } from "@/lib/motion";
 
 function parse(value: string) {
   const match = value.match(/^(\D*)([\d,]+)(.*)$/);
@@ -34,7 +35,7 @@ export default function CountUp({
     const parsed = parse(value);
     const el = ref.current;
     if (!parsed || !el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (reducedMotion()) return;
     if (!("IntersectionObserver" in window)) return;
 
     const format = (n: number) =>

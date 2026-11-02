@@ -1,0 +1,106 @@
+/* Donate page. */
+
+.donate-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 3rem 5rem;
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .donate-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.donate-copy {
+  position: sticky;
+  top: 100px;
+}
+
+@media (max-width: 960px) {
+  .donate-copy {
+    position: static;
+  }
+}
+
+.donate-uses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.donate-uses li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 40px;
+  padding-inline: 1rem;
+  border: var(--nb-bw) solid var(--nb-ink);
+  border-radius: 10px;
+  background: var(--nb-surface);
+  box-shadow: 2px 2px 0 var(--nb-ink);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--hu-fg);
+}
+
+.donate-uses .hu-mono {
+  font-size: 10.5px;
+  color: var(--hu-accent);
+}
+
+.donate-window {
+  overflow: hidden;
+}
+
+.donate-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Sponsor logos arrive in every colour and on mixed backgrounds, so each one
+   sits on a paper tile, like a sticker on a laptop lid. */
+.donate-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 196px;
+  height: 104px;
+  margin: 0.6rem 0.65rem 0.9rem;
+  padding: 1.1rem 1.4rem;
+  border: var(--nb-bw) solid var(--nb-ink);
+  border-radius: 12px;
+  background: #f6f3ec;
+  box-shadow: 4px 4px 0 var(--nb-shadow-c);
+  transition: transform 0.45s var(--hu-ease);
+}
+
+html.light .donate-tile {
+  background: #ffffff;
+}
+
+.obs-marquee-item:nth-child(even) .donate-tile {
+  box-shadow: 4px 4px 0 var(--nb-shadow-c2);
+}
+
+.donate-tile:hover {
+  transform: translateY(-3px);
+}
+
+.donate-tile img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+@media (max-width: 640px) {
+  .donate-tile {
+    width: 150px;
+    height: 84px;
+  }
+}

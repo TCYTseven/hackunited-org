@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, type RefObject } from "react";
+import { reducedMotion } from "@/lib/motion";
 
 /**
  * Fades `[data-reveal]` elements inside `root` up into place the first time
@@ -12,7 +13,7 @@ export function useScrollReveal(root: RefObject<HTMLElement | null>) {
   useEffect(() => {
     const container = root.current;
     if (!container) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (reducedMotion()) return;
     if (!("IntersectionObserver" in window)) return;
 
     const elements = Array.from(container.querySelectorAll<HTMLElement>("[data-reveal]"));

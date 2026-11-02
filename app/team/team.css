@@ -1,96 +1,223 @@
-/* Team page hover detail. Colors and sizes follow the existing atelier styles. */
+/* Team page: executive cards, hover list of members, alumni credits roll. */
 
-.team-portrait {
-  transition:
-    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
-    border-color 0.3s ease,
-    box-shadow 0.5s ease;
+.team-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
 }
 
-.team-card:hover .team-portrait {
-  transform: translateY(-6px);
-  border-color: #e4daff;
-  box-shadow: 0 18px 36px -16px rgba(196, 181, 253, 0.45);
+.team-grid-exec,
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.75rem 1.5rem;
 }
 
-.team-portrait img {
-  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+.team-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1.5rem 1.25rem;
 }
 
-.team-card:hover .team-portrait img {
-  transform: scale(1.07);
+@media (max-width: 1024px) {
+  .team-grid-exec {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
-/* A light glint passes over the photo on hover. */
-.team-portrait .atelier-portrait-inner::after {
-  content: "";
+@media (max-width: 560px) {
+  .team-grid-exec,
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 0.9rem;
+  }
+}
+
+.team-card {
+  margin: 0;
+  padding: 0.6rem;
+}
+
+.team-card-lg .team-name {
+  font-size: 18px;
+}
+
+.team-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: var(--nb-bw) solid var(--nb-ink);
+  border-radius: 8px;
+  background: var(--hu-bg-3);
+}
+
+/* Every portrait is always shown in full colour; hover just leans in. */
+.team-photo img {
+  transition: transform 0.6s var(--hu-ease);
+}
+
+.team-card:hover .team-photo img {
+  transform: scale(1.04);
+}
+
+.team-index {
   position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.22) 50%, transparent 65%);
-  transform: translateX(-120%);
+  z-index: 2;
+  top: 0.55rem;
+  right: 0.55rem;
+  padding: 2px 7px;
+  border: var(--nb-bw) solid #130e24;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #130e24;
+  background: #ffb547;
 }
 
-.team-card:hover .team-portrait .atelier-portrait-inner::after {
-  transform: translateX(120%);
-  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+.team-card figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.85rem 0.15rem 0.2rem;
 }
 
-.team-card h3 {
-  transition: color 0.3s ease;
+.team-name {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--hu-fg);
 }
 
-.team-card:hover h3 {
-  color: #d4c4ff;
+.team-role {
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--hu-fg-3);
 }
 
-.alum-card {
+/* ---------- Credits roll ---------- */
+
+.credits-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.credits-search {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: min(100%, 340px);
+  height: 46px;
+  padding-inline: 1rem;
+  border: var(--nb-bw) solid var(--nb-ink);
+  border-radius: 10px;
+  background: var(--nb-surface);
+  color: var(--hu-fg-3);
+  box-shadow: 3px 3px 0 var(--nb-shadow-c);
   transition:
-    border-color 0.3s ease,
-    background-color 0.3s ease,
-    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
-.alum-card:hover {
-  border-color: #c4b5fd;
-  background-color: #18141f;
-  transform: translateY(-2px);
+.credits-search:focus-within {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--nb-shadow-c2);
 }
 
-.alum-card img {
-  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+.credits-search input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--hu-fg);
 }
 
-.alum-card:hover img {
-  transform: scale(1.08);
+.credits-search input::placeholder {
+  color: var(--hu-fg-3);
 }
 
-.alum-card h3 {
-  transition: color 0.25s ease;
+.credits-search .hu-mono {
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  background: var(--nb-fill);
+  color: var(--nb-fill-ink);
+  font-size: 11px;
+  font-weight: 700;
 }
 
-.alum-card:hover h3 {
-  color: #d4c4ff;
+.credits {
+  columns: 3 300px;
+  column-gap: 3rem;
+  padding: 0.5rem 1.5rem;
 }
+
+.credits li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px dashed var(--hu-line-2);
+  break-inside: avoid;
+}
+
+.credits-name {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--hu-fg);
+  white-space: nowrap;
+  padding-inline: 2px;
+  border-radius: 3px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.credits-leader {
+  flex: 1;
+  min-width: 1rem;
+  border-bottom: 2px dotted var(--hu-line-2);
+  transform: translateY(-4px);
+}
+
+.credits-role {
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--hu-fg-3);
+  text-align: right;
+}
+
+.credits li:hover .credits-name {
+  background: var(--nb-fill);
+  color: var(--nb-fill-ink);
+}
+
+.credits li:hover .credits-role {
+  color: var(--hu-fg);
+}
+
 
 @media (prefers-reduced-motion: reduce) {
-  .team-portrait,
-  .team-portrait img,
-  .team-card:hover .team-portrait .atelier-portrait-inner::after,
-  .alum-card,
-  .alum-card img {
+  .team-photo img {
     transition: none;
   }
 
-  .team-card:hover .team-portrait,
-  .team-card:hover .team-portrait img,
-  .alum-card:hover,
-  .alum-card:hover img {
+  .team-card:hover .team-photo img {
     transform: none;
-  }
-
-  .team-portrait .atelier-portrait-inner::after {
-    display: none;
   }
 }

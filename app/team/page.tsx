@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import { useRef, type CSSProperties } from "react";
+import { useRef, useState } from "react";
+import { Search } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import "./team.css";
 
@@ -16,7 +16,7 @@ const executiveTeam: TeamMember[] = [
   {
     name: "Tejas C.",
     position: "Founder",
-    image: "/images/team-images/TejasChakrapaniPFP.png",
+    image: "/images/team-images/Headshot.jpg",
     blurb:
       "Tejas started Hack United to share his lifelong passion for coding and tech with other students around the world. For him, Hack United is more than just events, it's a way to help students explore, create, and connect through technology.",
   },
@@ -115,9 +115,6 @@ const membersTeam: TeamMember[] = [
 ];
 
 const otherMembers = [...headsTeam, ...membersTeam];
-const otherMembersRow1 = otherMembers.slice(0, 5);
-const otherMembersRow2 = otherMembers.slice(5, 10);
-const otherMembersRow3 = otherMembers.slice(10);
 
 // Previous Volunteers - 11 rows total, last row has 2 people
 // Using colored avatars with initials for previous volunteers
@@ -501,195 +498,120 @@ const previousVolunteers: TeamMember[][] = [
   ],
 ];
 
-function TeamMemberCard({
-  member,
-  size = "small",
-  index,
-}: {
-  member: TeamMember;
-  size?: "small" | "large" | "compact" | "card";
-  index?: number;
-}) {
-  const revealStyle = {
-    "--reveal-delay": `${((index || 0) % (size === "card" ? 4 : 5)) * 70}ms`,
-  } as CSSProperties;
 
-  const imageSize =
-    size === "large"
-      ? "w-32 h-32"
-      : size === "compact"
-        ? "w-12 h-12"
-        : size === "card"
-          ? "w-10 h-10"
-          : "w-20 h-20";
-  const textSize =
-    size === "large"
-      ? "text-lg"
-      : size === "compact"
-        ? "text-xs"
-        : size === "card"
-          ? "text-sm"
-          : "text-sm";
-  const positionSize =
-    size === "large"
-      ? "text-sm"
-      : size === "compact"
-        ? "text-[10px]"
-        : size === "card"
-          ? "text-xs"
-          : "text-xs";
-  const marginBottom =
-    size === "compact" ? "mb-1" : size === "card" ? "mb-2" : "mb-3";
-  const borderWidth =
-    size === "compact" ? "border-2" : size === "card" ? "border-2" : "border-4";
+const alumni = previousVolunteers.flat();
 
-  if (size === "card") {
-    return (
-      <div
-        className="alum-card flex items-center gap-3 border border-[#2c2438] bg-[#14111a] px-3 py-2.5"
-        data-reveal
-        style={revealStyle}
-      >
-        <div className="relative h-12 w-10 shrink-0 overflow-hidden border border-[#3f3458]">
-          <Image
-            src={member.image || "/placeholder.svg"}
-            alt={member.name}
-            fill
-            className="object-cover"
-          />
-        </div>
-        <div className="min-w-0 flex-1">
-          <h3 className="truncate text-sm text-[#f3efe6]">{member.name}</h3>
-          <p className="truncate text-xs text-[#b4adc4]">{member.position}</p>
-        </div>
-      </div>
-    );
-  }
-
+function MemberCard({ member, index, large = false }: { member: TeamMember; index: number; large?: boolean }) {
   return (
-    <div className="team-card flex flex-col items-center text-center" data-reveal style={revealStyle}>
-      <div className="atelier-portrait team-portrait mb-4">
-        <div className="atelier-portrait-inner">
-          <Image
-            src={member.image || "/placeholder.svg"}
-            alt={member.name}
-            fill
-            className="object-cover"
-          />
-        </div>
+    <figure className={`team-card nb nb-hover${index % 2 ? " nb-alt" : ""}${large ? " team-card-lg" : ""}`} data-drop>
+      <div className="team-photo">
+        <Image
+          src={member.image || "/placeholder.svg"}
+          alt={member.name}
+          fill
+          sizes={large ? "(min-width: 1024px) 25vw, 50vw" : "(min-width: 1024px) 18vw, 45vw"}
+          className="object-cover"
+        />
+        <span className="team-index hu-mono">{String(index + 1).padStart(2, "0")}</span>
       </div>
-      <h3
-        className="text-[17px] text-[#f3efe6]"
-        style={{ fontFamily: "var(--font-serif), serif" }}
-      >
-        {member.name}
-      </h3>
-      <p className="mt-1 max-w-[11rem] text-[12px] leading-snug text-[#b4adc4]">
-        {member.position}
-      </p>
-    </div>
+      <figcaption>
+        <span className="team-name">{member.name}</span>
+        {member.position && <span className="team-role hu-mono">{member.position}</span>}
+      </figcaption>
+    </figure>
   );
 }
 
 export default function TeamPage() {
   const mainRef = useRef<HTMLElement>(null);
+  const [query, setQuery] = useState("");
   useScrollReveal(mainRef);
 
+  const q = query.trim().toLowerCase();
+  const shownAlumni = q
+    ? alumni.filter((m) => `${m.name} ${m.position}`.toLowerCase().includes(q))
+    : alumni;
+
   return (
-    <main ref={mainRef} className="atelier flex flex-col items-center">
-      <section className="w-full max-w-7xl mx-auto px-4 py-16 md:py-24">
-        <div className="mb-16 max-w-3xl">
-          <h1 className="atelier-title" data-reveal>
-            <em>The</em> team
-          </h1>
-        </div>
+    <main ref={mainRef} className="hu-home">
+      <section className="hu-wrap hu-page-head">
+        <p className="hu-label" data-reveal>
+          <b>{String(executiveTeam.length + otherMembers.length).padStart(2, "0")}</b>
+          <span>People running Hack United</span>
+        </p>
+        <h1 className="hu-display mt-7" data-split>
+          <em>The</em> team
+        </h1>
+      </section>
 
-        <div className="mb-16">
-          <div className="atelier-frame mb-14">
-            <div className="atelier-frame-inner">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 justify-items-center">
-              {executiveTeam.map((member, index) => (
-                <TeamMemberCard
-                  key={index}
-                  member={member}
-                  size="large"
-                  index={index}
-                />
-              ))}
-            </div>
-            </div>
-          </div>
-
-          {/* Other Members Row 1 */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 justify-items-center mb-12">
-            {otherMembersRow1.map((member, index) => (
-              <TeamMemberCard
-                key={index}
-                member={member}
-                size="large"
-                index={index}
-              />
-            ))}
-          </div>
-
-          {/* Other Members Row 2 */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 justify-items-center mb-12">
-            {otherMembersRow2.map((member, index) => (
-              <TeamMemberCard
-                key={index}
-                member={member}
-                size="large"
-                index={index + otherMembersRow1.length}
-              />
-            ))}
-          </div>
-
-          {/* Other Members Row 3 */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 justify-items-center">
-            {otherMembersRow3.map((member, index) => (
-              <TeamMemberCard
-                key={index}
-                member={member}
-                size="large"
-                index={
-                  index + otherMembersRow1.length + otherMembersRow2.length
-                }
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Purple Divider - Thicker, Shorter, Darker */}
-        <div className="mb-12">
-          <div className="mb-8">
-            <h2 className="atelier-sub" data-reveal>
-              <em>Previous</em> volunteers
+      <section className="hu-section" data-stop="The team" data-zone="a">
+        <div className="hu-wrap">
+          <div className="team-head">
+            <h2 className="hu-label">
+              <b>A</b>
+              <span>Executive team</span>
             </h2>
-            <p className="mt-3 text-sm text-[#b4adc4]" data-reveal>Alumni who helped run past events.</p>
+          </div>
+          <div className="team-grid-exec">
+            {executiveTeam.map((member, i) => (
+              <MemberCard key={member.name} member={member} index={i} large />
+            ))}
           </div>
 
-          {/* All Previous Volunteers in Card Format */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-            {previousVolunteers.flat().map((member, index) => (
-              <TeamMemberCard
-                key={index}
-                member={member}
-                size="card"
-                index={index}
-              />
+          <div className="team-head mt-24">
+            <h2 className="hu-label">
+              <b>B</b>
+              <span>Leads &amp; members</span>
+            </h2>
+          </div>
+          <div className="team-grid">
+            {otherMembers.map((member, i) => (
+              <MemberCard key={member.name} member={member} index={i + executiveTeam.length} />
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <p className="text-sm text-[#c8c2b6]">
-            Open roles are listed on the{" "}
-            <Link href="/apply" className="atelier-link">
-              apply
-            </Link>{" "}
-            page.
-          </p>
+      <section className="hu-section" data-stop="Alumni">
+        <div className="hu-wrap">
+          <div className="credits-head">
+            <div>
+              <p className="hu-label">
+                <b>C</b>
+                <span>Alumni who helped run past events</span>
+              </p>
+              <h2 className="hu-h2 mt-7" data-split>
+                <em>Previous</em> volunteers
+              </h2>
+            </div>
+            <label className="credits-search">
+              <Search className="h-4 w-4" aria-hidden="true" />
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search name or role"
+                aria-label="Search previous volunteers"
+              />
+              <span className="hu-mono" aria-live="polite">
+                {shownAlumni.length}/{alumni.length}
+              </span>
+            </label>
+          </div>
+
+          <ol className="credits nb">
+            {shownAlumni.map((member) => (
+              <li key={`${member.name}-${member.position}`}>
+                <span className="credits-name">{member.name}</span>
+                <span className="credits-leader" aria-hidden="true" />
+                <span className="credits-role hu-mono">{member.position || "Volunteer"}</span>
+              </li>
+            ))}
+          </ol>
+          {shownAlumni.length === 0 && (
+            <p className="hu-body mt-6">No one matches &ldquo;{query}&rdquo;.</p>
+          )}
+
         </div>
       </section>
     </main>

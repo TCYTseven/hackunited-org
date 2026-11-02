@@ -1,20 +1,30 @@
 import type React from "react";
 import type { Metadata } from "next";
 import "@/app/globals.css";
-import { Inter, Playfair_Display } from "next/font/google";
+import "@/components/shell.css";
+import "@/components/journey/journey.css";
+import { Bricolage_Grotesque, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import Image from "next/image";
 import AnnouncementBanner from "@/components/announcement-banner";
+import SiteHeader from "@/components/site-header";
+import SiteFooter from "@/components/site-footer";
+import MotionLayer from "@/components/motion-layer";
+import ClickSpark from "@/components/obsidian/click-spark";
 
-const inter = Inter({ subsets: ["latin"] });
-const playfair = Playfair_Display({
+const sans = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["500", "600"],
+  axes: ["opsz", "wdth"],
+  variable: "--font-sans",
+});
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
   variable: "--font-serif",
+});
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
@@ -75,318 +85,25 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/images/main-globe-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/images/main-globe-icon.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/images/main-globe-icon.png"
-        />
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/main-globe-icon.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/main-globe-icon.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/main-globe-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={`${inter.className} ${playfair.variable}`} suppressHydrationWarning>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="flex min-h-screen flex-col bg-[#050505] text-white">
+      <body
+        id="top"
+        className={`${sans.variable} ${serif.variable} ${mono.variable}`}
+        suppressHydrationWarning
+      >
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+          <div className="flex min-h-screen flex-col">
             <AnnouncementBanner />
-            <header className="sticky top-0 z-50 w-full border-b border-white/[0.04] bg-[#050505]/80 backdrop-blur-xl">
-              <div className="container mx-auto flex h-12 items-center justify-between px-4 sm:px-6 lg:px-8">
-                <Link href="/" className="flex items-center gap-2.5">
-                  <Image
-                    src="/images/main-globe-icon.png"
-                    alt="Hack United"
-                    width={26}
-                    height={26}
-                    className="h-6 w-6 opacity-90"
-                  />
-                  <span className="text-[15px] font-semibold tracking-tight text-white">
-                    Hack United
-                  </span>
-                </Link>
-
-                <nav className="hidden items-center gap-8 text-[12px] font-normal md:flex">
-                  <Link
-                    href="/"
-                    className="text-neutral-500 transition-colors hover:text-white"
-                  >
-                    Home
-                  </Link>
-                  <Link
-                    href="/donate"
-                    className="text-neutral-500 transition-colors hover:text-white"
-                  >
-                    Donate
-                  </Link>
-                  <Link
-                    href="/team"
-                    className="text-neutral-500 transition-colors hover:text-white"
-                  >
-                    Team
-                  </Link>
-                  <Link
-                    href="/apply"
-                    className="text-neutral-500 transition-colors hover:text-white"
-                  >
-                    Apply
-                  </Link>
-                  <Link
-                    href="/social"
-                    className="text-neutral-500 transition-colors hover:text-white"
-                  >
-                    Socials
-                  </Link>
-                  <a
-                    href="https://blog.hackunited.org/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-neutral-500 transition-colors hover:text-white"
-                  >
-                    Blog
-                  </a>
-                </nav>
-
-                <div className="flex items-center md:hidden">
-                  <Sheet>
-                    <SheetTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="rounded-full hover:bg-gray-700/50 md:hidden"
-                      >
-                        <Menu className="h-5 w-5 text-white" />
-                        <span className="sr-only">Toggle menu</span>
-                      </Button>
-                    </SheetTrigger>
-                    <SheetContent
-                      side="right"
-                      className="border-gray-700 bg-gray-900"
-                    >
-                      <div className="mt-8 flex flex-col gap-6">
-                        <Link
-                          href="/"
-                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
-                        >
-                          Home
-                        </Link>
-                        <Link
-                          href="/donate"
-                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
-                        >
-                          Donate
-                        </Link>
-                        <Link
-                          href="/team"
-                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
-                        >
-                          Team
-                        </Link>
-                        <Link
-                          href="/apply"
-                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
-                        >
-                          Apply
-                        </Link>
-                        <Link
-                          href="/social"
-                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
-                        >
-                          Socials
-                        </Link>
-                        <a
-                          href="https://blog.hackunited.org/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="py-2 text-base font-medium text-gray-300 transition-colors hover:text-white"
-                        >
-                          Blog
-                        </a>
-                      </div>
-                    </SheetContent>
-                  </Sheet>
-                </div>
-              </div>
-            </header>
-            {children}
-            <footer className="border-t border-white/[0.07] bg-[#050505]">
-              <div className="container mx-auto px-4 py-10 sm:py-12">
-                <div className="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
-                  <div className="space-y-4">
-                    <Link
-                      href="/"
-                      className="flex items-center gap-2 font-bold text-xl"
-                    >
-                      <Image
-                        src="/images/globe-icon.png"
-                        alt="Hack United"
-                        width={24}
-                        height={24}
-                        className="h-6 w-6"
-                      />
-                      <span>Hack United</span>
-                    </Link>
-                    <p className="text-sm text-neutral-500 leading-relaxed max-w-xs">
-                      501(c)(3) nonprofit running free hackathons and workshops for students.
-                    </p>
-                    <p className="text-xs text-neutral-600">EIN 81-2908499</p>
-                    <div className="flex gap-2">
-                      <a
-                        href="https://instagram.com/hack_united"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="rounded-full w-8 h-8 border-white/10 text-neutral-400 hover:bg-white/5 hover:text-white"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="h-4 w-4"
-                          >
-                            <rect
-                              width="20"
-                              height="20"
-                              x="2"
-                              y="2"
-                              rx="5"
-                              ry="5"
-                            ></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-                          </svg>
-                          <span className="sr-only">Instagram</span>
-                        </Button>
-                      </a>
-                      <a
-                        href="https://linkedin.com/company/hack-united"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="rounded-full w-8 h-8 border-white/10 text-neutral-400 hover:bg-white/5 hover:text-white"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="h-4 w-4"
-                          >
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                            <rect width="4" height="12" x="2" y="9"></rect>
-                            <circle cx="4" cy="4" r="2"></circle>
-                          </svg>
-                          <span className="sr-only">LinkedIn</span>
-                        </Button>
-                      </a>
-                      <a
-                        href="https://x.com/hackunited_"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="rounded-full w-8 h-8 border-white/10 text-neutral-400 hover:bg-white/5 hover:text-white"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="h-4 w-4"
-                          >
-                            <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-                          </svg>
-                          <span className="sr-only">X (Twitter)</span>
-                        </Button>
-                      </a>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xs font-medium uppercase tracking-widest text-neutral-500 mb-4">
-                      Company
-                    </h3>
-                    <ul className="space-y-2">
-                      <li>
-                        <a
-                          href="mailto:humans@hackunited.org"
-                          className="text-sm text-neutral-500 hover:text-white transition-colors"
-                        >
-                          Sponsor Us
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="mailto:humans@hackunited.org"
-                          className="text-sm text-neutral-500 hover:text-white transition-colors"
-                        >
-                          Press/Media
-                        </a>
-                      </li>
-                      <li>
-                        <Link
-                          href="/apply"
-                          className="text-sm text-neutral-500 hover:text-white transition-colors"
-                        >
-                          Volunteer
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="text-xs font-medium uppercase tracking-widest text-neutral-500 mb-4">
-                      Contact
-                    </h3>
-                    <ul className="space-y-2 text-sm text-neutral-500">
-                      <li>humans@hackunited.org</li>
-                      <li>discord.gg/hackunited</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="mt-8 pt-8 border-t border-white/[0.07]">
-                  <p className="text-xs text-neutral-600 text-center">
-                    © {new Date().getFullYear()} Hack United. All rights
-                    reserved.
-                  </p>
-                </div>
-              </div>
-            </footer>
+            <SiteHeader />
+            <div className="flex-1">{children}</div>
+            <SiteFooter />
           </div>
+          <MotionLayer />
+          <ClickSpark />
         </ThemeProvider>
       </body>
     </html>

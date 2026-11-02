@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import gsap from "gsap";
+import { Lock } from "lucide-react";
+import DraggableMarquee from "@/components/obsidian/draggable-marquee";
+import "./donate.css";
 
 const allSponsors = [
   { src: "/images/sponsors/launchx.png", alt: "LaunchX" },
@@ -41,221 +42,88 @@ const allSponsors = [
   { src: "/images/sponsors/1_pass.jpg", alt: "1Pass" },
 ];
 
-// Split sponsors into 2 groups
-const firstThird = Math.ceil(allSponsors.length / 3);
-const secondThird = Math.ceil((allSponsors.length * 2) / 3);
-const sponsors2FirstHalf = allSponsors.slice(
-  firstThird,
-  Math.ceil((firstThird + secondThird) / 2)
-);
-const sponsors2SecondHalf = allSponsors.slice(
-  Math.ceil((firstThird + secondThird) / 2),
-  secondThird
-);
+const half = Math.ceil(allSponsors.length / 2);
+const sponsorRows = [allSponsors.slice(0, half), allSponsors.slice(half)];
 
-const sponsors1 = [...allSponsors.slice(0, firstThird), ...sponsors2FirstHalf];
-const sponsors3 = [...sponsors2SecondHalf, ...allSponsors.slice(secondThird)];
-
-const sponsorStyles = `
-  .sponsorContainer {
-    will-change: transform;
-    align-items: center;
-    backface-visibility: hidden;
-    min-height: 80px;
-    padding: 20px 0;
-    display: flex;
-    transform: translateX(0);
-  }
-
-  .sponsorContainer img {
-    height: 60px;
-    width: auto;
-    max-width: 200px;
-    min-width: 80px;
-    object-fit: contain;
-    margin: 0 40px;
-    display: block;
-    flex-shrink: 0;
-    padding: 8px 0;
-  }
-
-  @media (max-width: 768px) {
-    .sponsorContainer {
-      min-height: 70px;
-      padding: 15px 0;
-    }
-    .sponsorContainer img {
-      height: 45px;
-      margin: 0 25px;
-      max-width: 150px;
-      min-width: 60px;
-      padding: 6px 0;
-    }
-  }
-`;
+const uses = ["Servers", "Tooling", "Prize pools"];
 
 export default function DonatePage() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Sponsor carousels animations
-  useEffect(() => {
-    if (typeof window === "undefined" || !mounted) return;
-
-    const timeoutId = setTimeout(() => {
-      const sponsorContainers = document.querySelectorAll(".sponsorContainer");
-      sponsorContainers.forEach((container) => {
-        const images = container.querySelectorAll("img");
-        let loadedCount = 0;
-        let hasAnimated = false;
-
-        const checkAndAnimate = () => {
-          loadedCount++;
-          if ((loadedCount === images.length || images.length === 0) && !hasAnimated) {
-            hasAnimated = true;
-            // Small delay to ensure container width is calculated correctly
-            setTimeout(() => {
-              const firstSetWidth = container.scrollWidth / 4;
-              gsap.set(container, { x: 0 });
-              gsap.fromTo(
-                container,
-                { x: 0 },
-                {
-                  x: -firstSetWidth,
-                  duration: 20,
-                  ease: "none",
-                  repeat: -1,
-                }
-              );
-            }, 50);
-          }
-        };
-
-        if (images.length === 0) {
-          checkAndAnimate();
-        } else {
-          let allLoaded = true;
-          images.forEach((img) => {
-            if (img.complete) {
-              loadedCount++;
-            } else {
-              allLoaded = false;
-              img.addEventListener("load", checkAndAnimate, { once: true });
-              img.addEventListener("error", checkAndAnimate, { once: true });
-            }
-          });
-          if (allLoaded && images.length > 0) {
-            checkAndAnimate();
-          }
-        }
-      });
-    }, 200); // Increased delay to ensure DOM is ready
-
-    return () => clearTimeout(timeoutId);
-  }, [mounted]);
-
   return (
-    <>
-      <style jsx>{sponsorStyles}</style>
-      <main className="atelier">
-        <section className="border-b border-[#2c2438] pb-16 pt-16">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-6xl">
-            <div className="grid items-center gap-10 lg:grid-cols-2">
-              <div className="order-2 lg:order-1">
-                <h1 className="atelier-title mb-6">
-                  <em>Donate</em>
-                </h1>
+    <main className="hu-home">
+      <section className="hu-wrap hu-page-head" data-stop="Donate">
+        <div className="donate-layout">
+          <div className="donate-copy">
+            <h1 className="hu-display" data-split>
+              <em>Donate</em>
+            </h1>
+            <p className="hu-lead mt-8">
+              Donations are optional. They help cover servers, tooling, and prize pools for free student events.
+              Payments run through Hack Club Bank. Hack United is a 501(c)(3) nonprofit (EIN 81-2908499). Contributions
+              are tax-deductible where applicable.
+            </p>
 
-                <p className="atelier-lead mb-6">
-                  Donations are optional. They help cover servers, tooling, and prize pools for free student events.
-                </p>
+            <ul className="donate-uses" aria-label="What donations cover">
+              {uses.map((use, i) => (
+                <li key={use}>
+                  <span className="hu-mono">0{i + 1}</span>
+                  {use}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-                <div className="atelier-frame">
-                  <div className="atelier-frame-inner">
-                    <p className="text-sm leading-relaxed text-[#c8c2b6]">
-                      Hack Club Bank processes payments. Hack United is a 501(c)(3). EIN 81-2908499. Tax-deductible where applicable.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="order-1 flex justify-center lg:order-2">
-                <div className="atelier-frame w-full max-w-md lg:max-w-none">
-                  <div className="atelier-frame-inner">
-                  <iframe
-                    src="https://hcb.hackclub.com/donations/start/hackunited"
-                    style={{ border: "none" }}
-                    name="donateFrame"
-                    scrolling="yes"
-                    frameBorder={0}
-                    marginHeight={0}
-                    marginWidth={0}
-                    height="600px"
-                    width="100%"
-                    className="rounded-lg w-full min-w-0 sm:min-w-[350px] lg:min-w-[400px] max-w-[500px] mx-auto"
-                    title="Donation Form"
-                  />
-                  </div>
-                </div>
-              </div>
+          <div className="hu-window nb donate-window">
+            <div className="hu-window-bar hu-mono">
+              <Lock className="h-3.5 w-3.5" aria-hidden="true" />
+              <span>hcb.hackclub.com</span>
+              <span className="ml-auto hidden sm:inline">Hack Club Bank</span>
             </div>
+            <iframe
+              src="https://hcb.hackclub.com/donations/start/hackunited"
+              style={{ border: "none" }}
+              name="donateFrame"
+              scrolling="yes"
+              frameBorder={0}
+              marginHeight={0}
+              marginWidth={0}
+              height="640px"
+              width="100%"
+              className="block w-full"
+              title="Donation Form"
+            />
           </div>
         </div>
       </section>
 
-      {/* Past Sponsors Section */}
-      <div className="py-12 sm:py-16 relative overflow-hidden">
-        <div className="mx-auto mb-8 max-w-6xl px-4">
-          <h2 className="atelier-sub">
+      <section className="hu-section donate-sponsors" data-stop="Past sponsors" data-zone="a">
+        <div className="hu-wrap">
+          <p className="hu-label">
+            <b>{allSponsors.length}</b>
+            <span>Organizations that backed our events</span>
+          </p>
+          <h2 className="hu-h2 mt-7" data-split>
             <em>Past</em> sponsors
           </h2>
         </div>
 
-        <div className="container mx-auto px-4 md:px-8 companiesLogo flex overflow-hidden relative mb-4 py-6" suppressHydrationWarning>
-          <div className="absolute top-0 left-0 right-0 h-px bg-[#3f3458] z-10"></div>
-          {/* First carousel - left to right */}
-          <div className="sponsorContainer flex" data-carousel="1" suppressHydrationWarning>
-            {[...sponsors1, ...sponsors1, ...sponsors1, ...sponsors1].map(
-              (sponsor, index) => (
-                <img
-                  key={`sponsor-1-${index}`}
-                  src={sponsor.src}
-                  alt={sponsor.alt}
-                  className="cursor-pointer"
-                  loading="lazy"
-                />
-              )
-            )}
-          </div>
-            <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black via-black to-transparent z-30 pointer-events-none" />
-            <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-black via-black to-transparent z-30 pointer-events-none" />
+        <div className="donate-rows">
+          {sponsorRows.map((row, i) => (
+            <DraggableMarquee
+              key={i}
+              items={row}
+              reverse={i === 1}
+              speed={0.7}
+              getKey={(sponsor) => sponsor.src}
+              label="Past sponsors. Drag to scroll, or use the arrow keys."
+              renderItem={(sponsor) => (
+                <div className="donate-tile">
+                  <img src={sponsor.src} alt={sponsor.alt} loading="lazy" />
+                </div>
+              )}
+            />
+          ))}
         </div>
-
-        <div className="container mx-auto px-4 md:px-8 companiesLogo flex overflow-hidden relative py-6" suppressHydrationWarning>
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-[#3f3458] z-10"></div>
-          {/* Third carousel - left to right */}
-          <div className="sponsorContainer flex" data-carousel="3" suppressHydrationWarning>
-            {[...sponsors3, ...sponsors3, ...sponsors3, ...sponsors3].map(
-              (sponsor, index) => (
-                <img
-                  key={`sponsor-3-${index}`}
-                  src={sponsor.src}
-                  alt={sponsor.alt}
-                  className="cursor-pointer"
-                  loading="lazy"
-                />
-              )
-            )}
-          </div>
-            <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black via-black to-transparent z-30 pointer-events-none" />
-            <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-black via-black to-transparent z-30 pointer-events-none" />
-        </div>
-      </div>
+      </section>
     </main>
-    </>
-  )
+  );
 }

@@ -1,0 +1,232 @@
+/* United Hacks V8 organizer applications. */
+
+.org-hero {
+  border-bottom: var(--nb-bw) solid var(--nb-ink);
+}
+
+.org-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-top: 2rem;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hu-fg-2);
+}
+
+.org-strip-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--hu-line-2);
+}
+
+.org-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
+  gap: 3rem 4rem;
+  align-items: end;
+  padding-block: clamp(3.5rem, 8vw, 7rem);
+}
+
+@media (max-width: 960px) {
+  .org-hero-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.org-title {
+  font-size: clamp(3rem, 8.5vw, 7.5rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  font-variation-settings: "wdth" 88, "opsz" 96;
+}
+
+.org-title span {
+  color: var(--hu-accent);
+}
+
+.org-title em {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -0.03em;
+  color: var(--hu-accent);
+}
+
+.org-cta {
+  height: 56px;
+  padding-inline: 1.75rem;
+  font-size: 16px;
+}
+
+.org-cta[data-closed] {
+  background: transparent;
+  border-style: dashed;
+  color: var(--hu-fg-3);
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+}
+
+.org-deadline-board {
+  min-height: 3.5rem;
+}
+
+.org-deadline-board .hu-flap-row {
+  font-size: min(3rem, 13cqi);
+}
+
+.org-deadline-board .hu-flap-cell {
+  font-size: min(2.6rem, 11.5cqi);
+}
+
+.org-deadline-meta {
+  margin-top: 0.25rem;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.org-deadline-meta div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-top: var(--nb-bw) solid var(--nb-ink);
+}
+
+.org-deadline-meta dt {
+  color: var(--hu-fg-3);
+}
+
+.org-deadline-meta dd {
+  color: var(--hu-fg);
+}
+
+.org-tagline {
+  padding-bottom: 2rem;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--hu-fg-3);
+}
+
+.org-tagline span {
+  margin-inline: 0.4rem;
+  color: var(--hu-accent);
+}
+
+.org-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem 3rem;
+  margin-bottom: 3rem;
+}
+
+.org-teams {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .org-teams {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .org-teams {
+    grid-template-columns: 1fr;
+  }
+}
+
+.org-team {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-height: 300px;
+  padding: 1.6rem;
+}
+
+.org-team:hover {
+  background: var(--nb-fill);
+}
+
+.org-team:hover :is(h3, p, .org-team-index) {
+  color: var(--nb-fill-ink);
+}
+
+.org-team-index {
+  margin-bottom: auto;
+  padding-bottom: 3rem;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--hu-accent);
+}
+
+.org-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem;
+}
+
+@media (max-width: 960px) {
+  .org-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+.org-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding-top: 2rem;
+  border-top: var(--nb-bw) solid var(--nb-ink);
+}
+
+.org-step::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 10px;
+  border: 1px solid var(--hu-accent);
+  background: var(--hu-bg);
+  transition: background-color 0.3s ease;
+}
+
+.org-step:hover::before {
+  background: var(--hu-accent);
+}
+
+.org-step-num {
+  font-size: clamp(3.5rem, 6vw, 5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--hu-fg-3);
+  transition:
+    color 0.4s ease,
+    -webkit-text-stroke-color 0.4s ease;
+}
+
+.org-step:hover .org-step-num {
+  color: var(--hu-accent);
+  -webkit-text-stroke-color: var(--hu-accent);
+}
+
+.org-final {
+  padding-block: clamp(6rem, 12vw, 10rem);
+}

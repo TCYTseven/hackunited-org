@@ -1,14 +1,8 @@
 "use client"
 
-import { useState } from "react"
-import {
-  Mail,
-  Code,
-  Megaphone,
-  Briefcase,
-  MessageSquare,
-  X,
-} from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+import { ArrowUpRight, Check, Mail, X } from "lucide-react"
+import "./apply.css"
 
 type PositionName = keyof typeof positionDetails
 
@@ -143,213 +137,311 @@ const positionDetails = {
 } as const
 
 const departments = [
-  {
-    title: "Growth",
-    icon: <Megaphone className="w-5 h-5" />,
-    positions: ["Social Media Manager", "Short-Form Creator", "Growth Intern"],
-  },
-  {
-    title: "Human Resources",
-    icon: <Briefcase className="w-5 h-5" />,
-    positions: ["Talent Acquisition Manager", "Administrative Coordinator"],
-  },
-  {
-    title: "Strategy",
-    icon: <MessageSquare className="w-5 h-5" />,
-    positions: ["Outreach Manager", "Project Manager"],
-  },
-  {
-    title: "Community & Content",
-    icon: <Code className="w-5 h-5" />,
-    positions: ["Article Writer", "Community Manager"],
-  },
+  { title: "Growth", positions: ["Social Media Manager", "Short-Form Creator", "Growth Intern"] },
+  { title: "Human Resources", positions: ["Talent Acquisition Manager", "Administrative Coordinator"] },
+  { title: "Strategy", positions: ["Outreach Manager", "Project Manager"] },
+  { title: "Community & Content", positions: ["Article Writer", "Community Manager"] },
 ] as const
 
-export default function ApplyPage() {
-  const [selectedPosition, setSelectedPosition] = useState<{
-    name: PositionName
-    department: string
-    responsibilities: readonly string[]
-    requirements: readonly string[]
-  } | null>(null)
+const roles = departments.flatMap((d) =>
+  d.positions.map((name) => ({ name: name as PositionName, department: d.title as string }))
+)
 
-  const openPositionModal = (positionName: PositionName) => {
-    setSelectedPosition({
-      name: positionName,
-      ...positionDetails[positionName],
-    })
+const processSteps = [
+  "Email your application with the details listed below.",
+  "We read applications as they arrive. You may get a follow-up interview on Discord.",
+  "If we offer you a role, HR will send onboarding steps and a team invite.",
+]
+
+const emailItems = [
+  "Full name and contact email",
+  "Age and location (country and state or region)",
+  "Role(s) you want",
+  "Why you want to volunteer with Hack United",
+  "Relevant experience or links (GitHub, portfolio, socials)",
+  "Hours per week you can commit",
+  "Resume or LinkedIn (optional)",
+]
+
+// Pre-filled application email; the role line is filled in when applying from a role.
+const mailtoFor = (role?: string) =>
+  "mailto:jobs@hackunited.org?subject=" +
+  encodeURIComponent("Hack United volunteer application") +
+  "&body=" +
+  encodeURIComponent(
+    `Full name:\r\nEmail:\r\nAge:\r\nLocation (country, state/region):\r\n\r\nRole(s):${role ? ` ${role}` : ""}\r\n\r\nWhy you want to volunteer:\r\n\r\nRelevant experience:\r\n\r\nHours per week:\r\n\r\n(Optional) Resume or LinkedIn:\r\n`
+  )
+
+export default function ApplyPage() {
+  const [filter, setFilter] = useState("All")
+  const [selected, setSelected] = useState<PositionName | null>(null)
+  const [checked, setChecked] = useState<boolean[]>(() => emailItems.map(() => false))
+  const drawerRef = useRef<HTMLDivElement>(null)
+  const lastTrigger = useRef<HTMLElement | null>(null)
+
+  // Keep showing the last role while the drawer slides out.
+  const lastSelected = useRef<PositionName | null>(null)
+  if (selected) lastSelected.current = selected
+  const current = selected ?? lastSelected.current
+
+  const shown = filter === "All" ? roles : roles.filter((r) => r.department === filter)
+  const details = current ? positionDetails[current] : null
+  const done = checked.filter(Boolean).length
+
+  const open = (name: PositionName, trigger: HTMLElement) => {
+    lastTrigger.current = trigger
+    setSelected(name)
   }
 
-  const closeModal = () => setSelectedPosition(null)
+  const close = () => {
+    setSelected(null)
+    lastTrigger.current?.focus()
+  }
+
+  useEffect(() => {
+    if (!selected) return
+    drawerRef.current?.focus()
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSelected(null)
+        lastTrigger.current?.focus()
+      }
+    }
+    document.documentElement.style.overflow = "hidden"
+    window.addEventListener("keydown", onKey)
+    return () => {
+      document.documentElement.style.overflow = ""
+      window.removeEventListener("keydown", onKey)
+    }
+  }, [selected])
 
   const scrollToApplication = () => {
+    setSelected(null)
     document.getElementById("application-section")?.scrollIntoView({ behavior: "smooth" })
-    closeModal()
   }
 
-  const mailtoApply =
-    "mailto:jobs@hackunited.org?subject=Hack%20United%20volunteer%20application&body=Full%20name%3A%0D%0AEmail%3A%0D%0AAge%3A%0D%0ALocation%20(country%2C%20state%2Fregion)%3A%0D%0A%0D%0ARole(s)%3A%0D%0A%0D%0AWhy%20you%20want%20to%20volunteer%3A%0D%0A%0D%0ARelevant%20experience%3A%0D%0A%0D%0AHours%20per%20week%3A%0D%0A%0D%0A(Optional)%20Resume%20or%20LinkedIn%3A%0D%0A"
+  let sendButtonLabel = "Open email"
+  if (done === emailItems.length) {
+    sendButtonLabel = "Send application"
+  }
 
   return (
-    <main className="atelier">
-      <section className="border-b border-[#2c2438] pt-20 pb-14">
-        <div className="container mx-auto max-w-5xl px-4">
-          <h1 className="atelier-title mb-6">
+    <main className="hu-home">
+      <section className="hu-wrap hu-page-head">
+        <p className="hu-label">
+          <b>{String(roles.length).padStart(2, "0")}</b>
+          <span>Open volunteer roles</span>
+        </p>
+        <div className="apply-hero">
+          <h1 className="hu-display mt-7" data-split>
             <em>Apply</em>
           </h1>
-          <p className="atelier-lead mb-8">
-            Hack United is a student-run nonprofit. Roles are unpaid. We review applications on a rolling basis and
-            reply by email when we have a match.
-          </p>
-          <a href="mailto:jobs@hackunited.org" className="atelier-btn">
-            <Mail className="w-4 h-4" />
-            jobs@hackunited.org
-          </a>
-        </div>
-      </section>
-
-      <section className="border-b border-[#2c2438] py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-10 lg:grid-cols-4">
-            <div className="lg:col-span-1">
-              <h2 className="atelier-sub mb-5">What you get</h2>
-              <div className="atelier-frame">
-                <div className="atelier-frame-inner">
-                  <ul className="space-y-3 text-sm text-[#e7e1d6]">
-                    {benefits.map((benefit) => (
-                      <li key={benefit} className="border-b border-[#2c2438] pb-3 last:border-0 last:pb-0">
-                        {benefit}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-5 text-xs leading-relaxed text-[#9a93ad]">
-                    Swag and official service-hour credit depend on your role and tenure. Ask HR if you need
-                    documentation for school programs.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-3">
-              <h2 className="atelier-sub mb-5">Open roles</h2>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {departments.flatMap((department) =>
-                  department.positions.map((position) => (
-                    <button
-                      key={position}
-                      type="button"
-                      onClick={() => openPositionModal(position)}
-                      className="border border-[#2c2438] bg-[#14111a] p-4 text-left transition-colors hover:border-[#c4b5fd]"
-                    >
-                      <p className="mb-2 text-[11px] text-[#c4b5fd]">{department.title}</p>
-                      <h3 className="text-[15px] text-[#f3efe6]">{position}</h3>
-                    </button>
-                  ))
-                )}
-              </div>
-            </div>
+          <div>
+            <p className="hu-lead">
+              Hack United is a student-run nonprofit. Roles are unpaid. We review applications on a rolling basis and
+              reply by email when we have a match.
+            </p>
+            <a href="mailto:jobs@hackunited.org" className="hu-btn mt-7">
+              <Mail className="h-4 w-4" />
+              jobs@hackunited.org
+            </a>
           </div>
         </div>
       </section>
 
-      <section className="py-16" id="application-section">
-        <div className="container mx-auto max-w-5xl px-4">
-          <h2 className="atelier-sub mb-4">
+      <section className="hu-section" data-stop="Open roles" data-zone="a">
+        <div className="hu-wrap apply-board">
+          <div>
+            <div className="apply-board-head">
+              <h2 className="hu-h3">Open roles</h2>
+              <div className="apply-filters" role="group" aria-label="Filter by department">
+                {["All", ...departments.map((d) => d.title)].map((title) => {
+                  const count = title === "All" ? roles.length : roles.filter((r) => r.department === title).length
+                  return (
+                    <button
+                      key={title}
+                      type="button"
+                      className="apply-filter"
+                      aria-pressed={filter === title}
+                      onClick={() => setFilter(title)}
+                    >
+                      {title}
+                      <span className="hu-mono">{count}</span>
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+
+            <ul className="apply-roles">
+              {shown.map((role, i) => (
+                <li
+                  key={`${filter}-${role.name}`}
+                  className="animate-in fade-in-0 slide-in-from-bottom-1 duration-300 motion-reduce:animate-none"
+                  style={{ animationDelay: `${i * 35}ms`, animationFillMode: "backwards" }}
+                >
+                  <button type="button" onClick={(e) => open(role.name, e.currentTarget)} className="apply-role">
+                    <span className="apply-role-num hu-mono">{String(roles.indexOf(role) + 1).padStart(2, "0")}</span>
+                    <span className="apply-role-name">{role.name}</span>
+                    <span className="apply-role-dept hu-mono">{role.department}</span>
+                    <span className="apply-role-go" aria-hidden="true">
+                      <ArrowUpRight className="h-4 w-4" />
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <aside className="apply-perks nb nb-alt">
+            <h2 className="hu-label">
+              <b>+</b>
+              <span>What you get</span>
+            </h2>
+            <ol>
+              {benefits.map((benefit, i) => (
+                <li key={benefit}>
+                  <span className="hu-mono">{String(i + 1).padStart(2, "0")}</span>
+                  {benefit}
+                </li>
+              ))}
+            </ol>
+            <p className="apply-perks-note">
+              Swag and official service-hour credit depend on your role and tenure. Ask HR if you need documentation for
+              school programs.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section className="hu-section scroll-mt-16" id="application-section" data-stop="How to apply">
+        <div className="hu-wrap">
+          <h2 className="hu-h2" data-split>
             <em>How</em> to apply
           </h2>
-          <p className="atelier-lead mb-8">
+          <p className="hu-lead mt-6">
             Send one email to{" "}
-            <a href="mailto:jobs@hackunited.org" className="atelier-link">
+            <a href="mailto:jobs@hackunited.org" className="hu-link">
               jobs@hackunited.org
             </a>
             . Use the subject line Hack United volunteer application and include the items below.
           </p>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="atelier-frame">
-              <div className="atelier-frame-inner">
-                <h3 className="mb-4 text-[#f3efe6]" style={{ fontFamily: "var(--font-serif), serif", fontSize: "1.35rem" }}>
-                  Process
-                </h3>
-                <ol className="list-decimal space-y-3 pl-5 text-sm text-[#c8c2b6]">
-                  <li>Email your application with the details on the right.</li>
-                  <li>We read applications as they arrive. You may get a follow-up interview on Discord.</li>
-                  <li>If we offer you a role, HR will send onboarding steps and a team invite.</li>
-                </ol>
-              </div>
-            </div>
-            <div className="atelier-frame">
-              <div className="atelier-frame-inner">
-                <h3 className="mb-4 text-[#f3efe6]" style={{ fontFamily: "var(--font-serif), serif", fontSize: "1.35rem" }}>
-                  Include in your email
-                </h3>
-                <ul className="space-y-2 text-sm text-[#c8c2b6]">
-                  <li>Full name and contact email</li>
-                  <li>Age and location (country and state or region)</li>
-                  <li>Role(s) you want</li>
-                  <li>Why you want to volunteer with Hack United</li>
-                  <li>Relevant experience or links (GitHub, portfolio, socials)</li>
-                  <li>Hours per week you can commit</li>
-                  <li>Resume or LinkedIn (optional)</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <ol className="apply-steps">
+            {processSteps.map((step, i) => (
+              <li key={step}>
+                <span className="apply-step-num hu-mono">Step 0{i + 1}</span>
+                <p>{step}</p>
+              </li>
+            ))}
+          </ol>
 
-          <div className="mt-10">
-            <a href={mailtoApply} className="atelier-btn">
-              <Mail className="w-4 h-4" />
-              Open application email
-            </a>
+          <div className="apply-application">
+            <div className="apply-checklist nb">
+              <div className="apply-checklist-head">
+                <h3 className="hu-h3">Include in your email</h3>
+                <span className="hu-mono" aria-live="polite">
+                  {done}/{emailItems.length} ready
+                </span>
+              </div>
+              <div className="apply-progress" aria-hidden="true">
+                <span style={{ width: `${(done / emailItems.length) * 100}%` }} />
+              </div>
+              <ul>
+                {emailItems.map((item, i) => (
+                  <li key={item}>
+                    <label>
+                      <input
+                        type="checkbox"
+                        className="sr-only"
+                        checked={checked[i]}
+                        onChange={() => setChecked((prev) => prev.map((v, j) => (j === i ? !v : v)))}
+                      />
+                      <span className="apply-check" aria-hidden="true">
+                        <Check className="h-3 w-3" />
+                      </span>
+                      <span className="apply-check-text">{item}</span>
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="apply-send nb">
+              <div className="apply-send-copy">
+                <p className="apply-send-kicker hu-mono">Send to jobs@hackunited.org</p>
+                <p className="apply-send-status" aria-live="polite">
+                  {done} of {emailItems.length} checklist items marked
+                </p>
+                <p className="apply-send-subject hu-mono">Subject: Hack United volunteer application</p>
+              </div>
+              <a href={mailtoFor()} className="hu-btn apply-send-btn">
+                <Mail className="h-4 w-4" />
+                {sendButtonLabel}
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {selectedPosition && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
-          <div className="atelier-frame max-h-[90vh] w-full max-w-lg overflow-y-auto">
-            <div className="atelier-frame-inner">
-              <div className="mb-6 flex items-start justify-between gap-3 border-b border-[#2c2438] pb-4">
-                <div>
-                  <p className="mb-1 text-xs text-[#c4b5fd]">{selectedPosition.department}</p>
-                  <h3 className="text-2xl text-[#f3efe6]" style={{ fontFamily: "var(--font-serif), serif" }}>
-                    {selectedPosition.name}
-                  </h3>
-                </div>
-                <button type="button" onClick={closeModal} className="text-[#b4adc4]" aria-label="Close">
-                  <X className="h-5 w-5" />
-                </button>
+      <div className="apply-scrim" data-open={!!selected} onClick={close} aria-hidden="true" />
+      <div
+        ref={drawerRef}
+        className="apply-drawer"
+        data-open={!!selected}
+        role="dialog"
+        aria-modal="true"
+        aria-hidden={!selected}
+        aria-labelledby="apply-drawer-title"
+        tabIndex={-1}
+      >
+        {current && details && (
+          <>
+            <div className="apply-drawer-head">
+              <div>
+                <p className="hu-mono text-[11px] uppercase tracking-[0.12em] text-[var(--hu-accent)]">
+                  {details.department}
+                </p>
+                <h3 id="apply-drawer-title" className="apply-drawer-title">
+                  {current}
+                </h3>
               </div>
-              <div className="space-y-5 text-sm text-[#c8c2b6]">
-                <div>
-                  <h4 className="mb-2 text-[#f3efe6]">Responsibilities</h4>
-                  <ul className="list-disc space-y-1.5 pl-4">
-                    {selectedPosition.responsibilities.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="mb-2 text-[#f3efe6]">Requirements</h4>
-                  <ul className="list-disc space-y-1.5 pl-4">
-                    {selectedPosition.requirements.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="mt-6 flex flex-col gap-2 sm:flex-row">
-                <button type="button" onClick={scrollToApplication} className="atelier-btn flex-1">
-                  Apply
-                </button>
-                <button type="button" onClick={closeModal} className="atelier-btn-ghost flex-1">
-                  Close
-                </button>
-              </div>
+              <button type="button" onClick={close} className="apply-close" aria-label="Close" tabIndex={selected ? 0 : -1}>
+                <X className="h-5 w-5" />
+              </button>
             </div>
-          </div>
-        </div>
-      )}
+            <div className="apply-drawer-body">
+              <h4 className="hu-label">
+                <b>01</b>
+                <span>Responsibilities</span>
+              </h4>
+              <ul>
+                {details.responsibilities.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <h4 className="hu-label mt-10">
+                <b>02</b>
+                <span>Requirements</span>
+              </h4>
+              <ul>
+                {details.requirements.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="apply-drawer-foot">
+              <a href={mailtoFor(current)} className="hu-btn flex-1" tabIndex={selected ? 0 : -1}>
+                <Mail className="h-4 w-4" />
+                Apply for this role
+              </a>
+              <button type="button" onClick={scrollToApplication} className="hu-btn hu-btn-ghost flex-1" tabIndex={selected ? 0 : -1}>
+                How to apply
+              </button>
+            </div>
+          </>
+        )}
+      </div>
     </main>
   )
 }

@@ -2,85 +2,156 @@
 @tailwind components;
 @tailwind utilities;
 
+/* shadcn/ui tokens. The dark values are left as they were so components that
+   read them (Sheet, Button, Tabs) and the home hero render exactly as before. */
 @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-
     --radius: 0.5rem;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
 }
 
+/* ---------- Hack United tokens ----------
+   Dark is the default. The base black matches the bottom of the home hero so
+   the page continues out of it without a seam; lavender is the hero accent. */
+:root {
+  --hu-bg: #050505;
+  --hu-bg-2: #0d0c11;
+  --hu-bg-3: #15141b;
+  --hu-line: rgba(242, 239, 232, 0.09);
+  --hu-line-2: rgba(242, 239, 232, 0.18);
+  --hu-fg: #f2efe8;
+  --hu-fg-2: #bdb8c8;
+  --hu-fg-3: #7d7889;
+  --hu-accent: #d4c4ff;
+  --hu-accent-ink: #130e24;
+  --hu-accent-soft: rgba(212, 196, 255, 0.1);
+  --hu-signal: #ffb547;
+  --hu-grid: rgba(242, 239, 232, 0.045);
+  --hu-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.8);
+  --hu-logo-filter: brightness(0) invert(1);
+  --hu-press-filter: grayscale(1) brightness(1.15);
+
+  /* Zones: each stop of the journey sits on a slightly different ground. */
+  --hu-zone-a: #09080e;
+  --hu-zone-b: #0b0906;
+
+  /* Chart series colour, validated for the dark chart surface. */
+  --hu-chart: #9277f5;
+
+  /* Neobrutal layer: hard borders, flat offset shadows, solid colour blocks.
+     In the dark theme the shadow takes the hero's lavender instead of black. */
+  --nb-bw: 2px;
+  --nb-ink: #f2efe8;
+  --nb-surface: #111016;
+  --nb-shadow-c: #d4c4ff;
+  --nb-shadow-c2: #ffb547;
+  --nb-fill: #d4c4ff;
+  --nb-fill-2: #ffb547;
+  --nb-fill-ink: #130e24;
+  --nb-radius: 12px;
+  --nb-off: 4px;
+
+  /* One motion style for the whole site (mirrored in lib/motion.ts). */
+  --hu-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --hu-ease-press: cubic-bezier(0.3, 0.7, 0.4, 1.15);
+  color-scheme: dark;
+}
+
+/* Light theme: daylight paper, ink outlines, and coloured (not black)
+   shadows so the page keeps its lavender and amber character. */
+html.light {
+  --hu-bg: #f5f1e8;
+  --hu-bg-2: #ede7da;
+  --hu-bg-3: #e4ddcd;
+  --hu-line: rgba(22, 18, 32, 0.12);
+  --hu-line-2: rgba(22, 18, 32, 0.24);
+  --hu-fg: #15131b;
+  --hu-fg-2: #45404f;
+  --hu-fg-3: #736d7e;
+  --hu-accent: #5b3fd4;
+  --hu-accent-ink: #ffffff;
+  --hu-accent-soft: rgba(91, 63, 212, 0.08);
+  --hu-signal: #c2560c;
+  --hu-grid: rgba(22, 18, 32, 0.07);
+  --hu-shadow: 0 30px 60px -34px rgba(40, 30, 70, 0.35);
+  --hu-logo-filter: brightness(0);
+  --hu-press-filter: grayscale(1) invert(1) brightness(0.9);
+
+  --hu-zone-a: #eee8fb;
+  --hu-zone-b: #fbf1de;
+
+  --hu-chart: #5b3fd4;
+
+  --nb-ink: #15131b;
+  --nb-surface: #fffdf8;
+  --nb-shadow-c: #8f76f2;
+  --nb-shadow-c2: #f0a43a;
+  color-scheme: light;
+}
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground;
+    background: var(--hu-bg);
+    color: var(--hu-fg);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
-}
 
-.glow-purple {
-  box-shadow: 0 0 15px 2px rgba(168, 85, 247, 0.3);
-}
+  ::selection {
+    background: var(--hu-accent);
+    color: var(--hu-accent-ink);
+  }
 
-.glow-white {
-  box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.1);
+  :focus-visible {
+    outline: 2px solid var(--hu-accent);
+    outline-offset: 3px;
+  }
 }
 
 /* Scroll reveal (see hooks/use-scroll-reveal.ts). Uses an animation on the
@@ -101,7 +172,7 @@
 }
 
 .reveal-ready [data-reveal].is-revealed {
-  animation: hu-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation: hu-reveal 0.9s var(--hu-ease) backwards;
   animation-delay: var(--reveal-delay, 0ms);
 }
 
@@ -112,221 +183,312 @@
   }
 }
 
+/* ---------- Shared building blocks ---------- */
+
 @layer components {
-  .hu-section {
-    @apply relative py-20 md:py-28;
+  .hu-wrap {
+    width: 100%;
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
   }
 
-  .hu-section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 8%;
-    right: 8%;
-    height: 1px;
-    background: #3f3458;
+  @media (min-width: 640px) {
+    .hu-wrap {
+      padding-inline: 2rem;
+    }
   }
 
-  .hu-title {
-    font-family: var(--font-serif), "Times New Roman", serif;
-    @apply text-3xl sm:text-5xl font-medium tracking-tight text-white;
+  .hu-mono {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-feature-settings: "zero" 1;
   }
 
-  .hu-rule {
-    width: 42px;
-    height: 3px;
-    margin-bottom: 1.25rem;
-    background: #c4b5fd;
+  /* Boxed index tag over every section heading: [ 01 | ABOUT ] */
+  .hu-label {
+    display: inline-flex;
+    align-items: stretch;
+    border: var(--nb-bw) solid var(--nb-ink);
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hu-fg);
+    background: var(--nb-surface);
+    box-shadow: 2px 2px 0 var(--nb-ink);
+  }
+
+  .hu-label b,
+  .hu-label > span {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.55rem;
+  }
+
+  .hu-label b {
+    font-weight: 700;
+    background: var(--nb-fill);
+    color: var(--nb-fill-ink);
+    border-right: var(--nb-bw) solid var(--nb-ink);
+  }
+
+  .hu-display {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.75rem, 7vw, 6.25rem);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    font-variation-settings: "opsz" 96;
+    color: var(--hu-fg);
+  }
+
+  .hu-h2 {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(2.25rem, 5vw, 4.25rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--hu-fg);
+  }
+
+  .hu-h3 {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--hu-fg);
+  }
+
+  /* The accent word in a heading is set in the serif italic, in lavender. */
+  .hu-display em,
+  .hu-h2 em {
+    margin-right: 0.04em;
+    font-family: var(--font-serif), Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--hu-accent);
+  }
+
+  .hu-h3 em {
+    font-family: var(--font-serif), Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--hu-accent);
+  }
+
+  .hu-lead {
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    line-height: 1.6;
+    color: var(--hu-fg-2);
+    max-width: 40rem;
   }
 
   .hu-body {
-    @apply text-[16px] sm:text-[17px] leading-relaxed text-neutral-400 font-normal;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--hu-fg-2);
   }
 
-  .hu-panel {
-    @apply rounded-2xl bg-white/[0.04];
-  }
-
-  .hu-link {
-    @apply text-violet-300 hover:text-violet-200 underline-offset-4 hover:underline;
-  }
-
-  .saas-card {
+  .hu-section {
     position: relative;
-    border-radius: 0;
-    padding: 1.5rem 1.35rem;
-    background: #14111a;
-    border: 1px solid #3f3458;
-    box-shadow: inset 0 3px 0 #c4b5fd;
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    padding-block: clamp(4.5rem, 10vw, 8.5rem);
+    border-top: var(--nb-bw) solid var(--nb-ink);
   }
 
-  .saas-card:hover {
-    transform: translateY(-3px);
-    border-color: #c4b5fd;
+  /* Neobrutal frame: hard border, flat offset shadow. Add .nb-hover to lift
+     it toward the pointer. */
+  .nb {
+    position: relative;
+    border: var(--nb-bw) solid var(--nb-ink);
+    border-radius: var(--nb-radius);
+    background: var(--nb-surface);
+    box-shadow: var(--nb-off) var(--nb-off) 0 var(--nb-shadow-c);
+  }
+
+  .nb-alt {
+    box-shadow: var(--nb-off) var(--nb-off) 0 var(--nb-shadow-c2);
+  }
+
+  .nb-hover {
+    transition:
+      transform 0.25s var(--hu-ease-press),
+      box-shadow 0.25s var(--hu-ease-press),
+      background-color 0.25s ease;
+  }
+
+  .nb-hover:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: calc(var(--nb-off) + 2px) calc(var(--nb-off) + 2px) 0 var(--nb-shadow-c);
+  }
+
+  .nb-alt.nb-hover:hover {
+    box-shadow: calc(var(--nb-off) + 2px) calc(var(--nb-off) + 2px) 0 var(--nb-shadow-c2);
+  }
+
+  .hu-grid-bg {
+    background-image:
+      linear-gradient(var(--hu-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hu-grid) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* Chunky button that physically presses into its shadow. */
+  .hu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    height: 46px;
+    padding-inline: 1.25rem;
+    border-radius: 10px;
+    border: var(--nb-bw) solid var(--nb-ink);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    background: var(--nb-fill);
+    color: var(--nb-fill-ink);
+    box-shadow: 3px 3px 0 var(--nb-ink);
+    transition:
+      transform 0.18s var(--hu-ease-press),
+      box-shadow 0.18s var(--hu-ease-press),
+      background-color 0.2s ease;
+  }
+
+  .hu-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--nb-ink);
+  }
+
+  .hu-btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--nb-ink);
+    transition-duration: 0.06s;
+  }
+
+  .hu-btn svg {
+    transition: transform 0.3s var(--hu-ease);
+  }
+
+  .hu-btn:hover svg {
+    transform: translateX(3px);
+  }
+
+  .hu-btn-ghost {
+    background: var(--nb-surface);
+    color: var(--hu-fg);
+  }
+
+  .hu-btn-ghost:hover {
+    background: var(--nb-fill-2);
+    color: var(--nb-fill-ink);
+  }
+
+  /* Highlighter link: underlined, fills with lavender on hover. */
+  .hu-link {
+    color: var(--hu-fg);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--hu-accent);
+    padding-inline: 2px;
+    border-radius: 3px;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .hu-link:hover {
+    background: var(--nb-fill);
+    color: var(--nb-fill-ink);
+    text-decoration-color: transparent;
+  }
+
+  .hu-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    height: 26px;
+    padding-inline: 0.65rem;
+    border-radius: 6px;
+    border: var(--nb-bw) solid var(--nb-ink);
+    background: var(--nb-surface);
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--hu-fg);
+  }
+
+  /* Small "live" dot in the signal colour. */
+  .hu-live {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--hu-signal);
+    flex-shrink: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nb-hover,
+    .hu-btn {
+      transition: none;
+    }
+  }
+
+  .hu-page-head {
+    padding-top: clamp(4rem, 9vw, 7.5rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
   }
 }
 
-.atelier {
-  color: #f3efe6;
-  min-height: 100vh;
-  background-color: #141416;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    #19191c 0px,
-    #19191c 1px,
-    #121214 1px,
-    #121214 3px
-  );
+/* Logos supplied as dark-on-transparent PNGs are flattened to the text colour. */
+.hu-logo {
+  filter: var(--hu-logo-filter);
 }
 
-.atelier-title {
-  font-family: var(--font-serif), "Times New Roman", serif;
-  font-weight: 500;
-  font-size: clamp(3.5rem, 8vw, 6.5rem);
-  line-height: 0.88;
-  letter-spacing: -0.04em;
-  color: #f7f3ea;
+/* Framed embed with a lavender title bar (Discord widget, donation form). */
+
+.hu-window {
+  overflow: hidden;
 }
 
-.atelier-title em {
-  font-style: italic;
-  color: #d4c4ff;
-  font-weight: 500;
-}
-
-.atelier-sub {
-  font-family: var(--font-serif), "Times New Roman", serif;
-  font-weight: 500;
-  font-size: clamp(1.75rem, 3vw, 2.4rem);
-  letter-spacing: -0.02em;
-  color: #f7f3ea;
-}
-
-.atelier-sub em {
-  font-style: italic;
-  color: #d4c4ff;
-}
-
-.atelier-lead {
-  color: #c8c2b6;
-  font-size: 17px;
-  line-height: 1.65;
-  max-width: 38rem;
-}
-
-.atelier-mark {
-  display: block;
-  width: 42px;
-  height: 3px;
-  background: #c4b5fd;
-  margin-bottom: 1.25rem;
-}
-
-.atelier-frame {
-  border: 1px solid #2a2a2e;
-  padding: 10px;
-  background-color: #2a2a2e;
-  background-image: repeating-linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.045) 0px,
-    rgba(255, 255, 255, 0.045) 1px,
-    rgba(0, 0, 0, 0.18) 1px,
-    rgba(0, 0, 0, 0.18) 2px
-  );
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.55);
-}
-
-.atelier-frame-inner {
-  border: 1px solid #1a1a1e;
-  background-color: #1a1a1e;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    #1e1e22 0px,
-    #1e1e22 1px,
-    #17171a 1px,
-    #17171a 3px
-  );
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.55);
-  padding: 1.5rem;
-}
-
-.atelier-link {
-  color: #c4b5fd;
-  border-bottom: 1px solid #c4b5fd;
-  text-decoration: none;
-}
-
-.atelier-link:hover {
-  color: #f3efe6;
-  border-bottom-color: #f3efe6;
-}
-
-.atelier-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background: #f3efe6;
-  color: #141210;
-  padding: 0.8rem 1.15rem;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  text-decoration: none;
-  border: 1px solid #f3efe6;
-}
-
-.atelier-btn:hover {
-  background: #fff;
-}
-
-.atelier-btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  color: #f3efe6;
-  padding: 0.8rem 1.15rem;
-  font-size: 14px;
-  border: 1px solid #3f3458;
-  text-decoration: none;
-}
-
-.atelier-btn-ghost:hover {
-  border-color: #c4b5fd;
-  color: #c4b5fd;
-}
-
-.atelier-row {
+.hu-window-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid #2c2438;
-  color: #f3efe6;
-  text-decoration: none;
+  gap: 0.7rem;
+  height: 40px;
+  padding-inline: 1rem;
+  border-bottom: var(--nb-bw) solid var(--nb-ink);
+  background: var(--nb-fill);
+  color: var(--nb-fill-ink);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
-.atelier-row:hover {
-  color: #c4b5fd;
+.hu-window-bar .hu-live {
+  background: var(--nb-fill-ink);
 }
 
-.atelier-portrait {
-  width: 156px;
-  height: 196px;
-  padding: 5px;
-  border: 1px solid #c4b5fd;
-  background: #0b0b0b;
+/* A night band repaints itself with the dark palette it scopes. */
+.hu-night {
+  background-color: var(--hu-bg);
+  color: var(--hu-fg);
 }
 
-.atelier-portrait-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: #1c1b19;
+/* Section grounds that change as the reader moves through the page. */
+[data-zone="a"] {
+  background-color: var(--hu-zone-a);
 }
+
+[data-zone="b"] {
+  background-color: var(--hu-zone-b);
+}
+

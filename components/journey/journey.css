@@ -1,0 +1,481 @@
+/* Journey: route map rail, header progress line, next-stop hand-off. */
+
+/* ---------- Route map rail (wide screens) ---------- */
+
+.hu-rail {
+  position: fixed;
+  top: 50%;
+  left: 22px;
+  z-index: 50;
+  display: none;
+  transform: translate(-12px, -50%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s var(--hu-ease-press);
+}
+
+@media (min-width: 1440px) {
+  .hu-rail {
+    display: block;
+  }
+}
+
+.hu-rail[data-visible] {
+  opacity: 1;
+  transform: translate(0, -50%);
+  pointer-events: auto;
+}
+
+.hu-rail ol {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.hu-rail-track {
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  left: 6px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--hu-line-2);
+}
+
+.hu-rail-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--hu-signal);
+  transform: scaleY(var(--hu-rail, 0));
+  transform-origin: top;
+}
+
+.hu-rail button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hu-rail-dot {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  border: var(--nb-bw) solid var(--nb-ink);
+  border-radius: 999px;
+  background: var(--hu-bg);
+  transition:
+    background-color 0.25s ease,
+    transform 0.35s var(--hu-ease-press);
+}
+
+.hu-rail li[data-state="past"] .hu-rail-dot {
+  background: var(--nb-fill);
+}
+
+.hu-rail li[data-state="here"] .hu-rail-dot {
+  background: var(--nb-fill-2);
+  transform: scale(1.35);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--nb-fill-2) 30%, transparent);
+}
+
+/* Labels stay tucked away except for the current stop and on hover. */
+.hu-rail-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.5rem;
+  border: var(--nb-bw) solid var(--nb-ink);
+  border-radius: 6px;
+  background: var(--nb-surface);
+  box-shadow: 2px 2px 0 var(--nb-ink);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--hu-fg);
+  opacity: 0;
+  transform: translateX(-6px);
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.3s var(--hu-ease-press);
+}
+
+.hu-rail-label .hu-mono {
+  color: var(--hu-fg-3);
+}
+
+.hu-rail li[data-state="here"] .hu-rail-label,
+.hu-rail button:hover .hu-rail-label,
+.hu-rail button:focus-visible .hu-rail-label {
+  opacity: 1;
+  transform: none;
+}
+
+.hu-rail button:hover .hu-rail-dot {
+  transform: scale(1.25);
+}
+
+/* ---------- Header progress line (every screen size) ---------- */
+
+.hu-route-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(-1 * var(--nb-bw));
+  height: 3px;
+  pointer-events: none;
+}
+
+.hu-route-line span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--nb-fill), var(--nb-fill-2));
+  transform: scaleX(var(--hu-route, 0));
+  transform-origin: left;
+}
+
+/* ---------- Next stop ---------- */
+
+.hu-next {
+  padding-block: clamp(3.5rem, 7vw, 5.5rem);
+  border-top: var(--nb-bw) solid var(--nb-ink);
+  background-color: var(--hu-zone-a);
+}
+
+.hu-next-line {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.25rem;
+}
+
+.hu-next-line::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--hu-line-2);
+}
+
+.hu-next-line li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hu-next-line li:first-child {
+  align-items: flex-start;
+}
+
+.hu-next-line li:last-child {
+  align-items: flex-end;
+}
+
+.hu-next-dot {
+  width: 15px;
+  height: 15px;
+  border: var(--nb-bw) solid var(--nb-ink);
+  border-radius: 999px;
+  background: var(--hu-bg);
+}
+
+.hu-next-line li[data-state="past"] .hu-next-dot {
+  background: var(--nb-fill);
+}
+
+.hu-next-line li[data-state="here"] .hu-next-dot {
+  background: var(--nb-fill-2);
+  transform: scale(1.3);
+}
+
+.hu-next-line li[data-state="next"] .hu-next-dot {
+  background: var(--hu-bg);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--nb-fill) 45%, transparent);
+}
+
+.hu-next-name {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hu-fg-3);
+}
+
+.hu-next-line li[data-state="here"] .hu-next-name,
+.hu-next-line li[data-state="next"] .hu-next-name {
+  color: var(--hu-fg);
+}
+
+@media (max-width: 560px) {
+  .hu-next-name {
+    display: none;
+  }
+}
+
+/* ---------- Boarding pass ---------- */
+
+/* --pass-notch is the colour behind the ticket, so the notches read as cut-outs. */
+.hu-next {
+  --pass-notch: var(--hu-zone-a);
+}
+
+.hu-pass {
+  --pass-notch-size: 26px;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(170px, 22%, 240px);
+  overflow: hidden;
+  border: var(--nb-bw) solid var(--nb-ink);
+  border-radius: 16px;
+  background: var(--nb-surface);
+  color: var(--hu-fg);
+  box-shadow: var(--nb-off) var(--nb-off) 0 var(--nb-shadow-c);
+}
+
+.hu-pass-wrap {
+  container-type: inline-size;
+}
+
+.hu-pass-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.hu-pass-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hu-fg-3);
+}
+
+.hu-pass-label {
+  padding: 0.2rem 0.5rem;
+  border: var(--nb-bw) solid var(--nb-ink);
+  border-radius: 5px;
+  background: var(--nb-fill);
+  color: var(--nb-fill-ink);
+}
+
+.hu-pass-route {
+  display: grid;
+  grid-template-columns: auto minmax(2rem, 1fr) auto;
+  align-items: end;
+  gap: 1rem;
+}
+
+.hu-pass-end {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.hu-pass-end .hu-mono {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--hu-fg-3);
+}
+
+.hu-pass-to {
+  text-align: right;
+}
+
+.hu-pass-path {
+  position: relative;
+  align-self: center;
+  height: 2px;
+  margin-top: 1.1rem;
+  background-image: linear-gradient(90deg, var(--hu-fg-3) 50%, transparent 50%);
+  background-size: 10px 2px;
+}
+
+.hu-pass-plane {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--nb-surface);
+  color: var(--hu-accent);
+  transform: translate(-50%, -50%) rotate(45deg);
+  transition: left 0.6s var(--hu-ease);
+}
+
+.hu-pass:hover .hu-pass-plane {
+  left: 78%;
+}
+
+.hu-pass-detail {
+  font-size: 14.5px;
+  color: var(--hu-fg-2);
+}
+
+/* Destination ticket: a small "from" line, then the destination as the
+   headline with its description right under it. */
+.hu-pass-dest {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hu-pass-trip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: min(100%, 26rem);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hu-fg-3);
+}
+
+.hu-pass-trip .hu-pass-path {
+  flex: 1;
+  margin-top: 0;
+}
+
+.hu-pass-dest-name {
+  margin-top: 0.6rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.hu-pass-note {
+  margin-top: 0.6rem;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--hu-fg-2);
+}
+
+/* Stub: dashed perforation with a notch cut at each end. */
+.hu-pass-stub {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(1.25rem, 3vw, 2rem) 1.25rem;
+  border-left: var(--nb-bw) dashed var(--nb-ink);
+  background: var(--nb-fill-2);
+  color: var(--nb-fill-ink);
+}
+
+.hu-pass-stub::before,
+.hu-pass-stub::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--pass-notch-size) / -2 - 1px);
+  width: var(--pass-notch-size);
+  height: var(--pass-notch-size);
+  border: var(--nb-bw) solid var(--nb-ink);
+  border-radius: 999px;
+  background: var(--pass-notch, var(--hu-bg));
+}
+
+.hu-pass-stub::before {
+  top: calc(var(--pass-notch-size) / -2 - 2px);
+}
+
+.hu-pass-stub::after {
+  bottom: calc(var(--pass-notch-size) / -2 - 2px);
+}
+
+.hu-pass-stub-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hu-pass-stub-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.hu-pass-stub-cta svg {
+  transition: transform 0.35s var(--hu-ease-press);
+}
+
+.hu-pass:hover .hu-pass-stub-cta svg {
+  transform: translateX(5px);
+}
+
+/* Decorative barcode: bars of varied widths from layered stripes. */
+.hu-pass-barcode {
+  display: block;
+  height: 34px;
+  background-image:
+    repeating-linear-gradient(90deg, var(--nb-fill-ink) 0 2px, transparent 2px 5px),
+    repeating-linear-gradient(90deg, var(--nb-fill-ink) 0 1px, transparent 1px 7px, var(--nb-fill-ink) 7px 10px, transparent 10px 13px);
+  opacity: 0.85;
+}
+
+/* Narrow tickets tear along the bottom instead of the side. */
+@container (max-width: 560px) {
+  .hu-pass {
+    grid-template-columns: 1fr;
+  }
+
+  .hu-pass-stub {
+    border-left: 0;
+    border-top: var(--nb-bw) dashed var(--nb-ink);
+  }
+
+  .hu-pass-stub::before,
+  .hu-pass-stub::after {
+    top: calc(var(--pass-notch-size) / -2 - 1px);
+    bottom: auto;
+  }
+
+  .hu-pass-stub::before {
+    left: calc(var(--pass-notch-size) / -2 - 2px);
+  }
+
+  .hu-pass-stub::after {
+    left: auto;
+    right: calc(var(--pass-notch-size) / -2 - 2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hu-rail,
+  .hu-rail-dot,
+  .hu-rail-label {
+    transition: none;
+  }
+}

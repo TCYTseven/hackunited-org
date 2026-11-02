@@ -1,0 +1,189 @@
+/* Socials page. */
+
+.social-rows {
+  border-top: var(--nb-bw) solid var(--nb-ink);
+}
+
+.social-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr) auto 3rem;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: clamp(1rem, 2.2vw, 1.6rem) 0.25rem;
+  border-bottom: var(--nb-bw) solid var(--nb-ink);
+  text-align: left;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Lavender fill rises from the bottom edge of the hovered row. */
+.social-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--nb-fill);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.5s var(--hu-ease);
+}
+
+.social-row:hover::before,
+.social-row:focus-visible::before {
+  transform: scaleY(1);
+}
+
+.social-num {
+  font-size: 11px;
+  color: var(--hu-fg-3);
+  transition: color 0.3s ease;
+}
+
+.social-label {
+  font-size: clamp(2rem, 6vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--hu-fg);
+  transition:
+    color 0.3s ease,
+    transform 0.6s var(--hu-ease);
+}
+
+.social-url {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--hu-fg-3);
+  transition: color 0.3s ease;
+}
+
+.social-arrow {
+  justify-self: end;
+  width: 28px;
+  height: 28px;
+  color: var(--hu-fg-2);
+  transition:
+    color 0.3s ease,
+    transform 0.6s var(--hu-ease);
+}
+
+.social-row:hover .social-num,
+.social-row:hover .social-label,
+.social-row:hover .social-url,
+.social-row:hover .social-arrow,
+.social-row:focus-visible .social-num,
+.social-row:focus-visible .social-label,
+.social-row:focus-visible .social-url,
+.social-row:focus-visible .social-arrow {
+  color: var(--nb-fill-ink);
+}
+
+.social-row:hover .social-label {
+  transform: translateX(12px);
+}
+
+.social-row:hover .social-arrow {
+  transform: rotate(45deg);
+}
+
+.social-row[data-copied] .social-url,
+.social-row[data-copied] .social-arrow {
+  color: var(--hu-signal);
+}
+
+.social-row[data-copied]:hover .social-url,
+.social-row[data-copied]:hover .social-arrow {
+  color: var(--nb-fill-ink);
+}
+
+.social-row[data-copied] .social-arrow {
+  transform: none;
+}
+
+@media (max-width: 720px) {
+  .social-row {
+    grid-template-columns: 2rem minmax(0, 1fr) 2rem;
+  }
+
+  .social-url {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .social-arrow {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 4rem;
+}
+
+@media (max-width: 860px) {
+  .social-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.social-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 190px;
+  padding: 1.4rem;
+  color: var(--hu-fg);
+}
+
+.social-card:hover {
+  background: var(--nb-fill-2);
+  color: var(--nb-fill-ink);
+}
+
+.social-card svg:first-child {
+  color: var(--hu-accent);
+}
+
+.social-card-label {
+  margin-top: auto;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.social-card-handle {
+  margin-top: 0.3rem;
+  font-size: 11px;
+  color: var(--hu-fg-3);
+}
+
+.social-card-arrow {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  color: var(--hu-fg-3);
+  transition:
+    color 0.3s ease,
+    transform 0.4s var(--hu-ease);
+}
+
+.social-card:hover .social-card-arrow {
+  color: var(--hu-accent);
+  transform: translate(3px, -3px);
+}
+
+/* On the amber hover fill, everything on the card switches to ink. */
+.social-card:hover svg:first-child,
+.social-card:hover .social-card-handle,
+.social-card:hover .social-card-arrow {
+  color: var(--nb-fill-ink);
+}
+
+.social-label {
+  font-weight: 600;
+}

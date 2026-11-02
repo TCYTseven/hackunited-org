@@ -1,0 +1,40 @@
+/* Draggable marquee (adapted from ObsidianUI, MIT). */
+
+.obs-marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.obs-marquee:active {
+  cursor: grabbing;
+}
+
+.obs-marquee:focus-visible {
+  outline: 2px solid var(--hu-accent);
+  outline-offset: 4px;
+}
+
+.obs-marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.obs-marquee-copy {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.obs-marquee-item {
+  flex-shrink: 0;
+}
+
+.obs-marquee img {
+  -webkit-user-drag: none;
+  pointer-events: none;
+}

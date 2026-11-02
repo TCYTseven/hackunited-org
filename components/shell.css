@@ -1,0 +1,436 @@
+/* Site chrome: announcement bar, header, mobile menu, theme toggle, footer. */
+
+/* ---------- Announcement ---------- */
+
+.hu-announce {
+  position: relative;
+  border-bottom: var(--nb-bw) solid var(--nb-ink);
+  background: var(--nb-fill-2);
+  color: var(--nb-fill-ink);
+}
+
+.hu-announce a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 38px;
+  padding: 0.45rem 3rem;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.hu-announce .hu-live {
+  background: var(--nb-fill-ink);
+}
+
+.hu-announce-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.55rem;
+  border: var(--nb-bw) solid var(--nb-fill-ink);
+  border-radius: 6px;
+  background: #fffdf8;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 2px 2px 0 var(--nb-fill-ink);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.hu-announce-cta svg {
+  transition: transform 0.3s var(--hu-ease);
+}
+
+.hu-announce a:hover .hu-announce-cta {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--nb-fill-ink);
+}
+
+.hu-announce a:hover .hu-announce-cta svg {
+  transform: translateX(3px);
+}
+
+.hu-announce button {
+  color: var(--nb-fill-ink);
+}
+
+/* ---------- Header ---------- */
+
+.hu-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  height: 60px;
+  border-bottom: var(--nb-bw) solid transparent;
+  background: color-mix(in srgb, var(--hu-bg) 78%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.hu-header[data-scrolled="true"] {
+  border-bottom-color: var(--nb-ink);
+  background: var(--hu-bg);
+}
+
+html.light .hu-header {
+  background: color-mix(in srgb, var(--hu-bg) 94%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--nb-ink) 14%, transparent);
+}
+
+html.light .hu-header[data-scrolled="true"] {
+  background: var(--hu-bg);
+  border-bottom-color: var(--nb-ink);
+}
+
+html.light .hu-mobile-menu {
+  background: var(--hu-bg);
+}
+
+.hu-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--hu-fg);
+}
+
+.hu-brand-mark {
+  width: 26px;
+  height: 26px;
+}
+
+.hu-brand-name {
+  font-weight: 650;
+  font-size: 16px;
+  letter-spacing: -0.03em;
+}
+
+.hu-nav {
+  position: relative;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 3px;
+  border: var(--nb-bw) solid var(--nb-ink);
+  border-radius: 12px;
+  background: var(--nb-surface);
+  box-shadow: 2px 2px 0 var(--nb-ink);
+}
+
+.hu-nav a {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  height: 32px;
+  padding-inline: 0.85rem;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--hu-fg-2);
+  transition: color 0.15s ease;
+}
+
+.hu-nav a:hover {
+  color: var(--nb-fill-ink);
+}
+
+.hu-nav a[aria-current="page"] {
+  color: var(--hu-fg);
+}
+
+.hu-nav a[aria-current="page"]:hover {
+  color: var(--nb-fill-ink);
+}
+
+.hu-nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 14px;
+  height: 3px;
+  margin-left: -7px;
+  border-radius: 2px;
+  background: var(--hu-signal);
+}
+
+.hu-nav-pill {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  height: 32px;
+  width: 0;
+  border-radius: 8px;
+  background: var(--nb-fill);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.4s var(--hu-ease-press),
+    width 0.4s var(--hu-ease-press),
+    opacity 0.2s ease;
+}
+
+/* ---------- Square buttons (theme toggle, menu) ---------- */
+
+.hu-theme-toggle,
+.hu-menu-btn {
+  border: var(--nb-bw) solid var(--nb-ink);
+  border-radius: 10px;
+  background: var(--nb-surface);
+  color: var(--hu-fg);
+  box-shadow: 2px 2px 0 var(--nb-ink);
+  transition:
+    transform 0.18s var(--hu-ease-press),
+    box-shadow 0.18s var(--hu-ease-press),
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.hu-theme-toggle:hover,
+.hu-menu-btn:hover {
+  background: var(--nb-fill-2);
+  color: var(--nb-fill-ink);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--nb-ink);
+}
+
+.hu-theme-toggle:active,
+.hu-menu-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--nb-ink);
+}
+
+/* ---------- Theme toggle ---------- */
+
+.hu-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+}
+
+.hu-theme-toggle svg {
+  overflow: visible;
+  transition: transform 0.6s var(--hu-ease);
+}
+
+.hu-theme-toggle:hover svg {
+  transform: rotate(-25deg);
+}
+
+.hu-toggle-disc {
+  transform-origin: 12px 12px;
+  transition: transform 0.6s var(--hu-ease);
+}
+
+.hu-toggle-bite {
+  transition: transform 0.6s var(--hu-ease);
+}
+
+.hu-toggle-rays {
+  transform-origin: 12px 12px;
+  transition:
+    transform 0.6s var(--hu-ease),
+    opacity 0.35s ease;
+}
+
+.hu-theme-toggle[data-dark="true"] .hu-toggle-disc {
+  transform: scale(1.55);
+}
+
+.hu-theme-toggle[data-dark="true"] .hu-toggle-bite {
+  transform: translate(-7px, 4px);
+}
+
+.hu-theme-toggle[data-dark="true"] .hu-toggle-rays {
+  opacity: 0;
+  transform: rotate(-60deg) scale(0.5);
+}
+
+/* ---------- Mobile menu ---------- */
+
+.hu-menu-btn {
+  position: relative;
+  width: 42px;
+  height: 42px;
+}
+
+.hu-menu-btn span {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  height: 2.5px;
+  border-radius: 2px;
+  background: currentColor;
+  transition:
+    transform 0.4s var(--hu-ease),
+    top 0.4s var(--hu-ease);
+}
+
+.hu-menu-btn span:first-child {
+  top: 15px;
+}
+
+.hu-menu-btn span:last-child {
+  top: 24px;
+}
+
+.hu-menu-btn[data-open="true"] span:first-child {
+  top: 19.5px;
+  transform: rotate(45deg);
+}
+
+.hu-menu-btn[data-open="true"] span:last-child {
+  top: 19.5px;
+  transform: rotate(-45deg);
+}
+
+.hu-mobile-menu {
+  position: fixed;
+  inset: 60px 0 0 0;
+  z-index: 55;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.5rem;
+  border-top: var(--nb-bw) solid var(--nb-ink);
+  background: var(--hu-bg);
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.25s ease,
+    visibility 0s linear 0.25s;
+}
+
+.hu-mobile-menu[data-open="true"] {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.hu-mobile-menu nav a {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.85rem 0.5rem;
+  border-bottom: var(--nb-bw) solid var(--nb-ink);
+  font-size: 2.1rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--hu-fg);
+  opacity: 0;
+  transform: translateY(18px) rotate(-1.5deg);
+  transition:
+    opacity 0.4s ease,
+    transform 0.55s var(--hu-ease-press),
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.hu-mobile-menu[data-open="true"] nav a {
+  opacity: 1;
+  transform: none;
+}
+
+.hu-mobile-menu nav a[aria-current="page"],
+.hu-mobile-menu nav a:active {
+  background: var(--nb-fill);
+  color: var(--nb-fill-ink);
+}
+
+/* ---------- Footer ---------- */
+
+.hu-footer {
+  position: relative;
+  overflow: hidden;
+  border-top: var(--nb-bw) solid var(--nb-ink);
+  background: var(--hu-bg);
+}
+
+.hu-footer-heading {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.2rem 0.5rem;
+  border: var(--nb-bw) solid var(--nb-ink);
+  border-radius: 6px;
+  background: var(--nb-fill);
+  color: var(--nb-fill-ink);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hu-footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.1rem 0.25rem;
+  margin-left: -0.25rem;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--hu-fg-2);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.hu-footer-link:hover {
+  background: var(--nb-fill-2);
+  color: var(--nb-fill-ink);
+}
+
+.hu-footer-link svg {
+  opacity: 0.6;
+  transition: transform 0.3s var(--hu-ease);
+}
+
+.hu-footer-link:hover svg {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
+.hu-wordmark {
+  display: flex;
+  justify-content: center;
+  padding-inline: 1rem;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+  color: var(--hu-fg);
+  opacity: 0.28;
+  user-select: none;
+}
+
+/* Font size is set by the fit-to-width script; 15vw is the pre-script guess. */
+.hu-wordmark-inner {
+  display: inline-flex;
+  font-size: 15vw;
+  line-height: 0.82;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+}
+
+.hu-wordmark-inner span {
+  display: inline-block;
+  padding-top: 0.08em;
+  font-variation-settings: "wght" 650, "wdth" 100, "opsz" 96;
+  color: var(--hu-fg);
+}
+
+.hu-wordmark-gap {
+  width: 0.22em;
+}
+

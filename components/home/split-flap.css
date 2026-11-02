@@ -1,0 +1,71 @@
+/* Departure-board readout (see split-flap.tsx). */
+
+.hu-flap-row {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0.09em;
+  font-size: min(3rem, 12.5cqi);
+}
+
+.hu-flap-cell,
+.hu-flap-sym {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 600;
+  /* Sized to the board cell so the widest figure (25,000+) always fits. */
+  font-size: min(3rem, 12.5cqi);
+  line-height: 1;
+  color: var(--hu-fg);
+}
+
+.hu-flap-cell {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.08em;
+  height: 1.45em;
+  border: var(--nb-bw) solid var(--nb-ink);
+  border-radius: 6px;
+  background: var(--hu-bg-3);
+  box-shadow: 2px 2px 0 var(--nb-ink);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  transform-origin: 50% 50%;
+}
+
+/* The hinge across the middle of each flap. */
+.hu-flap-cell::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  margin-top: -1px;
+  background: var(--nb-ink);
+  opacity: 0.35;
+}
+
+.hu-flap-cell[data-flip] {
+  animation: hu-flap 0.16s cubic-bezier(0.3, 0, 0.3, 1);
+}
+
+@keyframes hu-flap {
+  0% {
+    transform: perspective(240px) rotateX(-70deg);
+    filter: brightness(0.6);
+  }
+  100% {
+    transform: perspective(240px) rotateX(0);
+    filter: none;
+  }
+}
+
+.hu-flap-sym {
+  display: inline-flex;
+  align-items: center;
+  padding-inline: 1px;
+  color: var(--hu-accent);
+}
+
