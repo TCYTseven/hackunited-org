@@ -53,15 +53,13 @@ export default function DonatePage() {
       <section className="hu-wrap hu-page-head" data-stop="Donate">
         <div className="donate-layout">
           <div className="donate-copy">
-            <p className="hu-label">
-              <b>501(c)(3)</b>
-              <span>EIN 81-2908499</span>
-            </p>
-            <h1 className="hu-display mt-7" data-split>
+            <h1 className="hu-display" data-split>
               <em>Donate</em>
             </h1>
             <p className="hu-lead mt-8">
               Donations are optional. They help cover servers, tooling, and prize pools for free student events.
+              Payments run through Hack Club Bank. Hack United is a 501(c)(3) nonprofit (EIN 81-2908499). Contributions
+              are tax-deductible where applicable.
             </p>
 
             <ul className="donate-uses" aria-label="What donations cover">
@@ -72,11 +70,6 @@ export default function DonatePage() {
                 </li>
               ))}
             </ul>
-
-            <p className="donate-note">
-              Hack Club Bank processes payments. Hack United is a 501(c)(3). EIN 81-2908499. Tax-deductible where
-              applicable.
-            </p>
           </div>
 
           <div className="hu-window nb donate-window">

@@ -16,7 +16,7 @@ const executiveTeam: TeamMember[] = [
   {
     name: "Tejas C.",
     position: "Founder",
-    image: "/images/team-images/TejasChakrapaniPFP.png",
+    image: "/images/team-images/Headshot.jpg",
     blurb:
       "Tejas started Hack United to share his lifelong passion for coding and tech with other students around the world. For him, Hack United is more than just events, it's a way to help students explore, create, and connect through technology.",
   },

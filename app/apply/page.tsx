@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react"
 import { ArrowUpRight, Check, Mail, X } from "lucide-react"
-import BoardingPass from "@/components/journey/boarding-pass"
 import "./apply.css"
 
 type PositionName = keyof typeof positionDetails
@@ -221,6 +220,11 @@ export default function ApplyPage() {
     document.getElementById("application-section")?.scrollIntoView({ behavior: "smooth" })
   }
 
+  let sendButtonLabel = "Open email"
+  if (done === emailItems.length) {
+    sendButtonLabel = "Send application"
+  }
+
   return (
     <main className="hu-home">
       <section className="hu-wrap hu-page-head">
@@ -312,11 +316,7 @@ export default function ApplyPage() {
 
       <section className="hu-section scroll-mt-16" id="application-section" data-stop="How to apply">
         <div className="hu-wrap">
-          <p className="hu-label">
-            <b>→</b>
-            <span>Process</span>
-          </p>
-          <h2 className="hu-h2 mt-7" data-split>
+          <h2 className="hu-h2" data-split>
             <em>How</em> to apply
           </h2>
           <p className="hu-lead mt-6">
@@ -336,52 +336,50 @@ export default function ApplyPage() {
             ))}
           </ol>
 
-          <div className="apply-checklist nb">
-            <div className="apply-checklist-head">
-              <h3 className="hu-h3">Include in your email</h3>
-              <span className="hu-mono" aria-live="polite">
-                {done}/{emailItems.length} ready
-              </span>
+          <div className="apply-application">
+            <div className="apply-checklist nb">
+              <div className="apply-checklist-head">
+                <h3 className="hu-h3">Include in your email</h3>
+                <span className="hu-mono" aria-live="polite">
+                  {done}/{emailItems.length} ready
+                </span>
+              </div>
+              <div className="apply-progress" aria-hidden="true">
+                <span style={{ width: `${(done / emailItems.length) * 100}%` }} />
+              </div>
+              <ul>
+                {emailItems.map((item, i) => (
+                  <li key={item}>
+                    <label>
+                      <input
+                        type="checkbox"
+                        className="sr-only"
+                        checked={checked[i]}
+                        onChange={() => setChecked((prev) => prev.map((v, j) => (j === i ? !v : v)))}
+                      />
+                      <span className="apply-check" aria-hidden="true">
+                        <Check className="h-3 w-3" />
+                      </span>
+                      <span className="apply-check-text">{item}</span>
+                    </label>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="apply-progress" aria-hidden="true">
-              <span style={{ width: `${(done / emailItems.length) * 100}%` }} />
+
+            <div className="apply-send nb">
+              <div className="apply-send-copy">
+                <p className="apply-send-kicker hu-mono">Send to jobs@hackunited.org</p>
+                <p className="apply-send-status" aria-live="polite">
+                  {done} of {emailItems.length} checklist items marked
+                </p>
+                <p className="apply-send-subject hu-mono">Subject: Hack United volunteer application</p>
+              </div>
+              <a href={mailtoFor()} className="hu-btn apply-send-btn">
+                <Mail className="h-4 w-4" />
+                {sendButtonLabel}
+              </a>
             </div>
-            <ul>
-              {emailItems.map((item, i) => (
-                <li key={item}>
-                  <label>
-                    <input
-                      type="checkbox"
-                      className="sr-only"
-                      checked={checked[i]}
-                      onChange={() => setChecked((prev) => prev.map((v, j) => (j === i ? !v : v)))}
-                    />
-                    <span className="apply-check" aria-hidden="true">
-                      <Check className="h-3 w-3" />
-                    </span>
-                    <span className="apply-check-text">{item}</span>
-                  </label>
-                </li>
-              ))}
-            </ul>
-            <BoardingPass
-              href={mailtoFor()}
-              className="mt-8"
-              label="Application pass"
-              code="jobs@hackunited.org"
-              from="You"
-              to="Hack United"
-              detail={`${done}/${emailItems.length} items ready · subject: Hack United volunteer application`}
-              stub={
-                <>
-                  <span className="hu-pass-stub-label hu-mono">{done === emailItems.length ? "Ready to send" : "Open email"}</span>
-                  <span className="hu-pass-stub-cta">
-                    <Mail className="h-5 w-5" />
-                    Send
-                  </span>
-                </>
-              }
-            />
           </div>
         </div>
       </section>

@@ -9,8 +9,6 @@ import AnnouncementBanner from "@/components/announcement-banner";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import MotionLayer from "@/components/motion-layer";
-import JourneyRail from "@/components/journey/journey-rail";
-import NextStop from "@/components/journey/next-stop";
 import ClickSpark from "@/components/obsidian/click-spark";
 
 const sans = Bricolage_Grotesque({
@@ -102,11 +100,9 @@ export default function RootLayout({
             <AnnouncementBanner />
             <SiteHeader />
             <div className="flex-1">{children}</div>
-            <NextStop />
             <SiteFooter />
           </div>
           <MotionLayer />
-          <JourneyRail />
           <ClickSpark />
         </ThemeProvider>
       </body>

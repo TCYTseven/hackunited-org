@@ -7,7 +7,7 @@ import {
   type PointerEvent as ReactPointerEvent,
   type TouchEvent as ReactTouchEvent,
 } from "react";
-import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import CountUp from "@/components/count-up";
 import PostcardStack from "./postcard-stack";
 import { hackathons, type HackathonStat } from "./data";
@@ -32,14 +32,13 @@ function Stat({ stat }: { stat: HackathonStat }) {
 
 /**
  * The hackathon archive. The track along the top is a bar chart of turnout
- * for each edition; drag the playhead (or click, swipe, or use the arrow
- * keys) to move between editions.
+ * for each edition; click, drag, swipe, or use arrow keys to move between editions.
  */
 export default function EditionScrubber() {
   const [active, setActive] = useState(hackathons.length - 1);
   const [direction, setDirection] = useState(1);
-  const [dragX, setDragX] = useState<number | null>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const draggingRef = useRef(false);
   const swipeStart = useRef<{ x: number; y: number } | null>(null);
 
   const select = (index: number) => {
@@ -58,19 +57,20 @@ export default function EditionScrubber() {
   const onPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
     if (e.pointerType === "mouse" && e.button !== 0) return;
     e.currentTarget.setPointerCapture(e.pointerId);
-    const { index, ratio } = indexAt(e.clientX);
-    setDragX(ratio);
+    const { index } = indexAt(e.clientX);
+    draggingRef.current = true;
     select(index);
   };
 
   const onPointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
-    if (dragX === null) return;
-    const { index, ratio } = indexAt(e.clientX);
-    setDragX(ratio);
+    if (!draggingRef.current) return;
+    const { index } = indexAt(e.clientX);
     select(index);
   };
 
-  const endDrag = () => setDragX(null);
+  const endDrag = () => {
+    draggingRef.current = false;
+  };
 
   const onKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
     const moves: Record<string, number> = {
@@ -103,7 +103,6 @@ export default function EditionScrubber() {
   };
 
   const h = hackathons[active];
-  const playhead = dragX ?? (active + 0.5) / hackathons.length;
   const stats = [...h.stats, ...(h.moreStats ?? [])];
 
   return (
@@ -124,7 +123,6 @@ export default function EditionScrubber() {
           aria-valuemax={hackathons.length}
           aria-valuenow={active + 1}
           aria-valuetext={`${h.title}, ${h.date}`}
-          data-dragging={dragX !== null || undefined}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={endDrag}
@@ -146,30 +144,6 @@ export default function EditionScrubber() {
               </div>
             </div>
           ))}
-          <span className="hu-ed-playhead" style={{ left: `${playhead * 100}%` }} aria-hidden="true">
-            <span className="hu-ed-knob">{h.label}</span>
-          </span>
-        </div>
-      </div>
-
-      <div className="hu-ed-controls">
-        <p className="hu-mono">
-          <span className="text-[var(--hu-fg)]">{String(active + 1).padStart(2, "0")}</span>
-          <span> / {String(hackathons.length).padStart(2, "0")}</span>
-          <span className="hidden sm:inline"> · drag the playhead or use ← →</span>
-        </p>
-        <div className="flex gap-2">
-          <button type="button" onClick={() => select(active - 1)} disabled={active === 0} aria-label="Previous edition">
-            <ArrowLeft className="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            onClick={() => select(active + 1)}
-            disabled={active === hackathons.length - 1}
-            aria-label="Next edition"
-          >
-            <ArrowRight className="h-4 w-4" />
-          </button>
         </div>
       </div>
 

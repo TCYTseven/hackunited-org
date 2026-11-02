@@ -287,10 +287,16 @@
   }
 }
 
-/* ---------- Checklist ---------- */
+/* ---------- Checklist + send CTA ---------- */
+
+.apply-application {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 4rem;
+}
 
 .apply-checklist {
-  margin-top: 4rem;
   padding: clamp(1.5rem, 3vw, 2.5rem);
   border: var(--nb-bw) solid var(--nb-ink);
   background: var(--nb-surface);
@@ -326,23 +332,44 @@
 }
 
 .apply-checklist ul {
-  columns: 2 280px;
-  column-gap: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (max-width: 720px) {
+  .apply-checklist ul {
+    grid-template-columns: 1fr;
+  }
 }
 
 .apply-checklist li {
-  break-inside: avoid;
+  min-width: 0;
 }
 
 .apply-checklist label {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.85rem;
-  padding: 0.85rem 0;
-  border-bottom: var(--nb-bw) solid var(--nb-ink);
+  min-height: 100%;
+  padding: 0.85rem 0.95rem;
+  border: var(--nb-bw) solid var(--nb-ink);
+  border-radius: 10px;
+  background: var(--hu-bg);
   cursor: pointer;
   font-size: 15px;
+  line-height: 1.45;
   color: var(--hu-fg-2);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.apply-checklist label:hover {
+  background: color-mix(in srgb, var(--nb-fill-2) 18%, var(--hu-bg));
 }
 
 .apply-check {
@@ -386,9 +413,55 @@
   color: var(--hu-fg);
 }
 
-/* The pass sits inside the checklist panel, so its notches take that colour. */
-.apply-checklist {
-  --pass-notch: var(--nb-surface);
+.apply-send {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+  padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.5rem, 3vw, 2rem);
+  border: var(--nb-bw) solid var(--nb-ink);
+  background: var(--nb-surface);
+}
+
+.apply-send-copy {
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+.apply-send-kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hu-fg-3);
+}
+
+.apply-send-status {
+  margin-top: 0.45rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--hu-fg);
+}
+
+.apply-send-subject {
+  margin-top: 0.35rem;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--hu-fg-3);
+}
+
+.apply-send-btn {
+  flex-shrink: 0;
+  min-width: 11rem;
+}
+
+@media (max-width: 540px) {
+  .apply-send-btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ---------- Drawer ---------- */

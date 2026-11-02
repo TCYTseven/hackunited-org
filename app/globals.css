@@ -54,8 +54,7 @@
 /* ---------- Hack United tokens ----------
    Dark is the default. The base black matches the bottom of the home hero so
    the page continues out of it without a seam; lavender is the hero accent. */
-:root,
-.hu-night {
+:root {
   --hu-bg: #050505;
   --hu-bg-2: #0d0c11;
   --hu-bg-3: #15141b;
@@ -129,11 +128,6 @@ html.light {
   --nb-shadow-c: #8f76f2;
   --nb-shadow-c2: #f0a43a;
   color-scheme: light;
-}
-
-/* Keep the night palette inside a light page (the band right after the hero). */
-html.light .hu-night {
-  color-scheme: dark;
 }
 
 @layer base {

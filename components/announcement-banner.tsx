@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
 
@@ -13,14 +12,14 @@ export default function AnnouncementBanner() {
 
   return (
     <div className="hu-announce">
-      <Link href="/organizer">
+      <a href="https://unitedhacksv8.devpost.com" target="_blank" rel="noopener noreferrer">
         <span className="hu-live" aria-hidden="true" />
-        <span>Organizer Applications for V8 are open!</span>
+        <span>Register for United Hacks V8</span>
         <span className="hu-announce-cta">
-          See more
+          Register
           <ArrowRight className="h-3 w-3" />
         </span>
-      </Link>
+      </a>
       <button
         type="button"
         onClick={() => setDismissed(true)}

@@ -47,11 +47,6 @@ const styles = `
     }
   }
 
-  .hero-badge {
-    animation: heroFadeUp 0.8s ease-out forwards;
-    opacity: 0;
-  }
-
   .hero-heading {
     animation: heroFadeUp 0.8s ease-out 0.2s forwards;
     opacity: 0;
@@ -113,24 +108,16 @@ function DiscordWidget() {
 }
 
 function SectionHead({
-  index,
-  label,
   children,
   aside,
 }: {
-  index: string;
-  label: string;
   children: React.ReactNode;
   aside?: React.ReactNode;
 }) {
   return (
     <header className="hu-sec-head">
       <div>
-        <p className="hu-label" data-reveal>
-          <b>{index}</b>
-          <span>{label}</span>
-        </p>
-        <h2 className="hu-h2 mt-7" data-split>
+        <h2 className="hu-h2" data-split>
           {children}
         </h2>
       </div>
@@ -163,16 +150,12 @@ export default function Home() {
     <>
       <style jsx>{styles}</style>
       <main ref={mainRef} className="hu-home overflow-hidden">
-        <div className={`${inter.className} hu-night bg-[#050505] text-white`}>
+        <div className={`${inter.className} hu-hero-shell`}>
         {/* Hero Section */}
-        <div className="bg-[url('/images/gradient.png')] bg-cover bg-center bg-no-repeat w-full pt-[30px] md:min-h-screen relative">
-          <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black to-transparent" />
+        <div className="hu-hero-stage w-full pt-[30px] md:min-h-screen relative">
+          <div className="hu-hero-fade" aria-hidden="true" />
           <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-16 sm:mt-24 md:mt-[140px] pb-12 sm:pb-16 md:pb-[160px] px-6 sm:px-8 md:px-8 relative">
             <div className="right hu-hero-copy">
-              <p className="hero-badge hu-hero-kicker hu-mono">
-                <span aria-hidden="true" />
-                501(c)(3) nonprofit · Free for students
-              </p>
               <h1 className="hero-heading hu-hero-title">
                 Empowering the next generation of <em>tech innovators</em>
               </h1>
@@ -220,12 +203,9 @@ export default function Home() {
         </div>
 
         {/* Recognized by */}
-        <section className="hu-press hu-night" aria-label="Recognized by">
+        <section className="hu-press" aria-label="Recognized by">
           <div className="hu-wrap hu-press-inner">
-            <p className="hu-label shrink-0">
-              <b>◎</b>
-              <span>Recognized by</span>
-            </p>
+            <p className="hu-press-kicker hu-mono shrink-0">Recognized by</p>
             <DraggableMarquee
               className="hu-press-strip"
               items={pressLogos}
@@ -251,7 +231,7 @@ export default function Home() {
         {/* About */}
         <section id="who-are-we" className="hu-section scroll-mt-16" data-stop="Who we are">
           <div className="hu-wrap">
-            <SectionHead index="01" label="Who we are">
+            <SectionHead>
               <em>About</em> us
             </SectionHead>
             <div className="hu-about">
@@ -270,10 +250,7 @@ export default function Home() {
         {/* Impact */}
         <section className="hu-section" data-stop="Impact" data-zone="a">
           <div className="hu-wrap">
-            <SectionHead
-              index="02"
-              label="By the numbers"
-            >
+            <SectionHead>
               <em>Our</em> impact
             </SectionHead>
             <ImpactBoard />
@@ -283,7 +260,7 @@ export default function Home() {
         {/* Goals */}
         <section className="hu-section" data-stop="Goals">
           <div className="hu-wrap">
-            <SectionHead index="03" label="What we build toward">
+            <SectionHead>
               <em>Our</em> goals
             </SectionHead>
             <GoalPanels />
@@ -294,8 +271,6 @@ export default function Home() {
         <section className="hu-section hu-grid-bg" data-stop="Archive" data-zone="b">
           <div className="hu-wrap">
             <SectionHead
-              index="04"
-              label="The archive · 2023 — 2026"
               aside={
                 <a href="https://unitedhacks.hackunited.org" target="_blank" rel="noopener noreferrer" className="hu-btn hu-btn-ghost">
                   Visit United Hacks
@@ -315,8 +290,6 @@ export default function Home() {
         <section className="hu-section" data-stop="Judges">
           <div className="hu-wrap">
             <SectionHead
-              index="05"
-              label="Our judging panel"
               aside={
                 <p className="hu-body">
                   Want to judge?{" "}
@@ -337,11 +310,7 @@ export default function Home() {
           <div className="hu-wrap">
             <div className="hu-discord">
               <div className="hu-discord-copy">
-                <p className="hu-label" data-reveal>
-                  <b>06</b>
-                  <span>Community</span>
-                </p>
-                <h2 className="hu-h2 mt-7" data-split>
+                <h2 className="hu-h2" data-split>
                   <em>Discord</em>
                 </h2>
                 <p className="hu-lead mt-6" data-reveal style={revealDelay(140)}>

@@ -51,19 +51,6 @@
   color: var(--hu-accent);
 }
 
-.donate-note {
-  margin-top: 2rem;
-  padding: 1rem 1.1rem;
-  border: var(--nb-bw) solid var(--nb-ink);
-  border-radius: 10px;
-  background: var(--nb-fill);
-  color: var(--nb-fill-ink);
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.6;
-  max-width: 34rem;
-}
-
 .donate-window {
   overflow: hidden;
 }

@@ -83,6 +83,20 @@
   background: var(--hu-bg);
 }
 
+html.light .hu-header {
+  background: color-mix(in srgb, var(--hu-bg) 94%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--nb-ink) 14%, transparent);
+}
+
+html.light .hu-header[data-scrolled="true"] {
+  background: var(--hu-bg);
+  border-bottom-color: var(--nb-ink);
+}
+
+html.light .hu-mobile-menu {
+  background: var(--hu-bg);
+}
+
 .hu-brand {
   display: inline-flex;
   align-items: center;
@@ -396,6 +410,7 @@
   padding-bottom: 0.1em;
   overflow: hidden;
   color: var(--hu-fg);
+  opacity: 0.28;
   user-select: none;
 }
 
@@ -413,7 +428,6 @@
   padding-top: 0.08em;
   font-variation-settings: "wght" 650, "wdth" 100, "opsz" 96;
   color: var(--hu-fg);
-  text-shadow: 0.025em 0.025em 0 var(--nb-shadow-c);
 }
 
 .hu-wordmark-gap {
