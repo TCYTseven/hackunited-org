@@ -185,19 +185,33 @@ export default function Home() {
                 src="./images/Logo.png"
                 alt=""
               />
-              <div className="glassCard glassCard1 hidden md:flex">
+              <div className="glassCard glassCard1">
                 <h3 className="heroAccent">25,000+</h3>
                 <p>Engineers Impacted</p>
               </div>
-              <div className="glassCard glassCard2 hidden md:flex">
+              <div className="glassCard glassCard2">
                 <h3 className="heroAccent">3,000+</h3>
                 <p>Community Members</p>
               </div>
-              <div className="glassCard glassCard3 hidden md:flex">
+              <div className="glassCard glassCard3">
                 <h3 className="heroAccent">50+</h3>
                 <p>Countries Reached</p>
               </div>
             </div>
+            <dl className="hu-hero-stats">
+              <div>
+                <dt>Engineers Impacted</dt>
+                <dd>25,000+</dd>
+              </div>
+              <div>
+                <dt>Community Members</dt>
+                <dd>3,000+</dd>
+              </div>
+              <div>
+                <dt>Countries Reached</dt>
+                <dd>50+</dd>
+              </div>
+            </dl>
           </div>
         </div>
         </div>

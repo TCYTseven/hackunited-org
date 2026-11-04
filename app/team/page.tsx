@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useRef, useState } from "react";
-import { Search } from "lucide-react";
+import { useRef } from "react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import "./team.css";
 
@@ -524,13 +523,7 @@ function MemberCard({ member, index, large = false }: { member: TeamMember; inde
 
 export default function TeamPage() {
   const mainRef = useRef<HTMLElement>(null);
-  const [query, setQuery] = useState("");
   useScrollReveal(mainRef);
-
-  const q = query.trim().toLowerCase();
-  const shownAlumni = q
-    ? alumni.filter((m) => `${m.name} ${m.position}`.toLowerCase().includes(q))
-    : alumni;
 
   return (
     <main ref={mainRef} className="hu-home">
@@ -572,35 +565,16 @@ export default function TeamPage() {
         </div>
       </section>
 
-      <section className="hu-section" data-stop="Alumni">
+      <section className="hu-section" data-stop="Volunteers">
         <div className="hu-wrap">
           <div className="credits-head">
-            <div>
-              <p className="hu-label">
-                <b>C</b>
-                <span>Alumni who helped run past events</span>
-              </p>
-              <h2 className="hu-h2 mt-7" data-split>
-                <em>Previous</em> volunteers
-              </h2>
-            </div>
-            <label className="credits-search">
-              <Search className="h-4 w-4" aria-hidden="true" />
-              <input
-                type="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search name or role"
-                aria-label="Search previous volunteers"
-              />
-              <span className="hu-mono" aria-live="polite">
-                {shownAlumni.length}/{alumni.length}
-              </span>
-            </label>
+            <h2 className="hu-h2" data-split>
+              <em>Previous</em> volunteers
+            </h2>
           </div>
 
           <ol className="credits nb">
-            {shownAlumni.map((member) => (
+            {alumni.map((member) => (
               <li key={`${member.name}-${member.position}`}>
                 <span className="credits-name">{member.name}</span>
                 <span className="credits-leader" aria-hidden="true" />
@@ -608,9 +582,6 @@ export default function TeamPage() {
               </li>
             ))}
           </ol>
-          {shownAlumni.length === 0 && (
-            <p className="hu-body mt-6">No one matches &ldquo;{query}&rdquo;.</p>
-          )}
 
         </div>
       </section>

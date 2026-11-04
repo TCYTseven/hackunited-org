@@ -21,7 +21,8 @@ a {
   width: 252px;
   min-height: 104px;
   padding: 16px 18px;
-  display: flex;
+  /* This sheet loads after Tailwind, so it owns visibility: hidden on phones. */
+  display: none;
   flex-direction: column;
   justify-content: center;
   gap: 4px;
@@ -44,6 +45,81 @@ a {
 
 .left {
   position: relative;
+}
+
+@media (min-width: 768px) {
+  .glassCard {
+    display: flex;
+  }
+}
+
+/* Tablet: the globe column is narrow, so shrink the cards and pin them inside it. */
+@media (min-width: 768px) and (max-width: 1099px) {
+  .glassCard {
+    width: 196px;
+    min-height: 0;
+    padding: 12px 14px;
+  }
+
+  .left .glassCard h3 {
+    font-size: 26px;
+  }
+
+  .left .glassCard p {
+    font-size: 14px;
+  }
+
+  .glassCard1,
+  .glassCard3 {
+    left: auto;
+    right: 0;
+  }
+
+  .glassCard2 {
+    left: 0;
+  }
+}
+
+/* Phones: the same three numbers as a compact row under the globe. */
+.hu-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin-top: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  .hu-hero-stats {
+    display: none;
+  }
+}
+
+.hu-hero-stats > div {
+  display: flex;
+  flex-direction: column-reverse;
+  min-width: 0;
+  padding: 0.8rem 0.6rem;
+  border: 1px solid var(--hu-line-2);
+  border-top: 3px solid var(--hu-accent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--nb-surface) 72%, transparent);
+  text-align: center;
+}
+
+.hu-hero-stats dt {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--hu-fg-2);
+}
+
+.hu-hero-stats dd {
+  margin: 0 0 0.2rem;
+  font-size: clamp(1.15rem, 5.5vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--hu-accent);
 }
 
 .glassCard p {

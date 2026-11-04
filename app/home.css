@@ -434,6 +434,12 @@ html.light .hu-globe-wrap {
     min-height: 0;
   }
 
+  /* flex-basis 0 in a column collapses each panel to nothing. */
+  .hu-goal,
+  .hu-goal[data-open] {
+    flex: none;
+  }
+
   .hu-goal-title {
     margin-top: 2.5rem;
   }
