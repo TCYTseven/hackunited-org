@@ -889,3 +889,65 @@ html.light .hu-globe-wrap {
 .hu-dawn {
   display: none;
 }
+
+/* The fold fits the screen on desktop. The stage takes what is left of the
+   viewport after the banner, the header (about 102px together) and the
+   "Recognized by" strip (112px), so the strip always sits at the foot of the
+   first screen and signals that the page goes on. The copy is centred in
+   what remains instead of floating at the top over empty gradient. */
+.hu-hero-cue {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hu-hero-stage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: max(600px, calc(100svh - 214px));
+  }
+
+  .hu-hero-stage .headContainer {
+    width: 100%;
+  }
+
+  .hu-hero-cue {
+    position: absolute;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hu-fg-3);
+    background: none;
+    border: 0;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .hu-hero-cue:hover,
+  .hu-hero-cue:focus-visible {
+    color: var(--hu-fg);
+  }
+
+  .hu-hero-cue svg {
+    animation: huCueBob 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes huCueBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hu-hero-cue svg {
+    animation: none;
+  }
+}

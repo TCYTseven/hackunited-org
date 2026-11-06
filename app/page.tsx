@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type CSSProperties } from "react";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight, ChevronDown } from "lucide-react";
 import { Inter } from "next/font/google";
 import "./page.css";
 import "./home.css";
@@ -152,9 +152,9 @@ export default function Home() {
       <main ref={mainRef} className="hu-home overflow-hidden">
         <div className={`${inter.className} hu-hero-shell`}>
         {/* Hero Section */}
-        <div className="hu-hero-stage w-full pt-[30px] md:min-h-screen relative">
+        <div className="hu-hero-stage w-full pt-[30px] md:pt-0 relative">
           <div className="hu-hero-fade" aria-hidden="true" />
-          <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-16 sm:mt-24 md:mt-[140px] pb-12 sm:pb-16 md:pb-[160px] px-6 sm:px-8 md:px-8 relative">
+          <div className="headContainer max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[48%_52%] mt-16 sm:mt-24 md:my-0 pb-12 sm:pb-16 md:py-16 px-6 sm:px-8 md:px-8 relative">
             <div className="right hu-hero-copy">
               <h1 className="hero-heading hu-hero-title">
                 Empowering the next generation of <em>tech innovators</em>
@@ -213,6 +213,15 @@ export default function Home() {
               </div>
             </dl>
           </div>
+          <button
+            type="button"
+            onClick={() => scrollTo("who-are-we")}
+            className="hu-hero-cue"
+            aria-label="Scroll to learn more"
+          >
+            <span className="hu-mono">Scroll</span>
+            <ChevronDown className="h-4 w-4" aria-hidden="true" />
+          </button>
         </div>
         </div>
 
