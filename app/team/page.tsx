@@ -121,6 +121,16 @@ const previousVolunteers: TeamMember[][] = [
   // Row 1
   [
     {
+      name: "Olwethu Dlamini",
+      position: "Research & Development",
+      image: "/images/team-images/olwethu.png",
+    },
+    {
+      name: "Zachary Tang",
+      position: "Partnerships & Marketing",
+      image: "/images/team-images/zachary.png",
+    },
+    {
       name: "Shruti G.",
       position: "Marketing",
       image:

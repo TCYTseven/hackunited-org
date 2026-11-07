@@ -165,7 +165,7 @@ const emailItems = [
 
 // Pre-filled application email; the role line is filled in when applying from a role.
 const mailtoFor = (role?: string) =>
-  "mailto:jobs@hackunited.org?subject=" +
+  "mailto:karthik@hackunited.org?subject=" +
   encodeURIComponent("Hack United volunteer application") +
   "&body=" +
   encodeURIComponent(
@@ -234,9 +234,9 @@ export default function ApplyPage() {
               Hack United is a student-run nonprofit. Roles are unpaid. We review applications on a rolling basis and
               reply by email when we have a match.
             </p>
-            <a href="mailto:jobs@hackunited.org" className="hu-btn mt-7">
+            <a href="mailto:karthik@hackunited.org" className="hu-btn mt-7">
               <Mail className="h-4 w-4" />
-              jobs@hackunited.org
+              karthik@hackunited.org
             </a>
           </div>
         </div>
@@ -314,8 +314,8 @@ export default function ApplyPage() {
           </h2>
           <p className="hu-lead mt-6">
             Send one email to{" "}
-            <a href="mailto:jobs@hackunited.org" className="hu-link">
-              jobs@hackunited.org
+            <a href="mailto:karthik@hackunited.org" className="hu-link">
+              karthik@hackunited.org
             </a>
             . Use the subject line Hack United volunteer application and include the items below.
           </p>
@@ -344,7 +344,7 @@ export default function ApplyPage() {
 
             <div className="apply-send nb">
               <div className="apply-send-copy">
-                <p className="apply-send-kicker hu-mono">Send to jobs@hackunited.org</p>
+                <p className="apply-send-kicker hu-mono">Send to karthik@hackunited.org</p>
                 <p className="apply-send-status">The email opens with every field ready to fill in</p>
                 <p className="apply-send-subject hu-mono">Subject: Hack United volunteer application</p>
               </div>
